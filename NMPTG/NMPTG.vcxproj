@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{488ADA74-5693-4F9C-A128-2528EDEA530F}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>NMPTG</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>NotSet</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <IncludePath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;E:\Program File\sdk\Include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Lib\x86;E:\Program File\sdk\Lib\x64;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>d3d9.lib;d3dx9.lib;dinput8.lib;dxguid.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="Box.h" />
+    <ClInclude Include="Brick.h" />
+    <ClInclude Include="Bullet.h" />
+    <ClInclude Include="Chaos.h" />
+    <ClInclude Include="DSutil.h" />
+    <ClInclude Include="E_CarnivorousPlant.h" />
+    <ClInclude Include="E_CarnivorousPlant_Gun.h" />
+    <ClInclude Include="E_FlyMushroom.h" />
+    <ClInclude Include="E_FlyTortoise.h" />
+    <ClInclude Include="E_Mushroom.h" />
+    <ClInclude Include="E_Tortoise.h" />
+    <ClInclude Include="FrkCamera.h" />
+    <ClInclude Include="FrkContent.h" />
+    <ClInclude Include="FrkControl.h" />
+    <ClInclude Include="FrkGraphic.h" />
+    <ClInclude Include="FrkGame.h" />
+    <ClInclude Include="FrkKeyboard.h" />
+    <ClInclude Include="FrkShareControl.h" />
+    <ClInclude Include="FrkSound.h" />
+    <ClInclude Include="FrkSprite.h" />
+    <ClInclude Include="FrkTexture.h" />
+    <ClInclude Include="F_Coin.h" />
+    <ClInclude Include="F_Leaf.h" />
+    <ClInclude Include="F_Mushroom.h" />
+    <ClInclude Include="F_P.h" />
+    <ClInclude Include="Hero.h" />
+    <ClInclude Include="Map.h" />
+    <ClInclude Include="Object.h" />
+    <ClInclude Include="Objects.h" />
+    <ClInclude Include="ResourcesManager.h" />
+    <ClInclude Include="SweptAABB.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Box.cpp" />
+    <ClCompile Include="Brick.cpp" />
+    <ClCompile Include="Bullet.cpp" />
+    <ClCompile Include="Chaos.cpp" />
+    <ClCompile Include="DSutil.cpp" />
+    <ClCompile Include="E_CarnivorousPlant.cpp" />
+    <ClCompile Include="E_CarnivorousPlant_Gun.cpp" />
+    <ClCompile Include="E_FlyMushroom.cpp" />
+    <ClCompile Include="E_FlyTortoise.cpp" />
+    <ClCompile Include="E_Mushroom.cpp" />
+    <ClCompile Include="E_Tortoise.cpp" />
+    <ClCompile Include="FrkCamera.cpp" />
+    <ClCompile Include="FrkContent.cpp" />
+    <ClCompile Include="FrkGame.cpp" />
+    <ClCompile Include="FrkGraphic.cpp" />
+    <ClCompile Include="FrkKeyboard.cpp" />
+    <ClCompile Include="FrkSound.cpp" />
+    <ClCompile Include="FrkSprite.cpp" />
+    <ClCompile Include="FrkTexture.cpp" />
+    <ClCompile Include="F_Coin.cpp" />
+    <ClCompile Include="F_Leaf.cpp" />
+    <ClCompile Include="F_Mushroom.cpp" />
+    <ClCompile Include="F_P.cpp" />
+    <ClCompile Include="Hero.cpp" />
+    <ClCompile Include="Map.cpp" />
+    <ClCompile Include="Object.cpp" />
+    <ClCompile Include="Objects.cpp" />
+    <ClCompile Include="ResourcesManager.cpp" />
+    <ClCompile Include="SweptAABB.cpp" />
+    <ClCompile Include="WinMain.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
