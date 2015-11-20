@@ -1,11 +1,4 @@
 #include "F_Mushroom.h"
+#include "ResourcesManager.h"
 
 
-F_Mushroom::F_Mushroom()
-{
-}
-
-
-F_Mushroom::~F_Mushroom()
-{
-}

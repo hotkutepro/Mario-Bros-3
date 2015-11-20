@@ -17,7 +17,7 @@ Object::~Object()
 {
 }
 
-void Object::Load(FrkContent*)
+void Object::Load()
 {
 
 }

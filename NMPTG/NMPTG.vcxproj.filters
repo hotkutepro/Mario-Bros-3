@@ -13,51 +13,27 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Manager">
+      <UniqueIdentifier>{fb95f1e4-072e-49f8-ba88-ee9c4687e704}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework">
+      <UniqueIdentifier>{3f9f1995-294f-48f4-9fd7-196fc6bcae9a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object">
+      <UniqueIdentifier>{8897b7a2-cd55-446f-8f14-074a49df83ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="State">
+      <UniqueIdentifier>{95f60769-2cd5-44d3-b6c0-76d8612d5f75}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Map">
+      <UniqueIdentifier>{38114c30-667f-4b4d-94da-6b4826fef10b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources">
+      <UniqueIdentifier>{e4848876-ed27-4254-a23e-745ebcf14b88}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="FrkContent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="FrkGraphic.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ResourcesManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="FrkGame.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="FrkKeyboard.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="FrkSprite.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="FrkShareControl.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="FrkTexture.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Object.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Chaos.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="FrkControl.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="FrkSound.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DSutil.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Map.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="FrkCamera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SweptAABB.h">
@@ -66,90 +42,108 @@
     <ClInclude Include="Box.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Hero.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Brick.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Objects.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="E_Tortoise.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="E_FlyTortoise.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="E_Mushroom.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="E_FlyMushroom.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="F_Leaf.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="F_Coin.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="F_Mushroom.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="E_CarnivorousPlant.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="E_CarnivorousPlant_Gun.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="F_P.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Bullet.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="StateManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourcesManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="State.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="FrkCamera.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="FrkContent.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="FrkControl.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="FrkGame.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="FrkGraphic.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="FrkKeyboard.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="FrkShareControl.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="FrkSound.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="FrkSprite.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="FrkTexture.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Object.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="E_CarnivorousPlant.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="E_CarnivorousPlant_Gun.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="E_FlyMushroom.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="E_FlyTortoise.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="E_Mushroom.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="E_Tortoise.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="F_Coin.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="F_Leaf.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="F_Mushroom.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="F_P.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="DSutil.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Hero.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="State_1.h">
+      <Filter>State</Filter>
+    </ClInclude>
+    <ClInclude Include="State_2.h">
+      <Filter>State</Filter>
+    </ClInclude>
+    <ClInclude Include="Map.h">
+      <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects.h">
+      <Filter>Map</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinMain.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="FrkContent.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="FrkGraphic.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ResourcesManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="FrkGame.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="FrkKeyboard.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="FrkSprite.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="FrkTexture.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Object.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Chaos.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DSutil.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="FrkSound.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Map.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="FrkCamera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SweptAABB.cpp">
@@ -158,50 +152,196 @@
     <ClCompile Include="Box.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Hero.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Brick.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Objects.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="E_Tortoise.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="E_FlyTortoise.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="E_Mushroom.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="E_FlyMushroom.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="F_Leaf.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="F_Coin.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="F_Mushroom.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="E_CarnivorousPlant.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="E_CarnivorousPlant_Gun.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="F_P.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Bullet.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ResourcesManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="State.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="StateManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="FrkTexture.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="FrkSprite.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="FrkSound.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="FrkKeyboard.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="FrkGraphic.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="FrkGame.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="FrkContent.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="FrkCamera.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="E_CarnivorousPlant.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="E_CarnivorousPlant_Gun.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="E_FlyMushroom.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="E_FlyTortoise.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="E_Mushroom.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="E_Tortoise.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="F_Coin.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="F_Leaf.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="F_Mushroom.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="F_P.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="DSutil.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="Object.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Hero.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="State_1.cpp">
+      <Filter>State</Filter>
+    </ClCompile>
+    <ClCompile Include="State_2.cpp">
+      <Filter>State</Filter>
+    </ClCompile>
+    <ClCompile Include="Map.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="resources\Cut\1-up.png">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="resources\Cut\CoinBox.png">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="resources\Cut\CoinBoxNull.png">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="resources\Cut\E_FlyTortoiseGreenLeft.png">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="resources\Cut\E_FlyTortoiseGreenRight.png">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="resources\Cut\E_FlyTortoiseRedLeft.png">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="resources\Cut\E_FlyTortoiseRedRight.png">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="resources\Cut\E_Mushroom.png">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="resources\Cut\E_MushroomDeath.png">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="resources\Cut\E_MushroomRed.png">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="resources\Cut\E_MushroomRedDeath.png">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="resources\Cut\E_TortoiseGreenLeft.png">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="resources\Cut\E_TortoiseGreenRight.png">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="resources\Cut\E_TortoiseRedRight.png">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="resources\Cut\E_TortoiseshellGreenLeft.png">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="resources\Cut\E_TortoiseshellGreenRight.png">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="resources\Cut\E_TortoiseshellRedLeft.png">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="resources\Cut\E_TortoiseshellRedRight.png">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="resources\Cut\E_TurtoiseRedLeft.png">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="resources\Cut\F_MushroomPower.png">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="resources\Cut\Leaf.png">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="resources\Cut\MarioDriftToLeft.png">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="resources\Cut\MarioDriftToRight.png">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="resources\Cut\MarioJumpLeft.png">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="resources\Cut\MarioJumpRight.png">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="resources\Cut\marioleft.png">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="resources\Cut\marioleft32.png">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="resources\Cut\marioright.png">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="resources\Cut\marioright32.png">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="resources\Cut\MarioRunLeft.png">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="resources\Cut\MarioRunRight.png">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="resources\Cut\Wood_1.png">
+      <Filter>Resources</Filter>
+    </Image>
   </ItemGroup>
 </Project>

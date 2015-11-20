@@ -2,7 +2,7 @@
 #include"FrkKeyboard.h"
 #include"FrkControl.h"
 
-FrkGame::FrkGame(HINSTANCE hIns, int Width, int Height, char* hWindowName)
+FrkGame::FrkGame(HINSTANCE hIns, int Width, int Height, char* hWindowName,StateManager* sm)
 {
 	this->m_hInstance = hIns;
 	this->m_hWidth = Width;
@@ -11,6 +11,7 @@ FrkGame::FrkGame(HINSTANCE hIns, int Width, int Height, char* hWindowName)
 	this->m_hD3D = NULL;
 	this->m_hD3DDevive = NULL;
 	strcpy(this->m_hWindowName, hWindowName);
+	m_hStateManager = sm;
 }
 
 FrkGame::FrkGame(FrkGame* hGame)
@@ -135,6 +136,8 @@ HWND FrkGame::GetwndHandle()
 void FrkGame::Run()
 {
 	MSG msg;
+	float fps = 0;
+	float time_eslapse = 0;
 	ZeroMemory(&msg, sizeof(MSG));
 	LARGE_INTEGER start;
 	LARGE_INTEGER now;
@@ -144,7 +147,7 @@ void FrkGame::Run()
 	//thoi gian 1 xung cpu / so xung cpu /1s
 	float time_per_cycle = 1000.0f / cycle_count_per_second.QuadPart;
 	float game_time = 0;
-	//thoi gian 1 frame / 60 frame /1s
+	//thoi gian 1 frame / 30 frame /1s
 	float frame_rate = 1000.0f / 30.0f;
 	//so xung tu luc khoi dong may den luc goi
 	QueryPerformanceCounter(&start);
@@ -163,11 +166,22 @@ void FrkGame::Run()
 			//A = (now - start)  số xung từ now ->start
 			// A * thoi gian 1 xung => thời gian từ now->start
 			game_time = (now.QuadPart - start.QuadPart) * time_per_cycle;
+			
 			if (game_time >= frame_rate)
 			{
+				/*fps++;
+				time_eslapse += game_time;
+				if (time_eslapse > 1000.0f)
+				{
+					string txt = "mario : FPS = ";
+					txt.append(std::to_string((fps / time_eslapse) * 1000));
+					fps = 0;
+					time_eslapse = 0;
+					SetWindowText(this->m_hWnd, (char*)(txt.c_str()));
+				}*/
 				start = now;
-				this->Update(game_time);
-				this->Render();
+				this->m_hStateManager->Update(game_time);
+				this->m_hStateManager->Render();
 				
 			}
 			else

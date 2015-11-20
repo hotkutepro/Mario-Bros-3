@@ -3,9 +3,12 @@
 #include <d3d9.h>
 #include<dinput.h>
 #include"Map.h"
+#include "StateManager.h"
+
 class FrkGame
 {
 private:	
+	
 	//hinstance cua chuong trinh
 	HINSTANCE m_hInstance;
 	//hwnd cua cua so
@@ -22,7 +25,7 @@ protected:
 	LPDIRECT3D9 m_hD3D;
 	//thiet bi ve
 	LPDIRECT3DDEVICE9 m_hD3DDevive;
-	
+	StateManager* m_hStateManager;
 
 
 public:		
@@ -38,7 +41,7 @@ public:
 	virtual void Render();
 	void Run();
 	// Constructor
-	FrkGame(HINSTANCE hIns, int hWidth, int hHeight, char* hWindowName);
+	FrkGame(HINSTANCE hIns, int hWidth, int hHeight, char* hWindowName, StateManager* sm);
 	FrkGame(FrkGame* hGame);
 	~FrkGame(void);
 
