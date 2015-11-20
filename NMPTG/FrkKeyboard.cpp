@@ -22,9 +22,9 @@ void FrkKeyboard::SetDataFormat()
 }
 void FrkKeyboard::SetCooperativeLevel()
 {
-	HRESULT hr = m_hDI_Device->SetCooperativeLevel(m_hGame->GetwndHandle(), DISCL_FOREGROUND|DISCL_NONEXCLUSIVE);
-	if (FAILED(hr))
-		MessageBox(NULL, "Lỗi thiết lập mức truy cập của thiết bị",NULL,1);
+	HRESULT hr = m_hDI_Device->SetCooperativeLevel(m_hGame->GetwndHandle(), DISCL_FOREGROUND);
+	//if (FAILED(hr))
+		//MessageBox(NULL, "Lỗi thiết lập mức truy cập của thiết bị",NULL,1);
 }
 void FrkKeyboard::Acquire()
 {
@@ -48,12 +48,13 @@ bool FrkKeyboard::IsKeyDown(int key)
 {	
 	return m_hBuffer[key] & 0x80;
 }
-void FrkKeyboard::Init(){
+void FrkKeyboard::Init(){	
 	ZeroMemory(&m_hBuffer, sizeof(m_hBuffer));
 	InitDirectInput();
 	CreateDevice();
 	SetCooperativeLevel();
 	SetDataFormat();
+	SetProperty();
 	Acquire();
 }
 FrkKeyboard::FrkKeyboard(FrkGame* game)
@@ -69,3 +70,22 @@ FrkKeyboard::FrkKeyboard()
 FrkKeyboard::~FrkKeyboard()
 {
 }
+
+void FrkKeyboard::SetProperty()
+{
+	DIPROPDWORD dipdw;		
+	dipdw.diph.dwSize = sizeof(DIPROPDWORD);
+	dipdw.diph.dwHeaderSize = sizeof(DIPROPHEADER);
+	dipdw.diph.dwObj = 0;
+	dipdw.diph.dwHow = DIPH_DEVICE;
+	dipdw.dwData = KEYBOARD_BUFFERSIZE;
+	HRESULT hr = this->m_hDI_Device->SetProperty(DIPROP_BUFFERSIZE, &dipdw.diph);
+	if (FAILED(hr))
+		MessageBox(NULL, "lỗi keyboard buffer ", NULL, 1);
+}
+
+LPDIRECTINPUTDEVICE8 FrkKeyboard::GetKeyboarddevice()
+{
+	return m_hDI_Device;
+}
+
