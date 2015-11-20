@@ -15,6 +15,7 @@ public:
 	FrkSprite* getCurrentSprite();
 	void Load();
 	void Render();
+	void onkeydown();///
 	void Update(float gameTime);	
 	Hero();
 	Hero(D3DXVECTOR2 pos, D3DXVECTOR2 speed);
