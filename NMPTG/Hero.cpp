@@ -1,6 +1,5 @@
 #include "Hero.h"
 #include"FrkShareControl.h"
-#include "ResourcesManager.h"
 
 Hero::Hero()
 {
@@ -31,9 +30,9 @@ void Hero::Load()
 {
 	m_hSpeed = D3DXVECTOR2(10, 10);
 	FrkTexture* tLeft;
-	tLeft = ResourcesManager::GetInstance()->GetTexture(TextureID::HeroLeft);
+	tLeft = _LocalContent->LoadTexture("marioleft.png");
 	FrkTexture* tRight;
-	tRight = ResourcesManager::GetInstance()->GetTexture(TextureID::HeroRight);
+	tRight = _LocalContent->LoadTexture("marioright.png");
 	m_hMarioRight = new FrkSprite(tRight, 2, 2);
 	m_hMarioLeft = new FrkSprite(tLeft, 4, 4);
 	SetSite(200, 200);
@@ -81,13 +80,12 @@ void Hero::Update(float gameTime)
 	{
 		int KeyCode = _LocalKeyboard->_KeyEvents[i].dwOfs;
 		int KeyState = _LocalKeyboard->_KeyEvents[i].dwData;
-		if ((KeyState & 0x80) > 0){
-			if (KeyCode==DIK_SPACE)
-				onkeydown();
-		}
-		else{
-
-		}
+		if (KeyCode == DIK_SPACE && (KeyState & 0x80) > 0)
+			onkeydown();
+		//if ((KeyState & 0x80) > 0)
+			//OnKeyDown(KeyCode);
+		//else
+			//OnKeyUp(KeyCode);
 	}
 
 }

@@ -12,7 +12,14 @@ Chaos::~Chaos()
 }
 
 void Chaos::Load()
-{				
+{					
+	qNode = new QNode();
+	qNode->LoadQNode("QNode.txt");
+	qNode->LoadObjects("Object.txt");
+	qNode->InsertObject("OiNode.txt");
+
+
+	qNode->Connect();
 	hero = new Hero();
 	hero->Load();
 	sw = new SweptAABB();	

@@ -12,6 +12,18 @@ Object::Object(D3DXVECTOR2 pos, D3DXVECTOR2 speed)
 	m_hAcceleration = 0;
 }
 
+Object::Object(int _id,D3DXVECTOR2 pos, typeObject _type)
+{
+	id = _id;
+	m_hPosition = pos;
+	type = _type;
+}
+
+Object::Object(typeObject _type)
+{
+	type = _type;
+}
+
 
 Object::~Object()
 {

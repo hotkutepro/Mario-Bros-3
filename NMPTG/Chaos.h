@@ -18,6 +18,7 @@ protected:
 	FrkCamera* camera;
 	FrkGraphic* graphic;	
 	Map* map;
+	QNode* qNode;
 public:	
 	Chaos(HINSTANCE hInst, int hW, int hH, char* hName);
 	~Chaos();

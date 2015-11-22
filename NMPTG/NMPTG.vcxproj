@@ -108,6 +108,7 @@
     <ClInclude Include="Map.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="Objects.h" />
+    <ClInclude Include="QNode.h" />
     <ClInclude Include="ResourcesManager.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="StateManager.h" />
@@ -143,6 +144,7 @@
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="Objects.cpp" />
+    <ClCompile Include="QNode.cpp" />
     <ClCompile Include="ResourcesManager.cpp" />
     <ClCompile Include="State.cpp" />
     <ClCompile Include="StateManager.cpp" />
