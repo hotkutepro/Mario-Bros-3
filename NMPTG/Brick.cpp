@@ -10,6 +10,11 @@ Brick::Brick(D3DXVECTOR2 pos, D3DXVECTOR2 speed) :Object(pos,speed)
 
 }
 
+Brick::Brick(typeObject _t) : Object(_t)
+{
+
+}
+
 
 Brick::~Brick()
 {
