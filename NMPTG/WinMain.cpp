@@ -9,19 +9,21 @@
 int WINAPI WinMain(HINSTANCE h, HINSTANCE p, LPTSTR a, int c)
 {
 	
-	
-	/*FrkGame* game = new Chaos(h, 800, 480, "animals");
-	if (!game->InitWindow())
-	{
-		MessageBox(NULL, "Can't init game", "Error", MB_OK);
-		return 0;
-	}
+	//StateManager* SM = new StateManager();
+	//State* game = new Chaos(h, 800, 480, "animals",SM);
+	////if (!game->InitWindow())
+	////{
+	////	MessageBox(NULL, "Can't init game", "Error", MB_OK);
+	////	return 0;
+	////}
 
-	game->InitDX();
-	game->InitLocal();
-	ResourcesManager::GetInstance()->Init();
-	game->Load();
-	game->Run();*/
+	////game->InitDX();
+	////game->InitLocal();
+	//SM->Add(game);
+	//game->Init();
+	//ResourcesManager::GetInstance()->Init();
+	//game->Load();
+	//game->Run();
 	StateManager* SM = new StateManager();
 	
 	State* state = new State_1(h, 800, 480, "demo", SM);

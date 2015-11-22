@@ -1,7 +1,7 @@
 #include "Chaos.h"
 #include "FrkShareControl.h"
 
-Chaos::Chaos(HINSTANCE hInst, int hW, int hH, char* hName) :FrkGame(hInst, hW, hH, hName)
+Chaos::Chaos(HINSTANCE hInst, int hW, int hH, char* hName,StateManager* sm) :State(hInst, hW, hH, hName,sm)
 {
 	
 }
@@ -20,6 +20,7 @@ void Chaos::Load()
 
 
 	qNode->Connect();
+	mushroom = new E_Mushroom(200, 200);
 	hero = new Hero();
 	hero->Load();
 	sw = new SweptAABB();	
@@ -30,7 +31,7 @@ void Chaos::Load()
 	map->Init("hihi.txt", _LocalContent->LoadTexture("hihi.png"));
 	FrkSound* music;
 	music->InitializeSoundClass(this->GetwndHandle());
-	music= new FrkSound("E.wav");
+	//music= new FrkSound("E.wav");
 	
 	//music->Play();
 
@@ -41,6 +42,8 @@ void Chaos::Load()
 void Chaos::Update(float gameTime)
 {
 	//mario->Update(gameTime);
+	mushroom->Update(gameTime);
+	mushroom->Load();
 	camera->Update(hero->GetPosition());
 	hero->Update(gameTime);
 	float normalx=0, normaly=0;
@@ -55,6 +58,7 @@ void Chaos::Render()
 	map->Render();
 	br->Render();
 	hero->Render();
+	mushroom->Render();
 	
 	_LocalGraphic->End();
 }

@@ -34,7 +34,7 @@ void Hero::Load()
 	FrkTexture* tRight;
 	tRight = _LocalContent->LoadTexture("marioright.png");
 	m_hMarioRight = new FrkSprite(tRight, 2, 2);
-	m_hMarioLeft = new FrkSprite(tLeft, 4, 4);
+	m_hMarioLeft = new FrkSprite(tLeft, 2, 2);
 	SetSite(200, 200);
 	setCurrentSprite(m_hMarioRight);
 	m_hBox = new Box(GetPosition().x, GetPosition().y, getCurrentSprite()->_Width, getCurrentSprite()->_Height, m_hSpeed.x, m_hSpeed.y);

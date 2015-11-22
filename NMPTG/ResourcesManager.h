@@ -5,7 +5,7 @@ enum TextureID
 {
 	HeroLeft, HeroRight, HeroJumpLeft, HeroJumpRight, TileMap1, Wall_1, Wall_2,
 	HeroDriftToLeft, HeroDriftToRight, MushroomPower, CoinBox, CoinBoxNull, Leaf,
-	EnermyMushroom
+	EnermyMushroom,EnermyFlyMushroom
 };
 class ResourcesManager
 {
@@ -27,7 +27,7 @@ private:
 	FrkTexture* mushroomPower;
 	FrkTexture* leaf;
 	FrkTexture* E_mushroom;
-
+	FrkTexture* E_flyMushroom;
 public:
 	static ResourcesManager* Instance;
 

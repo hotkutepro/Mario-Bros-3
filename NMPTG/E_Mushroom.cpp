@@ -19,7 +19,7 @@ E_Mushroom::~E_Mushroom()
 
 void E_Mushroom::Load()
 {
-	FrkTexture* mushroomTexture = ResourcesManager::GetInstance()->GetTexture(TextureID::EnermyMushroom);
+	FrkTexture* mushroomTexture = ResourcesManager::GetInstance()->GetTexture(TextureID::EnermyFlyMushroom);
 	this->mushroomSprite = new FrkSprite(mushroomTexture, 2, 2);
 }
 
@@ -30,7 +30,7 @@ void E_Mushroom::Render()
 float delay = 0;
 void E_Mushroom::Update(float gameTime)
 {
-	delay += gameTime / 10;
+	delay += gameTime/10 ;
 	m_hPosition.x += m_hSpeed.x;
 	m_hSpeed.y -= 0.2*gameTime/10;
 	m_hPosition.y += m_hSpeed.y*gameTime/10;
@@ -53,7 +53,7 @@ void E_Mushroom::Update(float gameTime)
 		
 			if ((KeyState & 0x80) > 0)
 			{
-				if (KeyCode == DIK_SPACE&&m_hPosition.y<=50)
+				if (KeyCode == DIK_SPACE&&m_hPosition.y<=200)
 				{
 					m_hSpeed.y = 10;
 				}
@@ -73,9 +73,9 @@ void E_Mushroom::Update(float gameTime)
 		m_hSpeed.y = -m_hSpeed.y;
 		
 	}*/
-	if (m_hPosition.y < 50)
+	if (m_hPosition.y < 200)
 	{
-		m_hPosition.y = 50;
+		m_hPosition.y = 200;
 	}
 
 }

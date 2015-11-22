@@ -36,6 +36,7 @@ void ResourcesManager::Init()
 	heroDriftToRight = _LocalContent->LoadTexture("MarioDriftToRight.png");
 	coinBox = _LocalContent->LoadTexture("CoinBox.png");
 	E_mushroom = _LocalContent->LoadTexture("resources\\Cut\\E_Mushroom.png");
+	E_flyMushroom = _LocalContent->LoadTexture("resources\\Cut\\a.png");
 }
 
 FrkTexture* ResourcesManager::GetTexture(TextureID ID)
@@ -70,6 +71,8 @@ FrkTexture* ResourcesManager::GetTexture(TextureID ID)
 		return this->leaf;
 	case EnermyMushroom:
 		return this->E_mushroom;
+	case  EnermyFlyMushroom:
+		return this->E_flyMushroom;
 
 	}
 	return NULL;

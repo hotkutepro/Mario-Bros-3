@@ -8,7 +8,9 @@
 #include "SweptAABB.h"
 #include "Hero.h"
 #include"Brick.h"
-class Chaos : public FrkGame
+#include "State_1.h"
+#include "E_Mushroom.h"
+class Chaos : public State
 {
 protected:		
 	Brick* br;
@@ -18,9 +20,9 @@ protected:
 	FrkCamera* camera;
 	FrkGraphic* graphic;	
 	Map* map;
-	QNode* qNode;
+	E_Mushroom* mushroom;
 public:	
-	Chaos(HINSTANCE hInst, int hW, int hH, char* hName);
+	Chaos(HINSTANCE hInst, int hW, int hH, char* hName,StateManager* sm);
 	~Chaos();
 
 
