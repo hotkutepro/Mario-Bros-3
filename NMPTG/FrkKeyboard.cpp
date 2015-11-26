@@ -38,6 +38,8 @@ void FrkKeyboard::GetDeviceState()
 {
 	
 	m_hDI_Device->GetDeviceState(sizeof(m_hBuffer), &m_hBuffer);
+	this->dwElements = KEYBOARD_BUFFERSIZE;
+	m_hDI_Device->GetDeviceData(sizeof(DIDEVICEOBJECTDATA), this->_KeyEvents, &dwElements, 0);
 
 }
 void FrkKeyboard::ClearBuffer(){
@@ -89,3 +91,22 @@ LPDIRECTINPUTDEVICE8 FrkKeyboard::GetKeyboarddevice()
 	return m_hDI_Device;
 }
 
+
+
+bool FrkKeyboard::IsKeyPressed(int key)
+{
+	for (DWORD i = 0; i < dwElements; i++)
+	{
+		int state = _KeyEvents[i].dwData;
+		int keycode = _KeyEvents[i].dwOfs;
+		if (keycode == key)
+		{
+			if (state & 0x80)
+			{
+				return true;				
+			}
+
+		}
+	}
+	return false;
+}

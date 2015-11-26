@@ -12,6 +12,7 @@ FrkCamera::FrkCamera(float map_Width, float map_height)
 	m_hVpx = m_hVpy = 0;
 	D3DXMatrixIdentity(&MatrixI);
 	this->MatrixI._22 = -1;
+	//D3DXMatrixRotationX()
 }
 
 
@@ -41,5 +42,11 @@ D3DXMATRIX* FrkCamera::GetTransformMatrix()
 	D3DXMATRIX transformmatrix;
 	D3DXMatrixTranslation(&transformmatrix, -m_hVpx, m_hVpy, 0);
 	D3DXMatrixMultiply(&MatrixTran, &MatrixI, &transformmatrix);
+
+	D3DXMATRIX zoom;
+	D3DXMatrixIdentity(&zoom);
+	//zoom._11 = 2;
+	//zoom._22 = 2;
+	D3DXMatrixMultiply(&MatrixTran, &MatrixTran, &zoom);
 	return &MatrixTran;
 }

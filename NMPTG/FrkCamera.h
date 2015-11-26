@@ -8,7 +8,9 @@ private:
 	float m_hVpx, m_hVpy, m_hMaxWidth, m_hMaxHeight;
 	D3DXMATRIX MatrixI;//matrix bậc 4
 	D3DXMATRIX MatrixTran;
+	D3DVIEWPORT9 viewport;
 public:
+	int zoom;
 	FrkCamera(float map_Width, float map_height);
 	void Update(D3DXVECTOR2 target);
 	D3DXMATRIX* GetTransformMatrix();
