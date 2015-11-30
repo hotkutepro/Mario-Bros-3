@@ -29,11 +29,6 @@ Object::~Object()
 {
 }
 
-void Object::Load()
-{
-
-}
-
 void Object::Render()
 {
 
@@ -53,4 +48,9 @@ void Object::SetSite(int x, int y)
 D3DXVECTOR2 Object::GetPosition()
 {
 	return m_hPosition;
+}
+
+void Object::Load()
+{
+
 }

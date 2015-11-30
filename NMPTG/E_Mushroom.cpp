@@ -19,8 +19,8 @@ E_Mushroom::~E_Mushroom()
 
 void E_Mushroom::Load()
 {
-	FrkTexture* mushroomTexture = ResourcesManager::GetInstance()->GetTexture(TextureID::EnermyFlyMushroom);
-	this->mushroomSprite = new FrkSprite(mushroomTexture, 2, 2);
+//	FrkTexture* mushroomTexture = ResourcesManager::GetInstance()->GetTexture(TextureID::HeroLeft);
+	//this->mushroomSprite = new FrkSprite(mushroomTexture, 2, 2);
 }
 
 void E_Mushroom::Render()

@@ -28,7 +28,7 @@ public:
 	bool IsKeyDown(int key);//trạng thái key đang được nhấn	
 	bool IsKeyPressed(int key);//lấy trong buffer
 	FrkKeyboard(FrkGame* game);
-	FrkKeyboard();
+	FrkKeyboard();  
 	~FrkKeyboard();
 };
 

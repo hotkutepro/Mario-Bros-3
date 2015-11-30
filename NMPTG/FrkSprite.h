@@ -6,8 +6,10 @@ class FrkSprite
 {
 public:
 public:
-	int _Index;
-	int _Width;//kích thước của một frame
+	int _X;//vị trí của sprite trên bức ảnh lớn
+	int _Y;//
+	int _Index=0;
+	int _Width;//kích thước của một frame con
 	int _Height;
 	int _Count;//số sprite trong một texture 
 	int _SpriteperRow;
@@ -16,6 +18,7 @@ public:
 	void Next();
 	void Reset();
 	void Set(int index);		
+	void Render2(D3DXVECTOR2 position);
 	void Render(D3DXVECTOR2 position);
 	FrkSprite(FrkSprite* sprite);
 	FrkSprite(FrkTexture* img,int count, int spriteperrow);

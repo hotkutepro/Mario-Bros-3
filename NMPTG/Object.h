@@ -14,7 +14,7 @@ protected:
 public:
 	typeObject type;
 	int id;
-	virtual void Load(FrkContent*);
+	virtual void Load();
 	virtual void Render();
 	virtual void Update(float gameTime);
 	void SetSite(int x, int y);

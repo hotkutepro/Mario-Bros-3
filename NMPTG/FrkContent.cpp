@@ -29,7 +29,7 @@ FrkTexture* FrkContent::LoadTexture(string path)
 		D3DCOLOR_XRGB(255, 255, 255),
 		&info,//thông tin hình ?nh
 		NULL,
-		&texture);
+		&texture);	
 
 	if (hr != D3D_OK)
 		return 0;

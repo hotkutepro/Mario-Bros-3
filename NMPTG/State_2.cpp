@@ -16,7 +16,7 @@ State_2::~State_2()
 
 void State_2::Load()
 {
-	wall = ResourcesManager::GetInstance()->GetTexture(TextureID::Wall_2);
+//	wall = ResourcesManager::GetInstance()->GetTexture(TextureID::Wall_2);
 }
 
 void State_2::Update(float gameTime)

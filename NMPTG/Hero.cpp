@@ -28,16 +28,64 @@ FrkSprite* Hero::getCurrentSprite()
 
 void Hero::Load()
 {
-	m_hSpeed = D3DXVECTOR2(10, 10);
-	FrkTexture* tLeft;
-	tLeft = _LocalContent->LoadTexture("marioleft.png");
-	FrkTexture* tRight;
-	tRight = _LocalContent->LoadTexture("marioright.png");
-	m_hMarioRight = new FrkSprite(tRight, 2, 2);
-	m_hMarioLeft = new FrkSprite(tLeft, 2, 2);
+	m_hSpeed = D3DXVECTOR2(10, 10);	
 	SetSite(200, 200);
 	setCurrentSprite(m_hMarioRight);
-	m_hBox = new Box(GetPosition().x, GetPosition().y, getCurrentSprite()->_Width, getCurrentSprite()->_Height, m_hSpeed.x, m_hSpeed.y);
+	//m_hBox = new Box(GetPosition().x, GetPosition().y, getCurrentSprite()->_Width, getCurrentSprite()->_Height, m_hSpeed.x, m_hSpeed.y);
+	BigMarioDriftToLeft = ResourcesManager::GetInstance()->GetSprite(SpriteID::BigMarioDriftToLeft);
+	BigMarioDriftToRight = ResourcesManager::GetInstance()->GetSprite(SpriteID::BigMarioDriftToRight);
+	BigMarioFallLeft = ResourcesManager::GetInstance()->GetSprite(SpriteID::BigMarioFallLeft);
+	BigMarioFallRight = ResourcesManager::GetInstance()->GetSprite(SpriteID::BigMarioFallRight);
+	BigMarioHugLeft = ResourcesManager::GetInstance()->GetSprite(SpriteID::BigMarioHugLeft);
+	BigMarioHugRight = ResourcesManager::GetInstance()->GetSprite(SpriteID::BigMarioHugRight);
+	BigMarioJumpLeft = ResourcesManager::GetInstance()->GetSprite(SpriteID::BigMarioJumpLeft);
+	BigMarioJumpRight = ResourcesManager::GetInstance()->GetSprite(SpriteID::BigMarioJumpRight);
+	BigMarioKickLeft = ResourcesManager::GetInstance()->GetSprite(SpriteID::BigMarioKickLeft);
+	BigMarioKickRight = ResourcesManager::GetInstance()->GetSprite(SpriteID::BigMarioKickRight);
+	BigMarioLeft = ResourcesManager::GetInstance()->GetSprite(SpriteID::BigMarioLeft);
+	BigMarioRight = ResourcesManager::GetInstance()->GetSprite(SpriteID::BigMarioRight);
+	BigMarioRunLeft = ResourcesManager::GetInstance()->GetSprite(SpriteID::BigMarioRunLeft);
+	BigMarioRunRight = ResourcesManager::GetInstance()->GetSprite(SpriteID::BigMarioRunRight);
+	BigMarioSitLeft = ResourcesManager::GetInstance()->GetSprite(SpriteID::BigMarioSitLeft);
+	BigMarioSitRight = ResourcesManager::GetInstance()->GetSprite(SpriteID::BigMarioSitRight);
+	BigMarioSuperJumpLeft = ResourcesManager::GetInstance()->GetSprite(SpriteID::BigMarioSuperJumpLeft);
+	BigMarioSuperJumpRight = ResourcesManager::GetInstance()->GetSprite(SpriteID::BigMarioSuperJumpRight);
+	BrosBaleLeft = ResourcesManager::GetInstance()->GetSprite(SpriteID::BrosBaleLeft);
+	BrosBaleRight = ResourcesManager::GetInstance()->GetSprite(SpriteID::BrosBaleRight);
+	BrosDriftToLeft = ResourcesManager::GetInstance()->GetSprite(SpriteID::BrosDriftToLeft);
+	BrosDriftToRight = ResourcesManager::GetInstance()->GetSprite(SpriteID::BrosDriftToRight);
+	BrosFallLeft = ResourcesManager::GetInstance()->GetSprite(SpriteID::BrosFallLeft);
+	BrosFallRight = ResourcesManager::GetInstance()->GetSprite(SpriteID::BrosFallRight);
+	BrosFlyLeft = ResourcesManager::GetInstance()->GetSprite(SpriteID::BrosFlyLeft);
+	BrosFlyRight = ResourcesManager::GetInstance()->GetSprite(SpriteID::BrosFlyRight);
+	BrosHugLeft = ResourcesManager::GetInstance()->GetSprite(SpriteID::BrosHugLeft);
+	BrosHugRight = ResourcesManager::GetInstance()->GetSprite(SpriteID::BrosHugRight);
+	BrosJumpLeft = ResourcesManager::GetInstance()->GetSprite(SpriteID::BrosJumpLeft);
+	BrosJumpRight = ResourcesManager::GetInstance()->GetSprite(SpriteID::BrosJumpRight);
+	BrosKickLeft = ResourcesManager::GetInstance()->GetSprite(SpriteID::BrosKickLeft);
+	BrosKickRight = ResourcesManager::GetInstance()->GetSprite(SpriteID::BrosKickRight);
+	BrosLeft = ResourcesManager::GetInstance()->GetSprite(SpriteID::BrosLeft);
+	BrosRight = ResourcesManager::GetInstance()->GetSprite(SpriteID::BrosRight);
+	BrosRunLeft = ResourcesManager::GetInstance()->GetSprite(SpriteID::BrosRunLeft);
+	BrosRunRight = ResourcesManager::GetInstance()->GetSprite(SpriteID::BrosRunRight);
+	BrosSitLeft = ResourcesManager::GetInstance()->GetSprite(SpriteID::BrosSitLeft);
+	BrosSitRight = ResourcesManager::GetInstance()->GetSprite(SpriteID::BrosSitRight);
+	MarioDeath = ResourcesManager::GetInstance()->GetSprite(SpriteID::MarioDeath);
+	MarioDriftToLeft = ResourcesManager::GetInstance()->GetSprite(SpriteID::MarioDriftToLeft);
+	MarioDriftToRight = ResourcesManager::GetInstance()->GetSprite(SpriteID::MarioDriftToRight);
+	MarioHugLeft = ResourcesManager::GetInstance()->GetSprite(SpriteID::MarioHugLeft);
+	MarioHugRight = ResourcesManager::GetInstance()->GetSprite(SpriteID::MarioHugRight);
+	MarioJumpLeft = ResourcesManager::GetInstance()->GetSprite(SpriteID::MarioJumpLeft);
+	MarioJumpRight = ResourcesManager::GetInstance()->GetSprite(SpriteID::MarioJumpRight);
+	MarioKickLeft = ResourcesManager::GetInstance()->GetSprite(SpriteID::MarioKickLeft);
+	MarioKickRight = ResourcesManager::GetInstance()->GetSprite(SpriteID::MarioKickRight);
+	MarioLeft = ResourcesManager::GetInstance()->GetSprite(SpriteID::MarioLeft);
+	MarioRight = ResourcesManager::GetInstance()->GetSprite(SpriteID::MarioRight);
+	MarioRunLeft = ResourcesManager::GetInstance()->GetSprite(SpriteID::MarioRunLeft);
+	MarioRunRight = ResourcesManager::GetInstance()->GetSprite(SpriteID::MarioRunRight);
+	MarioSuperJumpLeft = ResourcesManager::GetInstance()->GetSprite(SpriteID::MarioSuperJumpLeft);
+	MarioSuperJumpRight = ResourcesManager::GetInstance()->GetSprite(SpriteID::MarioSuperJumpRight);
+	setCurrentSprite(MarioRight);
 }
 
 void Hero::Render()
@@ -51,14 +99,14 @@ void Hero::Update(float gameTime)
 	if (_LocalKeyboard->IsKeyDown(DIK_LEFT))
 	{
 		m_hSpeed.x = -abs(m_hSpeed.x);
-		SetSite(GetPosition().x + m_hSpeed.x, GetPosition().y);
-		setCurrentSprite(m_hMarioLeft);
+		SetSite(GetPosition().x + m_hSpeed.x, GetPosition().y);		
+		setCurrentSprite(BigMarioRunLeft);
 		getCurrentSprite()->Next();
 	}
 	if (_LocalKeyboard->IsKeyDown(DIK_RIGHT)){
 		m_hSpeed.x = abs(m_hSpeed.x);
 		SetSite(GetPosition().x+m_hSpeed.x, GetPosition().y );
-		setCurrentSprite(m_hMarioRight);
+		setCurrentSprite(BigMarioRunRight);
 		getCurrentSprite()->Next();
 	}
 	if (_LocalKeyboard->IsKeyDown(DIK_UP))
@@ -75,19 +123,7 @@ void Hero::Update(float gameTime)
 	 
 	//////////////////////////////////////////////////////////////////////////
 	DWORD dwElements = KEYBOARD_BUFFERSIZE;
-	HRESULT hr = _LocalKeyboard->GetKeyboarddevice()->GetDeviceData(sizeof(DIDEVICEOBJECTDATA), _LocalKeyboard->_KeyEvents, &dwElements, 0);
-	for (DWORD i = 0; i < dwElements; i++)
-	{
-		int KeyCode = _LocalKeyboard->_KeyEvents[i].dwOfs;
-		int KeyState = _LocalKeyboard->_KeyEvents[i].dwData;
-		if (KeyCode == DIK_SPACE && (KeyState & 0x80) > 0)
-			onkeydown();
-		//if ((KeyState & 0x80) > 0)
-			//OnKeyDown(KeyCode);
-		//else
-			//OnKeyUp(KeyCode);
-	}
-
+	HRESULT hr = _LocalKeyboard->GetKeyboarddevice()->GetDeviceData(sizeof(DIDEVICEOBJECTDATA), _LocalKeyboard->_KeyEvents, &dwElements, 0);	
 }
 
 Box* Hero::getBox()
