@@ -165,7 +165,7 @@ namespace MyMap
                 {
                     tbsourse.Text = openFile.FileName;
                     Bitmap img = new Bitmap(tbsourse.Text);
-                    lbimfomation.Text = "W = " + img.Width + " H = " + img.Height;
+                    lbimfomation.Text = "W = " + img.Width + " H = " + img.Height;                    
                 }
             }
             catch
