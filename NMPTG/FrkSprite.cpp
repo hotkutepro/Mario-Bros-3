@@ -31,11 +31,11 @@ void FrkSprite::Render(D3DXVECTOR2 position)
 	RECT des;
 	des.left = position.x;
 	des.top = position.y;
-	des.right = des.left + _Width/2;
-	des.bottom = des.top + _Height/2;
+	des.right = des.left + _Width;
+	des.bottom = des.top + _Height;
 	D3DXVECTOR2 center;
-	center.x = _Width / 4;
-	center.y = _Height / 4;
+	center.x = _Width / 2;
+	center.y = _Height / 2;
 	_LocalGraphic->tDrawTexture(this->_Image, frame, des, center, D3DCOLOR_XRGB(255, 255, 255), 0.2);
 }
 void FrkSprite::Next()

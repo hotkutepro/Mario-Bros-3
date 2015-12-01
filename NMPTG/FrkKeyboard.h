@@ -18,9 +18,9 @@ class FrkKeyboard
 	void Acquire();
 	void UnAcquire();
 	void SetProperty();
-	void Init();			
-	DWORD dwElements;
+	void Init();				
 public:		
+	DWORD dwElements;
 	LPDIRECTINPUTDEVICE8 GetKeyboarddevice();
 	DIDEVICEOBJECTDATA _KeyEvents[KEYBOARD_BUFFERSIZE];
 	void ClearBuffer();

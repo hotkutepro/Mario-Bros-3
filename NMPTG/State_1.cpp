@@ -33,20 +33,7 @@ void State_1::Update(float gameTime)
 {
 	camera->Update(hero->GetPosition());
 	hero->Update(gameTime);
-	_LocalKeyboard->GetDeviceState();
-	if (_LocalKeyboard->IsKeyDown(DIK_L))
-	{
-		//m_hStateManager->Remove(this);
-		//m_hStateManager->Add(state_2);
-		//state_2->Load();
-	}	
-	if (_LocalKeyboard->IsKeyPressed(DIK_D))
-	{
-		//mushroom->SetSite(mushroom->GetPosition().x + 2, mushroom->GetPosition().y);
-	}
-	if (_LocalKeyboard->IsKeyDown(DIK_D)){
-		//mushroom->SetSite(mushroom->GetPosition().x - 2, mushroom->GetPosition().y);
-	}	
+	_LocalKeyboard->GetDeviceState();	
 	_LocalKeyboard->ClearBuffer();
 }
 

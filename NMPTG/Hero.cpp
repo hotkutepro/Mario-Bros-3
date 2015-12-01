@@ -120,10 +120,36 @@ void Hero::Update(float gameTime)
 	}
 	m_hBox = new Box(GetPosition().x, GetPosition().y, getCurrentSprite()->_Width, getCurrentSprite()->_Height, m_hSpeed.x, m_hSpeed.y);
 	_LocalKeyboard->ClearBuffer();
-	 
-	//////////////////////////////////////////////////////////////////////////
-	DWORD dwElements = KEYBOARD_BUFFERSIZE;
-	HRESULT hr = _LocalKeyboard->GetKeyboarddevice()->GetDeviceData(sizeof(DIDEVICEOBJECTDATA), _LocalKeyboard->_KeyEvents, &dwElements, 0);	
+
+	//_LocalKeyboard->GetKeyboarddevice()->GetDeviceData(sizeof(DIDEVICEOBJECTDATA), _LocalKeyboard->_KeyEvents, &_LocalKeyboard->dwElements, 0);
+	for (DWORD i = 0; i < _LocalKeyboard->dwElements; i++)
+	{
+
+		int state = _LocalKeyboard->_KeyEvents[i].dwData;
+		int keycode = _LocalKeyboard->_KeyEvents[i].dwOfs;
+		if (state & 0x80)
+		{
+			if (keycode == DIK_K)
+			{
+				SetSite(GetPosition().x, GetPosition().y + 50);
+			}
+			if (keycode == DIK_F)
+			{
+				SetSite(GetPosition().x+16, GetPosition().y);
+			}
+
+		}else
+		{
+			if (keycode == DIK_K)
+			{
+				SetSite(GetPosition().x, GetPosition().y -100);
+			}
+			if (keycode == DIK_F)
+			{
+				SetSite(GetPosition().x -50, GetPosition().y);
+			}
+		}
+	}
 }
 
 Box* Hero::getBox()
