@@ -111,6 +111,18 @@
     <ClInclude Include="QNode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="State.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="StateManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="State_1.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="State_2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinMain.cpp">
@@ -206,8 +218,118 @@
     <ClCompile Include="QNode.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="State.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="StateManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="State_1.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="State_2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="resources\Cut\1-up.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\Cut\CoinBox.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\Cut\CoinBoxNull.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\Cut\E_FlyTortoiseGreenLeft.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\Cut\E_FlyTortoiseGreenRight.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\Cut\E_FlyTortoiseRedLeft.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\Cut\E_FlyTortoiseRedRight.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\Cut\E_Mushroom.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\Cut\E_MushroomDeath.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\Cut\E_MushroomRed.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\Cut\E_MushroomRedDeath.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\Cut\E_TortoiseGreenLeft.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\Cut\E_TortoiseGreenRight.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\Cut\E_TortoiseRedRight.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\Cut\E_TortoiseshellGreenLeft.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\Cut\E_TortoiseshellGreenRight.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\Cut\E_TortoiseshellRedLeft.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\Cut\E_TortoiseshellRedRight.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\Cut\E_TurtoiseRedLeft.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\Cut\F_MushroomPower.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\Cut\Leaf.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\Cut\MarioDriftToLeft.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\Cut\MarioDriftToRight.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\Cut\MarioJumpLeft.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\Cut\MarioJumpRight.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\Cut\marioleft.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\Cut\marioleft32.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\Cut\marioright.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\Cut\marioright32.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\Cut\MarioRunLeft.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\Cut\MarioRunRight.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\Cut\Wood_1.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

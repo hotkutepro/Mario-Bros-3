@@ -17,7 +17,7 @@ public:
 	virtual void Load();
 	virtual void Render();
 	virtual void Update(float gameTime);
-	void SetSite(int x, int y);
+	void SetPosition(int x, int y);
 	D3DXVECTOR2 GetPosition();
 	Object(D3DXVECTOR2 pos, D3DXVECTOR2 speed);
 	Object(int _id,D3DXVECTOR2 pos, typeObject _type);

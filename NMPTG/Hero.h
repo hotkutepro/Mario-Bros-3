@@ -60,7 +60,7 @@ private:
 	FrkSprite* MarioRunRight;
 	FrkSprite* MarioSuperJumpLeft;
 	FrkSprite* MarioSuperJumpRight;
-
+	bool isMove;
 public:
 	Box* m_hBox;
 	FrkSprite* m_hMarioLeft;
@@ -72,6 +72,13 @@ public:
 	void Render();
 	void onkeydown();///
 	void Update(float gameTime);	
+	void GoLeft(float gameTime);
+	void GoRight(float gameTime);
+	void Jump(float gameTime);
+	void Fall(float gameTime);
+	void StandLeft();
+	void StandRight();
+
 	Hero();
 	Hero(D3DXVECTOR2 pos, D3DXVECTOR2 speed);
 	~Hero();

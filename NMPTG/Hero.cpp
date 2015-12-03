@@ -3,12 +3,12 @@
 
 Hero::Hero()
 {
-
+	isMove = false;
 }
 
 Hero::Hero(D3DXVECTOR2 pos, D3DXVECTOR2 speed) :Object(pos,speed)
 {
-
+	isMove = false;
 }
 
 
@@ -28,8 +28,7 @@ FrkSprite* Hero::getCurrentSprite()
 
 void Hero::Load()
 {
-	m_hSpeed = D3DXVECTOR2(10, 10);	
-	SetSite(200, 200);
+
 	setCurrentSprite(m_hMarioRight);
 	//m_hBox = new Box(GetPosition().x, GetPosition().y, getCurrentSprite()->_Width, getCurrentSprite()->_Height, m_hSpeed.x, m_hSpeed.y);
 	BigMarioDriftToLeft = ResourcesManager::GetInstance()->GetSprite(SpriteID::BigMarioDriftToLeft);
@@ -99,24 +98,24 @@ void Hero::Update(float gameTime)
 	if (_LocalKeyboard->IsKeyDown(DIK_LEFT))
 	{
 		m_hSpeed.x = -abs(m_hSpeed.x);
-		SetSite(GetPosition().x + m_hSpeed.x, GetPosition().y);		
+		SetPosition(GetPosition().x + m_hSpeed.x, GetPosition().y);		
 		setCurrentSprite(BigMarioRunLeft);
 		getCurrentSprite()->Next();
 	}
 	if (_LocalKeyboard->IsKeyDown(DIK_RIGHT)){
 		m_hSpeed.x = abs(m_hSpeed.x);
-		SetSite(GetPosition().x+m_hSpeed.x, GetPosition().y );
+		SetPosition(GetPosition().x + m_hSpeed.x, GetPosition().y);
 		setCurrentSprite(BigMarioRunRight);
 		getCurrentSprite()->Next();
 	}
 	if (_LocalKeyboard->IsKeyDown(DIK_UP))
 	{
 		m_hSpeed.y = abs(m_hSpeed.y);
-		SetSite(GetPosition().x, GetPosition().y+m_hSpeed.y);
+		SetPosition(GetPosition().x, GetPosition().y + m_hSpeed.y);
 	}
 	if (_LocalKeyboard->IsKeyDown(DIK_DOWN)){
 		m_hSpeed.y = -abs(m_hSpeed.y);
-		SetSite(GetPosition().x , GetPosition().y+m_hSpeed.y);
+		SetPosition(GetPosition().x, GetPosition().y + m_hSpeed.y);
 	}
 	m_hBox = new Box(GetPosition().x, GetPosition().y, getCurrentSprite()->_Width, getCurrentSprite()->_Height, m_hSpeed.x, m_hSpeed.y);
 	_LocalKeyboard->ClearBuffer();
@@ -131,22 +130,22 @@ void Hero::Update(float gameTime)
 		{
 			if (keycode == DIK_K)
 			{
-				SetSite(GetPosition().x, GetPosition().y + 50);
+				SetPosition(GetPosition().x, GetPosition().y + 50);
 			}
 			if (keycode == DIK_F)
 			{
-				SetSite(GetPosition().x+16, GetPosition().y);
+				SetPosition((GetPosition().x + 16, GetPosition().y);
 			}
 
 		}else
 		{
 			if (keycode == DIK_K)
 			{
-				SetSite(GetPosition().x, GetPosition().y -100);
+				SetPosition((GetPosition().x, GetPosition().y - 100);
 			}
 			if (keycode == DIK_F)
 			{
-				SetSite(GetPosition().x -50, GetPosition().y);
+				SetPosition((GetPosition().x - 50, GetPosition().y);
 			}
 		}
 	}
@@ -159,5 +158,5 @@ Box* Hero::getBox()
 
 void Hero::onkeydown()
 {
-	SetSite(GetPosition().x-20, GetPosition().y-20);
+	SetPosition(GetPosition().x - 20, GetPosition().y - 20);
 }

@@ -40,7 +40,7 @@ void Object::Update(float gameTime)
 
 }
 
-void Object::SetSite(int x, int y)
+void Object::SetPosition(int x, int y)
 {
 	m_hPosition = D3DXVECTOR2(x, y);
 }

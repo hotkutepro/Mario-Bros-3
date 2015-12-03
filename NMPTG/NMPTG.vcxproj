@@ -14,6 +14,7 @@
     <ProjectGuid>{488ADA74-5693-4F9C-A128-2528EDEA530F}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>NMPTG</RootNamespace>
+    <ProjectName>Bros3</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
