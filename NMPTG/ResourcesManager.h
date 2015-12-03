@@ -4,19 +4,19 @@
 #include "FrkSprite.h"
 enum SpriteID
 {
-	up, a, BigMarioDriftToLeft, BigMarioDriftToRight, BigMarioFallLeft, BigMarioFallRight,
-	BigMarioHugLeft, BigMarioHugRight, BigMarioJumpLeft, BigMarioJumpRight, BigMarioKickLeft, 
-	BigMarioKickRight, BigMarioLeft, BigMarioRight, BigMarioRunLeft, BigMarioRunRight, BigMarioSitLeft, 
-	BigMarioSitRight, BigMarioSuperJumpLeft, BigMarioSuperJumpRight, Brick, BrosBaleLeft, BrosBaleRight,
-	BrosDriftToLeft, BrosDriftToRight, BrosFallLeft, BrosFallRight, BrosFlyLeft, BrosFlyRight, BrosHugLeft,
-	BrosHugRight, BrosJumpLeft, BrosJumpRight, BrosKickLeft, BrosKickRight, BrosLeft, BrosRight, BrosRunLeft, 
-	BrosRunRight, BrosSitLeft, BrosSitRight, Coin, CoinBox, CoinBoxNull, E_FlyMushroom, E_FlyMushroom1, E_FlyTortoiseGreenLeft,
+	a, BigMarioDriftToLeft, BigMarioDriftToRight, BigMarioFallLeft, BigMarioFallRight, BigMarioHugLeft, 
+	BigMarioHugRight, BigMarioJumpLeft, BigMarioJumpRight, BigMarioKickLeft, BigMarioKickRight,
+	BigMarioLeft, BigMarioRight, BigMarioRunLeft, BigMarioRunRight, BigMarioSitLeft, BigMarioSitRight, 
+	BigMarioSuperJumpLeft, BigMarioSuperJumpRight, Brick, BrosBaleLeft, BrosBaleRight, BrosDriftToLeft,
+	BrosDriftToRight, BrosFallLeft, BrosFallRight, BrosFlyLeft, BrosFlyRight, BrosHugLeft, BrosHugRight,
+	BrosJumpLeft, BrosJumpRight, BrosKickLeft, BrosKickRight, BrosLeft, BrosRight, BrosRunLeft, BrosRunRight, 
+	BrosSitLeft, BrosSitRight, cloud, Coin, CoinBox, CoinBoxNull, E_FlyMushroom, E_FlyMushroom1, E_FlyTortoiseGreenLeft, 
 	E_FlyTortoiseGreenRight, E_FlyTortoiseRedLeft, E_FlyTortoiseRedRight, E_Mushroom, E_MushroomDeath, E_MushroomRed, 
-	E_MushroomRedDeath, E_TortoiseGreenLeft, E_TortoiseGreenRight, E_TortoiseRedRight, E_TortoiseshellGreenLeft, 
-	E_TortoiseshellGreenRight, E_TortoiseshellRedLeft, E_TortoiseshellRedRight, E_TurtoiseRedLeft, F_MushroomPower,
-	F_Star, KickP, Leaf, MarioDeath, MarioDriftToLeft, MarioDriftToRight, MarioHugLeft, MarioHugRight, MarioJumpLeft,
-	MarioJumpRight, MarioKickLeft, MarioKickRight, MarioLeft, MarioRight, MarioRunLeft, MarioRunRight, MarioSuperJumpLeft, 
-	MarioSuperJumpRight, P, Strike, Wood_1,
+	E_MushroomRedDeath, E_TortoiseGreenLeft, E_TortoiseGreenRight, E_TortoiseRedRight, E_TortoiseshellGreenLeft,
+	E_TortoiseshellGreenRight, E_TortoiseshellRedLeft, E_TortoiseshellRedRight, E_TurtoiseRedLeft, F_MushroomPower, 
+	KickP, Leaf, MarioDeath, MarioDriftToLeft, MarioDriftToRight, MarioHugLeft, MarioHugRight, MarioJumpLeft,
+	MarioJumpRight, MarioKickLeft, MarioKickRight, MarioLeft, MarioRight, MarioRunLeft, MarioRunRight,
+	MarioSuperJumpLeft, MarioSuperJumpRight, P, Strike, up, Wood_1,
 };
 enum TextureID
 {
