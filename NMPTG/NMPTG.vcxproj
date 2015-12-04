@@ -83,14 +83,22 @@
     <ClInclude Include="Box.h" />
     <ClInclude Include="Brick.h" />
     <ClInclude Include="Bullet.h" />
-    <ClInclude Include="Chaos.h" />
+    <ClInclude Include="C_Box.h" />
+    <ClInclude Include="C_Drain.h" />
+    <ClInclude Include="C_Land.h" />
+    <ClInclude Include="C_Question_Block.h" />
     <ClInclude Include="DSutil.h" />
-    <ClInclude Include="E_CarnivorousPlant.h" />
-    <ClInclude Include="E_CarnivorousPlant_Gun.h" />
+    <ClInclude Include="E_Plant_Red.h" />
+    <ClInclude Include="E_Plant.h" />
+    <ClInclude Include="E_Plant_Gun.h" />
     <ClInclude Include="E_FlyMushroom.h" />
     <ClInclude Include="E_FlyTortoise.h" />
     <ClInclude Include="E_Mushroom.h" />
+    <ClInclude Include="E_Plant_Red_Gun.h" />
+    <ClInclude Include="E_Tarnooki.h" />
+    <ClInclude Include="E_Tarnooki_Fly.h" />
     <ClInclude Include="E_Tortoise.h" />
+    <ClInclude Include="E_Tortoise_Red.h" />
     <ClInclude Include="FrkCamera.h" />
     <ClInclude Include="FrkContent.h" />
     <ClInclude Include="FrkControl.h" />
@@ -105,10 +113,10 @@
     <ClInclude Include="F_Leaf.h" />
     <ClInclude Include="F_Mushroom.h" />
     <ClInclude Include="F_P.h" />
+    <ClInclude Include="F_Star.h" />
     <ClInclude Include="Hero.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="Object.h" />
-    <ClInclude Include="Objects.h" />
     <ClInclude Include="QNode.h" />
     <ClInclude Include="ResourcesManager.h" />
     <ClInclude Include="State.h" />
@@ -121,14 +129,22 @@
     <ClCompile Include="Box.cpp" />
     <ClCompile Include="Brick.cpp" />
     <ClCompile Include="Bullet.cpp" />
-    <ClCompile Include="Chaos.cpp" />
+    <ClCompile Include="C_Box.cpp" />
+    <ClCompile Include="C_Drain.cpp" />
+    <ClCompile Include="C_Land.cpp" />
+    <ClCompile Include="C_Question_Block.cpp" />
     <ClCompile Include="DSutil.cpp" />
-    <ClCompile Include="E_CarnivorousPlant.cpp" />
-    <ClCompile Include="E_CarnivorousPlant_Gun.cpp" />
+    <ClCompile Include="E_Plant_Red.cpp" />
+    <ClCompile Include="E_Plant.cpp" />
+    <ClCompile Include="E_Plant_Gun.cpp" />
     <ClCompile Include="E_FlyMushroom.cpp" />
     <ClCompile Include="E_FlyTortoise.cpp" />
     <ClCompile Include="E_Mushroom.cpp" />
+    <ClCompile Include="E_Plant_Red_Gun.cpp" />
+    <ClCompile Include="E_Tarnooki.cpp" />
+    <ClCompile Include="E_Tarnooki_Fly.cpp" />
     <ClCompile Include="E_Tortoise.cpp" />
+    <ClCompile Include="E_Tortoise_Red.cpp" />
     <ClCompile Include="FrkCamera.cpp" />
     <ClCompile Include="FrkContent.cpp" />
     <ClCompile Include="FrkGame.cpp" />
@@ -141,10 +157,10 @@
     <ClCompile Include="F_Leaf.cpp" />
     <ClCompile Include="F_Mushroom.cpp" />
     <ClCompile Include="F_P.cpp" />
+    <ClCompile Include="F_Star.cpp" />
     <ClCompile Include="Hero.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="Object.cpp" />
-    <ClCompile Include="Objects.cpp" />
     <ClCompile Include="QNode.cpp" />
     <ClCompile Include="ResourcesManager.cpp" />
     <ClCompile Include="State.cpp" />
@@ -153,9 +169,6 @@
     <ClCompile Include="State_2.cpp" />
     <ClCompile Include="SweptAABB.cpp" />
     <ClCompile Include="WinMain.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="resources\Cut\1-up.png" />
@@ -190,6 +203,9 @@
     <Image Include="resources\Cut\MarioRunLeft.png" />
     <Image Include="resources\Cut\MarioRunRight.png" />
     <Image Include="resources\Cut\Wood_1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

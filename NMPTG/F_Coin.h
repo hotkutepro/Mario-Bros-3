@@ -1,5 +1,6 @@
 #pragma once
-class F_Coin
+#include "Object.h"
+class F_Coin:public Object
 {
 public:
 	F_Coin();

@@ -2,7 +2,7 @@
 #include"Object.h"
 #include"FrkSprite.h"
 #include"Box.h"
-class Brick:Object
+class Brick:public Object
 {
 public:
 	Box* m_hBox;

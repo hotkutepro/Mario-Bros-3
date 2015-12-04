@@ -5,8 +5,7 @@
 #include"ResourcesManager.h"
 class Hero:public Object
 {
-private:
-	FrkSprite* m_hCurrentSprite;
+private:	
 	FrkSprite* BigMarioDriftToLeft;
 	FrkSprite* BigMarioDriftToRight;
 	FrkSprite* BigMarioFallLeft;
@@ -62,12 +61,8 @@ private:
 	FrkSprite* MarioSuperJumpRight;
 	bool isMove;
 public:
-	Box* m_hBox;
-	FrkSprite* m_hMarioLeft;
-	FrkSprite* m_hMarioRight;
-	Box* getBox();
-	void setCurrentSprite(FrkSprite*);
-	FrkSprite* getCurrentSprite();
+	Box* m_hBox;	
+	Box* getBox();	
 	void Load();
 	void Render();
 	void onkeydown();///

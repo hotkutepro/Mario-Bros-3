@@ -12,5 +12,5 @@ typedef map<int, QNode*>mapQNode;
 extern FrkGraphic* _LocalGraphic;
 extern FrkContent* _LocalContent;
 extern FrkKeyboard* _LocalKeyboard;
-
+extern float Zoom;
 #endif ShareControl

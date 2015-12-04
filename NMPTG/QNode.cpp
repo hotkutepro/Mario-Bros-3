@@ -1,6 +1,30 @@
 ﻿#include "QNode.h"
 #include"Object.h"
+#include"Brick.h"
+#include "F_Coin.h"
+#include "C_Box.h"
+#include "C_Drain.h"
+#include "C_Land.h"
+#include "C_Question_Block.h"
+#include "E_FlyMushroom.h"
+#include "E_FlyTortoise.h"
+#include "E_Mushroom.h"
+#include "E_Plant.h"
+#include "E_Plant_Gun.h"
+#include "E_Plant_Red.h"
+#include "E_Plant_Red_Gun.h"
+#include "E_Tarnooki.h"
+#include "E_Tarnooki_Fly.h"
+#include "E_Tortoise.h"
+#include "E_Tortoise_Red.h"
+#include "F_Leaf.h"
+#include "F_Mushroom.h"
+#include "F_P.h"
+#include "F_Star.h"
 
+
+
+sId QNode::s_IdObjectInViewPort;
 QNode::QNode()
 {
 }
@@ -49,8 +73,93 @@ void QNode::Connect()
 		}
 	}
 }
-
-void QNode::LoadObjects(string path)
+void QNode::LoadObjects(string path)//Viet lai
+{
+	int count;
+	typeObject type;
+	string stype;
+	fstream open(path);
+	string line;
+	typeObject typeO[19] = { brick, coin, drain, land, leaf, mushroom_red, p,box , question_block, star, tarnooki, 
+		tarnooki_fly, tortoise, tortoise_fly, tortoise_red, tree, tree_red, tree_red_shoot, tree_shoot };
+	for (int i = 0; i < 18; i++)
+	{
+		open >> stype;
+		open >> count;
+		for (int j = 0; j < count; j++)
+		{
+			Object *tmp;			
+			switch (i)
+			{
+			case 0:
+				tmp = new Brick();
+				break;
+			case 1:
+				tmp = new F_Coin();
+				break;
+			case 2:
+				tmp = new C_Drain();
+				break;
+			case 3:
+				tmp = new C_Land();
+				break;
+			case 4:
+				tmp = new F_Leaf();
+				break;
+			case 5:
+				tmp = new E_Mushroom();
+				break;
+			case 6:
+				tmp = new F_P();
+				break;
+			case 7:
+				tmp = new C_Box();
+				break;
+			case 8:
+				tmp = new C_Question_Block();
+				break;
+			case 9:
+				tmp = new F_Star();
+				break;
+			case 10:
+				tmp = new E_Tarnooki();
+				break;
+			case 11:
+				tmp = new E_Tarnooki_Fly();
+				break;
+			case 12:
+				tmp = new E_Tortoise();
+				break;
+			case 13:
+				tmp = new E_FlyTortoise();
+				break;
+			case 14:
+				tmp = new E_Tortoise_Red();
+				break;
+			case 15:
+				tmp = new E_Plant();
+				break;
+			case 16:
+				tmp = new E_Plant_Red();
+				break;
+			case 17:
+				tmp = new E_Plant_Red_Gun();
+				break;
+			case 18:
+				tmp = new E_Plant_Gun();
+				break;			
+			}
+			open >> tmp->id;
+			D3DXVECTOR2 pos;
+			open >> pos.x;
+			open >> pos.y;
+			tmp->SetPosition(pos.x, pos.y);
+			tmp->type = typeO[i];
+			m_Objects.insert(pair<int, Object*>(tmp->id, tmp));
+		}				
+	}
+}
+void QNode::LoadObjects2(string path)
 {
 	int count;
 	typeObject type;
@@ -69,9 +178,8 @@ void QNode::LoadObjects(string path)
 			D3DXVECTOR2 pos;
 			open >> pos.x;
 			open >> pos.y;	
-			tmp->SetSite(pos.x, pos.y);
-			tmp->type = typeO[i];
-			
+			tmp->SetPosition(pos.x, pos.y);
+			tmp->type = typeO[i];			
 			m_Objects.insert(pair<int, Object*>(tmp->id, tmp));
 		}
 	}
@@ -134,6 +242,4 @@ bool QNode::Intersect(RECT _r1, RECT _r2)
 {	
 	return !(_r1.right<_r2.left||_r1.left>_r2.right||_r1.bottom<_r2.top||_r1.top<_r2.bottom );
 }
-
-sId QNode::s_IdObjectInViewPort;
 

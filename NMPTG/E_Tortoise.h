@@ -1,5 +1,6 @@
 #pragma once
-class E_Tortoise
+#include"Object.h"
+class E_Tortoise:public Object
 {
 public:
 	E_Tortoise();

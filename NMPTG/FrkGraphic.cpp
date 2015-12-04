@@ -1,4 +1,5 @@
 #include "FrkGraphic.h"
+#include "FrkShareControl.h"
 
 FrkGraphic::FrkGraphic(FrkGame* hGame)
 {
@@ -78,10 +79,10 @@ void FrkGraphic::DrawTexture(FrkTexture* texture, RECT rect_Present, D3DXVECTOR2
 	m_hD3DXSprite->SetTransform(&_normal);
 }
 
-void FrkGraphic::DrawTexture(FrkTexture* texture, RECT rect_source, RECT rect_Present, D3DXVECTOR2 texture_center, D3DCOLOR color, float depth)
+void FrkGraphic::DrawTexture2(FrkTexture* texture, RECT rect_source, RECT rect_Present, D3DXVECTOR2 texture_center, D3DCOLOR color, float depth)
 {
 	float xScale = (float)(rect_Present.right - rect_Present.left) / (float)(rect_source.right - rect_source.left);
-	float yScale = (float)(rect_Present.bottom - rect_Present.top) / (float)(rect_source.bottom - rect_source.top);
+	float yScale = (float)(rect_Present.bottom - rect_Present.top) / (float)(rect_source.bottom - rect_source.top);	
 
 	D3DXMATRIX _normal;
 	D3DXMATRIX _ScaleMatrix;
@@ -98,8 +99,43 @@ void FrkGraphic::DrawTexture(FrkTexture* texture, RECT rect_source, RECT rect_Pr
 	draw_center.y = (float)texture_center.y / yScale;
 	draw_center.z = 0;
 
+	m_hD3DXSprite->GetTransform(&_normal);	
+	m_hD3DXSprite->SetTransform(&_ScaleMatrix);	
+	this->m_hD3DXSprite->Draw(
+		texture->GetImage(),//hinh can ve
+		&rect_source,//khung cat tu hinh//////////////////////////////////////////////
+		&draw_center,//tam cua texture (sau khi Scale)
+		&postion_Present,//toa do texture tren man hinh (sau khi Scale)
+		color
+		);
+	m_hD3DXSprite->SetTransform(&_normal);
+}
+
+///////test 
+void FrkGraphic::DrawTexture(FrkTexture* texture, RECT rect_source, RECT rect_Present, D3DXVECTOR2 texture_center, D3DCOLOR color, float depth)////////
+{
+	float xScale = (float)(rect_Present.right - rect_Present.left) / (float)(rect_source.right - rect_source.left);
+	float yScale = (float)(rect_Present.bottom - rect_Present.top) / (float)(rect_source.bottom - rect_source.top);	
+	D3DXMATRIX _normal;
+	xScale = xScale * Zoom;
+	yScale = yScale * Zoom;
+	D3DXMATRIX _ScaleMatrix;
+	D3DXMatrixScaling(&_ScaleMatrix, xScale, yScale, depth);
+
+	D3DXVECTOR3 postion_Present;
+	postion_Present.x = (float)rect_Present.left / xScale;
+	postion_Present.y = (float)rect_Present.top / yScale;
+	postion_Present.z = depth;
+
+	D3DXVECTOR3 draw_center;
+	draw_center.x = (float)texture_center.x / xScale;
+	draw_center.y = (float)texture_center.y / yScale;
+	draw_center.z = 0;
+
 	m_hD3DXSprite->GetTransform(&_normal);
-	m_hD3DXSprite->SetTransform(&_ScaleMatrix);
+
+	
+	m_hD3DXSprite->SetTransform(&_ScaleMatrix);	
 	this->m_hD3DXSprite->Draw(
 		texture->GetImage(),//hinh can ve
 		&rect_source,//khung cat tu hinh//////////////////////////////////////////////

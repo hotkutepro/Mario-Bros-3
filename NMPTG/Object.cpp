@@ -31,7 +31,8 @@ Object::~Object()
 
 void Object::Render()
 {
-
+	if (m_hCurrentSprite!=NULL)
+		m_hCurrentSprite->Render(m_hPosition);
 }
 
 
@@ -53,4 +54,13 @@ D3DXVECTOR2 Object::GetPosition()
 void Object::Load()
 {
 
+}
+void Object::setCurrentSprite(FrkSprite* s)
+{
+	m_hCurrentSprite = s;
+}
+
+FrkSprite* Object::getCurrentSprite()
+{
+	return m_hCurrentSprite;
 }

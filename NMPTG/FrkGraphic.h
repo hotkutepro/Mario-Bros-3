@@ -3,6 +3,7 @@
 #include <d3dx9.h>
 #include "FrkGame.h"
 #include "FrkTexture.h"
+
 class FrkGraphic
 {
 private:
@@ -31,6 +32,7 @@ public:
 	//Ve texture
 	void DrawTexture(FrkTexture* texture, D3DXVECTOR2 draw_postion,D3DXVECTOR2 texture_center, D3DCOLOR color, float depth);
 	void DrawTexture(FrkTexture* texture, RECT rect_Present, D3DXVECTOR2 texture_center, D3DCOLOR color, float depth);
+	void FrkGraphic::DrawTexture2(FrkTexture* texture, RECT rect_source, RECT rect_Present, D3DXVECTOR2 texture_center, D3DCOLOR color, float depth);
 	void DrawTexture(FrkTexture* texture, RECT rect_source, RECT rect_Present, D3DXVECTOR2 texture_center, D3DCOLOR color, float depth);
 	
 	D3DXVECTOR2 ConvertCoordinate(D3DXVECTOR2 ObjectWorldPosition, D3DXVECTOR2 ObjectCenter);

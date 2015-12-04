@@ -21,7 +21,7 @@ void Map::loadMaxtrix(string path)
 }
 void Map::Init(string path, FrkTexture* texture)
 {
-	this->loadMaxtrix(path);
+	this->loadMaxtrix(path);	
 	this->_texture = texture;
 }
 void Map::Update()
@@ -34,6 +34,19 @@ void Map::Render()
 	{
 		for (int j = 0; j < this->_column; j++)
 		{
+			/*RECT s_rect;
+			s_rect.left = (this->_matrix[i][j]) * 32;
+			s_rect.right = s_rect.left + 32;
+			s_rect.top = 0;
+			s_rect.bottom = 32;
+
+			RECT des_rect;
+			des_rect.left = j * 32;
+			des_rect.right = (j + 1) * 32;
+
+			des_rect.top =i * 32;
+			des_rect.bottom = des_rect.top + 32;			
+			_LocalGraphic->tDrawTexture(this->_texture, s_rect, des_rect, D3DXVECTOR2(8, 8), D3DCOLOR_XRGB(255, 255, 255), 0.1);			*/
 			RECT s_rect;
 			s_rect.left = (this->_matrix[i][j]) * 16;
 			s_rect.right = s_rect.left + 16;
@@ -44,8 +57,8 @@ void Map::Render()
 			des_rect.left = j * 16;
 			des_rect.right = (j + 1) * 16;
 
-			des_rect.top =i * 16;
-			des_rect.bottom = des_rect.top + 16;			
+			des_rect.top = i * 16;
+			des_rect.bottom = des_rect.top + 16;
 			_LocalGraphic->tDrawTexture(this->_texture, s_rect, des_rect, D3DXVECTOR2(8, 8), D3DCOLOR_XRGB(255, 255, 255), 0.1);
 		}
 	}

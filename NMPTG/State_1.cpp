@@ -19,8 +19,8 @@ State_1::~State_1()
 
 void State_1::Load()
 {
-//	mushroom = new E_Mushroom(200, 200);
-	//mushroom->Load();
+	leaf = new F_Leaf();
+	leaf->Load();
 	camera = new FrkCamera(2848, 720);
 	map1 = new Map();
 	map1->Init("hihi.txt", ResourcesManager::GetInstance()->GetTexture(TextureID::TileMap1));
@@ -39,10 +39,10 @@ void State_1::Update(float gameTime)
 
 void State_1::Render()
 {
-	_LocalGraphic->Begin(camera->GetTransformMatrix());
-	
-	//_LocalGraphic->DrawTexture(wall, D3DXVECTOR2(720,450), D3DXVECTOR2(720, 450), D3DCOLOR_XRGB(255, 255, 255), 0.2);
+	_LocalGraphic->Begin(camera->GetTransformMatrix());		
 	map1->Render();
+	////render object ben duoi
+	leaf->Render();
 	hero->Render();
 	//mushroom->Render();
 	_LocalGraphic->End();

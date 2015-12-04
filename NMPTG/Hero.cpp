@@ -16,21 +16,10 @@ Hero::~Hero()
 {
 }
 
-void Hero::setCurrentSprite(FrkSprite* s)
-{
-	m_hCurrentSprite = s;
-}
-
-FrkSprite* Hero::getCurrentSprite()
-{
-	return m_hCurrentSprite;
-}
-
 void Hero::Load()
 {
-
-	setCurrentSprite(m_hMarioRight);
-	//m_hBox = new Box(GetPosition().x, GetPosition().y, getCurrentSprite()->_Width, getCurrentSprite()->_Height, m_hSpeed.x, m_hSpeed.y);
+	m_hSpeed = D3DXVECTOR2(3, 3);
+	SetPosition(300, 300);
 	BigMarioDriftToLeft = ResourcesManager::GetInstance()->GetSprite(SpriteID::BigMarioDriftToLeft);
 	BigMarioDriftToRight = ResourcesManager::GetInstance()->GetSprite(SpriteID::BigMarioDriftToRight);
 	BigMarioFallLeft = ResourcesManager::GetInstance()->GetSprite(SpriteID::BigMarioFallLeft);
@@ -128,24 +117,24 @@ void Hero::Update(float gameTime)
 		int keycode = _LocalKeyboard->_KeyEvents[i].dwOfs;
 		if (state & 0x80)
 		{
-			if (keycode == DIK_K)
+			if (keycode == DIK_Z)
 			{
-				SetPosition(GetPosition().x, GetPosition().y + 50);
+				Zoom += 1;
 			}
-			if (keycode == DIK_F)
+			if (keycode == DIK_X)
 			{
-				SetPosition((GetPosition().x + 16, GetPosition().y);
+				Zoom -= 1;
 			}
 
 		}else
 		{
 			if (keycode == DIK_K)
 			{
-				SetPosition((GetPosition().x, GetPosition().y - 100);
+				SetPosition(GetPosition().x, GetPosition().y - 100);
 			}
 			if (keycode == DIK_F)
 			{
-				SetPosition((GetPosition().x - 50, GetPosition().y);
+				SetPosition(GetPosition().x - 50, GetPosition().y);
 			}
 		}
 	}

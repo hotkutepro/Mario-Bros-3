@@ -1,5 +1,6 @@
 #pragma once
-class E_FlyMushroom
+#include"Object.h"
+class E_FlyMushroom:public Object
 {
 public:
 	E_FlyMushroom();

@@ -1,128 +1,338 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="Chaos" Collapsed="true">
-    <Position X="3.5" Y="1.75" Width="1.5" />
+  <Class Name="Box" Collapsed="true">
+    <Position X="40.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQAkAAAEkAAAAAAAgAAAAAAAAWAAAEAABACAAAAAAA=</HashCode>
-      <FileName>Chaos.h</FileName>
+      <HashCode>EAAAAAAAAAAAAAAAAgAAAAAAAAYAAAAAQAhgAAAAAAA=</HashCode>
+      <FileName>Box.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Brick" Collapsed="true">
+    <Position X="6.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAgAAAAAAAAAAAAAABAAABAAAAACAAABAAAAAgAAQ=</HashCode>
+      <FileName>Brick.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Bullet" Collapsed="true">
+    <Position X="42.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAQAAA=</HashCode>
+      <FileName>Bullet.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="C_Box" Collapsed="true">
+    <Position X="15.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>C_Box.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="C_Drain" Collapsed="true">
+    <Position X="44.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAA=</HashCode>
+      <FileName>C_Drain.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="C_Land" Collapsed="true">
+    <Position X="29.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>C_Land.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CSoundManager" Collapsed="true">
-    <Position X="6" Y="0.5" Width="1.5" />
+    <Position X="46" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAIAQEQAAAAEAAAAAAAAEAgABAAAAACAAI=</HashCode>
       <FileName>DSutil.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CSound" Collapsed="true">
-    <Position X="0.5" Y="3.5" Width="1.5" />
+    <Position X="5.5" Y="3.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AEyGAABAAAAIDAAAAACAAAAAAQAEAAAAoAAAgEAAAAA=</HashCode>
       <FileName>DSutil.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CStreamingSound" Collapsed="true">
-    <Position X="0.5" Y="4.75" Width="1.5" />
+    <Position X="5.5" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAABAAABAAABgAgAAAEAAAAEAAAAAAAAAAAACE=</HashCode>
       <FileName>DSutil.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CWaveFile" Collapsed="true">
-    <Position X="7.75" Y="0.5" Width="1.5" />
+    <Position X="47.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>EggAACAARAAAIAiAAAAEAAgwAgABAAgIAAAAAIGIAAA=</HashCode>
       <FileName>DSutil.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="FrkCamera" Collapsed="true">
-    <Position X="9.5" Y="0.5" Width="1.5" />
+  <Class Name="E_Plant" Collapsed="true">
+    <Position X="18" Y="1.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQCAQAAAQAAAAACAAgAASAAAAAAEAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAACA=</HashCode>
+      <FileName>E_Plant.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="E_Plant_Gun" Collapsed="true">
+    <Position X="24.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAIA=</HashCode>
+      <FileName>E_Plant_Gun.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="E_FlyMushroom" Collapsed="true">
+    <Position X="31.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAACAAAAAAgAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>E_FlyMushroom.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="E_FlyTortoise" Collapsed="true">
+    <Position X="36" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAACAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>E_FlyTortoise.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="E_Mushroom" Collapsed="true">
+    <Position X="2.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAgAAAAAAAAAAAAAAAAAAAAAAIAQAAABAAAAAAACA=</HashCode>
+      <FileName>E_Mushroom.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="E_Tortoise" Collapsed="true">
+    <Position X="9" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>E_Tortoise.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FrkCamera" Collapsed="true">
+    <Position X="40.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQCAQAAAQAAAAACBAgAASAAAAAAEAAAAAAAAAAAAAA=</HashCode>
       <FileName>FrkCamera.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="FrkContent" Collapsed="true">
-    <Position X="11.25" Y="0.5" Width="1.5" />
+    <Position X="42.5" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>BAAGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA0A=</HashCode>
       <FileName>FrkContent.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="FrkGraphic" Collapsed="true">
-    <Position X="6" Y="1.5" Width="1.5" />
+    <Position X="44.25" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAYAAAAAAAEECAAAAAAAEAAEAAAAEAAAABAAgAAAAgA=</HashCode>
       <FileName>FrkGraphic.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="FrkGame" Collapsed="true">
-    <Position X="3.5" Y="0.5" Width="1.5" />
+    <Position X="1.75" Y="3.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQAggAAAKIAgAAAAAAEIIAAAAAAAAgAQBAAQAwBAEY=</HashCode>
+      <HashCode>AAQAggAAAKIAgAAAAAAEIIAAAAAAAIgAQBAAQAwBAEY=</HashCode>
       <FileName>FrkGame.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="FrkKeyboard" Collapsed="true">
-    <Position X="7.75" Y="1.5" Width="1.5" />
+    <Position X="46" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>GQAAAAAAAAAAAAAAAggAAIAAQAAFAAAYAAACQAAAAgA=</HashCode>
+      <HashCode>GQABAAAAAAAAAAAAAggABIBAQAEFAAAZACACQAAAAgA=</HashCode>
       <FileName>FrkKeyboard.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="FrkSound" Collapsed="true">
-    <Position X="9.5" Y="1.5" Width="1.5" />
+    <Position X="47.75" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAgAEAAAAAIABICAAAAAAAAoAAAyAAACAA=</HashCode>
       <FileName>FrkSound.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="FrkSprite">
-    <Position X="11.25" Y="1.5" Width="1.5" />
+  <Class Name="FrkSprite" Collapsed="true">
+    <Position X="40.75" Y="2.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AgAgAAAAABCABAAAAAAAAAAAAAAAAAQBABIAAIAAABA=</HashCode>
+      <HashCode>AgAgAAAAIBSABAAAAAAAAAAAAAQAAAQBABIAAIAAABA=</HashCode>
       <FileName>FrkSprite.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="FrkTexture" Collapsed="true">
-    <Position X="6" Y="2.5" Width="1.5" />
+    <Position X="42.5" Y="2.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAEAAAgAAAAEAAFQAAQAAAAAQACAAEAAAAQ=</HashCode>
       <FileName>FrkTexture.h</FileName>
     </TypeIdentifier>
   </Class>
+  <Class Name="F_Coin" Collapsed="true">
+    <Position X="38.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAIAAA=</HashCode>
+      <FileName>F_Coin.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="F_Leaf" Collapsed="true">
+    <Position X="4.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACQAgAAAAAAAAAAAAAAAAAAAAAAAAAAAABACAAAAAAA=</HashCode>
+      <FileName>F_Leaf.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="F_Mushroom" Collapsed="true">
+    <Position X="11.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAgAQAAAAAAAAAAAAAAAAAAAAAAAAAgBAAAAAAAAA=</HashCode>
+      <FileName>F_Mushroom.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="F_P" Collapsed="true">
+    <Position X="13.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>F_P.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Hero" Collapsed="true">
+    <Position X="20.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AScYgAkgAoyAAbBIAAIEdgwgIAECgGSYVxEaLQi5AIA=</HashCode>
+      <FileName>Hero.h</FileName>
+    </TypeIdentifier>
+  </Class>
   <Class Name="Map" Collapsed="true">
-    <Position X="7.75" Y="2.5" Width="1.5" />
+    <Position X="44.25" Y="2.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAEAARAAAIAAAAAAAAAAAAAAAAgAABAKAQAAAAA=</HashCode>
       <FileName>Map.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Object" Collapsed="true">
-    <Position X="0.5" Y="0.5" Width="1.5" />
+    <Position X="20.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQAgAACASAAAAAgAAAIEAAAAAAAAAAAABAAQAAAAAA=</HashCode>
+      <HashCode>AAQAgAACASAAAAAgAAAAEAAAQEABAgAAABBAQAAAAgA=</HashCode>
       <FileName>Object.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ResourcesManager" Collapsed="true">
-    <Position X="9.5" Y="2.5" Width="1.5" />
+  <Class Name="QNode" Collapsed="true">
+    <Position X="46" Y="2.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>ACAAAAAAAAAAAAAAAAAAACAABAAAAAAIQAACAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAQAAgABAgAAAEIIAAASwQAAAgAIAAAARQAAA=</HashCode>
+      <FileName>QNode.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ResourcesManager" Collapsed="true">
+    <Position X="47.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAACACAAAAEAAAAQAAACAEBAAAABAAQAACQAAAAAA=</HashCode>
       <FileName>ResourcesManager.h</FileName>
     </TypeIdentifier>
   </Class>
+  <Class Name="State" Collapsed="true">
+    <Position X="1.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAgABAAAACAAgAAAAABAAAAAAAAAAAABACBBAAAAI=</HashCode>
+      <FileName>State.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StateManager" Collapsed="true">
+    <Position X="40.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAYAAAAAAAAAAAAAIgAABAAAAAEAAAAAEBAAAABAAAA=</HashCode>
+      <FileName>StateManager.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="State_1" Collapsed="true">
+    <Position X="0.5" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAkAAAAkAAIAAAAAIAAAAQAAAAAAIAABAEAAAAAAA=</HashCode>
+      <FileName>State_1.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="State_2" Collapsed="true">
+    <Position X="2.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAgAAAAkAAIAAAABAAAAACAAAAACIAABAEAAAAQAA=</HashCode>
+      <FileName>State_2.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SweptAABB" Collapsed="true">
+    <Position X="42.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQYAAAAQAAAAAAAAAAAAAAAAAAAAAAAAIAAAAEAAAAA=</HashCode>
+      <FileName>SweptAABB.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="E_Plant_Red" Collapsed="true">
+    <Position X="22.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAgAAAA=</HashCode>
+      <FileName>E_Plant_Red.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="E_Plant_Red_Gun" Collapsed="true">
+    <Position X="27" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAgAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>E_Plant_Red_Gun.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="E_Tortoise_Red" Collapsed="true">
+    <Position X="33.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>E_Tortoise_Red.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Typedef Name="mapObject" Collapsed="true">
+    <Position X="40.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>FrkShareControl.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="mapQNode" Collapsed="true">
+    <Position X="42.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>FrkShareControl.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
   <Typedef Name="tchar" Collapsed="true">
-    <Position X="11" Y="3.75" Width="1.5" />
+    <Position X="46" Y="5.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>FrkSound.h</FileName>
     </TypeIdentifier>
   </Typedef>
-  <Enum Name="TextureID" Collapsed="true">
-    <Position X="8.25" Y="3.5" Width="1.5" />
+  <Typedef Name="sId" Collapsed="true">
+    <Position X="44.25" Y="5.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>QNode.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Enum Name="typeObject" Collapsed="true">
+    <Position X="44.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAICAQAAAAAAgAgAAAAgAAAQSIAAIBBMwAAAIAQAA=</HashCode>
+      <FileName>Object.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="SpriteID" Collapsed="true">
+    <Position X="40.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CSMcIQogEIyBAbQIABIFxgwAIAUCgVW9V4EaLwD9AAA=</HashCode>
+      <FileName>ResourcesManager.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="TextureID" Collapsed="true">
+    <Position X="42.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
       <FileName>ResourcesManager.h</FileName>
     </TypeIdentifier>
   </Enum>

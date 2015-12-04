@@ -23,7 +23,8 @@ public:
 	void LoadQNode(string path);//load danh sách QNode
 	void Connect();//liên kết, tìm con cho node
 	void LoadObjects(string path);//load danh sách Object
-	void InsertObject(string path);
+	void LoadObjects2(string path);
+	void InsertObject(string path);	
 	void getIdObjectInViewPort(RECT _rectViewport, QNode* node);
 	QNode(int _id, RECT  _rect);
 	QNode();

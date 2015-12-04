@@ -7,6 +7,7 @@ private:
 FrkSprite* mushroomSprite;
 public:
 	E_Mushroom(int x, int y);
+	E_Mushroom();
 	~E_Mushroom();
 	void Load();
 

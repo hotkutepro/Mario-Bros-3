@@ -12,6 +12,11 @@ E_Mushroom::E_Mushroom(int x, int y)
 	this->m_hSpeed.y = -4;
 }
 
+E_Mushroom::E_Mushroom()
+{
+
+}
+
 
 E_Mushroom::~E_Mushroom()
 {

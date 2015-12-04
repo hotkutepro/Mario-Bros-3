@@ -6,7 +6,7 @@
 using namespace std;
 class Map
 {
-private: 
+private: 	
 	FrkTexture* _texture;
 	int** _matrix;
 	int _row;
