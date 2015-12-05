@@ -91,13 +91,13 @@
     <ClInclude Include="E_Plant_Red.h" />
     <ClInclude Include="E_Plant.h" />
     <ClInclude Include="E_Plant_Gun.h" />
-    <ClInclude Include="E_FlyMushroom.h" />
-    <ClInclude Include="E_FlyTortoise.h" />
+    <ClInclude Include="E_Mushroom_Fly.h" />
     <ClInclude Include="E_Mushroom.h" />
     <ClInclude Include="E_Plant_Red_Gun.h" />
     <ClInclude Include="E_Tarnooki.h" />
     <ClInclude Include="E_Tarnooki_Fly.h" />
     <ClInclude Include="E_Tortoise.h" />
+    <ClInclude Include="E_Tortoise_Fly.h" />
     <ClInclude Include="E_Tortoise_Red.h" />
     <ClInclude Include="FrkCamera.h" />
     <ClInclude Include="FrkContent.h" />
@@ -137,9 +137,7 @@
     <ClCompile Include="E_Plant_Red.cpp" />
     <ClCompile Include="E_Plant.cpp" />
     <ClCompile Include="E_Plant_Gun.cpp" />
-    <ClCompile Include="E_FlyMushroom.cpp" />
-    <ClCompile Include="E_FlyTortoise.cpp" />
-    <ClCompile Include="E_Mushroom.cpp" />
+    <ClCompile Include="E_Tortoise_Fly.cpp" />
     <ClCompile Include="E_Plant_Red_Gun.cpp" />
     <ClCompile Include="E_Tarnooki.cpp" />
     <ClCompile Include="E_Tarnooki_Fly.cpp" />

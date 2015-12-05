@@ -6,9 +6,7 @@
 #include "C_Drain.h"
 #include "C_Land.h"
 #include "C_Question_Block.h"
-#include "E_FlyMushroom.h"
-#include "E_FlyTortoise.h"
-#include "E_Mushroom.h"
+#include "E_Tortoise_Fly.h"
 #include "E_Plant.h"
 #include "E_Plant_Gun.h"
 #include "E_Plant_Red.h"
@@ -107,7 +105,7 @@ void QNode::LoadObjects(string path)//Viet lai
 				tmp = new F_Leaf();
 				break;
 			case 5:
-				tmp = new E_Mushroom();
+				tmp = new F_Mushroom();
 				break;
 			case 6:
 				tmp = new F_P();
@@ -131,7 +129,7 @@ void QNode::LoadObjects(string path)//Viet lai
 				tmp = new E_Tortoise();
 				break;
 			case 13:
-				tmp = new E_FlyTortoise();
+				tmp = new E_Tortoise_Fly();
 				break;
 			case 14:
 				tmp = new E_Tortoise_Red();

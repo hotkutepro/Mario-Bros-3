@@ -1,5 +1,6 @@
 #include "Brick.h"
 #include"FrkShareControl.h"
+#include "ResourcesManager.h"
 
 Brick::Brick()
 {
@@ -21,41 +22,12 @@ Brick::~Brick()
 }
 
 void Brick::Load()
-{
-	FrkTexture* tBrick;
-	tBrick=	_LocalContent->LoadTexture("brick.png");
-	m_hBrick = new FrkSprite(tBrick, 1, 1);
-	SetPosition(230, 200);
-	m_hBox = new Box(GetPosition().x,GetPosition().y,m_hBrick->_Width,m_hBrick->_Height);
+{	
+	brick = ResourcesManager::GetInstance()->GetSprite(SpriteID::Brick);
+	setCurrentSprite(brick);
 }
 
-void Brick::Render()
+void Brick::Update(float gameTime)
 {
-	m_hBrick->Render(GetPosition());
-}
 
-void Brick::Update(float x,float y)
-{
-	if (x==-1)
-	{
-		SetPosition(GetPosition().x+10, GetPosition().y);
-	}
-	if (x == 1)
-	{
-		SetPosition(GetPosition().x - 10, GetPosition().y);
-	}
-	if (y == -1)
-	{
-		SetPosition(GetPosition().x, GetPosition().y + 10);
-	}
-	if (y == 1)
-	{
-		SetPosition(GetPosition().x, GetPosition().y - 10);
-	}
-	m_hBox = new Box(GetPosition().x, GetPosition().y, m_hBrick->_Width, m_hBrick->_Height);
-}
-
-Box* Brick::getBox()
-{
-	return m_hBox;
 }

@@ -3,7 +3,6 @@
 #include "State_2.h"
 #include "FrkCamera.h"
 #include "Map.h"
-#include "E_Mushroom.h"
 #include"Hero.h"
 #include"F_Leaf.h"
 class State;

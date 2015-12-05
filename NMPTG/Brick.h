@@ -4,13 +4,14 @@
 #include"Box.h"
 class Brick:public Object
 {
+private:
+	FrkSprite* brick;
+
+
 public:
-	Box* m_hBox;
-	FrkSprite* m_hBrick;		
-	void Load();
-	void Render();
-	void Update(float x, float y);
-	Box* getBox();
+	Box* m_hBox;	
+	void Load();	
+	void Update(float gameTime);	
 	Brick(D3DXVECTOR2 pos, D3DXVECTOR2 speed);
 	Brick(typeObject _t);
 	Brick();

@@ -13,270 +13,276 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Framework">
+      <UniqueIdentifier>{c85813c5-90e4-4461-b1b0-25678860de50}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameState">
+      <UniqueIdentifier>{fc0993dd-341b-46aa-bd56-268ed3439ef0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SweptAABB">
+      <UniqueIdentifier>{4fd8ec5a-51dc-4463-bf0a-4aafb50b2501}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject">
+      <UniqueIdentifier>{39d4924b-dc75-41e4-a7bd-e64896828c23}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="FrkContent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="FrkGraphic.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="ResourcesManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="FrkGame.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="FrkKeyboard.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="FrkSprite.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="FrkShareControl.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="FrkTexture.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Object.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="FrkControl.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="FrkSound.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DSutil.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Map.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="FrkCamera.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SweptAABB.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Box.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Hero.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Brick.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="E_Tortoise.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="E_FlyTortoise.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="E_Mushroom.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="E_FlyMushroom.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="F_Leaf.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="F_Coin.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="F_Mushroom.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="F_P.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Bullet.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="QNode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="State.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="FrkCamera.h">
+      <Filter>Framework</Filter>
     </ClInclude>
-    <ClInclude Include="StateManager.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="FrkContent.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="FrkControl.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="FrkGame.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="FrkGraphic.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="FrkKeyboard.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="FrkShareControl.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="FrkSound.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="FrkSprite.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="FrkTexture.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="DSutil.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="State.h">
+      <Filter>GameState</Filter>
     </ClInclude>
     <ClInclude Include="State_1.h">
-      <Filter>Header Files</Filter>
+      <Filter>GameState</Filter>
     </ClInclude>
     <ClInclude Include="State_2.h">
-      <Filter>Header Files</Filter>
+      <Filter>GameState</Filter>
     </ClInclude>
-    <ClInclude Include="C_Land.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="StateManager.h">
+      <Filter>GameState</Filter>
     </ClInclude>
-    <ClInclude Include="C_Drain.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="SweptAABB.h">
+      <Filter>SweptAABB</Filter>
+    </ClInclude>
+    <ClInclude Include="Box.h">
+      <Filter>SweptAABB</Filter>
+    </ClInclude>
+    <ClInclude Include="Brick.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet.h">
+      <Filter>GameObject</Filter>
     </ClInclude>
     <ClInclude Include="C_Box.h">
-      <Filter>Header Files</Filter>
+      <Filter>GameObject</Filter>
     </ClInclude>
-    <ClInclude Include="E_Plant.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="C_Drain.h">
+      <Filter>GameObject</Filter>
     </ClInclude>
-    <ClInclude Include="E_Plant_Gun.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="E_Plant_Red.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="E_Tortoise_Red.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="E_Tarnooki.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="E_Tarnooki_Fly.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="F_Star.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="C_Land.h">
+      <Filter>GameObject</Filter>
     </ClInclude>
     <ClInclude Include="C_Question_Block.h">
-      <Filter>Header Files</Filter>
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="E_Mushroom.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="E_Mushroom_Fly.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="E_Plant.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="E_Plant_Gun.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="E_Plant_Red.h">
+      <Filter>GameObject</Filter>
     </ClInclude>
     <ClInclude Include="E_Plant_Red_Gun.h">
-      <Filter>Header Files</Filter>
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="E_Tarnooki.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="E_Tarnooki_Fly.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="E_Tortoise.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="E_Tortoise_Fly.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="E_Tortoise_Red.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="F_Coin.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="F_Leaf.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="F_Mushroom.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="F_P.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="F_Star.h">
+      <Filter>GameObject</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinMain.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="FrkContent.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="FrkGraphic.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="ResourcesManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="FrkGame.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="FrkKeyboard.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="FrkSprite.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="FrkTexture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Object.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="DSutil.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="FrkSound.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Map.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="FrkCamera.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SweptAABB.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Box.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Hero.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Brick.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="E_Tortoise.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="E_FlyTortoise.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="E_Mushroom.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="E_FlyMushroom.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="F_Leaf.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="F_Coin.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="F_Mushroom.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="F_P.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Bullet.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="QNode.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="State.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="FrkCamera.cpp">
+      <Filter>Framework</Filter>
     </ClCompile>
-    <ClCompile Include="StateManager.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="FrkContent.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="FrkGame.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="FrkGraphic.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="FrkKeyboard.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="FrkSound.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="FrkSprite.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="FrkTexture.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="DSutil.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="State.cpp">
+      <Filter>GameState</Filter>
     </ClCompile>
     <ClCompile Include="State_1.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>GameState</Filter>
     </ClCompile>
     <ClCompile Include="State_2.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>GameState</Filter>
     </ClCompile>
-    <ClCompile Include="C_Land.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="StateManager.cpp">
+      <Filter>GameState</Filter>
     </ClCompile>
-    <ClCompile Include="C_Drain.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="SweptAABB.cpp">
+      <Filter>SweptAABB</Filter>
+    </ClCompile>
+    <ClCompile Include="Box.cpp">
+      <Filter>SweptAABB</Filter>
+    </ClCompile>
+    <ClCompile Include="Brick.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>GameObject</Filter>
     </ClCompile>
     <ClCompile Include="C_Box.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>GameObject</Filter>
     </ClCompile>
-    <ClCompile Include="E_Plant.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="C_Drain.cpp">
+      <Filter>GameObject</Filter>
     </ClCompile>
-    <ClCompile Include="E_Plant_Gun.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="E_Plant_Red.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="E_Tortoise_Red.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="E_Tarnooki.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="E_Tarnooki_Fly.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="F_Star.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="C_Land.cpp">
+      <Filter>GameObject</Filter>
     </ClCompile>
     <ClCompile Include="C_Question_Block.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="E_Plant.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="E_Plant_Gun.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="E_Plant_Red.cpp">
+      <Filter>GameObject</Filter>
     </ClCompile>
     <ClCompile Include="E_Plant_Red_Gun.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="E_Tarnooki.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="E_Tarnooki_Fly.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="E_Tortoise.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="E_Tortoise_Fly.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="E_Tortoise_Red.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="F_Coin.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="F_Leaf.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="F_Mushroom.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="F_P.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="F_Star.cpp">
+      <Filter>GameObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

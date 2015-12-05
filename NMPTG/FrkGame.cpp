@@ -195,5 +195,5 @@ void FrkGame::InitLocal(){
 	_LocalGraphic = new FrkGraphic(this);
 	_LocalContent = new FrkContent(this);
 	_LocalKeyboard = new FrkKeyboard(this);
-	Zoom = 2.0f;
+	Zoom = 1.0f;
 }

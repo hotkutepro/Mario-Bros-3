@@ -5,7 +5,9 @@
 #include"ResourcesManager.h"
 class Hero:public Object
 {
-private:	
+private:
+#pragma region Hero Sprite
+	FrkSprite* Strike;
 	FrkSprite* BigMarioDriftToLeft;
 	FrkSprite* BigMarioDriftToRight;
 	FrkSprite* BigMarioFallLeft;
@@ -59,21 +61,26 @@ private:
 	FrkSprite* MarioRunRight;
 	FrkSprite* MarioSuperJumpLeft;
 	FrkSprite* MarioSuperJumpRight;
+#pragma endregion
 	bool isMove;
+	bool isJump;
+	bool direction;
+	bool isRun;
+	float delay_next;
+	float max_speed;
+	int status;
+
 public:
-	Box* m_hBox;	
-	Box* getBox();	
 	void Load();
 	void Render();
-	void onkeydown();///
-	void Update(float gameTime);	
+	void Update(float gameTime);
 	void GoLeft(float gameTime);
 	void GoRight(float gameTime);
+	void Inertia(float gameTime);
 	void Jump(float gameTime);
 	void Fall(float gameTime);
-	void StandLeft();
-	void StandRight();
-
+	void Run();
+	D3DXVECTOR2 getSpeed();
 	Hero();
 	Hero(D3DXVECTOR2 pos, D3DXVECTOR2 speed);
 	~Hero();

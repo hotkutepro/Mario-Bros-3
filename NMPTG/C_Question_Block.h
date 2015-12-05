@@ -2,7 +2,12 @@
 #include"Object.h"
 class C_Question_Block:public Object
 {
+	FrkSprite* Coin;
+	FrkSprite* CoinBox;
+	FrkSprite* CoinBoxNull;
 public:
+	void Load();	
+	void Update(float gameTime);
 	C_Question_Block();
 	~C_Question_Block();
 };
