@@ -1,7 +1,7 @@
 ﻿#pragma once
 #include"d3dx9.h"
-#define Center_W  400
-#define Center_H  240
+#define Center_W  160
+#define Center_H  120
 #include "FrkShareControl.h"
 
 class FrkCamera

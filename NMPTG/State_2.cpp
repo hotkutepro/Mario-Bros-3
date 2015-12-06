@@ -66,13 +66,6 @@ void State_2::Render()
 	for (it = qnode->m_Objects.begin(); it != qnode->m_Objects.end(); it++)
 	{
 		it->second->Render();
-	}
-	/*it = qnode->m_Objects.begin();
-	for (int i = 0; i < 122;i++)
-	{
-		it->second->Render();
-		it++;
-	}*/
-	//mushroom->Render();
+	}	
 	_LocalGraphic->End();
 }

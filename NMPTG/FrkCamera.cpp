@@ -36,13 +36,13 @@ void FrkCamera::Update(D3DXVECTOR2 target)
 	m_hVpy = (target.y)*Zoom + Center_H;
 	if (m_hVpx < 0)
 		m_hVpx = 0;
-	if (m_hVpx + 800 >= m_hMaxWidth*Zoom)//800 là chiều dài của cửa sổ
-		m_hVpx = m_hMaxWidth*Zoom - 800;
+	if (m_hVpx + 320 >= m_hMaxWidth*Zoom)//800 là chiều dài của cửa sổ
+		m_hVpx = m_hMaxWidth*Zoom - 320;
 
 	if (m_hVpy > m_hMaxHeight*Zoom)
 		m_hVpy = m_hMaxHeight*Zoom;
-	if (m_hVpy <= 480)
-		m_hVpy = 480;//480 là chiều cao của cửa sổ			*/
+	if (m_hVpy <= 240)
+		m_hVpy = 240;//480 là chiều cao của cửa sổ			*/
 }
 
 D3DXMATRIX* FrkCamera::GetTransformMatrix()
