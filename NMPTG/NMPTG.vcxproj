@@ -91,8 +91,6 @@
     <ClInclude Include="E_Plant_Red.h" />
     <ClInclude Include="E_Plant.h" />
     <ClInclude Include="E_Plant_Gun.h" />
-    <ClInclude Include="E_Mushroom_Fly.h" />
-    <ClInclude Include="E_Mushroom.h" />
     <ClInclude Include="E_Plant_Red_Gun.h" />
     <ClInclude Include="E_Tarnooki.h" />
     <ClInclude Include="E_Tarnooki_Fly.h" />

@@ -18,5 +18,5 @@ void C_Drain::Update(float gameTime)
 
 void C_Drain::Load()
 {
-
+	m_hCurrentSprite = NULL;
 }

@@ -31,7 +31,7 @@ Object::~Object()
 
 void Object::Render()
 {
-	if (m_hCurrentSprite!=NULL)
+	if (m_hCurrentSprite!=NULL&&m_hPosition!=NULL)
 		m_hCurrentSprite->Render(m_hPosition);
 }
 

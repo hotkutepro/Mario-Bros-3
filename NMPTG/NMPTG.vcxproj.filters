@@ -111,12 +111,6 @@
     <ClInclude Include="C_Question_Block.h">
       <Filter>GameObject</Filter>
     </ClInclude>
-    <ClInclude Include="E_Mushroom.h">
-      <Filter>GameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="E_Mushroom_Fly.h">
-      <Filter>GameObject</Filter>
-    </ClInclude>
     <ClInclude Include="E_Plant.h">
       <Filter>GameObject</Filter>
     </ClInclude>
