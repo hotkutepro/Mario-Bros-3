@@ -1,5 +1,6 @@
 ﻿#include "Hero.h"
 #include"FrkShareControl.h"
+
 enum Status
 {
 	MARIO, BIGMARIO, BROS, RUN
@@ -24,7 +25,7 @@ Hero::Hero(D3DXVECTOR2 pos, D3DXVECTOR2 speed) :Object(pos, speed)
 	isRun = false;
 	isJump = false;
 	isMove = false;
-	m_hAcceleration = 0.3;
+	m_hAcceleration = 3;
 	direction = true;
 
 }
@@ -36,6 +37,7 @@ Hero::~Hero()
 
 void Hero::Load()
 {
+#pragma region Sprite
 	Strike = ResourcesManager::GetInstance()->GetSprite(SpriteID::Strike);
 	BigMarioDriftToLeft = ResourcesManager::GetInstance()->GetSprite(SpriteID::BigMarioDriftToLeft);
 	BigMarioDriftToRight = ResourcesManager::GetInstance()->GetSprite(SpriteID::BigMarioDriftToRight);
@@ -90,23 +92,39 @@ void Hero::Load()
 	MarioRunRight = ResourcesManager::GetInstance()->GetSprite(SpriteID::MarioRunRight);
 	MarioSuperJumpLeft = ResourcesManager::GetInstance()->GetSprite(SpriteID::MarioSuperJumpLeft);
 	MarioSuperJumpRight = ResourcesManager::GetInstance()->GetSprite(SpriteID::MarioSuperJumpRight);
+#pragma endregion
 	setCurrentSprite(MarioRight);
 }
 
 void Hero::Render()
 {
+	_LocalGraphic->sDraw(a, D3DXVECTOR2(m_hPosition.x, m_hPosition.y + 20), D3DCOLOR_XRGB(255, 255, 255));
+	_LocalGraphic->sDraw(b, D3DXVECTOR2(m_hPosition.x, m_hPosition.y + 50), D3DCOLOR_XRGB(255, 255, 255));
 	getCurrentSprite()->Render(GetPosition());
 }
 
 void Hero::Update(float gameTime)
 {
+	double sx = m_hSpeed.x;
+	double sy = m_hSpeed.y;
+	f_str1 = "Vy = " + std::to_string(sy);
+	f_str = "Vx = "+std::to_string(sx);
+	a = new char[f_str.length() + 1];
+	b = new char[f_str1.length() + 1];
+	strcpy(a, f_str.c_str());
+	strcpy(b, f_str1.c_str());
+	
+	
 	//trọng lực luôn kéo mario rớt xuống
-	m_hSpeed.y -= 0.3*gameTime / 20;
-	m_hPosition.y += m_hSpeed.y*gameTime / 20;
+	
+	
+	m_hSpeed.y -= GRAVITY*gameTime*LIMITTIME;
+	m_hPosition.y += m_hSpeed.y*gameTime*LIMITTIME;
 	//tọa độ y giảm tới 200 là dừng
-	if (m_hPosition.y < 200)
+#pragma region Ground_Y
+	if (m_hPosition.y <GROUND_Y)
 	{
-		m_hPosition.y = 200;
+		m_hPosition.y = GROUND_Y;
 		isJump = false;
 		if (direction == true)
 		{
@@ -145,16 +163,17 @@ void Hero::Update(float gameTime)
 
 		}
 	}
+#pragma endregion
 	//quán tính gia tốc
-	if (isRun == false)
+	/*if (isRun == false)
 	{
 
 		if (m_hAcceleration <= 0.3)
 		{
 			m_hAcceleration = 0.3;
 		}
-		m_hAcceleration -= 0.0001;
-	}
+		m_hAcceleration -= 0.001;
+	}*/
 	//quán tính vận tốc
 	if (isMove == false)
 	{
@@ -165,10 +184,21 @@ void Hero::Update(float gameTime)
 	if (_LocalKeyboard->IsKeyDown(DIK_LEFT))
 	{
 		GoLeft(gameTime);
+		if (_LocalKeyboard->IsKeyDown(DIK_RIGHT))
+		{
+			return;
+		}
+		
 
 	}
-	if (_LocalKeyboard->IsKeyDown(DIK_RIGHT)){
+	if (_LocalKeyboard->IsKeyDown(DIK_RIGHT))
+	{
 		GoRight(gameTime);
+		if (_LocalKeyboard->IsKeyDown(DIK_LEFT))
+		{
+			return;
+		}
+		
 
 	}
 	if (_LocalKeyboard->IsKeyDown(DIK_LCONTROL))
@@ -179,7 +209,10 @@ void Hero::Update(float gameTime)
 	//	m_hBox = new Box(GetPosition().x, GetPosition().y, getCurrentSprite()->_Width, getCurrentSprite()->_Height, m_hSpeed.x, m_hSpeed.y);
 	_LocalKeyboard->ClearBuffer();
 
+	
 	//_LocalKeyboard->GetKeyboarddevice()->GetDeviceData(sizeof(DIDEVICEOBJECTDATA), _LocalKeyboard->_KeyEvents, &_LocalKeyboard->dwElements, 0);
+	
+#pragma region KeyboardProcess
 	for (DWORD i = 0; i < _LocalKeyboard->dwElements; i++)
 	{
 		int state = _LocalKeyboard->_KeyEvents[i].dwData;
@@ -226,6 +259,7 @@ void Hero::Update(float gameTime)
 			}
 		}
 	}
+#pragma endregion
 }
 
 void Hero::GoLeft(float gameTime)
@@ -252,7 +286,7 @@ void Hero::GoLeft(float gameTime)
 			break;
 		}
 
-		m_hSpeed.x -= m_hAcceleration*gameTime / 20;
+		m_hSpeed.x -= m_hAcceleration*gameTime*LIMITTIME;
 
 		m_hPosition.x += m_hSpeed.x;
 
@@ -321,7 +355,7 @@ void Hero::GoLeft(float gameTime)
 			}
 
 		}
-		m_hSpeed.x -= m_hAcceleration*gameTime / 20;
+		m_hSpeed.x -= m_hAcceleration*gameTime*LIMITTIME;
 
 		m_hPosition.x += m_hSpeed.x;
 
@@ -366,7 +400,7 @@ void Hero::GoRight(float gameTime)
 			break;
 		}
 
-		m_hSpeed.x += m_hAcceleration*gameTime / 20;
+		m_hSpeed.x += m_hAcceleration*gameTime*LIMITTIME;
 
 		m_hPosition.x += m_hSpeed.x;
 
@@ -442,7 +476,7 @@ void Hero::GoRight(float gameTime)
 			}
 
 		}
-		m_hSpeed.x += m_hAcceleration*gameTime / 20;
+		m_hSpeed.x += m_hAcceleration*gameTime*LIMITTIME;
 
 		m_hPosition.x += m_hSpeed.x;
 	}
@@ -539,16 +573,16 @@ void Hero::Jump(float gameTime)
 
 	}
 	//không cho mario nhảy khi đang trong không trung
-	if (m_hPosition.y <= 200)
+	if (m_hPosition.y <= GROUND_Y)
 	{
 		//khi có trớn nhảy cao hơn
 		if (abs(m_hSpeed.x) >= 6)
 		{
-			m_hSpeed.y = 8;
+			m_hSpeed.y = MAXJUM;
 		}
 		else//khi không có trớn
 		{
-			m_hSpeed.y = 5;
+			m_hSpeed.y = JUMP;
 		}
 
 	}
@@ -565,7 +599,7 @@ void Hero::Run()
 	if (m_hSpeed.x != 0)
 	{
 		isRun = true;
-		m_hAcceleration += 0.0001;
+		m_hAcceleration += 0.001;
 		if (m_hAcceleration > 0.8)
 		{
 			m_hAcceleration = 0.8;
@@ -584,7 +618,7 @@ void Hero::Inertia(float gameTime)
 	if (m_hSpeed.x > 0)
 	{
 		delay_next += gameTime / 2;
-		m_hSpeed.x -= m_hAcceleration*gameTime / 20;
+		m_hSpeed.x -= m_hAcceleration*gameTime*LIMITTIME;
 		if (delay_next > gameTime)
 		{
 			delay_next = 0;
@@ -604,7 +638,7 @@ void Hero::Inertia(float gameTime)
 	if (m_hSpeed.x < 0)
 	{
 		delay_next += gameTime / 2;
-		m_hSpeed.x += m_hAcceleration*gameTime / 20;
+		m_hSpeed.x += m_hAcceleration*gameTime*LIMITTIME;
 		if (delay_next > gameTime)
 		{
 			delay_next = 0;

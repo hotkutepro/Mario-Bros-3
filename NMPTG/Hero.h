@@ -3,6 +3,11 @@
 #include "FrkSprite.h"
 #include"Box.h"
 #include"ResourcesManager.h"
+#define GROUND_Y 287
+#define LIMITTIME 0.01
+#define GRAVITY 3.5
+#define JUMP 24
+#define MAXJUM 30
 class Hero:public Object
 {
 private:
@@ -71,6 +76,11 @@ private:
 	int status;
 
 public:
+	
+	string f_str;
+	string f_str1;
+	char* a;
+	char* b;
 	void Load();
 	void Render();
 	void Update(float gameTime);

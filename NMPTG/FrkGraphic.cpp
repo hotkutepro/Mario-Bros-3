@@ -5,6 +5,8 @@ FrkGraphic::FrkGraphic(FrkGame* hGame)
 {
 	this->m_hGame = hGame;
 	D3DXCreateSprite(this->m_hGame->GetDevice(), &this->m_hD3DXSprite);
+	fontFace = "impact";
+	SetFontSize(D3DXVECTOR2(15,15));
 }
 
 
@@ -212,3 +214,49 @@ void FrkGraphic::tDrawTexture(FrkTexture* texture, RECT rect_source, RECT rect_P
 	DrawTexture(texture, rect_source, rect_Present, texture_center, color, depth);
 }
 
+bool FrkGraphic::initFont()
+{
+	//AddFontResourceA("BAUHS93.TTF");
+	ZeroMemory(&fontDesc, sizeof(D3DXFONT_DESC));
+	fontDesc.Height = fontSize.x;
+	fontDesc.Width = fontSize.y;
+	fontDesc.Weight = 500;
+	fontDesc.MipLevels = D3DX_DEFAULT;
+	fontDesc.Italic = false;
+	fontDesc.CharSet = 0;
+	fontDesc.OutputPrecision = 0;
+	fontDesc.Quality = 0;
+	fontDesc.PitchAndFamily = 0;
+	string a = fontDesc.FaceName;
+	strcpy_s(fontDesc.FaceName, strlen(fontFace) + 1, this->fontFace);
+	if (FAILED(D3DXCreateFontIndirect(this->m_hGame->GetDevice(), &fontDesc, &font)))
+		return false;
+	return true;
+}
+void FrkGraphic::sDraw(char* text, D3DXVECTOR2 pos, D3DCOLOR color)
+{
+	int index;
+	RECT s_rect;
+
+	float str_width = strlen(text)*fontSize.x;
+	float str_height = fontSize.y;
+
+	D3DXVECTOR2 toa_do_man_anh = ConvertCoordinate(pos, D3DXVECTOR2(str_width / 2.0f, str_height / 2.0f));
+	s_rect.left = toa_do_man_anh.x - str_width / 2.0f;
+	s_rect.top = toa_do_man_anh.y - str_height / 2.0f;
+	s_rect.right = s_rect.left + str_width;
+	s_rect.bottom = s_rect.top + strlen(text)*fontSize.y;
+	font->DrawText(m_hD3DXSprite,
+		text,
+		-1, // so ki tu trong chuoi, -1 ->khong gioi han
+		&s_rect,
+		DT_TOP | DT_LEFT,
+		color);
+}
+
+void FrkGraphic::SetFontSize(D3DXVECTOR2 size)
+{
+	this->fontSize = size;
+	if (!this->initFont())
+		MessageBox(NULL, "Khong the sua kich thuoc chu", NULL, NULL);
+}

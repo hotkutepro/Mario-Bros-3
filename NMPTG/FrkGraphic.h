@@ -7,7 +7,11 @@
 class FrkGraphic
 {
 private:
-	
+	//font
+	LPD3DXFONT font;
+	char* fontFace;
+	D3DXVECTOR2 fontSize;
+	D3DXFONT_DESC fontDesc;
 	////doi tuong direct x
 	//LPDIRECT3D9 d3d;
 	////thiet bi ve
@@ -42,6 +46,9 @@ public:
 	void tDrawTexture(FrkTexture* texture, RECT rect_source, RECT rect_Present, D3DXVECTOR2 texture_center, D3DCOLOR color, float depth);
 	//Ve surface
 	void DrawSurface(LPDIRECT3DSURFACE9 surface, RECT rect, int x, int y);
-	
+	//font
+	bool initFont();
+	void sDraw(char* text, D3DXVECTOR2 pos, D3DCOLOR color);
+	void SetFontSize(D3DXVECTOR2 size);
 	
 };
