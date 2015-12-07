@@ -3,11 +3,14 @@
 #include "FrkSprite.h"
 #include"Box.h"
 #include"ResourcesManager.h"
-#define GROUND_Y 287
-#define LIMITTIME 0.01
-#define GRAVITY 3.5
-#define JUMP 24
-#define MAXJUM 30
+#define _hero_GROUND_Y 287
+#define _hero_LIMITTIME 0.0075
+#define _hero_GRAVITY 9
+#define _hero_JUMP 35
+#define _hero_MAXJUM 45
+#define _hero_MAXSPEED 6
+#define _hero_SPEED 2
+
 class Hero:public Object
 {
 private:

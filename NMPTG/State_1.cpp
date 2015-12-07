@@ -25,7 +25,7 @@ void State_1::Load()
 	camera = new FrkCamera(2848, 720);
 	map1 = new Map();
 	map1->Init("hihi.txt", ResourcesManager::GetInstance()->GetTexture(TextureID::TileMap1));
-	hero = new Hero(D3DXVECTOR2(200,GROUND_Y),D3DXVECTOR2(0,0));
+	hero = new Hero(D3DXVECTOR2(200,_hero_GROUND_Y),D3DXVECTOR2(0,0));
 	hero->Load();
 	camera->Update(hero->GetPosition());
 

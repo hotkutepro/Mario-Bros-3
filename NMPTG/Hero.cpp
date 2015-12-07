@@ -13,7 +13,7 @@ Hero::Hero()
 	delay_next = 0;
 	isRun = false;
 	isMove = false;
-	m_hAcceleration = 0.3;
+	m_hAcceleration = 4;
 	isJump = false;
 	direction = true;
 }
@@ -25,7 +25,7 @@ Hero::Hero(D3DXVECTOR2 pos, D3DXVECTOR2 speed) :Object(pos, speed)
 	isRun = false;
 	isJump = false;
 	isMove = false;
-	m_hAcceleration = 3;
+	m_hAcceleration = 4;
 	direction = true;
 
 }
@@ -117,14 +117,17 @@ void Hero::Update(float gameTime)
 	
 	//trọng lực luôn kéo mario rớt xuống
 	
-	
-	m_hSpeed.y -= GRAVITY*gameTime*LIMITTIME;
-	m_hPosition.y += m_hSpeed.y*gameTime*LIMITTIME;
+	if (m_hSpeed.y <= -_hero_GRAVITY)
+	{
+		m_hSpeed.y = -_hero_GRAVITY;
+	}
+	m_hSpeed.y -= _hero_GRAVITY*gameTime*_hero_LIMITTIME;
+	m_hPosition.y += m_hSpeed.y*gameTime*_hero_LIMITTIME;
 	//tọa độ y giảm tới 200 là dừng
 #pragma region Ground_Y
-	if (m_hPosition.y <GROUND_Y)
+	if (m_hPosition.y <_hero_GROUND_Y)
 	{
-		m_hPosition.y = GROUND_Y;
+		m_hPosition.y = _hero_GROUND_Y;
 		isJump = false;
 		if (direction == true)
 		{
@@ -266,7 +269,7 @@ void Hero::GoLeft(float gameTime)
 {
 	direction = false;
 	isMove = true;
-	delay_next += gameTime / 2;
+	delay_next += gameTime / 1.5;
 	//nếu mario đang nhảy thì chỉ update tọa độ x qua trái
 	if (isJump == true)
 	{
@@ -286,7 +289,7 @@ void Hero::GoLeft(float gameTime)
 			break;
 		}
 
-		m_hSpeed.x -= m_hAcceleration*gameTime*LIMITTIME;
+		m_hSpeed.x -= m_hAcceleration*gameTime*_hero_LIMITTIME;
 
 		m_hPosition.x += m_hSpeed.x;
 
@@ -314,26 +317,37 @@ void Hero::GoLeft(float gameTime)
 		}
 		else
 		{
-			if (m_hSpeed.x > -6)
+			if (m_hSpeed.x > -_hero_MAXSPEED)
 			{
 				switch (status)
 				{
 				case BIGMARIO:
 					setCurrentSprite(BigMarioLeft);
+					if (delay_next > gameTime)
+					{
+						delay_next = 0;
+						getCurrentSprite()->Next();
+					}
 					break;
 				case BROS:
 					setCurrentSprite(BrosLeft);
+					if (delay_next > gameTime)
+					{
+						delay_next = 0;
+						getCurrentSprite()->Next();
+					}
 					break;
 				default:
 					setCurrentSprite(MarioLeft);
+					if (delay_next > gameTime)
+					{
+						delay_next = 0;
+						getCurrentSprite()->Next();
+					}
 					break;
 				}
 
-				if (delay_next > gameTime)
-				{
-					delay_next = 0;
-					getCurrentSprite()->Next();
-				}
+				
 			}
 			else
 			{
@@ -341,21 +355,22 @@ void Hero::GoLeft(float gameTime)
 				{
 				case MARIO:
 					setCurrentSprite(MarioRunLeft);
+					getCurrentSprite()->Next();
 					break;
 				case BIGMARIO:
 					setCurrentSprite(BigMarioRunLeft);
+					getCurrentSprite()->Next();
 					break;
 				case BROS:
 					setCurrentSprite(BrosRunLeft);
+					getCurrentSprite()->Next();
 				default:
 					break;
 				}
-
-				getCurrentSprite()->Next();
 			}
 
 		}
-		m_hSpeed.x -= m_hAcceleration*gameTime*LIMITTIME;
+		m_hSpeed.x -= m_hAcceleration*gameTime*_hero_LIMITTIME;
 
 		m_hPosition.x += m_hSpeed.x;
 
@@ -364,11 +379,11 @@ void Hero::GoLeft(float gameTime)
 	//giới hạn tốc độ của mario
 	if (isRun == false)
 	{
-		max_speed = 3;
+		max_speed = _hero_SPEED;
 	}
 	else
 	{
-		max_speed = 6;
+		max_speed = _hero_MAXSPEED;
 	}
 	if (m_hSpeed.x < -max_speed)
 	{
@@ -400,7 +415,7 @@ void Hero::GoRight(float gameTime)
 			break;
 		}
 
-		m_hSpeed.x += m_hAcceleration*gameTime*LIMITTIME;
+		m_hSpeed.x += m_hAcceleration*gameTime*_hero_LIMITTIME;
 
 		m_hPosition.x += m_hSpeed.x;
 
@@ -431,29 +446,40 @@ void Hero::GoRight(float gameTime)
 		}
 		else
 		{
-			if (m_hSpeed.x < 6)
+			if (m_hSpeed.x < _hero_MAXSPEED)
 			{
 				switch (status)
 				{
 				case MARIO:
 					setCurrentSprite(MarioRight);
+					if (delay_next > gameTime)
+					{
+						delay_next = 0;
+						getCurrentSprite()->Next();
+					}
 					break;
 				case BIGMARIO:
 					setCurrentSprite(BigMarioRight);
+					if (delay_next > gameTime)
+					{
+						delay_next = 0;
+						getCurrentSprite()->Next();
+					}
 					break;
 				case BROS:
 					setCurrentSprite(BrosRight);
+					if (delay_next > gameTime)
+					{
+						delay_next = 0;
+						getCurrentSprite()->Next();
+					}
 					break;
 				default:
 
 					break;
 				}
 
-				if (delay_next > gameTime)
-				{
-					delay_next = 0;
-					getCurrentSprite()->Next();
-				}
+				
 			}
 			else
 			{
@@ -461,22 +487,25 @@ void Hero::GoRight(float gameTime)
 				{
 				case MARIO:
 					setCurrentSprite(MarioRunRight);
+					getCurrentSprite()->Next();
 					break;
 				case BIGMARIO:
 					setCurrentSprite(BigMarioRunRight);
+					getCurrentSprite()->Next();
 					break;
 				case BROS:
 					setCurrentSprite(BrosRunRight);
+					getCurrentSprite()->Next();
 					break;
 				default:
 
 					break;
 				}
-				getCurrentSprite()->Next();
+				
 			}
 
 		}
-		m_hSpeed.x += m_hAcceleration*gameTime*LIMITTIME;
+		m_hSpeed.x += m_hAcceleration*gameTime*_hero_LIMITTIME;
 
 		m_hPosition.x += m_hSpeed.x;
 	}
@@ -484,11 +513,11 @@ void Hero::GoRight(float gameTime)
 
 	if (isRun == false)
 	{
-		max_speed = 3;
+		max_speed = _hero_SPEED;
 	}
 	else
 	{
-		max_speed = 6;
+		max_speed = _hero_MAXSPEED;
 	}
 	if (m_hSpeed.x > max_speed)
 	{
@@ -503,7 +532,7 @@ void Hero::Jump(float gameTime)
 
 	if (direction == true)
 	{
-		if (abs(m_hSpeed.x) >= 6)
+		if (abs(m_hSpeed.x) >= _hero_MAXSPEED)
 		{
 			switch (status)
 			{
@@ -538,7 +567,7 @@ void Hero::Jump(float gameTime)
 	}
 	else
 	{
-		if (abs(m_hSpeed.x) >= 6)
+		if (abs(m_hSpeed.x) >= _hero_MAXSPEED)
 		{
 			switch (status)
 			{
@@ -573,16 +602,16 @@ void Hero::Jump(float gameTime)
 
 	}
 	//không cho mario nhảy khi đang trong không trung
-	if (m_hPosition.y <= GROUND_Y)
+	if (m_hPosition.y <= _hero_GROUND_Y)
 	{
 		//khi có trớn nhảy cao hơn
 		if (abs(m_hSpeed.x) >= 6)
 		{
-			m_hSpeed.y = MAXJUM;
+			m_hSpeed.y = _hero_MAXJUM;
 		}
 		else//khi không có trớn
 		{
-			m_hSpeed.y = JUMP;
+			m_hSpeed.y = _hero_JUMP;
 		}
 
 	}
@@ -591,7 +620,7 @@ void Hero::Jump(float gameTime)
 void Hero::Fall(float gameTime)
 {
 	if (m_hSpeed.y > 0)
-		m_hSpeed.y /= 2;
+		m_hSpeed.y /= 3;
 }
 
 void Hero::Run()
@@ -618,7 +647,7 @@ void Hero::Inertia(float gameTime)
 	if (m_hSpeed.x > 0)
 	{
 		delay_next += gameTime / 2;
-		m_hSpeed.x -= m_hAcceleration*gameTime*LIMITTIME;
+		m_hSpeed.x -= m_hAcceleration*gameTime*_hero_LIMITTIME;
 		if (delay_next > gameTime)
 		{
 			delay_next = 0;
@@ -638,7 +667,7 @@ void Hero::Inertia(float gameTime)
 	if (m_hSpeed.x < 0)
 	{
 		delay_next += gameTime / 2;
-		m_hSpeed.x += m_hAcceleration*gameTime*LIMITTIME;
+		m_hSpeed.x += m_hAcceleration*gameTime*_hero_LIMITTIME;
 		if (delay_next > gameTime)
 		{
 			delay_next = 0;
