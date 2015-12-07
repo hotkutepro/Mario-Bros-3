@@ -70,20 +70,21 @@
             this.pMushroom_red = new System.Windows.Forms.Panel();
             this.btMushroom_red = new System.Windows.Forms.Button();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.btBrick = new System.Windows.Forms.Button();
             this.btLand = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.btBrick = new System.Windows.Forms.Button();
+            this.tby2 = new System.Windows.Forms.TextBox();
+            this.tby1 = new System.Windows.Forms.TextBox();
+            this.tbx2 = new System.Windows.Forms.TextBox();
+            this.tbx1 = new System.Windows.Forms.TextBox();
+            this.lby1 = new System.Windows.Forms.Label();
+            this.lbx2 = new System.Windows.Forms.Label();
+            this.lby2 = new System.Windows.Forms.Label();
+            this.lbx1 = new System.Windows.Forms.Label();
+            this.btSetRegions = new System.Windows.Forms.Button();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.btCheckOut = new System.Windows.Forms.Button();
-            this.btSetRegions = new System.Windows.Forms.Button();
-            this.lbx1 = new System.Windows.Forms.Label();
-            this.lby2 = new System.Windows.Forms.Label();
-            this.lbx2 = new System.Windows.Forms.Label();
-            this.lby1 = new System.Windows.Forms.Label();
-            this.tbx1 = new System.Windows.Forms.TextBox();
-            this.tbx2 = new System.Windows.Forms.TextBox();
-            this.tby1 = new System.Windows.Forms.TextBox();
-            this.tby2 = new System.Windows.Forms.TextBox();
+            this.btBox = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbImgMap)).BeginInit();
             this.panel2.SuspendLayout();
@@ -124,7 +125,7 @@
             this.pbImgMap.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.pbImgMap.TabIndex = 1;
             this.pbImgMap.TabStop = false;
-            this.pbImgMap.Paint += new System.Windows.Forms.PaintEventHandler(this.pbImgMap_Paint);            
+            this.pbImgMap.Paint += new System.Windows.Forms.PaintEventHandler(this.pbImgMap_Paint);
             this.pbImgMap.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pbImgMap_MouseDown);
             this.pbImgMap.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pbImgMap_MouseMove);
             this.pbImgMap.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pbImgMap_MouseUp);
@@ -463,6 +464,7 @@
             // 
             // pTortoise
             // 
+            this.pTortoise.Controls.Add(this.btBox);
             this.pTortoise.Controls.Add(this.btTortoise);
             this.pTortoise.Location = new System.Drawing.Point(3, 160);
             this.pTortoise.Name = "pTortoise";
@@ -507,6 +509,16 @@
             this.panel4.Size = new System.Drawing.Size(374, 127);
             this.panel4.TabIndex = 2;
             // 
+            // btBrick
+            // 
+            this.btBrick.Location = new System.Drawing.Point(3, 29);
+            this.btBrick.Name = "btBrick";
+            this.btBrick.Size = new System.Drawing.Size(75, 23);
+            this.btBrick.TabIndex = 0;
+            this.btBrick.Text = "Brick";
+            this.btBrick.UseVisualStyleBackColor = true;
+            this.btBrick.Click += new System.EventHandler(this.btBrick_Click);
+            // 
             // btLand
             // 
             this.btLand.Location = new System.Drawing.Point(3, 0);
@@ -533,15 +545,83 @@
             this.panel3.Size = new System.Drawing.Size(324, 127);
             this.panel3.TabIndex = 1;
             // 
-            // btBrick
+            // tby2
             // 
-            this.btBrick.Location = new System.Drawing.Point(3, 29);
-            this.btBrick.Name = "btBrick";
-            this.btBrick.Size = new System.Drawing.Size(75, 23);
-            this.btBrick.TabIndex = 0;
-            this.btBrick.Text = "Brick";
-            this.btBrick.UseVisualStyleBackColor = true;
-            this.btBrick.Click += new System.EventHandler(this.btBrick_Click);
+            this.tby2.Location = new System.Drawing.Point(146, 80);
+            this.tby2.Name = "tby2";
+            this.tby2.Size = new System.Drawing.Size(100, 20);
+            this.tby2.TabIndex = 8;
+            this.tby2.Text = "0";
+            // 
+            // tby1
+            // 
+            this.tby1.Location = new System.Drawing.Point(146, 26);
+            this.tby1.Name = "tby1";
+            this.tby1.Size = new System.Drawing.Size(100, 20);
+            this.tby1.TabIndex = 7;
+            this.tby1.Text = "0";
+            // 
+            // tbx2
+            // 
+            this.tbx2.Location = new System.Drawing.Point(146, 50);
+            this.tbx2.Name = "tbx2";
+            this.tbx2.Size = new System.Drawing.Size(100, 20);
+            this.tbx2.TabIndex = 6;
+            this.tbx2.Text = "0";
+            // 
+            // tbx1
+            // 
+            this.tbx1.Location = new System.Drawing.Point(146, 5);
+            this.tbx1.Name = "tbx1";
+            this.tbx1.Size = new System.Drawing.Size(100, 20);
+            this.tbx1.TabIndex = 5;
+            this.tbx1.Text = "0";
+            // 
+            // lby1
+            // 
+            this.lby1.AutoSize = true;
+            this.lby1.Location = new System.Drawing.Point(93, 29);
+            this.lby1.Name = "lby1";
+            this.lby1.Size = new System.Drawing.Size(30, 13);
+            this.lby1.TabIndex = 4;
+            this.lby1.Text = "y1 = ";
+            // 
+            // lbx2
+            // 
+            this.lbx2.AutoSize = true;
+            this.lbx2.Location = new System.Drawing.Point(93, 57);
+            this.lbx2.Name = "lbx2";
+            this.lbx2.Size = new System.Drawing.Size(30, 13);
+            this.lbx2.TabIndex = 3;
+            this.lbx2.Text = "x2 = ";
+            // 
+            // lby2
+            // 
+            this.lby2.AutoSize = true;
+            this.lby2.Location = new System.Drawing.Point(93, 87);
+            this.lby2.Name = "lby2";
+            this.lby2.Size = new System.Drawing.Size(30, 13);
+            this.lby2.TabIndex = 2;
+            this.lby2.Text = "y2 = ";
+            // 
+            // lbx1
+            // 
+            this.lbx1.AutoSize = true;
+            this.lbx1.Location = new System.Drawing.Point(93, 8);
+            this.lbx1.Name = "lbx1";
+            this.lbx1.Size = new System.Drawing.Size(30, 13);
+            this.lbx1.TabIndex = 1;
+            this.lbx1.Text = "x1 = ";
+            // 
+            // btSetRegions
+            // 
+            this.btSetRegions.Location = new System.Drawing.Point(3, 3);
+            this.btSetRegions.Name = "btSetRegions";
+            this.btSetRegions.Size = new System.Drawing.Size(75, 39);
+            this.btSetRegions.TabIndex = 0;
+            this.btSetRegions.Text = "Set Regions: off";
+            this.btSetRegions.UseVisualStyleBackColor = true;
+            this.btSetRegions.Click += new System.EventHandler(this.btSetRegions_Click);
             // 
             // contextMenuStrip1
             // 
@@ -558,83 +638,15 @@
             this.btCheckOut.UseVisualStyleBackColor = true;
             this.btCheckOut.Click += new System.EventHandler(this.btCheckOut_Click);
             // 
-            // btSetRegions
+            // btBox
             // 
-            this.btSetRegions.Location = new System.Drawing.Point(3, 3);
-            this.btSetRegions.Name = "btSetRegions";
-            this.btSetRegions.Size = new System.Drawing.Size(75, 39);
-            this.btSetRegions.TabIndex = 0;
-            this.btSetRegions.Text = "Set Regions: off";
-            this.btSetRegions.UseVisualStyleBackColor = true;
-            this.btSetRegions.Click += new System.EventHandler(this.btSetRegions_Click);
-            // 
-            // lbx1
-            // 
-            this.lbx1.AutoSize = true;
-            this.lbx1.Location = new System.Drawing.Point(93, 8);
-            this.lbx1.Name = "lbx1";
-            this.lbx1.Size = new System.Drawing.Size(30, 13);
-            this.lbx1.TabIndex = 1;
-            this.lbx1.Text = "x1 = ";
-            // 
-            // lby2
-            // 
-            this.lby2.AutoSize = true;
-            this.lby2.Location = new System.Drawing.Point(93, 87);
-            this.lby2.Name = "lby2";
-            this.lby2.Size = new System.Drawing.Size(30, 13);
-            this.lby2.TabIndex = 2;
-            this.lby2.Text = "y2 = ";
-            // 
-            // lbx2
-            // 
-            this.lbx2.AutoSize = true;
-            this.lbx2.Location = new System.Drawing.Point(93, 57);
-            this.lbx2.Name = "lbx2";
-            this.lbx2.Size = new System.Drawing.Size(30, 13);
-            this.lbx2.TabIndex = 3;
-            this.lbx2.Text = "x2 = ";
-            // 
-            // lby1
-            // 
-            this.lby1.AutoSize = true;
-            this.lby1.Location = new System.Drawing.Point(93, 29);
-            this.lby1.Name = "lby1";
-            this.lby1.Size = new System.Drawing.Size(30, 13);
-            this.lby1.TabIndex = 4;
-            this.lby1.Text = "y1 = ";
-            // 
-            // tbx1
-            // 
-            this.tbx1.Location = new System.Drawing.Point(146, 5);
-            this.tbx1.Name = "tbx1";
-            this.tbx1.Size = new System.Drawing.Size(100, 20);
-            this.tbx1.TabIndex = 5;
-            this.tbx1.Text = "0";
-            // 
-            // tbx2
-            // 
-            this.tbx2.Location = new System.Drawing.Point(146, 50);
-            this.tbx2.Name = "tbx2";
-            this.tbx2.Size = new System.Drawing.Size(100, 20);
-            this.tbx2.TabIndex = 6;
-            this.tbx2.Text = "0";
-            // 
-            // tby1
-            // 
-            this.tby1.Location = new System.Drawing.Point(146, 26);
-            this.tby1.Name = "tby1";
-            this.tby1.Size = new System.Drawing.Size(100, 20);
-            this.tby1.TabIndex = 7;
-            this.tby1.Text = "0";
-            // 
-            // tby2
-            // 
-            this.tby2.Location = new System.Drawing.Point(146, 80);
-            this.tby2.Name = "tby2";
-            this.tby2.Size = new System.Drawing.Size(100, 20);
-            this.tby2.TabIndex = 8;
-            this.tby2.Text = "0";
+            this.btBox.Location = new System.Drawing.Point(42, 44);
+            this.btBox.Name = "btBox";
+            this.btBox.Size = new System.Drawing.Size(75, 23);
+            this.btBox.TabIndex = 2;
+            this.btBox.Text = "Box";
+            this.btBox.UseVisualStyleBackColor = true;
+            this.btBox.Click += new System.EventHandler(this.btBox_Click);
             // 
             // Form1
             // 
@@ -735,6 +747,7 @@
         private System.Windows.Forms.Label lby2;
         private System.Windows.Forms.Label lbx1;
         private System.Windows.Forms.Button btSetRegions;
+        private System.Windows.Forms.Button btBox;
 
     }
 }
