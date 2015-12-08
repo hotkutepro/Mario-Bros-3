@@ -4,13 +4,13 @@
 #include"Box.h"
 #include"ResourcesManager.h"
 #define _hero_GROUND_Y 287
-#define _hero_LIMITTIME 0.0075
-#define _hero_GRAVITY 9
-#define _hero_JUMP 37
-#define _hero_MAXJUM 45
-#define _hero_MAXSPEED 5
-#define _hero_SPEED 2
-#define _hero_ACCELERATION 0.7
+#define _hero_LIMITTIME 0.0075//0.0075
+#define _hero_GRAVITY 9//9
+#define _hero_JUMP 36//36
+#define _hero_MAXJUM 45//45
+#define _hero_MAXSPEED 5//5
+#define _hero_SPEED 2//2
+#define _hero_ACCELERATION 0.7//0.7~0.8
 class Hero:public Object
 {
 private:
@@ -94,7 +94,9 @@ public:
 	void GoLeft(float gameTime);
 	void GoRight(float gameTime);
 	void Inertia(float gameTime);
+	void InertiaRun(float gameTime);
 	void Jump(float gameTime);
+	void JumpKeyUp(float gameTime);
 	void Fall(float gameTime);
 	void Squat(float gameTime);
 	void Run();

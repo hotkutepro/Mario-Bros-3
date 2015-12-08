@@ -169,7 +169,7 @@ void FrkGame::Run()
 			
 			if (game_time >= frame_rate)
 			{
-				/*fps++;
+				fps++;
 				time_eslapse += game_time;
 				if (time_eslapse > 1000.0f)
 				{
@@ -178,7 +178,7 @@ void FrkGame::Run()
 					fps = 0;
 					time_eslapse = 0;
 					SetWindowText(this->m_hWnd, (char*)(txt.c_str()));
-				}*/
+				}
 				start = now;
 				this->m_hStateManager->Update(game_time);
 				this->m_hStateManager->Render();
