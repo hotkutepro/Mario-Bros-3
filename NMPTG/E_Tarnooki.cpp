@@ -12,13 +12,14 @@ E_Tarnooki::~E_Tarnooki()
 }
 
 void E_Tarnooki::Load()
-{
+{	
 	E_Mushroom = ResourcesManager::GetInstance()->GetSprite(SpriteID::E_Mushroom);
 	E_MushroomDeath = ResourcesManager::GetInstance()->GetSprite(SpriteID::E_MushroomDeath);
 	setCurrentSprite(E_Mushroom);
+	Object::Load();
 }
 
 void E_Tarnooki::Update(float gameTime)
 {
-
+	Object::Update(gameTime);
 }

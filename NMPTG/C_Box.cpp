@@ -12,6 +12,7 @@ C_Box::~C_Box()
 
 void C_Box::Load()
 {
+	Object::Load();
 	m_hCurrentSprite = NULL;
 }
 

@@ -22,9 +22,11 @@ Brick::~Brick()
 }
 
 void Brick::Load()
-{	
+{		
 	brick = ResourcesManager::GetInstance()->GetSprite(SpriteID::Brick);
+	CoinBoxNull = ResourcesManager::GetInstance()->GetSprite(SpriteID::CoinBoxNull);
 	setCurrentSprite(brick);
+	Object::Load();
 }
 
 void Brick::Update(float gameTime)

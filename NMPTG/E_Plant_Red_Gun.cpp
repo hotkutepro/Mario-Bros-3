@@ -14,9 +14,10 @@ E_Plant_Red_Gun::~E_Plant_Red_Gun()
 void E_Plant_Red_Gun::Load()
 {
 	m_hCurrentSprite = ResourcesManager::GetInstance()->GetSprite(SpriteID::Wood_1);
+	Object::Load();
 }
 
 void E_Plant_Red_Gun::Update(float gameTime)
 {
-
+	Object::Update(gameTime);
 }

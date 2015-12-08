@@ -12,11 +12,12 @@ F_Star::~F_Star()
 }
 
 void F_Star::Load()
-{
+{	
 	m_hCurrentSprite = ResourcesManager::GetInstance()->GetSprite(SpriteID::Wood_1);
+	Object::Load();
 }
 
 void F_Star::Update(float gameTime)
 {
-
+	Object::Update(gameTime);
 }

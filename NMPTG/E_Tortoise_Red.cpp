@@ -18,9 +18,10 @@ void E_Tortoise_Red::Load()
 	E_TortoiseshellRedLeft = ResourcesManager::GetInstance()->GetSprite(SpriteID::E_TortoiseshellRedLeft);
 	E_TortoiseshellRedRight = ResourcesManager::GetInstance()->GetSprite(SpriteID::E_TortoiseshellRedRight);
 	setCurrentSprite(E_TortoiseRedRight);
+	Object::Load();
 }
 
 void E_Tortoise_Red::Update(float gameTime)
 {
-
+	Object::Update(gameTime);
 }

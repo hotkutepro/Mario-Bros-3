@@ -55,12 +55,16 @@ D3DXVECTOR2 Object::GetPosition()
 
 void Object::Load()
 {
+	box = new Box();
 	box->x = GetPosition().x;
 	box->y = GetPosition().y;
 	box->vx = 0;
 	box->vy = 0;
-	box->w = m_hCurrentSprite->_Width;
-	box->h = m_hCurrentSprite->_Height;
+	if (m_hCurrentSprite)
+	{
+		box->w = m_hCurrentSprite->_Width;
+		box->h = m_hCurrentSprite->_Height;
+	}
 }
 void Object::setCurrentSprite(FrkSprite* s)
 {
