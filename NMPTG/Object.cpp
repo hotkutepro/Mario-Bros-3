@@ -38,7 +38,9 @@ void Object::Render()
 
 void Object::Update(float gameTime)
 {
-
+	
+	box->x = GetPosition().x;
+	box->y = GetPosition().y;
 }
 
 void Object::SetPosition(int x, int y)
@@ -53,7 +55,12 @@ D3DXVECTOR2 Object::GetPosition()
 
 void Object::Load()
 {
-
+	box->x = GetPosition().x;
+	box->y = GetPosition().y;
+	box->vx = 0;
+	box->vy = 0;
+	box->w = m_hCurrentSprite->_Width;
+	box->h = m_hCurrentSprite->_Height;
 }
 void Object::setCurrentSprite(FrkSprite* s)
 {

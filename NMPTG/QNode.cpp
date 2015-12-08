@@ -23,14 +23,17 @@
 
 
 sId QNode::s_IdObjectInViewPort;
+
 QNode::QNode()
 {
+	tl = NULL;
 }
 
 QNode::QNode(int _id, RECT _rect)
 {
 	nodeId = _id;
 	Rect = _rect;
+	tl = NULL;
 }
 
 
@@ -43,17 +46,42 @@ void QNode::LoadQNode(string path)
 	fstream open(path);
 	int count_Node = 0;
 	open >> count_Node;
+
+	open >> nodeId;
+	open >> Rect.top;
+	open >> Rect.left;
+	open >> Rect.right;
+	open >> Rect.bottom;
+	m_QNode.insert(pair<int, QNode*>(nodeId, this));	
 	for (int i = 0; i < count_Node; i++){
 		QNode* tmp=new QNode;
 		open >> tmp->nodeId;
-		open >> tmp->Rect.left;
 		open >> tmp->Rect.top;
+		open >> tmp->Rect.left;
 		open >> tmp->Rect.right;
 		open >> tmp->Rect.bottom;
 		m_QNode.insert(pair<int, QNode*>(tmp->nodeId, tmp));
 	}
 	
 }
+/*
+void QNode::LoadQNode(string path)
+{
+fstream open(path);
+int count_Node = 0;
+open >> count_Node;
+for (int i = 0; i < count_Node; i++){
+QNode* tmp=new QNode;
+open >> tmp->nodeId;
+open >> tmp->Rect.left;
+open >> tmp->Rect.top;
+open >> tmp->Rect.right;
+open >> tmp->Rect.bottom;
+m_QNode.insert(pair<int, QNode*>(tmp->nodeId, tmp));
+}
+
+}
+*/
 
 void QNode::Connect()
 {	
@@ -205,18 +233,21 @@ void QNode::InsertObject(string path)
 
 void QNode::getIdObjectInViewPort(RECT _rectViewport, QNode* node)
 {
-	if (node->nodeId==0||node->nodeId==NULL)
+
+	if (IsRootNode(node))
 		s_IdObjectInViewPort.clear();
 
-	if (!node->tl)
+	if (node->tl==NULL)
 	{
 		if (Intersect(_rectViewport,node->Rect))
 		{
-			if (!node->m_Objects.empty())
+			if (node->objects.size()!=0)
 			{
-				mapObject::iterator it;
-				for (it = m_Objects.begin(); it != m_Objects.end(); it++);
-					s_IdObjectInViewPort.insert(it->second->id);;
+				for (int i = 0; i < node->objects.size(); i++)
+				{
+					int id = node->objects.at(i)->id;
+					node->s_IdObjectInViewPort.insert(id);
+				}
 			}
 		}
 	}
@@ -229,15 +260,22 @@ void QNode::getIdObjectInViewPort(RECT _rectViewport, QNode* node)
 	}
 }
 
-bool QNode::IsRootNode()
+bool QNode::IsRootNode(QNode* node)
 {
-	if (tl==NULL)
+	if (node->nodeId!=0)
 		return false;
 	return true;
 }
 
 bool QNode::Intersect(RECT _r1, RECT _r2)
 {	
-	return !(_r1.right<_r2.left||_r1.left>_r2.right||_r1.bottom<_r2.top||_r1.top<_r2.bottom );
+	return !(_r1.right<_r2.left||_r1.left>_r2.right||_r1.bottom<_r2.top||_r1.top>_r2.bottom );
+}
+
+bool QNode::IsLeafNode()
+{
+	if (tl == NULL)
+		return true;
+	return false;
 }
 

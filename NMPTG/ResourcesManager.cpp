@@ -40,7 +40,7 @@ FrkTexture* ResourcesManager::GetTexture(TextureID ID)
 
 FrkSprite* ResourcesManager::GetSprite(SpriteID id)//chú ý khi thêm mới phải sửa 84
 {
-	for (int i = 0; i < 84;i++)
+	for (int i = 0; i < Count_Sprite;i++)
 	{
 		if (SpriteID(i) == id)
 			return sprite_vector[i];
@@ -53,10 +53,9 @@ void ResourcesManager::LoadSprite(string path)//o viết lại
 	sprite_texture = new FrkTexture();
 	sprite_texture = _LocalContent->LoadTexture("sprite1.png");//load tất cả sprite 
 	sprite_vector.reserve(100);
-	fstream open(path);
-	int c;
-	open>> c;
-	for (int i = 0; i < c; i++)
+	fstream open(path);	
+	open >> Count_Sprite;
+	for (int i = 0; i < Count_Sprite; i++)
 	{
 		FrkSprite* fs = new FrkSprite();
 		open >> fs->_Count;

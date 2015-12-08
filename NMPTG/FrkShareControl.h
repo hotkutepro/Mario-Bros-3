@@ -13,4 +13,5 @@ extern FrkGraphic* _LocalGraphic;
 extern FrkContent* _LocalContent;
 extern FrkKeyboard* _LocalKeyboard;
 extern float Zoom;
+extern RECT R_Viewport;
 #endif ShareControl

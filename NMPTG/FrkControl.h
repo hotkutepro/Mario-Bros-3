@@ -8,4 +8,6 @@ FrkGraphic* _LocalGraphic;
 FrkContent* _LocalContent;
 FrkKeyboard* _LocalKeyboard;
 float Zoom = 1.0f;
+RECT R_Viewport;
+
 #endif FrkControl

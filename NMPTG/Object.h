@@ -4,6 +4,7 @@
 #include"QNode.h"
 #include<map>
 #include"FrkSprite.h"
+#include"Box.h"
 enum typeObject{ brick, coin, drain, land, leaf, mushroom_red, p,box, question_block, star, tarnooki, tarnooki_fly,
 	tortoise, tortoise_fly, tortoise_red, tree, tree_red, tree_red_shoot, tree_shoot };
 class Object
@@ -15,6 +16,7 @@ protected:
 	FrkSprite* m_hCurrentSprite;
 
 public:	
+	Box* box;
 	typeObject type;
 	int id;
 	void setCurrentSprite(FrkSprite*);

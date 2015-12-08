@@ -21,5 +21,5 @@ void E_Tarnooki_Fly::Load()
 
 void E_Tarnooki_Fly::Update(float gameTime)
 {
-
+	Object::Update(gameTime);
 }

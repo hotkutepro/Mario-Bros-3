@@ -196,4 +196,9 @@ void FrkGame::InitLocal(){
 	_LocalContent = new FrkContent(this);
 	_LocalKeyboard = new FrkKeyboard(this);
 	Zoom = 1.0f;
+	R_Viewport.top=R_Viewport.left = 0;
+	R_Viewport.right = 320;
+	R_Viewport.bottom = 240;
+
+
 }
