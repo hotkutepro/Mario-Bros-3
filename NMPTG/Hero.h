@@ -6,11 +6,11 @@
 #define _hero_GROUND_Y 287
 #define _hero_LIMITTIME 0.0075
 #define _hero_GRAVITY 9
-#define _hero_JUMP 35
+#define _hero_JUMP 37
 #define _hero_MAXJUM 45
-#define _hero_MAXSPEED 6
+#define _hero_MAXSPEED 5
 #define _hero_SPEED 2
-
+#define _hero_ACCELERATION 0.7
 class Hero:public Object
 {
 private:
@@ -82,8 +82,12 @@ public:
 	
 	string f_str;
 	string f_str1;
-	char* a;
+	string f_str2;
+	string f_str3;
+	char* a; 
 	char* b;
+	char* c;
+	char* d;
 	void Load();
 	void Render();
 	void Update(float gameTime);
@@ -92,6 +96,7 @@ public:
 	void Inertia(float gameTime);
 	void Jump(float gameTime);
 	void Fall(float gameTime);
+	void Squat(float gameTime);
 	void Run();
 	D3DXVECTOR2 getSpeed();
 	Hero();
