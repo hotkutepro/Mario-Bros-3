@@ -14,6 +14,7 @@ void E_Plant::Load()
 {	
 	m_hCurrentSprite = ResourcesManager::GetInstance()->GetSprite(SpriteID::Wood_1);
 	Object::Load();
+	type = typeObject::tree;
 }
 
 void E_Plant::Update(float gameTime)

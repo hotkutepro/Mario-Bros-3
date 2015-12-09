@@ -94,12 +94,14 @@ void Hero::Load()
 	MarioSuperJumpRight = ResourcesManager::GetInstance()->GetSprite(SpriteID::MarioSuperJumpRight);
 #pragma endregion
 	setCurrentSprite(MarioRight);
+	Object::Load();
 }
 
 
 
 void Hero::Update(float gameTime)
 {
+	Object::UpdateBox(gameTime);
 	double sx = m_hSpeed.x;
 	double sy = m_hSpeed.y;
 

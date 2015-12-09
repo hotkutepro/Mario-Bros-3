@@ -153,6 +153,9 @@
     <ClInclude Include="F_Star.h">
       <Filter>GameObject</Filter>
     </ClInclude>
+    <ClInclude Include="Operate.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinMain.cpp">
@@ -277,6 +280,9 @@
     </ClCompile>
     <ClCompile Include="F_Star.cpp">
       <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Operate.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

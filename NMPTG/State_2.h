@@ -5,11 +5,13 @@
 #include "Map.h"
 #include"Hero.h"
 #include"F_Leaf.h"
+#include "SweptAABB.h"
 class State;
 class State_1;
 class State_2 : public State
 {
 private:
+	SweptAABB* Swept;
 	QNode* qnode;
 	FrkTexture* wall;
 	State* state_1;

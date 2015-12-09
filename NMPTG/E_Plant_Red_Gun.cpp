@@ -15,6 +15,7 @@ void E_Plant_Red_Gun::Load()
 {
 	m_hCurrentSprite = ResourcesManager::GetInstance()->GetSprite(SpriteID::Wood_1);
 	Object::Load();
+	type = tree_red_shoot;
 }
 
 void E_Plant_Red_Gun::Update(float gameTime)

@@ -12,6 +12,7 @@ E_Tortoise_Fly::~E_Tortoise_Fly()
 
 void E_Tortoise_Fly::Load()
 {
+	m_hSpeed.x = m_hSpeed.y = 0.2;
 	E_FlyTortoiseGreenLeft = ResourcesManager::GetInstance()->GetSprite(SpriteID::E_FlyTortoiseGreenLeft);
 	E_FlyTortoiseGreenRight = ResourcesManager::GetInstance()->GetSprite(SpriteID::E_FlyTortoiseGreenRight);
 	E_TortoiseGreenLeft = ResourcesManager::GetInstance()->GetSprite(SpriteID::E_TortoiseGreenLeft);
@@ -20,6 +21,7 @@ void E_Tortoise_Fly::Load()
 	E_TortoiseshellGreenRight = ResourcesManager::GetInstance()->GetSprite(SpriteID::E_TortoiseshellGreenRight);
 	setCurrentSprite(E_FlyTortoiseGreenRight);
 	Object::Load();
+	type = typeObject::tortoise_fly;
 }
 
 void E_Tortoise_Fly::Update(float gameTime)

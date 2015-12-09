@@ -18,6 +18,7 @@ void E_Tarnooki_Fly::Load()
 	E_MushroomRedDeath = ResourcesManager::GetInstance()->GetSprite(SpriteID::E_MushroomRedDeath);
 	setCurrentSprite(E_FlyMushroom);
 	Object::Load();
+	type = typeObject::tarnooki_fly;
 }
 
 void E_Tarnooki_Fly::Update(float gameTime)

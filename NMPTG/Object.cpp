@@ -41,6 +41,8 @@ void Object::Update(float gameTime)
 	
 	box->x = GetPosition().x;
 	box->y = GetPosition().y;
+	m_hPosition.x += m_hSpeed.x*gameTime;
+	//m_hPosition.y += 0.2*gameTime;
 }
 
 void Object::SetPosition(int x, int y)
@@ -55,6 +57,8 @@ D3DXVECTOR2 Object::GetPosition()
 
 void Object::Load()
 {
+	//m_hSpeed.x = 2;
+	//m_hSpeed.y = 0;
 	box = new Box();
 	box->x = GetPosition().x;
 	box->y = GetPosition().y;
@@ -65,6 +69,9 @@ void Object::Load()
 		box->w = m_hCurrentSprite->_Width;
 		box->h = m_hCurrentSprite->_Height;
 	}
+	else{
+		box->w = box->h = 16;
+	}
 }
 void Object::setCurrentSprite(FrkSprite* s)
 {
@@ -74,4 +81,10 @@ void Object::setCurrentSprite(FrkSprite* s)
 FrkSprite* Object::getCurrentSprite()
 {
 	return m_hCurrentSprite;
+}
+
+void Object::UpdateBox(float gameTime)
+{
+	box->x = GetPosition().x;
+	box->y = GetPosition().y;
 }

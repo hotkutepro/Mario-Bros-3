@@ -5,13 +5,17 @@
 #include<map>
 #include"FrkSprite.h"
 #include"Box.h"
-enum typeObject{ brick, coin, drain, land, leaf, mushroom_red, p,box, question_block, star, tarnooki, tarnooki_fly,
-	tortoise, tortoise_fly, tortoise_red, tree, tree_red, tree_red_shoot, tree_shoot };
-class Object
+#include"Operate.h"
+enum typeObject{
+	brick, coin, drain, land, leaf, mushroom_red, p, box, question_block, star, tarnooki, tarnooki_fly,
+	tortoise, tortoise_fly, tortoise_red, tree, tree_red, tree_red_shoot, tree_shoot,bullet
+};
+class Object:public Operate
 {
 protected:
 	D3DXVECTOR2 m_hPosition;
 	float m_hAcceleration;
+	float m_hgravity=0.98f;
 	D3DXVECTOR2 m_hSpeed;
 	FrkSprite* m_hCurrentSprite;
 
@@ -23,6 +27,7 @@ public:
 	FrkSprite* getCurrentSprite();
 	virtual void Load();
 	virtual void Render();
+	virtual void UpdateBox(float gameTime);
 	virtual void Update(float gameTime);
 	void SetPosition(int x, int y);
 	D3DXVECTOR2 GetPosition();

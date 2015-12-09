@@ -7,6 +7,7 @@ void F_Mushroom::Load()
 {	
 	m_hCurrentSprite = ResourcesManager::GetInstance()->GetSprite(SpriteID::F_MushroomPower);
 	Object::Load();
+	type = typeObject::mushroom_red;
 }
 
 void F_Mushroom::Update(float gameTime)

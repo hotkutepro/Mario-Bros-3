@@ -12,7 +12,8 @@ C_Box::~C_Box()
 
 void C_Box::Load()
 {
-	Object::Load();
+	//Object::Load();
+	type = typeObject::box;
 	m_hCurrentSprite = NULL;
 }
 

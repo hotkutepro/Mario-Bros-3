@@ -69,6 +69,7 @@ private:
 	FrkSprite* MarioRunRight;
 	FrkSprite* MarioSuperJumpLeft;
 	FrkSprite* MarioSuperJumpRight;
+
 #pragma endregion
 	bool isMove;
 	bool isJump;
