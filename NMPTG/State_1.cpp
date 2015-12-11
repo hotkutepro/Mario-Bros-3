@@ -1,4 +1,4 @@
-#include "State_1.h"
+﻿#include "State_1.h"
 #include "State.h"
 #include "StateManager.h"
 #include "ResourcesManager.h"
@@ -19,8 +19,18 @@ State_1::~State_1()
 
 void State_1::Load()
 {
-//	mushroom = new E_Mushroom(200, 200);
-	//mushroom->Load();
+	swept = new SweptAABB();
+	qnode = new QNode();
+	qnode->LoadQNode("QNode.txt");
+	qnode->LoadObjects("Object.txt");
+	qnode->Connect();
+	qnode->InsertObject("OiNode.txt");
+	qnode->getIdObjectInViewPort(R_Viewport, qnode);
+	mapObject::iterator it;
+	for (it = qnode->m_Objects.begin(); it != qnode->m_Objects.end(); it++)
+	{
+		it->second->Load();		
+	}
 
 	camera = new FrkCamera(2848, 720);
 	map1 = new Map();
@@ -35,6 +45,42 @@ void State_1::Update(float gameTime)
 {
 	camera->Update(hero->GetPosition());
 	hero->Update(gameTime);
+	mapQNode::iterator it_Node;
+	it_Node = qnode->m_QNode.find(0);
+	qnode->s_IdObjectInViewPort.clear();
+	qnode->getIdObjectInViewPort(R_Viewport, it_Node->second);
+	sId::iterator id_Objects;
+	sId::iterator id_ONext;
+	mapObject::iterator it_Object;
+	mapObject::iterator it_ONext;
+	float nx = 0; float ny = 0;//swept aabb
+	float mx, my;//swept aabb
+	Box*b1; Box*b2;
+	for (id_Objects = qnode->s_IdObjectInViewPort.begin(); id_Objects != qnode->s_IdObjectInViewPort.end(); id_Objects++)
+	{
+		it_Object = qnode->m_Objects.find(*id_Objects);		//Object đang xét		
+		if (it_Object->second->type == typeObject::land){
+			if (swept->AABB(hero->box, it_Object->second->box, mx, my))
+			{
+				if (my < 0)//
+				{
+
+				}
+				if (my > 0)//hero va cham mat dat
+				{
+					//hero->m_hSpeed.y = 36;
+				}
+				if (mx < 0)//hero cham ben ben trai cuc dat
+				{
+					hero->m_hPosition.x -= 20;
+				}
+				if (mx > 0)//hero cham ben phai cuc dat
+				{
+
+				}
+			}
+		}
+	}
 	_LocalKeyboard->GetDeviceState();	
 	_LocalKeyboard->ClearBuffer();
 }
