@@ -846,102 +846,103 @@ namespace QT
         }
         private void Write_Object()
         {
-            using (StreamWriter sw = new StreamWriter("Object.txt"))
+            int mapHeight = pbImgMap.Height-16;
+            using (StreamWriter sw = new StreamWriter("C:/Users/HomeSK/Desktop/Mario-Bros-3.git/trunk/NMPTG/Object.txt"))
             {
                 sw.WriteLine("brick" + " " + c_brick.Count);
                 for (int i = 0; i < c_brick.Count; i++)
                 {
-                    sw.WriteLine(c_brick[i].id + " " + c_brick[i].oRect.X + " " + (pbImgMap.Height-c_brick[i].oRect.Y));
+                    sw.WriteLine(c_brick[i].id + " " + c_brick[i].oRect.X + " " + (mapHeight-c_brick[i].oRect.Y));
                 }
                 sw.WriteLine("coin" + " " + c_coin.Count);
                 for (int i = 0; i < c_coin.Count; i++)
                 {
-                    sw.WriteLine(c_coin[i].id + " " + c_coin[i].oRect.X + " " +(pbImgMap.Height- c_coin[i].oRect.Y));
+                    sw.WriteLine(c_coin[i].id + " " + c_coin[i].oRect.X + " " +(mapHeight- c_coin[i].oRect.Y));
                 }
                 sw.WriteLine("drain" + " " + c_drain.Count);
                 for (int i = 0; i < c_drain.Count; i++)
                 {
-                    sw.WriteLine(c_drain[i].id + " " + c_drain[i].oRect.X + " " +(pbImgMap.Height- c_drain[i].oRect.Y));
+                    sw.WriteLine(c_drain[i].id + " " + c_drain[i].oRect.X + " " +(mapHeight- c_drain[i].oRect.Y));
                 }
                 sw.WriteLine("land" + " " + c_land.Count);
                 for (int i = 0; i < c_land.Count; i++)
                 {
-                    sw.WriteLine(c_land[i].id + " " + c_land[i].oRect.X + " " +(pbImgMap.Height- c_land[i].oRect.Y));
+                    sw.WriteLine(c_land[i].id + " " + c_land[i].oRect.X + " " +(mapHeight- c_land[i].oRect.Y));
                 }
                 sw.WriteLine("leaf" + " " + c_leaf.Count);
                 for (int i = 0; i < c_leaf.Count; i++)
                 {
-                    sw.WriteLine(c_leaf[i].id + " " + c_leaf[i].oRect.X + " " +(pbImgMap.Height- c_leaf[i].oRect.Y));
+                    sw.WriteLine(c_leaf[i].id + " " + c_leaf[i].oRect.X + " " +(mapHeight- c_leaf[i].oRect.Y));
                 }
                 sw.WriteLine("mushroom_red" + " " + c_mushroom_red.Count);
                 for (int i = 0; i < c_mushroom_red.Count; i++)
                 {
-                    sw.WriteLine(c_mushroom_red[i].id + " " + c_mushroom_red[i].oRect.X + " " + (pbImgMap.Height - c_mushroom_red[i].oRect.Y));
+                    sw.WriteLine(c_mushroom_red[i].id + " " + c_mushroom_red[i].oRect.X + " " + (mapHeight - c_mushroom_red[i].oRect.Y));
                 }
                 sw.WriteLine("p" + " " + c_p.Count);
                 for (int i = 0; i < c_p.Count; i++)
                 {
-                    sw.WriteLine(c_p[i].id + " " + c_p[i].oRect.X + " " + (pbImgMap.Height - c_p[i].oRect.Y));
+                    sw.WriteLine(c_p[i].id + " " + c_p[i].oRect.X + " " + (mapHeight - c_p[i].oRect.Y));
                 }
                 sw.WriteLine("box" + " " + c_box.Count);
                 for (int i = 0; i < c_box.Count; i++)
                 {
-                    sw.WriteLine(c_box[i].id + " " + c_box[i].oRect.X + " " + (pbImgMap.Height - c_box[i].oRect.Y));
+                    sw.WriteLine(c_box[i].id + " " + c_box[i].oRect.X + " " + (mapHeight - c_box[i].oRect.Y));
                 }
                 sw.WriteLine("question_block" + " " + c_question_block.Count);
                 for (int i = 0; i < c_question_block.Count; i++)
                 {
-                    sw.WriteLine(c_question_block[i].id + " " + c_question_block[i].oRect.X + " " + (pbImgMap.Height - c_question_block[i].oRect.Y));
+                    sw.WriteLine(c_question_block[i].id + " " + c_question_block[i].oRect.X + " " + (mapHeight - c_question_block[i].oRect.Y));
                 }
                 sw.WriteLine("star" + " " + c_star.Count);
                 for (int i = 0; i < c_star.Count; i++)
                 {
-                    sw.WriteLine(c_star[i].id + " " + c_star[i].oRect.X + " " + (pbImgMap.Height - c_star[i].oRect.Y));
+                    sw.WriteLine(c_star[i].id + " " + c_star[i].oRect.X + " " + (mapHeight - c_star[i].oRect.Y));
                 }
                 sw.WriteLine("tarnooki" + " " + c_tarnooki.Count);
                 for (int i = 0; i < c_tarnooki.Count; i++)
                 {
-                    sw.WriteLine(c_tarnooki[i].id + " " + c_tarnooki[i].oRect.X + " " +(pbImgMap.Height- c_tarnooki[i].oRect.Y));
+                    sw.WriteLine(c_tarnooki[i].id + " " + c_tarnooki[i].oRect.X + " " +(mapHeight- c_tarnooki[i].oRect.Y));
                 }
                 sw.WriteLine("tarnooki_fly" + " " + c_tarnooki_fly.Count);
                 for (int i = 0; i < c_tarnooki_fly.Count; i++)
                 {
-                    sw.WriteLine(c_tarnooki_fly[i].id + " " + c_tarnooki_fly[i].oRect.X + " " +(pbImgMap.Height- c_tarnooki_fly[i].oRect.Y));
+                    sw.WriteLine(c_tarnooki_fly[i].id + " " + c_tarnooki_fly[i].oRect.X + " " +(mapHeight- c_tarnooki_fly[i].oRect.Y));
                 }
                 sw.WriteLine("tortoise" + " " + c_tortoise.Count);
                 for (int i = 0; i < c_tortoise.Count; i++)
                 {
-                    sw.WriteLine(c_tortoise[i].id + " " + c_tortoise[i].oRect.X + " " +(pbImgMap.Height- c_tortoise[i].oRect.Y));
+                    sw.WriteLine(c_tortoise[i].id + " " + c_tortoise[i].oRect.X + " " +(mapHeight- c_tortoise[i].oRect.Y));
                 }
                 sw.WriteLine("tortoise_fly" + " " + c_tortoise_fly.Count);
                 for (int i = 0; i < c_tortoise_fly.Count; i++)
                 {
-                    sw.WriteLine(c_tortoise_fly[i].id + " " + c_tortoise_fly[i].oRect.X + " " +(pbImgMap.Height- c_tortoise_fly[i].oRect.Y));
+                    sw.WriteLine(c_tortoise_fly[i].id + " " + c_tortoise_fly[i].oRect.X + " " +(mapHeight- c_tortoise_fly[i].oRect.Y));
                 }
                 sw.WriteLine("tortoise_red" + " " + c_tortoise_red.Count);
                 for (int i = 0; i < c_tortoise_red.Count; i++)
                 {
-                    sw.WriteLine(c_tortoise_red[i].id + " " + c_tortoise_red[i].oRect.X + " " +(pbImgMap.Height- c_tortoise_red[i].oRect.Y));
+                    sw.WriteLine(c_tortoise_red[i].id + " " + c_tortoise_red[i].oRect.X + " " +(mapHeight- c_tortoise_red[i].oRect.Y));
                 }
                 sw.WriteLine("tree" + " " + c_tree.Count);
                 for (int i = 0; i < c_tree.Count; i++)
                 {
-                    sw.WriteLine(c_tree[i].id + " " + c_tree[i].oRect.X + " " +(pbImgMap.Height- c_tree[i].oRect.Y));
+                    sw.WriteLine(c_tree[i].id + " " + c_tree[i].oRect.X + " " +(mapHeight- c_tree[i].oRect.Y));
                 }
                 sw.WriteLine("tree_red" + " " + c_tree_red.Count);
                 for (int i = 0; i < c_tree_red.Count; i++)
                 {
-                    sw.WriteLine(c_tree_red[i].id + " " + c_tree_red[i].oRect.X + " " +(pbImgMap.Height- c_tree_red[i].oRect.Y));
+                    sw.WriteLine(c_tree_red[i].id + " " + c_tree_red[i].oRect.X + " " +(mapHeight- c_tree_red[i].oRect.Y));
                 }
                 sw.WriteLine("tree_red_shoot" + " " + c_tree_red_shoot.Count);
                 for (int i = 0; i < c_tree_red_shoot.Count; i++)
                 {
-                    sw.WriteLine(c_tree_red_shoot[i].id + " " + c_tree_red_shoot[i].oRect.X + " " +(pbImgMap.Height- c_tree_red_shoot[i].oRect.Y));
+                    sw.WriteLine(c_tree_red_shoot[i].id + " " + c_tree_red_shoot[i].oRect.X + " " +(mapHeight- c_tree_red_shoot[i].oRect.Y));
                 }
                 sw.WriteLine("tree_shoot" + " " + c_tree_shoot.Count);
                 for (int i = 0; i < c_tree_shoot.Count; i++)
                 {
-                    sw.WriteLine(c_tree_shoot[i].id + " " + c_tree_shoot[i].oRect.X + " " +(pbImgMap.Height- c_tree_shoot[i].oRect.Y));
+                    sw.WriteLine(c_tree_shoot[i].id + " " + c_tree_shoot[i].oRect.X + " " +(mapHeight- c_tree_shoot[i].oRect.Y));
                 }
                 sw.Close();
             }
