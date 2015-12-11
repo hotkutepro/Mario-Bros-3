@@ -12,7 +12,7 @@ void F_Mushroom::Load()
 
 void F_Mushroom::Update(float gameTime)
 {
-	Object::Update(gameTime);
+	Object::Update(gameTime);	
 }
 
 F_Mushroom::F_Mushroom()
@@ -23,4 +23,10 @@ F_Mushroom::F_Mushroom()
 F_Mushroom::~F_Mushroom()
 {
 
+}
+
+void F_Mushroom::Die()
+{
+	m_hCurrentSprite = NULL;
+	life = false;
 }

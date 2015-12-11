@@ -7,6 +7,7 @@ class E_Tarnooki:public Object
 public:
 	void Load();
 	void Update(float gameTime);
+	void Die();
 	E_Tarnooki();
 	~E_Tarnooki();
 };

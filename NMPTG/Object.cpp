@@ -31,7 +31,7 @@ Object::~Object()
 
 void Object::Render()
 {
-	if (m_hCurrentSprite!=NULL&&m_hPosition!=NULL)
+	if (m_hCurrentSprite!=NULL&&m_hPosition!=NULL&&life)
 		m_hCurrentSprite->Render(m_hPosition);
 }
 
@@ -41,8 +41,10 @@ void Object::Update(float gameTime)
 	
 	box->x = GetPosition().x;
 	box->y = GetPosition().y;
+	box->vx = m_hSpeed.x;
+	box->vy = m_hSpeed.y;
 	m_hPosition.x += m_hSpeed.x*gameTime;
-	//m_hPosition.y += 0.2*gameTime;
+	m_hPosition.y += m_hSpeed.y*gameTime;
 }
 
 void Object::SetPosition(int x, int y)
@@ -57,8 +59,9 @@ D3DXVECTOR2 Object::GetPosition()
 
 void Object::Load()
 {
-	//m_hSpeed.x = 2;
-	//m_hSpeed.y = 0;
+	life = true;
+	m_hSpeed.x = 0;
+	m_hSpeed.y = 0;
 	box = new Box();
 	box->x = GetPosition().x;
 	box->y = GetPosition().y;
@@ -87,4 +90,14 @@ void Object::UpdateBox(float gameTime)
 {
 	box->x = GetPosition().x;
 	box->y = GetPosition().y;
+}
+
+void Object::Tortoise_Shell()
+{
+
+}
+
+void Object::Die()
+{
+	life = false;
 }

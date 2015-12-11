@@ -20,9 +20,27 @@ void E_Tortoise::Load()
 	setCurrentSprite(E_TortoiseGreenLeft);
 	Object::Load();
 	type = typeObject::tortoise;
+	m_hSpeed.x = 0.02; m_hSpeed.y = -0.02;
 }
 
 void E_Tortoise::Update(float gameTime)
-{
+{	
 	Object::Update(gameTime);
+}
+
+void E_Tortoise::Tortoise_Shell()
+{
+	setCurrentSprite(E_TortoiseshellGreenLeft);
+}
+
+void E_Tortoise::Die()
+{
+	if (v == 2)
+	{
+		setCurrentSprite(E_TortoiseshellGreenLeft);
+		v--;
+		//m_hSpeed.x = m_hSpeed.y = 0;
+		life = 0;
+	}
+
 }

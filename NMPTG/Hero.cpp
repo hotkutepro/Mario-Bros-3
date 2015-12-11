@@ -562,10 +562,6 @@ void Hero::Jump(float gameTime)
 }
 
 
-void Hero::SuperJump(float gameTime)
-{
-	
-}
 
 void Hero::JumpKeyUp(float gameTime)
 {

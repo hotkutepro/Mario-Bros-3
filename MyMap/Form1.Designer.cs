@@ -69,11 +69,12 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.btnImage = new System.Windows.Forms.Button();
+            this.pbImage = new System.Windows.Forms.PictureBox();
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbImage)).BeginInit();
             this.panel4.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -465,23 +466,23 @@
             // panel1
             // 
             this.panel1.AutoSize = true;
-            this.panel1.Controls.Add(this.btnImage);
+            this.panel1.Controls.Add(this.pbImage);
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(772, 402);
-            this.panel1.TabIndex = 6;            
+            this.panel1.TabIndex = 6;
             this.panel1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseClick);
             // 
-            // btnImage
+            // pbImage
             // 
-            this.btnImage.AutoSize = true;
-            this.btnImage.Enabled = false;
-            this.btnImage.Location = new System.Drawing.Point(0, 0);
-            this.btnImage.Name = "btnImage";
-            this.btnImage.Size = new System.Drawing.Size(75, 23);
-            this.btnImage.TabIndex = 0;
-            this.btnImage.UseVisualStyleBackColor = true;            
-            this.btnImage.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnImage_MouseClick);
+            this.pbImage.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pbImage.Location = new System.Drawing.Point(0, 0);
+            this.pbImage.Name = "pbImage";
+            this.pbImage.Size = new System.Drawing.Size(772, 402);
+            this.pbImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pbImage.TabIndex = 1;
+            this.pbImage.TabStop = false;
+            this.pbImage.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pbImage_MouseClick);
             // 
             // panel4
             // 
@@ -526,13 +527,14 @@
             this.Controls.Add(this.btbrowses);
             this.ForeColor = System.Drawing.Color.Black;
             this.Name = "Form1";
-            this.Text = "ii";            
+            this.Text = "ii";
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbImage)).EndInit();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
             this.ResumeLayout(false);
@@ -583,8 +585,8 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button btnImage;
         private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.PictureBox pbImage;
 
     }
 }

@@ -294,13 +294,13 @@ namespace MyMap
             this._height = int.Parse(tbth.Text);
             this._column = _img.Width / _width;
             this._row = _img.Height / _height;
-            btnImage.Image = _image;
-            btnImage.Enabled = true;
+            pbImage.Image = _image;
+            pbImage.Enabled = true;
             btDuyet.Enabled = true;
             btAddtiled.Enabled = true;
             _sizeObject = new Size(_width, _height);
             panel1.MinimumSize = new Size(_img.Width, _img.Height);
-            btnImage.MinimumSize = new Size(_img.Width, _img.Height);
+            pbImage.MinimumSize = new Size(_img.Width, _img.Height);
             for(int i=0;i<_row;i++)
                 for(int j=0;j<_column;j++)
                 {
@@ -308,11 +308,11 @@ namespace MyMap
                     tbm.Visible = false;
                     tbm.Size = _sizeObject;
                     tbm.Name = "" + (j + i * _column);
-                    tbm.Location=new Point(btnImage.Location.X+j*_width+2,btnImage.Location.Y+i*_height+2);
+                    tbm.Location = new Point(pbImage.Location.X + j * _width + 2, pbImage.Location.Y + i * _height + 2);
                     tbm.MouseClick += new MouseEventHandler(l_btnTiled_MouseClick);
                     _lTiled.Add(tbm);                    
                 }
-            this.btnImage.Paint += new System.Windows.Forms.PaintEventHandler(this.btnImage_Paint);
+            this.pbImage.Paint += new System.Windows.Forms.PaintEventHandler(this.pbImage_Paint);
         }
         private void l_btnTiled_MouseClick(object sender, MouseEventArgs e)
         {
@@ -324,7 +324,7 @@ namespace MyMap
             _lTiled[i].id = "";
             _lTiled[i].Visible = false;                        
         }
-        private void btnImage_MouseClick(object sender, MouseEventArgs e)
+        private void pbImage_MouseClick(object sender, MouseEventArgs e)
         {
             if (cbCoordinatesMouse.Checked)
             {
@@ -334,8 +334,8 @@ namespace MyMap
             }
             if (_index == -1||_index==-2)
                 return;
-            int x = (e.X - btnImage.Location.X) / _width;
-            int y = (e.Y - btnImage.Location.Y) / _height;         
+            int x = (e.X - pbImage.Location.X) / _width;
+            int y = (e.Y - pbImage.Location.Y) / _height;         
             _lTiled[x + _column * y].Visible = true;
             _lTiled[x + _column * y].id = "" + _index;            
             panel1.Controls.Add(_lTiled[x + _column * y]);
@@ -387,19 +387,19 @@ namespace MyMap
                 }
             }
             MessageBox.Show("Đã Xong!");
-        }        
-        private void btnImage_Paint(object sender, PaintEventArgs e)
+        }
+        private void pbImage_Paint(object sender, PaintEventArgs e)
         {
             Graphics g;
             g = e.Graphics;
             Pen p = new Pen(Color.Red, 0.5f);
             for (int i = 0; i <= _row; i++)
             {
-                g.DrawLine(p, new Point(2, i * _height+2), new Point(_image.Width+2, i * _height+2));
+                g.DrawLine(p, new Point(0, i * _height), new Point(_image.Width, i * _height));
             }
             for (int i = 0; i <= _column; i++)
             {
-                g.DrawLine(p, new Point(i * _width+2, 2), new Point(i * _width+2, _image.Height+2));
+                g.DrawLine(p, new Point(i * _width, 0), new Point(i * _width, _image.Height));
             }
         }        
         private void panel1_MouseClick(object sender, MouseEventArgs e)

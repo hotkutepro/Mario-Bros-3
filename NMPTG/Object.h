@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include <d3dx9math.h>
 #include "FrkContent.h"
 #include"QNode.h"
@@ -12,23 +12,27 @@ enum typeObject{
 };
 class Object:public Operate
 {
-protected:
-	D3DXVECTOR2 m_hPosition;
-	float m_hAcceleration;
-	float m_hgravity=0.98f;
-	D3DXVECTOR2 m_hSpeed;
-	FrkSprite* m_hCurrentSprite;
+protected:		
 
 public:	
+	float m_hAcceleration;
+	float m_hgravity = 0.98f;
+	D3DXVECTOR2 m_hSpeed;
+	FrkSprite* m_hCurrentSprite;
+	D3DXVECTOR2 m_hPosition;
 	Box* box;
 	typeObject type;
 	int id;
+	bool life=true;
+	bool connect=false;//Kiểm tra có kết nối với brick ko.
 	void setCurrentSprite(FrkSprite*);
 	FrkSprite* getCurrentSprite();
 	virtual void Load();
 	virtual void Render();
 	virtual void UpdateBox(float gameTime);
 	virtual void Update(float gameTime);
+	virtual void Tortoise_Shell();
+	virtual void Die();
 	void SetPosition(int x, int y);
 	D3DXVECTOR2 GetPosition();
 	Object(D3DXVECTOR2 pos, D3DXVECTOR2 speed);

@@ -19,5 +19,23 @@ void F_Coin::Load()
 }
 
 void F_Coin::Update(float gameTime)
+{
+	if (connect == true && life == true)
+		Show();
+}
+
+void F_Coin::Die()
+{
+	m_hCurrentSprite = NULL;
+}
+
+void F_Coin::Show()
 {	
+	n++;
+	m_hSpeed.y = 0.05;
+	if (n >= 15)
+	{
+		life = false;
+		m_hCurrentSprite = NULL;
+	}
 }

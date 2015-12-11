@@ -19,6 +19,7 @@ void E_Tarnooki_Fly::Load()
 	setCurrentSprite(E_FlyMushroom);
 	Object::Load();
 	type = typeObject::tarnooki_fly;
+	m_hSpeed.x = 0.02; m_hSpeed.y = -0.002;
 }
 
 void E_Tarnooki_Fly::Update(float gameTime)

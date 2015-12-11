@@ -55,7 +55,6 @@ Box* SweptAABB::GetSweptBroadphaseBox(Box* b)
 	broadphasebox->y = b->vy > 0 ? b->y : b->y + b->vy;
 	broadphasebox->w = b->vx > 0 ? b->vx + b->w : b->w - b->vx;
 	broadphasebox->h = b->vy > 0 ? b->vy + b->h : b->h - b->vy;
-
 	return broadphasebox;
 }
 
@@ -71,23 +70,23 @@ float SweptAABB::SweptAABB1(Box* b1, Box* b2, float& normalx, float& normaly)
 	float xInvExit, yInvExit;
 
 	// find the distance between the objects on the near and far sides for both x and y
-	if (b1->vx > 0.0f)//b1 đang tiến lên để gặp b2
+	if (b1->vx > 0.0f)//b1 đang di chuyển qua phải
 	{
 		xInvEntry = b2->x - (b1->x + b1->w);
 		xInvExit = (b2->x + b2->w) - b1->x;
 	}
-	else//b1 đang lùi về để gặp b2
+	else//b1 đang di chuyển qua trái 
 	{
 		xInvEntry = (b2->x + b2->w) - b1->x;
 		xInvExit = b2->x - (b1->x + b1->w);
 	}
 
-	if (b1->vy > 0.0f)//tiến lên hướng phía b2
+	if (b1->vy > 0.0f)//b1 đang di chuyển lên trên
 	{
 		yInvEntry = b2->y - (b1->y + b1->h);
 		yInvExit = (b2->y + b2->h) - b1->y;
 	}
-	else//lùi về hướng về phía b2
+	else//b1 đang di chuyển xuống dưới
 	{
 		yInvEntry = (b2->y + b2->h) - b1->y;
 		yInvExit = b2->y - (b1->y + b1->h);
@@ -123,7 +122,7 @@ float SweptAABB::SweptAABB1(Box* b1, Box* b2, float& normalx, float& normaly)
 	float entryTime = std::max(xEntry, yEntry);//Thời gian xảy ra va chạm tại hệ trục tọa độ oxy
 	float exitTime = std::min(xExit, yExit);//Thời gian kết thúc va chạm
 
-	// Nếu không có xảy ra va chạm thì
+	// Nếu không có xảy ra va chạm thì trả về 1
 	if (entryTime > exitTime || xEntry < 0.0f && yEntry < 0.0f || xEntry > 1.0f || yEntry > 1.0f)
 	{
 		normalx = 0.0f;

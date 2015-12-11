@@ -7,6 +7,7 @@ public:
 	
 	void Load();	
 	void Update(float gameTime);	
+	void Die();
 	F_Leaf();
 	~F_Leaf();
 };

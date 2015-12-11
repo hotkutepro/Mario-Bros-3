@@ -23,3 +23,8 @@ void F_Leaf::Update(float gameTime)
 	Object::Update(gameTime);
 }
 
+void F_Leaf::Die()
+{
+	m_hCurrentSprite = NULL;
+}
+

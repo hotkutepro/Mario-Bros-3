@@ -8,6 +8,6 @@ public:
 	~F_Mushroom();
 	void Load();
 	void Update(float gameTime);
-
+	void Die();
 };
 
