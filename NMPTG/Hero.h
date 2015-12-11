@@ -75,9 +75,10 @@ private:
 	bool isJump;
 	bool direction;
 	bool isRun;
+	bool isControlUp;
 	float delay_next;
-	float max_speed;
 	int status;
+	
 
 public:
 	
@@ -94,6 +95,8 @@ public:
 	void Update(float gameTime);
 	void GoLeft(float gameTime);
 	void GoRight(float gameTime);
+	void RunLeft(float gameTime);
+	void RunRight(float gameTime);
 	void Inertia(float gameTime);
 	void InertiaRun(float gameTime);
 	void Jump(float gameTime);
