@@ -22,6 +22,7 @@ public:
 	D3DXVECTOR2 m_hSpeed;
 	FrkSprite* m_hCurrentSprite;
 	D3DXVECTOR2 m_hPosition;
+	D3DXVECTOR2 m_hSize;
 	Box* box;
 	typeObject type;
 	int id;

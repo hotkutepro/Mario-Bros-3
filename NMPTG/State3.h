@@ -9,7 +9,8 @@
 class State;
 class State_3 : public State
 {
-private:	
+private:		
+	QNode* qnode;
 	State* state_2;
 	FrkCamera* camera;
 	Map* map1;

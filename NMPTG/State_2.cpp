@@ -150,11 +150,7 @@ void State_2::Update(float gameTime)
 				it_Object->second->Die();
 			}*/
 			break;
-		case typeObject::leaf:
-			/*if (swept->AABBCheck(man->box, it_Object->second->box) && it_Object->second->life)
-			{
-				it_Object->second->Die();
-			}*/
+		case typeObject::leaf:			
 			break;
 		case typeObject::mushroom_red:
 			/*if (swept->AABBCheck(man->box, it_Object->second->box) && it_Object->second->life)

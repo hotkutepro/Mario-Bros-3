@@ -177,10 +177,15 @@ void QNode::LoadObjects(string path)//Viet lai
 			}
 			open >> tmp->id;
 			D3DXVECTOR2 pos;
+			D3DXVECTOR2 size;
 			open >> pos.x;
 			open >> pos.y;
+			open >> size.x;
+			open >> size.y;
 			tmp->SetPosition(pos.x, pos.y);
 			tmp->type = typeO[i];
+			tmp->m_hSize.x = size.x;
+			tmp->m_hSize.y = size.y;
 			m_Objects.insert(pair<int, Object*>(tmp->id, tmp));
 		}				
 	}

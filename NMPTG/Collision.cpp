@@ -12,9 +12,9 @@ Collision::~Collision(void)
 {
 }
 
-bool Collision::AABBCheck(Box b1, Box b2)
+bool Collision::AABBCheck(Box* b1, Box* b2)
 {
-	return !(b1.position.right < b2.position.left || b1.position.bottom < b2.position.top ||b2.position.right < b1.position.left || b2.position.bottom < b1.position.top);
+	return !(b1->position.right < b2->position.left || b1->position.bottom < b2->position.top || b2->position.right < b1->position.left || b2->position.bottom < b1->position.top);
 }
 
 Box* Collision::GetBoardPhaseBox(Box* box)

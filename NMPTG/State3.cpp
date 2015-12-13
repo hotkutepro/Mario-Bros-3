@@ -18,7 +18,13 @@ State_3::~State_3()
 }
 
 void State_3::Load()
-{	
+{
+	qnode = new QNode();
+	qnode->LoadQNode("QNode.txt");
+	qnode->LoadObjects("Object.txt");
+	qnode->Connect();
+	qnode->InsertObject("OiNode.txt");
+	qnode->getIdObjectInViewPort(R_Viewport, qnode);
 	camera = new FrkCamera(2848, 720);
 	map1 = new Map();
 	map1->Init("hihi.txt", ResourcesManager::GetInstance()->GetTexture(TextureID::TileMap1));
@@ -39,14 +45,52 @@ void State_3::Load()
 	b2->position.right = brick->m_hPosition.x + brick->getCurrentSprite()->_Width;
 	b2->position.bottom = brick->m_hPosition.y + brick->getCurrentSprite()->_Height;
 	camera->Update(man->GetPosition());
-	speed = -50;
+	speed = -5;
+	mapObject::iterator it;
+	for (it = qnode->m_Objects.begin(); it != qnode->m_Objects.end(); it++)
+	{
+		it->second->Load();		
+	}
 }
 void State_3::Update(float gameTime)
 {
 	camera->Update(man->GetPosition());			
 	_LocalKeyboard->GetDeviceState();
-	b1->v.x = b1->v.y = 0;
+	//b1->v.x = b1->v.y = 0;
 	float time = 0;
+
+
+	mapQNode::iterator it_Node;
+	it_Node = qnode->m_QNode.find(0);
+	qnode->s_IdObjectInViewPort.clear();
+	qnode->getIdObjectInViewPort(R_Viewport, it_Node->second);
+	sId::iterator id_Objects;
+	sId::iterator id_ONext;
+	mapObject::iterator it_Object;
+	mapObject::iterator it_ONext;
+	//float time = 0;
+	float nx = 0; float ny = 0;//swept aabb
+	float mx, my;//swept aabb
+	//Box*b1; Box*b2;
+	for (id_Objects = qnode->s_IdObjectInViewPort.begin(); id_Objects != qnode->s_IdObjectInViewPort.end(); id_Objects++)
+	{
+		it_Object = qnode->m_Objects.find(*id_Objects);		//Object đang xét
+		Box* b=new Box();
+		b->v.x = b->v.y=0;
+		b->position.left = it_Object->second->m_hPosition.x;
+		b->position.top = it_Object->second->m_hPosition.y;
+		b->position.right = b->position.left + it_Object->second->m_hSize.x;
+		b->position.bottom= b->position.top + it_Object->second->m_hSize.y;
+		it_Object = qnode->m_Objects.find(*id_Objects);		//Object đang xét		
+		if (Collision::AABBCheck(b1, b))
+		{ 
+			b1->position.top+=20;		
+			b1->position.bottom += 20;
+		}
+	}
+
+
+
 	if (_LocalKeyboard->IsKeyDown(DIK_LEFT))
 	{
 		b1->v.x = speed;
