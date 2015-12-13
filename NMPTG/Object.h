@@ -10,11 +10,13 @@ enum typeObject{
 	brick, coin, drain, land, leaf, mushroom_red, p, box, question_block, star, tarnooki, tarnooki_fly,
 	tortoise, tortoise_fly, tortoise_red, tree, tree_red, tree_red_shoot, tree_shoot,bullet
 };
+enum state{ON_GROUND,ON_SPACE,ON_FLY};
 class Object:public Operate
 {
 protected:		
 
 public:	
+	int v = 0.05;	
 	float m_hAcceleration;
 	float m_hgravity = 0.98f;
 	D3DXVECTOR2 m_hSpeed;

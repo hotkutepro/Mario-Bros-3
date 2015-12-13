@@ -1,19 +1,16 @@
 #pragma once
+#include <Windows.h>
+#include <d3dx9.h>
 class Box
 {
 	
 public:
-	// position of top-left corner
-	float x, y;
-
-	// dimensions
-	float w, h;
-
-	// velocity
-	float vx, vy;
-	Box(float _x, float _y, float _w, float _h, float _vx, float _vy);
-	Box(float _x, float _y, float _w, float _h);
+	RECT position;
+	D3DXVECTOR2 v;
+	Box(RECT _p,D3DXVECTOR2 _v);
 	Box();
-	~Box();
+	~Box(void);
+	int getWidth(){return position.right - position.left;}
+	int getHeight(){return position.bottom - position.top;}
 };
 

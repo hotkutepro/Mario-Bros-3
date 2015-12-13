@@ -1,5 +1,6 @@
 #include "Object.h"
-
+#include"Box.h"
+#include"Hero.h"
 
 Object::Object()
 {
@@ -35,18 +36,6 @@ void Object::Render()
 		m_hCurrentSprite->Render(m_hPosition);
 }
 
-
-void Object::Update(float gameTime)
-{
-	
-	box->x = GetPosition().x;
-	box->y = GetPosition().y;
-	box->vx = m_hSpeed.x;
-	box->vy = m_hSpeed.y;
-	m_hPosition.x += m_hSpeed.x*gameTime;
-	m_hPosition.y += m_hSpeed.y*gameTime;
-}
-
 void Object::SetPosition(int x, int y)
 {
 	m_hPosition = D3DXVECTOR2(x, y);
@@ -63,18 +52,20 @@ void Object::Load()
 	m_hSpeed.x = 0;
 	m_hSpeed.y = 0;
 	box = new Box();
-	box->x = GetPosition().x;
-	box->y = GetPosition().y;
-	box->vx = 0;
-	box->vy = 0;
-	if (m_hCurrentSprite)
-	{
-		box->w = m_hCurrentSprite->_Width;
-		box->h = m_hCurrentSprite->_Height;
-	}
-	else{
-		box->w = box->h = 16;
-	}
+	box->position.left = m_hPosition.x;
+	box->position.top = m_hPosition.y;
+	box->position.right = m_hPosition.x + m_hCurrentSprite->_Width;
+	box->position.bottom = m_hPosition.y + m_hCurrentSprite->_Height;
+	box->v.x = box->v.y = 0;	
+}
+void Object::Update(float gameTime)
+{
+	box->position.top += box->v.y;
+	box->position.bottom += box->v.y;
+	box->position.left += box->v.x;
+	box->position.right += box->v.x;
+	m_hPosition.x = box->position.left;
+	m_hPosition.y = box->position.top;	
 }
 void Object::setCurrentSprite(FrkSprite* s)
 {
@@ -88,8 +79,8 @@ FrkSprite* Object::getCurrentSprite()
 
 void Object::UpdateBox(float gameTime)
 {
-	box->x = GetPosition().x;
-	box->y = GetPosition().y;
+	m_hPosition.x=box->position.left;
+	m_hPosition.y=box->position.top;
 }
 
 void Object::Tortoise_Shell()
