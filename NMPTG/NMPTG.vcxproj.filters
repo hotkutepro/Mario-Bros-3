@@ -87,14 +87,8 @@
     <ClInclude Include="StateManager.h">
       <Filter>GameState</Filter>
     </ClInclude>
-    <ClInclude Include="SweptAABB.h">
-      <Filter>SweptAABB</Filter>
-    </ClInclude>
     <ClInclude Include="Box.h">
       <Filter>SweptAABB</Filter>
-    </ClInclude>
-    <ClInclude Include="Brick.h">
-      <Filter>GameObject</Filter>
     </ClInclude>
     <ClInclude Include="Bullet.h">
       <Filter>GameObject</Filter>
@@ -156,26 +150,23 @@
     <ClInclude Include="Operate.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="SuperHero.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Man.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Collision.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C_Brick.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="State3.h">
+      <Filter>GameState</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="WinMain.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ResourcesManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Object.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Map.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Hero.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="QNode.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="FrkCamera.cpp">
       <Filter>Framework</Filter>
     </ClCompile>
@@ -215,14 +206,8 @@
     <ClCompile Include="StateManager.cpp">
       <Filter>GameState</Filter>
     </ClCompile>
-    <ClCompile Include="SweptAABB.cpp">
-      <Filter>SweptAABB</Filter>
-    </ClCompile>
     <ClCompile Include="Box.cpp">
       <Filter>SweptAABB</Filter>
-    </ClCompile>
-    <ClCompile Include="Brick.cpp">
-      <Filter>GameObject</Filter>
     </ClCompile>
     <ClCompile Include="Bullet.cpp">
       <Filter>GameObject</Filter>
@@ -281,8 +266,41 @@
     <ClCompile Include="F_Star.cpp">
       <Filter>GameObject</Filter>
     </ClCompile>
+    <ClCompile Include="C_Brick.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="State3.cpp">
+      <Filter>GameState</Filter>
+    </ClCompile>
+    <ClCompile Include="Collision.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Hero.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Man.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Map.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Object.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
     <ClCompile Include="Operate.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="QNode.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourcesManager.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SuperHero.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="WinMain.cpp">
+      <Filter>Header Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

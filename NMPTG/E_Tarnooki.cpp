@@ -17,15 +17,15 @@ void E_Tarnooki::Load()
 	E_MushroomDeath = ResourcesManager::GetInstance()->GetSprite(SpriteID::E_MushroomDeath);
 	setCurrentSprite(E_Mushroom);
 	Object::Load();
-	m_hSpeed.x = 0.01;
-	m_hSpeed.y = -0.02;
+	m_hSpeed.x = 0.1;
+	m_hSpeed.y = -0.2;
 	type = typeObject::tarnooki;
 }
 
 void E_Tarnooki::Update(float gameTime)
 {
-	if (!life)
-		return;
+	//if (!life)
+		//return;
 	Object::Update(gameTime);
 	//m_hPosition.y -= 0.2*gameTime;
 }

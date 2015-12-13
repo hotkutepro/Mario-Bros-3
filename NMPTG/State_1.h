@@ -10,7 +10,6 @@ class State_2;
 class State_1 : public State
 {
 private:
-	SweptAABB* swept;
 	QNode* qnode;
 	FrkTexture* wall;
 	State* state_2;

@@ -4,6 +4,7 @@
 #include "State.h"
 #include "State_1.h"
 #include "State_2.h"
+#include "State3.h"
 
 int WINAPI WinMain(HINSTANCE h, HINSTANCE p, LPTSTR a, int c)
 {
@@ -26,7 +27,7 @@ int WINAPI WinMain(HINSTANCE h, HINSTANCE p, LPTSTR a, int c)
 	
 	StateManager* SM = new StateManager();
 	
-	State* state = new State_2(h, 320, 240, "demo", SM);
+	State* state = new State_3(h, 320, 240, "demo", SM);
 	SM->Add(state);
 	
 	state->Init();

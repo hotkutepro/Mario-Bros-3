@@ -15,8 +15,8 @@ void C_Land::Load()
 	m_hCurrentSprite = NULL;
 	Object::Load();
 	type = typeObject::land;
-	box->vx = 0;
-	box->vy = 0;	
+	//box->vx = 0;
+	//box->vy = 0;	
 }
 
 void C_Land::Update(float gameTime)

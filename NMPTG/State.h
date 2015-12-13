@@ -1,6 +1,6 @@
 #pragma once
 #include "FrkGame.h"
-#include "SweptAABB.h"
+#include "Collision.h"
 #include "StateManager.h"
 
 
@@ -9,8 +9,7 @@ class State : public FrkGame
 protected:
 	StateManager* stateManager;
 	int Score;
-	int Coin;
-	SweptAABB* sAABB;
+	int Coin;	
 	
 public:
 	enum SceneID

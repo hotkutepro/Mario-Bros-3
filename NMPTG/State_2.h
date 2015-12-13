@@ -3,21 +3,21 @@
 #include "State_2.h"
 #include "FrkCamera.h"
 #include "Map.h"
-#include"Hero.h"
+#include"Man.h"
 #include"F_Leaf.h"
-#include "SweptAABB.h"
+#include "Collision.h"
 class State;
 class State_1;
 class State_2 : public State
 {
-private:
-	SweptAABB* Swept;
+private:	
+	Collision* collis;
 	QNode* qnode;
 	FrkTexture* wall;
 	State* state_1;
 	FrkCamera* camera;
 	Map* map1;
-	Hero *hero;
+	Man* man;
 	F_Leaf* leaf;
 public:
 	State_2(HINSTANCE hIns, int width, int height, char* wName, StateManager* SM);

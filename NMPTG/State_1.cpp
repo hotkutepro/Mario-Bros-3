@@ -3,6 +3,7 @@
 #include "StateManager.h"
 #include "ResourcesManager.h"
 #include "FrkShareControl.h"
+#include"Hero.h"
 
 State_1::State_1(HINSTANCE hIns, int width, int height, char* wName, StateManager* SM) :State(hIns,width,height,wName,SM)
 {
@@ -19,7 +20,7 @@ State_1::~State_1()
 
 void State_1::Load()
 {
-	swept = new SweptAABB();
+//	swept = new SweptAABB();
 	qnode = new QNode();
 	qnode->LoadQNode("QNode.txt");
 	qnode->LoadObjects("Object.txt");
@@ -60,7 +61,7 @@ void State_1::Update(float gameTime)
 	{
 		it_Object = qnode->m_Objects.find(*id_Objects);		//Object đang xét		
 		if (it_Object->second->type == typeObject::land){
-			if (swept->AABB(hero->box, it_Object->second->box, mx, my))
+			/*if (swept->AABB(hero->box, it_Object->second->box, mx, my))
 			{
 				if (my < 0)//
 				{
@@ -72,13 +73,13 @@ void State_1::Update(float gameTime)
 				}
 				if (mx < 0)//hero cham ben ben trai cuc dat
 				{
-					hero->m_hPosition.x -= 20;
+					
 				}
 				if (mx > 0)//hero cham ben phai cuc dat
 				{
 
 				}
-			}
+			}*/
 		}
 	}
 	_LocalKeyboard->GetDeviceState();	

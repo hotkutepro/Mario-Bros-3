@@ -1,6 +1,6 @@
 ﻿#include "QNode.h"
 #include"Object.h"
-#include"Brick.h"
+#include"C_Brick.h"
 #include "F_Coin.h"
 #include "C_Box.h"
 #include "C_Drain.h"
@@ -118,7 +118,7 @@ void QNode::LoadObjects(string path)//Viet lai
 			switch (i)
 			{
 			case 0:
-				tmp = new Brick();
+				tmp = new C_Brick();
 				break;
 			case 1:
 				tmp = new F_Coin();
