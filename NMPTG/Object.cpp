@@ -64,6 +64,15 @@ void Object::Load()
 	}
 	m_hBox->v.x = m_hBox->v.y = 0;
 	m_hObjectGround = NULL;
+
+	m_hBox_Colis = new Box();
+	m_hBox_Colis->position.left = m_hBox->position.left;
+	m_hBox_Colis->position.right = m_hBox->position.right;
+	m_hBox_Colis->position.top = m_hBox->position.top;
+	m_hBox_Colis->position.bottom = m_hBox->position.bottom - 1;
+	m_hBox_Colis->v.x = 0;
+	m_hBox_Colis->v.y = m_hBox->v.y - 1.1;;
+
 }
 void Object::Update(float gameTime)
 {
@@ -71,6 +80,13 @@ void Object::Update(float gameTime)
 	m_hBox->position.bottom += m_hBox->v.y;
 	m_hBox->position.left += m_hBox->v.x;
 	m_hBox->position.right += m_hBox->v.x;	
+
+	/*m_hBox_Colis->position.left = m_hBox->position.left;
+	m_hBox_Colis->position.right = m_hBox->position.right;
+	m_hBox_Colis->position.top = m_hBox->position.top;
+	m_hBox_Colis->position.bottom = m_hBox->position.bottom - 0.3;
+	m_hBox_Colis->v.y = m_hBox->v.y - 0.4;;*/
+
 	m_hPosition.x = m_hBox->position.left;
 	m_hPosition.y = m_hBox->position.top;
 }

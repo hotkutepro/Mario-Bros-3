@@ -27,6 +27,7 @@ public:
 	STATE m_hState = ON_GROUND;
 	DIRECT m_hDirect;
 	Box* m_hBox;
+	Box* m_hBox_Colis;
 	TYPEOBJECT type;
 //dung cho quadtree
 	int id;

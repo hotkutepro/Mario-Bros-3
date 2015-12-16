@@ -15,10 +15,8 @@ private:
 	QNode* qnode;
 	State* state_2;
 	FrkCamera* camera;
-	Map* map1;
-	Man *man;	
-	SuperHero* s_hero;
-	C_Brick* brick;
+	Map* map1;	
+	SuperHero* s_hero;	
 	float speed, nx, ny;
 	Box* b1;
 	Box* b2;
