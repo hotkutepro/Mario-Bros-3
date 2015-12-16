@@ -15,7 +15,7 @@ void F_Star::Load()
 {	
 	m_hCurrentSprite = ResourcesManager::GetInstance()->GetSprite(SpriteID::Wood_1);
 	Object::Load();
-	type = typeObject::star;
+	type = TYPEOBJECT::star;
 }
 
 void F_Star::Update(float gameTime)

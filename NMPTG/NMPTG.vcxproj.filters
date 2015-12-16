@@ -156,14 +156,14 @@
     <ClInclude Include="Man.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Collision.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="C_Brick.h">
       <Filter>GameObject</Filter>
     </ClInclude>
     <ClInclude Include="State3.h">
       <Filter>GameState</Filter>
+    </ClInclude>
+    <ClInclude Include="Collision.h">
+      <Filter>SweptAABB</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -272,9 +272,6 @@
     <ClCompile Include="State3.cpp">
       <Filter>GameState</Filter>
     </ClCompile>
-    <ClCompile Include="Collision.cpp">
-      <Filter>Header Files</Filter>
-    </ClCompile>
     <ClCompile Include="Hero.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
@@ -301,6 +298,9 @@
     </ClCompile>
     <ClCompile Include="WinMain.cpp">
       <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Collision.cpp">
+      <Filter>SweptAABB</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

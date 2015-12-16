@@ -19,7 +19,7 @@ void E_Tortoise::Load()
 	E_TortoiseshellGreenRight = ResourcesManager::GetInstance()->GetSprite(SpriteID::E_TortoiseshellGreenRight);
 	setCurrentSprite(E_TortoiseGreenLeft);
 	Object::Load();
-	type = typeObject::tortoise;
+	type = TYPEOBJECT::tortoise;
 	m_hSpeed.x = 0.02; m_hSpeed.y = -0.02;
 }
 

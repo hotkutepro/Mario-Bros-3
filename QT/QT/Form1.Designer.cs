@@ -35,43 +35,28 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.btRemove = new System.Windows.Forms.Button();
             this.btReset = new System.Windows.Forms.Button();
-            this.panel22 = new System.Windows.Forms.Panel();
-            this.panel21 = new System.Windows.Forms.Panel();
-            this.pP = new System.Windows.Forms.Panel();
-            this.btP = new System.Windows.Forms.Button();
-            this.pTree_shoot = new System.Windows.Forms.Panel();
-            this.btTree_Shoot = new System.Windows.Forms.Button();
-            this.pTree_Red_Shoot = new System.Windows.Forms.Panel();
-            this.btTree_Red_Shoot = new System.Windows.Forms.Button();
-            this.pDrain = new System.Windows.Forms.Panel();
-            this.btDrain = new System.Windows.Forms.Button();
-            this.pTree = new System.Windows.Forms.Panel();
-            this.btTree = new System.Windows.Forms.Button();
-            this.pTarnooki = new System.Windows.Forms.Panel();
-            this.btTarnooki = new System.Windows.Forms.Button();
-            this.pTree_red = new System.Windows.Forms.Panel();
-            this.btTree_red = new System.Windows.Forms.Button();
-            this.pTarnooki_fly = new System.Windows.Forms.Panel();
-            this.btTarnooki_fly = new System.Windows.Forms.Button();
-            this.pQuestion_block = new System.Windows.Forms.Panel();
-            this.btQuestion_Block = new System.Windows.Forms.Button();
-            this.pCoin = new System.Windows.Forms.Panel();
-            this.btCoin = new System.Windows.Forms.Button();
-            this.pStar = new System.Windows.Forms.Panel();
-            this.btStar = new System.Windows.Forms.Button();
             this.pleaf = new System.Windows.Forms.Panel();
-            this.bt_leaf = new System.Windows.Forms.Button();
+            this.btTree_Red_Shoot = new System.Windows.Forms.Button();
+            this.btP = new System.Windows.Forms.Button();
+            this.btTree_red = new System.Windows.Forms.Button();
+            this.btDrain = new System.Windows.Forms.Button();
+            this.btTree_Shoot = new System.Windows.Forms.Button();
+            this.btTree = new System.Windows.Forms.Button();
             this.pTortoise_red = new System.Windows.Forms.Panel();
-            this.btTortoise_red = new System.Windows.Forms.Button();
-            this.pTortoise_fly = new System.Windows.Forms.Panel();
-            this.btTortoise_fly = new System.Windows.Forms.Button();
+            this.btTarnooki = new System.Windows.Forms.Button();
+            this.btQuestion_Block = new System.Windows.Forms.Button();
+            this.btTarnooki_fly = new System.Windows.Forms.Button();
+            this.btCoin = new System.Windows.Forms.Button();
+            this.bt_leaf = new System.Windows.Forms.Button();
+            this.btStar = new System.Windows.Forms.Button();
             this.pTortoise = new System.Windows.Forms.Panel();
-            this.btTortoise = new System.Windows.Forms.Button();
-            this.pMushroom_red = new System.Windows.Forms.Panel();
             this.btMushroom_red = new System.Windows.Forms.Button();
-            this.panel4 = new System.Windows.Forms.Panel();
+            this.btTortoise_red = new System.Windows.Forms.Button();
+            this.btTortoise_fly = new System.Windows.Forms.Button();
             this.btBrick = new System.Windows.Forms.Button();
+            this.btBox = new System.Windows.Forms.Button();
             this.btLand = new System.Windows.Forms.Button();
+            this.btTortoise = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
             this.tby2 = new System.Windows.Forms.TextBox();
             this.tby1 = new System.Windows.Forms.TextBox();
@@ -84,27 +69,12 @@
             this.btSetRegions = new System.Windows.Forms.Button();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.btCheckOut = new System.Windows.Forms.Button();
-            this.btBox = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbImgMap)).BeginInit();
             this.panel2.SuspendLayout();
-            this.pP.SuspendLayout();
-            this.pTree_shoot.SuspendLayout();
-            this.pTree_Red_Shoot.SuspendLayout();
-            this.pDrain.SuspendLayout();
-            this.pTree.SuspendLayout();
-            this.pTarnooki.SuspendLayout();
-            this.pTree_red.SuspendLayout();
-            this.pTarnooki_fly.SuspendLayout();
-            this.pQuestion_block.SuspendLayout();
-            this.pCoin.SuspendLayout();
-            this.pStar.SuspendLayout();
             this.pleaf.SuspendLayout();
             this.pTortoise_red.SuspendLayout();
-            this.pTortoise_fly.SuspendLayout();
             this.pTortoise.SuspendLayout();
-            this.pMushroom_red.SuspendLayout();
-            this.panel4.SuspendLayout();
             this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -148,25 +118,9 @@
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel2.Controls.Add(this.btRemove);
             this.panel2.Controls.Add(this.btReset);
-            this.panel2.Controls.Add(this.panel22);
-            this.panel2.Controls.Add(this.panel21);
-            this.panel2.Controls.Add(this.pP);
-            this.panel2.Controls.Add(this.pTree_shoot);
-            this.panel2.Controls.Add(this.pTree_Red_Shoot);
-            this.panel2.Controls.Add(this.pDrain);
-            this.panel2.Controls.Add(this.pTree);
-            this.panel2.Controls.Add(this.pTarnooki);
-            this.panel2.Controls.Add(this.pTree_red);
-            this.panel2.Controls.Add(this.pTarnooki_fly);
-            this.panel2.Controls.Add(this.pQuestion_block);
-            this.panel2.Controls.Add(this.pCoin);
-            this.panel2.Controls.Add(this.pStar);
             this.panel2.Controls.Add(this.pleaf);
             this.panel2.Controls.Add(this.pTortoise_red);
-            this.panel2.Controls.Add(this.pTortoise_fly);
             this.panel2.Controls.Add(this.pTortoise);
-            this.panel2.Controls.Add(this.pMushroom_red);
-            this.panel2.Controls.Add(this.panel4);
             this.panel2.Controls.Add(this.panel3);
             this.panel2.Location = new System.Drawing.Point(807, 46);
             this.panel2.Name = "panel2";
@@ -193,68 +147,22 @@
             this.btReset.UseVisualStyleBackColor = true;
             this.btReset.Click += new System.EventHandler(this.btReset_Click);
             // 
-            // panel22
+            // pleaf
             // 
-            this.panel22.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.panel22.Location = new System.Drawing.Point(333, 1260);
-            this.panel22.Name = "panel22";
-            this.panel22.Size = new System.Drawing.Size(371, 129);
-            this.panel22.TabIndex = 5;
-            // 
-            // panel21
-            // 
-            this.panel21.Location = new System.Drawing.Point(3, 1260);
-            this.panel21.Name = "panel21";
-            this.panel21.Size = new System.Drawing.Size(324, 129);
-            this.panel21.TabIndex = 15;
-            // 
-            // pP
-            // 
-            this.pP.Controls.Add(this.btP);
-            this.pP.Location = new System.Drawing.Point(333, 1117);
-            this.pP.Name = "pP";
-            this.pP.Size = new System.Drawing.Size(371, 137);
-            this.pP.TabIndex = 14;
-            // 
-            // btP
-            // 
-            this.btP.Location = new System.Drawing.Point(3, 3);
-            this.btP.Name = "btP";
-            this.btP.Size = new System.Drawing.Size(39, 23);
-            this.btP.TabIndex = 3;
-            this.btP.Text = "P";
-            this.btP.UseVisualStyleBackColor = true;
-            this.btP.Click += new System.EventHandler(this.btP_Click);
-            // 
-            // pTree_shoot
-            // 
-            this.pTree_shoot.Controls.Add(this.btTree_Shoot);
-            this.pTree_shoot.Location = new System.Drawing.Point(333, 982);
-            this.pTree_shoot.Name = "pTree_shoot";
-            this.pTree_shoot.Size = new System.Drawing.Size(371, 129);
-            this.pTree_shoot.TabIndex = 13;
-            // 
-            // btTree_Shoot
-            // 
-            this.btTree_Shoot.Location = new System.Drawing.Point(3, 3);
-            this.btTree_Shoot.Name = "btTree_Shoot";
-            this.btTree_Shoot.Size = new System.Drawing.Size(75, 23);
-            this.btTree_Shoot.TabIndex = 2;
-            this.btTree_Shoot.Text = "Tree_Shoot";
-            this.btTree_Shoot.UseVisualStyleBackColor = true;
-            this.btTree_Shoot.Click += new System.EventHandler(this.btTree_Shoot_Click);
-            // 
-            // pTree_Red_Shoot
-            // 
-            this.pTree_Red_Shoot.Controls.Add(this.btTree_Red_Shoot);
-            this.pTree_Red_Shoot.Location = new System.Drawing.Point(3, 1117);
-            this.pTree_Red_Shoot.Name = "pTree_Red_Shoot";
-            this.pTree_Red_Shoot.Size = new System.Drawing.Size(324, 137);
-            this.pTree_Red_Shoot.TabIndex = 12;
+            this.pleaf.Controls.Add(this.btTree_Red_Shoot);
+            this.pleaf.Controls.Add(this.btP);
+            this.pleaf.Controls.Add(this.btTree_red);
+            this.pleaf.Controls.Add(this.btDrain);
+            this.pleaf.Controls.Add(this.btTree_Shoot);
+            this.pleaf.Controls.Add(this.btTree);
+            this.pleaf.Location = new System.Drawing.Point(27, 424);
+            this.pleaf.Name = "pleaf";
+            this.pleaf.Size = new System.Drawing.Size(324, 129);
+            this.pleaf.TabIndex = 0;
             // 
             // btTree_Red_Shoot
             // 
-            this.btTree_Red_Shoot.Location = new System.Drawing.Point(3, 3);
+            this.btTree_Red_Shoot.Location = new System.Drawing.Point(201, 103);
             this.btTree_Red_Shoot.Name = "btTree_Red_Shoot";
             this.btTree_Red_Shoot.Size = new System.Drawing.Size(99, 23);
             this.btTree_Red_Shoot.TabIndex = 2;
@@ -262,72 +170,19 @@
             this.btTree_Red_Shoot.UseVisualStyleBackColor = true;
             this.btTree_Red_Shoot.Click += new System.EventHandler(this.btTree_Red_Shoot_Click);
             // 
-            // pDrain
+            // btP
             // 
-            this.pDrain.Controls.Add(this.btDrain);
-            this.pDrain.Location = new System.Drawing.Point(3, 982);
-            this.pDrain.Name = "pDrain";
-            this.pDrain.Size = new System.Drawing.Size(324, 129);
-            this.pDrain.TabIndex = 11;
-            this.pDrain.Paint += new System.Windows.Forms.PaintEventHandler(this.pDrain_Paint);
-            // 
-            // btDrain
-            // 
-            this.btDrain.Location = new System.Drawing.Point(3, 3);
-            this.btDrain.Name = "btDrain";
-            this.btDrain.Size = new System.Drawing.Size(75, 23);
-            this.btDrain.TabIndex = 1;
-            this.btDrain.Text = "Drain";
-            this.btDrain.UseVisualStyleBackColor = true;
-            this.btDrain.Click += new System.EventHandler(this.btDrain_Click);
-            // 
-            // pTree
-            // 
-            this.pTree.Controls.Add(this.btTree);
-            this.pTree.Location = new System.Drawing.Point(3, 837);
-            this.pTree.Name = "pTree";
-            this.pTree.Size = new System.Drawing.Size(324, 139);
-            this.pTree.TabIndex = 10;
-            // 
-            // btTree
-            // 
-            this.btTree.Location = new System.Drawing.Point(3, 3);
-            this.btTree.Name = "btTree";
-            this.btTree.Size = new System.Drawing.Size(75, 23);
-            this.btTree.TabIndex = 1;
-            this.btTree.Text = "Tree";
-            this.btTree.UseVisualStyleBackColor = true;
-            this.btTree.Click += new System.EventHandler(this.btTree_Click);
-            // 
-            // pTarnooki
-            // 
-            this.pTarnooki.Controls.Add(this.btTarnooki);
-            this.pTarnooki.Location = new System.Drawing.Point(3, 696);
-            this.pTarnooki.Name = "pTarnooki";
-            this.pTarnooki.Size = new System.Drawing.Size(324, 135);
-            this.pTarnooki.TabIndex = 9;
-            // 
-            // btTarnooki
-            // 
-            this.btTarnooki.Location = new System.Drawing.Point(3, 3);
-            this.btTarnooki.Name = "btTarnooki";
-            this.btTarnooki.Size = new System.Drawing.Size(75, 23);
-            this.btTarnooki.TabIndex = 1;
-            this.btTarnooki.Text = "Tarnooki";
-            this.btTarnooki.UseVisualStyleBackColor = true;
-            this.btTarnooki.Click += new System.EventHandler(this.btTarnooki_Click);
-            // 
-            // pTree_red
-            // 
-            this.pTree_red.Controls.Add(this.btTree_red);
-            this.pTree_red.Location = new System.Drawing.Point(333, 837);
-            this.pTree_red.Name = "pTree_red";
-            this.pTree_red.Size = new System.Drawing.Size(371, 139);
-            this.pTree_red.TabIndex = 8;
+            this.btP.Location = new System.Drawing.Point(0, 18);
+            this.btP.Name = "btP";
+            this.btP.Size = new System.Drawing.Size(39, 23);
+            this.btP.TabIndex = 3;
+            this.btP.Text = "P";
+            this.btP.UseVisualStyleBackColor = true;
+            this.btP.Click += new System.EventHandler(this.btP_Click);
             // 
             // btTree_red
             // 
-            this.btTree_red.Location = new System.Drawing.Point(3, 3);
+            this.btTree_red.Location = new System.Drawing.Point(213, 3);
             this.btTree_red.Name = "btTree_red";
             this.btTree_red.Size = new System.Drawing.Size(75, 23);
             this.btTree_red.TabIndex = 1;
@@ -335,35 +190,61 @@
             this.btTree_red.UseVisualStyleBackColor = true;
             this.btTree_red.Click += new System.EventHandler(this.btTree_red_Click);
             // 
-            // pTarnooki_fly
+            // btDrain
             // 
-            this.pTarnooki_fly.Controls.Add(this.btTarnooki_fly);
-            this.pTarnooki_fly.Location = new System.Drawing.Point(333, 696);
-            this.pTarnooki_fly.Name = "pTarnooki_fly";
-            this.pTarnooki_fly.Size = new System.Drawing.Size(371, 135);
-            this.pTarnooki_fly.TabIndex = 7;
+            this.btDrain.Location = new System.Drawing.Point(0, 47);
+            this.btDrain.Name = "btDrain";
+            this.btDrain.Size = new System.Drawing.Size(75, 23);
+            this.btDrain.TabIndex = 1;
+            this.btDrain.Text = "Drain";
+            this.btDrain.UseVisualStyleBackColor = true;
+            this.btDrain.Click += new System.EventHandler(this.btDrain_Click);
             // 
-            // btTarnooki_fly
+            // btTree_Shoot
             // 
-            this.btTarnooki_fly.Location = new System.Drawing.Point(3, 3);
-            this.btTarnooki_fly.Name = "btTarnooki_fly";
-            this.btTarnooki_fly.Size = new System.Drawing.Size(75, 23);
-            this.btTarnooki_fly.TabIndex = 1;
-            this.btTarnooki_fly.Text = "Tarnooki_fly";
-            this.btTarnooki_fly.UseVisualStyleBackColor = true;
-            this.btTarnooki_fly.Click += new System.EventHandler(this.btTarnooki_fly_Click);
+            this.btTree_Shoot.Location = new System.Drawing.Point(211, 32);
+            this.btTree_Shoot.Name = "btTree_Shoot";
+            this.btTree_Shoot.Size = new System.Drawing.Size(75, 23);
+            this.btTree_Shoot.TabIndex = 2;
+            this.btTree_Shoot.Text = "Tree_Shoot";
+            this.btTree_Shoot.UseVisualStyleBackColor = true;
+            this.btTree_Shoot.Click += new System.EventHandler(this.btTree_Shoot_Click);
             // 
-            // pQuestion_block
+            // btTree
             // 
-            this.pQuestion_block.Controls.Add(this.btQuestion_Block);
-            this.pQuestion_block.Location = new System.Drawing.Point(333, 561);
-            this.pQuestion_block.Name = "pQuestion_block";
-            this.pQuestion_block.Size = new System.Drawing.Size(371, 129);
-            this.pQuestion_block.TabIndex = 6;
+            this.btTree.Location = new System.Drawing.Point(213, 61);
+            this.btTree.Name = "btTree";
+            this.btTree.Size = new System.Drawing.Size(75, 23);
+            this.btTree.TabIndex = 1;
+            this.btTree.Text = "Tree";
+            this.btTree.UseVisualStyleBackColor = true;
+            this.btTree.Click += new System.EventHandler(this.btTree_Click);
+            // 
+            // pTortoise_red
+            // 
+            this.pTortoise_red.Controls.Add(this.btQuestion_Block);
+            this.pTortoise_red.Controls.Add(this.btTarnooki_fly);
+            this.pTortoise_red.Controls.Add(this.btCoin);
+            this.pTortoise_red.Controls.Add(this.bt_leaf);
+            this.pTortoise_red.Controls.Add(this.btStar);
+            this.pTortoise_red.Location = new System.Drawing.Point(3, 293);
+            this.pTortoise_red.Name = "pTortoise_red";
+            this.pTortoise_red.Size = new System.Drawing.Size(324, 127);
+            this.pTortoise_red.TabIndex = 3;
+            // 
+            // btTarnooki
+            // 
+            this.btTarnooki.Location = new System.Drawing.Point(0, 90);
+            this.btTarnooki.Name = "btTarnooki";
+            this.btTarnooki.Size = new System.Drawing.Size(75, 23);
+            this.btTarnooki.TabIndex = 1;
+            this.btTarnooki.Text = "Tarnooki";
+            this.btTarnooki.UseVisualStyleBackColor = true;
+            this.btTarnooki.Click += new System.EventHandler(this.btTarnooki_Click);
             // 
             // btQuestion_Block
             // 
-            this.btQuestion_Block.Location = new System.Drawing.Point(3, 3);
+            this.btQuestion_Block.Location = new System.Drawing.Point(229, 101);
             this.btQuestion_Block.Name = "btQuestion_Block";
             this.btQuestion_Block.Size = new System.Drawing.Size(95, 23);
             this.btQuestion_Block.TabIndex = 1;
@@ -371,17 +252,19 @@
             this.btQuestion_Block.UseVisualStyleBackColor = true;
             this.btQuestion_Block.Click += new System.EventHandler(this.btQuestion_Block_Click);
             // 
-            // pCoin
+            // btTarnooki_fly
             // 
-            this.pCoin.Controls.Add(this.btCoin);
-            this.pCoin.Location = new System.Drawing.Point(3, 561);
-            this.pCoin.Name = "pCoin";
-            this.pCoin.Size = new System.Drawing.Size(324, 129);
-            this.pCoin.TabIndex = 5;
+            this.btTarnooki_fly.Location = new System.Drawing.Point(246, 0);
+            this.btTarnooki_fly.Name = "btTarnooki_fly";
+            this.btTarnooki_fly.Size = new System.Drawing.Size(75, 23);
+            this.btTarnooki_fly.TabIndex = 1;
+            this.btTarnooki_fly.Text = "Tarnooki_fly";
+            this.btTarnooki_fly.UseVisualStyleBackColor = true;
+            this.btTarnooki_fly.Click += new System.EventHandler(this.btTarnooki_fly_Click);
             // 
             // btCoin
             // 
-            this.btCoin.Location = new System.Drawing.Point(3, 3);
+            this.btCoin.Location = new System.Drawing.Point(0, 61);
             this.btCoin.Name = "btCoin";
             this.btCoin.Size = new System.Drawing.Size(75, 23);
             this.btCoin.TabIndex = 1;
@@ -389,35 +272,9 @@
             this.btCoin.UseVisualStyleBackColor = true;
             this.btCoin.Click += new System.EventHandler(this.btCoin_Click);
             // 
-            // pStar
-            // 
-            this.pStar.Controls.Add(this.btStar);
-            this.pStar.Location = new System.Drawing.Point(333, 426);
-            this.pStar.Name = "pStar";
-            this.pStar.Size = new System.Drawing.Size(371, 129);
-            this.pStar.TabIndex = 4;
-            // 
-            // btStar
-            // 
-            this.btStar.Location = new System.Drawing.Point(3, 3);
-            this.btStar.Name = "btStar";
-            this.btStar.Size = new System.Drawing.Size(75, 23);
-            this.btStar.TabIndex = 1;
-            this.btStar.Text = "Star";
-            this.btStar.UseVisualStyleBackColor = true;
-            this.btStar.Click += new System.EventHandler(this.btStar_Click);
-            // 
-            // pleaf
-            // 
-            this.pleaf.Controls.Add(this.bt_leaf);
-            this.pleaf.Location = new System.Drawing.Point(3, 426);
-            this.pleaf.Name = "pleaf";
-            this.pleaf.Size = new System.Drawing.Size(324, 129);
-            this.pleaf.TabIndex = 0;
-            // 
             // bt_leaf
             // 
-            this.bt_leaf.Location = new System.Drawing.Point(3, 3);
+            this.bt_leaf.Location = new System.Drawing.Point(-4, 32);
             this.bt_leaf.Name = "bt_leaf";
             this.bt_leaf.Size = new System.Drawing.Size(75, 23);
             this.bt_leaf.TabIndex = 1;
@@ -425,17 +282,44 @@
             this.bt_leaf.UseVisualStyleBackColor = true;
             this.bt_leaf.Click += new System.EventHandler(this.bt_leaf_Click);
             // 
-            // pTortoise_red
+            // btStar
             // 
-            this.pTortoise_red.Controls.Add(this.btTortoise_red);
-            this.pTortoise_red.Location = new System.Drawing.Point(3, 293);
-            this.pTortoise_red.Name = "pTortoise_red";
-            this.pTortoise_red.Size = new System.Drawing.Size(324, 127);
-            this.pTortoise_red.TabIndex = 3;
+            this.btStar.Location = new System.Drawing.Point(0, 3);
+            this.btStar.Name = "btStar";
+            this.btStar.Size = new System.Drawing.Size(75, 23);
+            this.btStar.TabIndex = 1;
+            this.btStar.Text = "Star";
+            this.btStar.UseVisualStyleBackColor = true;
+            this.btStar.Click += new System.EventHandler(this.btStar_Click);
+            // 
+            // pTortoise
+            // 
+            this.pTortoise.Controls.Add(this.btTarnooki);
+            this.pTortoise.Controls.Add(this.btMushroom_red);
+            this.pTortoise.Controls.Add(this.btTortoise_red);
+            this.pTortoise.Controls.Add(this.btTortoise_fly);
+            this.pTortoise.Controls.Add(this.btBrick);
+            this.pTortoise.Controls.Add(this.btBox);
+            this.pTortoise.Controls.Add(this.btLand);
+            this.pTortoise.Controls.Add(this.btTortoise);
+            this.pTortoise.Location = new System.Drawing.Point(3, 160);
+            this.pTortoise.Name = "pTortoise";
+            this.pTortoise.Size = new System.Drawing.Size(324, 127);
+            this.pTortoise.TabIndex = 3;
+            // 
+            // btMushroom_red
+            // 
+            this.btMushroom_red.Location = new System.Drawing.Point(235, 90);
+            this.btMushroom_red.Name = "btMushroom_red";
+            this.btMushroom_red.Size = new System.Drawing.Size(86, 23);
+            this.btMushroom_red.TabIndex = 1;
+            this.btMushroom_red.Text = "Mushroom_red";
+            this.btMushroom_red.UseVisualStyleBackColor = true;
+            this.btMushroom_red.Click += new System.EventHandler(this.btMushroom_red_Click);
             // 
             // btTortoise_red
             // 
-            this.btTortoise_red.Location = new System.Drawing.Point(3, 3);
+            this.btTortoise_red.Location = new System.Drawing.Point(246, 61);
             this.btTortoise_red.Name = "btTortoise_red";
             this.btTortoise_red.Size = new System.Drawing.Size(75, 23);
             this.btTortoise_red.TabIndex = 1;
@@ -443,18 +327,9 @@
             this.btTortoise_red.UseVisualStyleBackColor = true;
             this.btTortoise_red.Click += new System.EventHandler(this.btTortoise_red_Click);
             // 
-            // pTortoise_fly
-            // 
-            this.pTortoise_fly.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.pTortoise_fly.Controls.Add(this.btTortoise_fly);
-            this.pTortoise_fly.Location = new System.Drawing.Point(333, 160);
-            this.pTortoise_fly.Name = "pTortoise_fly";
-            this.pTortoise_fly.Size = new System.Drawing.Size(371, 127);
-            this.pTortoise_fly.TabIndex = 3;
-            // 
             // btTortoise_fly
             // 
-            this.btTortoise_fly.Location = new System.Drawing.Point(3, 3);
+            this.btTortoise_fly.Location = new System.Drawing.Point(246, 32);
             this.btTortoise_fly.Name = "btTortoise_fly";
             this.btTortoise_fly.Size = new System.Drawing.Size(75, 23);
             this.btTortoise_fly.TabIndex = 1;
@@ -462,14 +337,35 @@
             this.btTortoise_fly.UseVisualStyleBackColor = true;
             this.btTortoise_fly.Click += new System.EventHandler(this.btTortoise_fly_Click);
             // 
-            // pTortoise
+            // btBrick
             // 
-            this.pTortoise.Controls.Add(this.btBox);
-            this.pTortoise.Controls.Add(this.btTortoise);
-            this.pTortoise.Location = new System.Drawing.Point(3, 160);
-            this.pTortoise.Name = "pTortoise";
-            this.pTortoise.Size = new System.Drawing.Size(324, 127);
-            this.pTortoise.TabIndex = 3;
+            this.btBrick.Location = new System.Drawing.Point(177, 0);
+            this.btBrick.Name = "btBrick";
+            this.btBrick.Size = new System.Drawing.Size(75, 23);
+            this.btBrick.TabIndex = 0;
+            this.btBrick.Text = "Brick";
+            this.btBrick.UseVisualStyleBackColor = true;
+            this.btBrick.Click += new System.EventHandler(this.btBrick_Click);
+            // 
+            // btBox
+            // 
+            this.btBox.Location = new System.Drawing.Point(3, 32);
+            this.btBox.Name = "btBox";
+            this.btBox.Size = new System.Drawing.Size(75, 23);
+            this.btBox.TabIndex = 2;
+            this.btBox.Text = "Box";
+            this.btBox.UseVisualStyleBackColor = true;
+            this.btBox.Click += new System.EventHandler(this.btBox_Click);
+            // 
+            // btLand
+            // 
+            this.btLand.Location = new System.Drawing.Point(3, 61);
+            this.btLand.Name = "btLand";
+            this.btLand.Size = new System.Drawing.Size(75, 23);
+            this.btLand.TabIndex = 1;
+            this.btLand.Text = "Land";
+            this.btLand.UseVisualStyleBackColor = true;
+            this.btLand.Click += new System.EventHandler(this.btLand_Click);
             // 
             // btTortoise
             // 
@@ -480,54 +376,6 @@
             this.btTortoise.Text = "Tortoise";
             this.btTortoise.UseVisualStyleBackColor = true;
             this.btTortoise.Click += new System.EventHandler(this.btTortoise_Click);
-            // 
-            // pMushroom_red
-            // 
-            this.pMushroom_red.Controls.Add(this.btMushroom_red);
-            this.pMushroom_red.Location = new System.Drawing.Point(333, 293);
-            this.pMushroom_red.Name = "pMushroom_red";
-            this.pMushroom_red.Size = new System.Drawing.Size(371, 127);
-            this.pMushroom_red.TabIndex = 3;
-            // 
-            // btMushroom_red
-            // 
-            this.btMushroom_red.Location = new System.Drawing.Point(3, 3);
-            this.btMushroom_red.Name = "btMushroom_red";
-            this.btMushroom_red.Size = new System.Drawing.Size(86, 23);
-            this.btMushroom_red.TabIndex = 1;
-            this.btMushroom_red.Text = "Mushroom_red";
-            this.btMushroom_red.UseVisualStyleBackColor = true;
-            this.btMushroom_red.Click += new System.EventHandler(this.btMushroom_red_Click);
-            // 
-            // panel4
-            // 
-            this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.panel4.Controls.Add(this.btBrick);
-            this.panel4.Controls.Add(this.btLand);
-            this.panel4.Location = new System.Drawing.Point(333, 27);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(374, 127);
-            this.panel4.TabIndex = 2;
-            // 
-            // btBrick
-            // 
-            this.btBrick.Location = new System.Drawing.Point(3, 29);
-            this.btBrick.Name = "btBrick";
-            this.btBrick.Size = new System.Drawing.Size(75, 23);
-            this.btBrick.TabIndex = 0;
-            this.btBrick.Text = "Brick";
-            this.btBrick.UseVisualStyleBackColor = true;
-            this.btBrick.Click += new System.EventHandler(this.btBrick_Click);
-            // 
-            // btLand
-            // 
-            this.btLand.Location = new System.Drawing.Point(3, 0);
-            this.btLand.Name = "btLand";
-            this.btLand.Size = new System.Drawing.Size(75, 23);
-            this.btLand.TabIndex = 1;
-            this.btLand.Text = "Land";
-            this.btLand.UseVisualStyleBackColor = true;
-            this.btLand.Click += new System.EventHandler(this.btLand_Click);
             // 
             // panel3
             // 
@@ -638,16 +486,6 @@
             this.btCheckOut.UseVisualStyleBackColor = true;
             this.btCheckOut.Click += new System.EventHandler(this.btCheckOut_Click);
             // 
-            // btBox
-            // 
-            this.btBox.Location = new System.Drawing.Point(42, 44);
-            this.btBox.Name = "btBox";
-            this.btBox.Size = new System.Drawing.Size(75, 23);
-            this.btBox.TabIndex = 2;
-            this.btBox.Text = "Box";
-            this.btBox.UseVisualStyleBackColor = true;
-            this.btBox.Click += new System.EventHandler(this.btBox_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -666,23 +504,9 @@
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbImgMap)).EndInit();
             this.panel2.ResumeLayout(false);
-            this.pP.ResumeLayout(false);
-            this.pTree_shoot.ResumeLayout(false);
-            this.pTree_Red_Shoot.ResumeLayout(false);
-            this.pDrain.ResumeLayout(false);
-            this.pTree.ResumeLayout(false);
-            this.pTarnooki.ResumeLayout(false);
-            this.pTree_red.ResumeLayout(false);
-            this.pTarnooki_fly.ResumeLayout(false);
-            this.pQuestion_block.ResumeLayout(false);
-            this.pCoin.ResumeLayout(false);
-            this.pStar.ResumeLayout(false);
             this.pleaf.ResumeLayout(false);
             this.pTortoise_red.ResumeLayout(false);
-            this.pTortoise_fly.ResumeLayout(false);
             this.pTortoise.ResumeLayout(false);
-            this.pMushroom_red.ResumeLayout(false);
-            this.panel4.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.ResumeLayout(false);
@@ -699,31 +523,15 @@
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.Panel pleaf;
         private System.Windows.Forms.Panel pTortoise_red;
-        private System.Windows.Forms.Panel pTortoise_fly;
         private System.Windows.Forms.Panel pTortoise;
-        private System.Windows.Forms.Panel pMushroom_red;
-        private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Panel panel22;
-        private System.Windows.Forms.Panel panel21;
-        private System.Windows.Forms.Panel pP;
-        private System.Windows.Forms.Panel pTree_shoot;
-        private System.Windows.Forms.Panel pTree_Red_Shoot;
-        private System.Windows.Forms.Panel pDrain;
         private System.Windows.Forms.Button btDrain;
-        private System.Windows.Forms.Panel pTree;
         private System.Windows.Forms.Button btTree;
-        private System.Windows.Forms.Panel pTarnooki;
         private System.Windows.Forms.Button btTarnooki;
-        private System.Windows.Forms.Panel pTree_red;
         private System.Windows.Forms.Button btTree_red;
-        private System.Windows.Forms.Panel pTarnooki_fly;
         private System.Windows.Forms.Button btTarnooki_fly;
-        private System.Windows.Forms.Panel pQuestion_block;
         private System.Windows.Forms.Button btQuestion_Block;
-        private System.Windows.Forms.Panel pCoin;
         private System.Windows.Forms.Button btCoin;
-        private System.Windows.Forms.Panel pStar;
         private System.Windows.Forms.Button btStar;
         private System.Windows.Forms.Button bt_leaf;
         private System.Windows.Forms.Button btTortoise_red;

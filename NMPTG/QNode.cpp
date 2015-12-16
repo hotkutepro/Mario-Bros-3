@@ -102,11 +102,11 @@ void QNode::Connect()
 void QNode::LoadObjects(string path)//Viet lai
 {
 	int count;
-	typeObject type;
+	TYPEOBJECT type;
 	string stype;
 	fstream open(path);
 	string line;
-	typeObject typeO[19] = { brick, coin, drain, land, leaf, mushroom_red, p,box , question_block, star, tarnooki, 
+	TYPEOBJECT typeO[19] = { brick, coin, drain, land, leaf, mushroom_red, p,box , question_block, star, tarnooki, 
 		tarnooki_fly, tortoise, tortoise_fly, tortoise_red, tree, tree_red, tree_red_shoot, tree_shoot };
 	for (int i = 0; i < 18; i++)
 	{
@@ -193,11 +193,11 @@ void QNode::LoadObjects(string path)//Viet lai
 void QNode::LoadObjects2(string path)
 {
 	int count;
-	typeObject type;
+	TYPEOBJECT type;
 	string stype;
 	fstream open(path);
 	string line;
-	typeObject typeO[18] = { brick, coin, drain, land, leaf, mushroom_red, p, question_block, star, tarnooki, tarnooki_fly, tortoise, tortoise_fly, tortoise_red, tree, tree_red, tree_red_shoot, tree_shoot };
+	TYPEOBJECT typeO[18] = { brick, coin, drain, land, leaf, mushroom_red, p, question_block, star, tarnooki, tarnooki_fly, tortoise, tortoise_fly, tortoise_red, tree, tree_red, tree_red_shoot, tree_shoot };
 	for (int i = 0; i < 18; i++)
 	{
 		open >> stype;

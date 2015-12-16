@@ -15,7 +15,7 @@ void F_Leaf::Load()
 {	
 	m_hCurrentSprite = ResourcesManager::GetInstance()->GetSprite(SpriteID::Leaf);	
 	Object::Load();
-	type = typeObject::leaf;
+	type = TYPEOBJECT::leaf;
 }
 
 void F_Leaf::Update(float gameTime)

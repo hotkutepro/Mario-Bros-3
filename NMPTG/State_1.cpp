@@ -60,7 +60,7 @@ void State_1::Update(float gameTime)
 	for (id_Objects = qnode->s_IdObjectInViewPort.begin(); id_Objects != qnode->s_IdObjectInViewPort.end(); id_Objects++)
 	{
 		it_Object = qnode->m_Objects.find(*id_Objects);		//Object đang xét		
-		if (it_Object->second->type == typeObject::land){
+		if (it_Object->second->type == TYPEOBJECT::land){
 			/*if (swept->AABB(hero->box, it_Object->second->box, mx, my))
 			{
 				if (my < 0)//

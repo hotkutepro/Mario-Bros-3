@@ -235,13 +235,15 @@ namespace QT
         }
         #endregion        
         #region Sự kiện của Picture Box
+        CTreeObject Land;
+
         private void pbImgMap_MouseDown(object sender, MouseEventArgs e)
         {
+            mousedown = 1;
             if (set) {
                 MessageBox.Show("mouse.X = " + e.X + " mouse.Y = " + e.Y);
                 return;
-            }
-            mousedown = 1;
+            }            
             if (ctype == typeO._null || mousedown == 0 || remove)
                 return;
             int i = e.X / 16;
@@ -429,12 +431,12 @@ namespace QT
                     c_drain[c_drain.Count - 1].gameObject.BringToFront();
                     lCtree.Add(c_drain[c_drain.Count - 1]);
                     break;
-                case typeO.land:
+                /*case typeO.land:
                     c_land.Add(ct);
                     pbImgMap.Controls.Add(c_land[c_land.Count - 1].gameObject);
                     c_land[c_land.Count - 1].gameObject.BringToFront();
                     lCtree.Add(c_land[c_land.Count - 1]);
-                    break;
+                    break;*/
                 case typeO.leaf:
                     c_leaf.Add(ct);
                     pbImgMap.Controls.Add(c_leaf[c_leaf.Count - 1].gameObject);
@@ -453,12 +455,12 @@ namespace QT
                     c_p[c_p.Count - 1].gameObject.BringToFront();
                     lCtree.Add(c_p[c_p.Count - 1]);
                     break;
-                case typeO.Box:
+                /*case typeO.Box:
                     c_box.Add(ct);
                     pbImgMap.Controls.Add(c_box[c_box.Count - 1].gameObject);
                     c_box[c_box.Count - 1].gameObject.BringToFront();
                     lCtree.Add(c_box[c_box.Count - 1]);
-                    break;
+                    break;*/
                 case typeO.question_block:
                     c_question_block.Add(ct);
                     pbImgMap.Controls.Add(c_question_block[c_question_block.Count - 1].gameObject);
@@ -530,7 +532,27 @@ namespace QT
         }
 
         private void pbImgMap_MouseUp(object sender, MouseEventArgs e)
-        {                        
+        {
+            if (mousedown != 1)
+                return;
+            if (ctype == typeO.land) 
+            {
+                int i = e.X / 16;
+                int j = e.Y / 16;                
+                int i0 = c_land[c_land.Count - 1].oRect.X / 16;
+                int j0 = c_land[c_land.Count - 1].oRect.Y / 16;
+                c_land[c_land.Count - 1].oRect.Width = (Math.Abs(i - i0) + 1) * 16;
+                c_land[c_land.Count - 1].oRect.Height= (Math.Abs(j - j0) + 1) * 16;
+            }
+            if (ctype == typeO.Box)
+            {
+                int i = e.X / 16;
+                int j = e.Y / 16;
+                int i0 = c_box[c_box.Count - 1].oRect.X / 16;
+                int j0 = c_box[c_box.Count - 1].oRect.Y / 16;
+                c_box[c_box.Count - 1].oRect.Width = (i - i0 + 1) * 16;
+                c_box[c_box.Count - 1].oRect.Height = (j - j0 + 1) * 16;
+            }
             mousedown = 0;            
         }
         
@@ -846,311 +868,109 @@ namespace QT
         }
         private void Write_Object()
         {
-            int mapHeight = pbImgMap.Height-16;
+            int mapHeight = pbImgMap.Height;
             using (StreamWriter sw = new StreamWriter("C:/Users/HomeSK/Desktop/Mario-Bros-3.git/trunk/NMPTG/Object.txt"))
             {
                 sw.WriteLine("brick" + " " + c_brick.Count);
                 for (int i = 0; i < c_brick.Count; i++)
                 {
-                    sw.WriteLine(c_brick[i].id + " " + c_brick[i].oRect.X + " " + (mapHeight-c_brick[i].oRect.Y));
+                    sw.WriteLine(c_brick[i].id + " " + c_brick[i].oRect.X + " " + (mapHeight - c_brick[i].oRect.Bottom) + " " + c_brick[i].oRect.Width+" "+c_brick[i].oRect.Height);
                 }
                 sw.WriteLine("coin" + " " + c_coin.Count);
                 for (int i = 0; i < c_coin.Count; i++)
                 {
-                    sw.WriteLine(c_coin[i].id + " " + c_coin[i].oRect.X + " " +(mapHeight- c_coin[i].oRect.Y));
+                    sw.WriteLine(c_coin[i].id + " " + c_coin[i].oRect.X + " " + (mapHeight - c_coin[i].oRect.Bottom) + " " + c_coin[i].oRect.Width + " " + c_coin[i].oRect.Height);
                 }
                 sw.WriteLine("drain" + " " + c_drain.Count);
                 for (int i = 0; i < c_drain.Count; i++)
                 {
-                    sw.WriteLine(c_drain[i].id + " " + c_drain[i].oRect.X + " " +(mapHeight- c_drain[i].oRect.Y));
+                    sw.WriteLine(c_drain[i].id + " " + c_drain[i].oRect.X + " " + (mapHeight - c_drain[i].oRect.Bottom) + " " + c_drain[i].oRect.Width + " " + c_drain[i].oRect.Height);
                 }
                 sw.WriteLine("land" + " " + c_land.Count);
                 for (int i = 0; i < c_land.Count; i++)
                 {
-                    sw.WriteLine(c_land[i].id + " " + c_land[i].oRect.X + " " +(mapHeight- c_land[i].oRect.Y));
+                    sw.WriteLine(c_land[i].id + " " + c_land[i].oRect.X + " " + (mapHeight - c_land[i].oRect.Bottom) + " " + c_land[i].oRect.Width + " " + c_land[i].oRect.Height);
                 }
                 sw.WriteLine("leaf" + " " + c_leaf.Count);
                 for (int i = 0; i < c_leaf.Count; i++)
                 {
-                    sw.WriteLine(c_leaf[i].id + " " + c_leaf[i].oRect.X + " " +(mapHeight- c_leaf[i].oRect.Y));
+                    sw.WriteLine(c_leaf[i].id + " " + c_leaf[i].oRect.X + " " + (mapHeight - c_leaf[i].oRect.Bottom) + " " + c_leaf[i].oRect.Width + " " + c_leaf[i].oRect.Height);
                 }
                 sw.WriteLine("mushroom_red" + " " + c_mushroom_red.Count);
                 for (int i = 0; i < c_mushroom_red.Count; i++)
                 {
-                    sw.WriteLine(c_mushroom_red[i].id + " " + c_mushroom_red[i].oRect.X + " " + (mapHeight - c_mushroom_red[i].oRect.Y));
+                    sw.WriteLine(c_mushroom_red[i].id + " " + c_mushroom_red[i].oRect.X + " " + (mapHeight - c_mushroom_red[i].oRect.Bottom) + " " + c_mushroom_red[i].oRect.Width + " " + c_mushroom_red[i].oRect.Height);
                 }
                 sw.WriteLine("p" + " " + c_p.Count);
                 for (int i = 0; i < c_p.Count; i++)
                 {
-                    sw.WriteLine(c_p[i].id + " " + c_p[i].oRect.X + " " + (mapHeight - c_p[i].oRect.Y));
+                    sw.WriteLine(c_p[i].id + " " + c_p[i].oRect.X + " " + (mapHeight - c_p[i].oRect.Bottom) + " " + c_p[i].oRect.Width + " " + c_p[i].oRect.Height);
                 }
                 sw.WriteLine("box" + " " + c_box.Count);
                 for (int i = 0; i < c_box.Count; i++)
                 {
-                    sw.WriteLine(c_box[i].id + " " + c_box[i].oRect.X + " " + (mapHeight - c_box[i].oRect.Y));
+                    sw.WriteLine(c_box[i].id + " " + c_box[i].oRect.X + " " + (mapHeight - c_box[i].oRect.Bottom) + " " + c_box[i].oRect.Width + " " + c_box[i].oRect.Height);
                 }
                 sw.WriteLine("question_block" + " " + c_question_block.Count);
                 for (int i = 0; i < c_question_block.Count; i++)
                 {
-                    sw.WriteLine(c_question_block[i].id + " " + c_question_block[i].oRect.X + " " + (mapHeight - c_question_block[i].oRect.Y));
+                    sw.WriteLine(c_question_block[i].id + " " + c_question_block[i].oRect.X + " " + (mapHeight - c_question_block[i].oRect.Bottom) + " " + c_question_block[i].oRect.Width + " " + c_question_block[i].oRect.Height);
                 }
                 sw.WriteLine("star" + " " + c_star.Count);
                 for (int i = 0; i < c_star.Count; i++)
                 {
-                    sw.WriteLine(c_star[i].id + " " + c_star[i].oRect.X + " " + (mapHeight - c_star[i].oRect.Y));
+                    sw.WriteLine(c_star[i].id + " " + c_star[i].oRect.X + " " + (mapHeight - c_star[i].oRect.Bottom) + " " + c_star[i].oRect.Width + " " + c_star[i].oRect.Height);
                 }
                 sw.WriteLine("tarnooki" + " " + c_tarnooki.Count);
                 for (int i = 0; i < c_tarnooki.Count; i++)
                 {
-                    sw.WriteLine(c_tarnooki[i].id + " " + c_tarnooki[i].oRect.X + " " +(mapHeight- c_tarnooki[i].oRect.Y));
+                    sw.WriteLine(c_tarnooki[i].id + " " + c_tarnooki[i].oRect.X + " " + (mapHeight - c_tarnooki[i].oRect.Bottom) + " " + c_tarnooki[i].oRect.Width + " " + c_tarnooki[i].oRect.Height);
                 }
                 sw.WriteLine("tarnooki_fly" + " " + c_tarnooki_fly.Count);
                 for (int i = 0; i < c_tarnooki_fly.Count; i++)
                 {
-                    sw.WriteLine(c_tarnooki_fly[i].id + " " + c_tarnooki_fly[i].oRect.X + " " +(mapHeight- c_tarnooki_fly[i].oRect.Y));
+                    sw.WriteLine(c_tarnooki_fly[i].id + " " + c_tarnooki_fly[i].oRect.X + " " + (mapHeight - c_tarnooki_fly[i].oRect.Bottom) + " " + c_tarnooki_fly[i].oRect.Width + " " + c_tarnooki_fly[i].oRect.Height);
                 }
                 sw.WriteLine("tortoise" + " " + c_tortoise.Count);
                 for (int i = 0; i < c_tortoise.Count; i++)
                 {
-                    sw.WriteLine(c_tortoise[i].id + " " + c_tortoise[i].oRect.X + " " +(mapHeight- c_tortoise[i].oRect.Y));
+                    sw.WriteLine(c_tortoise[i].id + " " + c_tortoise[i].oRect.X + " " + (mapHeight - c_tortoise[i].oRect.Bottom) + " " + c_tortoise[i].oRect.Width + " " + c_tortoise[i].oRect.Height);
                 }
                 sw.WriteLine("tortoise_fly" + " " + c_tortoise_fly.Count);
                 for (int i = 0; i < c_tortoise_fly.Count; i++)
                 {
-                    sw.WriteLine(c_tortoise_fly[i].id + " " + c_tortoise_fly[i].oRect.X + " " +(mapHeight- c_tortoise_fly[i].oRect.Y));
+                    sw.WriteLine(c_tortoise_fly[i].id + " " + c_tortoise_fly[i].oRect.X + " " + (mapHeight - c_tortoise_fly[i].oRect.Bottom) + " " + c_tortoise_fly[i].oRect.Width + " " + c_tortoise_fly[i].oRect.Height);
                 }
                 sw.WriteLine("tortoise_red" + " " + c_tortoise_red.Count);
                 for (int i = 0; i < c_tortoise_red.Count; i++)
                 {
-                    sw.WriteLine(c_tortoise_red[i].id + " " + c_tortoise_red[i].oRect.X + " " +(mapHeight- c_tortoise_red[i].oRect.Y));
+                    sw.WriteLine(c_tortoise_red[i].id + " " + c_tortoise_red[i].oRect.X + " " + (mapHeight - c_tortoise_red[i].oRect.Bottom) + " " + c_tortoise_red[i].oRect.Width + " " + c_tortoise_red[i].oRect.Height);
                 }
                 sw.WriteLine("tree" + " " + c_tree.Count);
                 for (int i = 0; i < c_tree.Count; i++)
                 {
-                    sw.WriteLine(c_tree[i].id + " " + c_tree[i].oRect.X + " " +(mapHeight- c_tree[i].oRect.Y));
+                    sw.WriteLine(c_tree[i].id + " " + c_tree[i].oRect.X + " " + (mapHeight - c_tree[i].oRect.Bottom) + " " + c_tree[i].oRect.Width + " " + c_tree[i].oRect.Height);
                 }
                 sw.WriteLine("tree_red" + " " + c_tree_red.Count);
                 for (int i = 0; i < c_tree_red.Count; i++)
                 {
-                    sw.WriteLine(c_tree_red[i].id + " " + c_tree_red[i].oRect.X + " " +(mapHeight- c_tree_red[i].oRect.Y));
+                    sw.WriteLine(c_tree_red[i].id + " " + c_tree_red[i].oRect.X + " " + (mapHeight - c_tree_red[i].oRect.Bottom) + " " + c_tree_red[i].oRect.Width + " " + c_tree_red[i].oRect.Height);
                 }
                 sw.WriteLine("tree_red_shoot" + " " + c_tree_red_shoot.Count);
                 for (int i = 0; i < c_tree_red_shoot.Count; i++)
                 {
-                    sw.WriteLine(c_tree_red_shoot[i].id + " " + c_tree_red_shoot[i].oRect.X + " " +(mapHeight- c_tree_red_shoot[i].oRect.Y));
+                    sw.WriteLine(c_tree_red_shoot[i].id + " " + c_tree_red_shoot[i].oRect.X + " " + (mapHeight - c_tree_red_shoot[i].oRect.Bottom) + " " + c_tree_red_shoot[i].oRect.Width + " " + c_tree_red_shoot[i].oRect.Height);
                 }
                 sw.WriteLine("tree_shoot" + " " + c_tree_shoot.Count);
                 for (int i = 0; i < c_tree_shoot.Count; i++)
                 {
-                    sw.WriteLine(c_tree_shoot[i].id + " " + c_tree_shoot[i].oRect.X + " " +(mapHeight- c_tree_shoot[i].oRect.Y));
+                    sw.WriteLine(c_tree_shoot[i].id + " " + c_tree_shoot[i].oRect.X + " " + (mapHeight - c_tree_shoot[i].oRect.Bottom) + " " + c_tree_shoot[i].oRect.Width + " " + c_tree_shoot[i].oRect.Height);
                 }
                 sw.Close();
             }
         }
-        /*private void Write_Object()
-        {
-            using (StreamWriter sw = new StreamWriter("Object.txt"))
-            {
-                sw.WriteLine("brick" + " " + c_brick.Count);
-                for (int i = 0; i < c_brick.Count; i++)
-                {
-                    sw.WriteLine(c_brick[i].id + " " + c_brick[i].oRect.X + " " + c_brick[i].oRect.Y );
-                }
-                sw.WriteLine("coin" + " " + c_coin.Count);
-                for (int i = 0; i < c_coin.Count; i++)
-                {
-                    sw.WriteLine(c_coin[i].id + " " + c_coin[i].oRect.X + " " + c_coin[i].oRect.Y );
-                }
-                sw.WriteLine("drain" + " " + c_drain.Count);
-                for (int i = 0; i < c_drain.Count; i++)
-                {
-                    sw.WriteLine(c_drain[i].id + " " + c_drain[i].oRect.X + " " + c_drain[i].oRect.Y );
-                }
-                sw.WriteLine("land" + " " + c_land.Count);
-                for (int i = 0; i < c_land.Count; i++)
-                {
-                    sw.WriteLine(c_land[i].id + " " + c_land[i].oRect.X + " " + c_land[i].oRect.Y );
-                }
-                sw.WriteLine("leaf" + " " + c_leaf.Count);
-                for (int i = 0; i < c_leaf.Count; i++)
-                {
-                    sw.WriteLine(c_leaf[i].id + " " + c_leaf[i].oRect.X + " " + c_leaf[i].oRect.Y);
-                }
-                sw.WriteLine("mushroom_red" + " " + c_mushroom_red.Count);
-                for (int i = 0; i < c_mushroom_red.Count; i++)
-                {
-                    sw.WriteLine(c_mushroom_red[i].id + " " + c_mushroom_red[i].oRect.X + " " + c_mushroom_red[i].oRect.Y);
-                }
-                sw.WriteLine("p" + " " + c_p.Count);
-                for (int i = 0; i < c_p.Count; i++)
-                {
-                    sw.WriteLine(c_p[i].id + " " + c_p[i].oRect.X + " " + c_p[i].oRect.Y);
-                }
-                sw.WriteLine("box" + " " + c_box.Count);
-                for (int i = 0; i < c_box.Count; i++)
-                {
-                    sw.WriteLine(c_box[i].id + " " + c_box[i].oRect.X + " " + c_box[i].oRect.Y);
-                }
-                sw.WriteLine("question_block" + " " + c_question_block.Count);
-                for (int i = 0; i < c_question_block.Count; i++)
-                {
-                    sw.WriteLine(c_question_block[i].id + " " + c_question_block[i].oRect.X + " " + c_question_block[i].oRect.Y );
-                }
-                sw.WriteLine("star" + " " + c_star.Count);
-                for (int i = 0; i < c_star.Count; i++)
-                {
-                    sw.WriteLine(c_star[i].id + " " + c_star[i].oRect.X + " " + c_star[i].oRect.Y);
-                }
-                sw.WriteLine("tarnooki" + " " + c_tarnooki.Count);
-                for (int i = 0; i < c_tarnooki.Count; i++)
-                {
-                    sw.WriteLine(c_tarnooki[i].id + " " + c_tarnooki[i].oRect.X + " " + c_tarnooki[i].oRect.Y);
-                }
-                sw.WriteLine("tarnooki_fly" + " " + c_tarnooki_fly.Count);
-                for (int i = 0; i < c_tarnooki_fly.Count; i++)
-                {
-                    sw.WriteLine(c_tarnooki_fly[i].id + " " + c_tarnooki_fly[i].oRect.X + " " + c_tarnooki_fly[i].oRect.Y);
-                }
-                sw.WriteLine("tortoise" + " " + c_tortoise.Count);
-                for (int i = 0; i < c_tortoise.Count; i++)
-                {
-                    sw.WriteLine(c_tortoise[i].id + " " + c_tortoise[i].oRect.X + " " + c_tortoise[i].oRect.Y);
-                }
-                sw.WriteLine("tortoise_fly" + " " + c_tortoise_fly.Count);
-                for (int i = 0; i < c_tortoise_fly.Count; i++)
-                {
-                    sw.WriteLine(c_tortoise_fly[i].id + " " + c_tortoise_fly[i].oRect.X + " " + c_tortoise_fly[i].oRect.Y);
-                }
-                sw.WriteLine("tortoise_red" + " " + c_tortoise_red.Count);
-                for (int i = 0; i < c_tortoise_red.Count; i++)
-                {
-                    sw.WriteLine(c_tortoise_red[i].id + " " + c_tortoise_red[i].oRect.X + " " + c_tortoise_red[i].oRect.Y);
-                }
-                sw.WriteLine("tree" + " " + c_tree.Count);
-                for (int i = 0; i < c_tree.Count; i++)
-                {
-                    sw.WriteLine(c_tree[i].id + " " + c_tree[i].oRect.X + " " + c_tree[i].oRect.Y);
-                }
-                sw.WriteLine("tree_red" + " " + c_tree_red.Count);
-                for (int i = 0; i < c_tree_red.Count; i++)
-                {
-                    sw.WriteLine(c_tree_red[i].id + " " + c_tree_red[i].oRect.X + " " + c_tree_red[i].oRect.Y);
-                }
-                sw.WriteLine("tree_red_shoot" + " " + c_tree_red_shoot.Count);
-                for (int i = 0; i < c_tree_red_shoot.Count; i++)
-                {
-                    sw.WriteLine(c_tree_red_shoot[i].id + " " + c_tree_red_shoot[i].oRect.X + " " + c_tree_red_shoot[i].oRect.Y );
-                }
-                sw.WriteLine("tree_shoot" + " " + c_tree_shoot.Count);
-                for (int i = 0; i < c_tree_shoot.Count; i++)
-                {
-                    sw.WriteLine(c_tree_shoot[i].id + " " + c_tree_shoot[i].oRect.X + " " + c_tree_shoot[i].oRect.Y );
-                }
-                sw.Close();
-            }
-        }*/
-        private void Write_Object2()
-        {
-            using (StreamWriter sw = new StreamWriter("Object.txt"))
-            {
-                sw.WriteLine("brick" + " " + c_brick.Count);
-                for (int i = 0; i < c_brick.Count;i++ )
-                {
-                    sw.WriteLine(c_brick[i].id + " "+c_brick[i].oRect.Left+" "+c_brick[i].oRect.Right+" "+c_brick[i].oRect.Top+" "+c_brick[i].oRect.Bottom );                    
-                }
-                sw.WriteLine("coin" + " " + c_coin.Count);
-                for (int i = 0; i < c_coin.Count; i++)
-                {
-                    sw.WriteLine(c_coin[i].id + " " + c_coin[i].oRect.X + " " + c_coin[i].oRect.Y + " " + c_coin[i].oRect.Width + " " + c_coin[i].oRect.Height);
-                }
-                sw.WriteLine("drain" + " " + c_drain.Count);
-                for (int i = 0; i < c_drain.Count; i++)
-                {
-                    sw.WriteLine(c_drain[i].id + " " + c_drain[i].oRect.X + " " + c_drain[i].oRect.Y + " " + c_drain[i].oRect.Width + " " + c_drain[i].oRect.Height);
-                }
-                sw.WriteLine("land" + " " + c_land.Count);
-                for (int i = 0; i < c_land.Count; i++)
-                {
-                    sw.WriteLine(c_land[i].id + " " + c_land[i].oRect.X + " " + c_land[i].oRect.Y + " " + c_land[i].oRect.Width + " " + c_land[i].oRect.Height);
-                }
-                sw.WriteLine("leaf" + " " + c_leaf.Count);
-                for (int i = 0; i < c_leaf.Count; i++)
-                {
-                    sw.WriteLine(c_leaf[i].id + " " + c_leaf[i].oRect.X + " " + c_leaf[i].oRect.Y + " " + c_leaf[i].oRect.Width + " " + c_leaf[i].oRect.Height);
-                }
-                sw.WriteLine("mushroom_red" + " " + c_mushroom_red.Count);
-                for (int i = 0; i < c_mushroom_red.Count; i++)
-                {
-                    sw.WriteLine(c_mushroom_red[i].id + " " + c_mushroom_red[i].oRect.X + " " + c_mushroom_red[i].oRect.Y + " " + c_mushroom_red[i].oRect.Width + " " + c_mushroom_red[i].oRect.Height);
-                }
-                sw.WriteLine("p" + " " + c_p.Count);
-                for (int i = 0; i < c_p.Count; i++)
-                {
-                    sw.WriteLine(c_p[i].id + " " + c_p[i].oRect.X + " " + c_p[i].oRect.Y + " " + c_p[i].oRect.Width + " " + c_p[i].oRect.Height);
-                }
-                sw.WriteLine("box" + " " + c_box.Count);
-                for (int i = 0; i < c_box.Count; i++)
-                {
-                    sw.WriteLine(c_box[i].id + " " + c_box[i].oRect.X + " " + c_box[i].oRect.Y + " " + c_box[i].oRect.Width + " " + c_box[i].oRect.Height);
-                }
-                sw.WriteLine("question_block" + " " + c_question_block.Count);
-                for (int i = 0; i < c_coin.Count; i++)
-                {
-                    sw.WriteLine(c_question_block[i].id + " " + c_question_block[i].oRect.X + " " + c_question_block[i].oRect.Y + " " + c_question_block[i].oRect.Width + " " + c_question_block[i].oRect.Height);
-                }
-                sw.WriteLine("star" + " " + c_star.Count);
-                for (int i = 0; i < c_star.Count; i++)
-                {
-                    sw.WriteLine(c_star[i].id + " " + c_star[i].oRect.X + " " + c_star[i].oRect.Y + " " + c_star[i].oRect.Width + " " + c_star[i].oRect.Height);
-                }
-                sw.WriteLine("tarnooki" + " " + c_tarnooki.Count);
-                for (int i = 0; i < c_tarnooki.Count; i++)
-                {
-                    sw.WriteLine(c_tarnooki[i].id + " " + c_tarnooki[i].oRect.X + " " + c_tarnooki[i].oRect.Y + " " + c_tarnooki[i].oRect.Width + " " + c_tarnooki[i].oRect.Height);
-                }
-                sw.WriteLine("tarnooki_fly" + " " + c_tarnooki_fly.Count);
-                for (int i = 0; i < c_tarnooki_fly.Count; i++)
-                {
-                    sw.WriteLine(c_tarnooki_fly[i].id + " " + c_tarnooki_fly[i].oRect.X + " " + c_tarnooki_fly[i].oRect.Y + " " + c_tarnooki_fly[i].oRect.Width + " " + c_tarnooki_fly[i].oRect.Height);
-                }
-                sw.WriteLine("tortoise" + " " + c_tortoise.Count);
-                for (int i = 0; i < c_tortoise.Count; i++)
-                {
-                    sw.WriteLine(c_tortoise[i].id + " " + c_tortoise[i].oRect.X + " " + c_tortoise[i].oRect.Y + " " + c_tortoise[i].oRect.Width + " " + c_tortoise[i].oRect.Height);
-                }
-                sw.WriteLine("tortoise_fly" + " " + c_tortoise_fly.Count);
-                for (int i = 0; i < c_tortoise_fly.Count; i++)
-                {
-                    sw.WriteLine(c_tortoise_fly[i].id + " " + c_tortoise_fly[i].oRect.X + " " + c_tortoise_fly[i].oRect.Y + " " + c_tortoise_fly[i].oRect.Width + " " + c_tortoise_fly[i].oRect.Height);
-                }
-                sw.WriteLine("tortoise_red" + " " + c_tortoise_red.Count);
-                for (int i = 0; i < c_tortoise_red.Count; i++)
-                {
-                    sw.WriteLine(c_tortoise_red[i].id + " " + c_tortoise_red[i].oRect.X + " " + c_tortoise_red[i].oRect.Y + " " + c_tortoise_red[i].oRect.Width + " " + c_tortoise_red[i].oRect.Height);
-                }
-                sw.WriteLine("tree" + " " + c_tree.Count);
-                for (int i = 0; i < c_tree.Count; i++)
-                {
-                    sw.WriteLine(c_tree[i].id + " " + c_tree[i].oRect.X + " " + c_tree[i].oRect.Y + " " + c_tree[i].oRect.Width + " " + c_tree[i].oRect.Height);
-                }
-                sw.WriteLine("tree_red" + " " + c_tree_red.Count);
-                for (int i = 0; i < c_tree_red.Count; i++)
-                {
-                    sw.WriteLine(c_tree_red[i].id + " " + c_tree_red[i].oRect.X + " " + c_tree_red[i].oRect.Y + " " + c_tree_red[i].oRect.Width + " " + c_tree_red[i].oRect.Height);
-                }
-                sw.WriteLine("tree_red_shoot" + " " + c_tree_red_shoot.Count);
-                for (int i = 0; i < c_tree_red_shoot.Count; i++)
-                {
-                    sw.WriteLine(c_tree_red_shoot[i].id + " " + c_tree_red_shoot[i].oRect.X + " " + c_tree_red_shoot[i].oRect.Y + " " + c_tree_red_shoot[i].oRect.Width + " " + c_tree_red_shoot[i].oRect.Height);
-                }
-                sw.WriteLine("tree_shoot" + " " + c_tree_shoot.Count);
-                for (int i = 0; i < c_tree_shoot.Count; i++)
-                {
-                    sw.WriteLine(c_tree_shoot[i].id + " " + c_tree_shoot[i].oRect.X + " " + c_tree_shoot[i].oRect.Y + " " + c_tree_shoot[i].oRect.Width + " " + c_tree_shoot[i].oRect.Height);
-                }                
-                    sw.Close();
-            }
-        }
+       
+     
         bool set = false;
         private void btSetRegions_Click(object sender, EventArgs e)
         {

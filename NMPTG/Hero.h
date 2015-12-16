@@ -74,14 +74,14 @@ private:
 	bool isMove;
 	bool isJump;
 	bool direction;
-	bool isRun;
+	
 	bool isControlUp;
 	float delay_next;
 	int status;
-	
+	float m_hAcceleration;
 
 public:
-	
+	bool isRun;
 	string f_str;
 	string f_str1;
 	string f_str2;

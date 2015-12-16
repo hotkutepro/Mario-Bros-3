@@ -6,6 +6,8 @@
 #include"Man.h"
 #include"C_Brick.h"
 #include"Box.h"
+#include"SuperHero.h"
+
 class State;
 class State_3 : public State
 {
@@ -14,7 +16,8 @@ private:
 	State* state_2;
 	FrkCamera* camera;
 	Map* map1;
-	Man *man;
+	Man *man;	
+	SuperHero* s_hero;
 	C_Brick* brick;
 	float speed, nx, ny;
 	Box* b1;

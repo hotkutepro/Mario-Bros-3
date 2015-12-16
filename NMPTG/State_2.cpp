@@ -40,7 +40,7 @@ void State_2::Load()
 	for (it = qnode->m_Objects.begin(); it != qnode->m_Objects.end(); it++)
 	{
 		it->second->Load();
-		if (it->second->type==typeObject::question_block)
+		if (it->second->type==TYPEOBJECT::question_block)
 		{
 			mapObject::iterator it_up;
 			it_up = qnode->m_Objects.find(it->first-178);
@@ -78,89 +78,89 @@ void State_2::Update(float gameTime)
 			it_Object->second->getCurrentSprite()->Next();
 		switch (it_Object->second->type)
 		{
-		case typeObject::brick:
+		case TYPEOBJECT::brick:
 						
 			if (_LocalKeyboard->IsKeyDown(DIK_LEFT))
 			{
-				man->box->v.x = -2;
-				time = collis->SweptAABB(man->box, it_Object->second->box, nx, ny);
-				man->box->position.left += man->box->v.x*time;
-				man->box->position.right += man->box->v.x*time;
-				man->m_hPosition.x = man->box->position.left;
+				man->m_hBox->v.x = -2;
+				//time = collis->SweptAABB(man->m_hBox, it_Object->second->box, nx, ny);
+				man->m_hBox->position.left += man->m_hBox->v.x*time;
+				man->m_hBox->position.right += man->m_hBox->v.x*time;
+				man->m_hPosition.x = man->m_hBox->position.left;
 				//man->m_hPosition.x = man->box->position.left;
 				if (time < 1.0f)
-					man->box->v.x = 0;
+					man->m_hBox->v.x = 0;
 			}
 			if (_LocalKeyboard->IsKeyDown(DIK_RIGHT))
 			{
-				man->box->v.x = 2;
-				time = collis->SweptAABB(man->box, it_Object->second->box, nx, ny);
-				man->box->position.left += man->box->v.x*time;
-				man->box->position.right += man->box->v.x*time;
-				man->m_hPosition.x = man->box->position.left;
+				man->m_hBox->v.x = 2;
+//				time = collis->SweptAABB(man->m_hBox, it_Object->second->box, nx, ny);
+				man->m_hBox->position.left += man->m_hBox->v.x*time;
+				man->m_hBox->position.right += man->m_hBox->v.x*time;
+				man->m_hPosition.x = man->m_hBox->position.left;
 				//man->m_hPosition.x = man->box->position.left;
 				if (time < 1.0f)
-					man->box->v.x = 0;
+					man->m_hBox->v.x = 0;
 			}
 			if (_LocalKeyboard->IsKeyDown(DIK_UP))
 			{
-				man->box->v.y = 2;
-				time = collis->SweptAABB(man->box, it_Object->second->box, nx, ny);
+				man->m_hBox->v.y = 2;
+//				time = collis->SweptAABB(man->m_hBox, it_Object->second->box, nx, ny);
 			}
 			if (_LocalKeyboard->IsKeyDown(DIK_DOWN))
 			{
-				man->box->v.y = -2;
-				time = collis->SweptAABB(man->box, it_Object->second->box, nx, ny);
+				man->m_hBox->v.y = -2;
+//				time = collis->SweptAABB(man->m_hBox, it_Object->second->box, nx, ny);
 			}
 			break;
-		case typeObject::bullet:
+		case TYPEOBJECT::bullet:
 			break;
-		case typeObject::box:
+		//case TYPEOBJECT::m_hBox:
+			//break;
+		case TYPEOBJECT::drain:
 			break;
-		case typeObject::drain:
-			break;
-		case typeObject::land:
+		case TYPEOBJECT::land:
 			
 			break;
-		case typeObject::question_block:
+		case TYPEOBJECT::question_block:
 			
 			break;
-		case typeObject::tree:
+		case TYPEOBJECT::tree:
 			break;
-		case typeObject::tree_shoot:
+		case TYPEOBJECT::tree_shoot:
 			break;
-		case typeObject::tree_red:
+		case TYPEOBJECT::tree_red:
 			break;
-		case typeObject::tree_red_shoot:
+		case TYPEOBJECT::tree_red_shoot:
 			break;
-		case typeObject::tarnooki:
+		case TYPEOBJECT::tarnooki:
 			
 			break;
-		case typeObject::tarnooki_fly:
+		case TYPEOBJECT::tarnooki_fly:
 			break;
-		case typeObject::tortoise:												
+		case TYPEOBJECT::tortoise:												
 			break;
-		case typeObject::tortoise_fly:
+		case TYPEOBJECT::tortoise_fly:
 			break;
-		case typeObject::tortoise_red:
+		case TYPEOBJECT::tortoise_red:
 			break;
-		case typeObject::coin:
+		case TYPEOBJECT::coin:
 			/*if (swept->AABBCheck(man->box,it_Object->second->box) &&it_Object->second->life)
 			{
 				it_Object->second->Die();
 			}*/
 			break;
-		case typeObject::leaf:			
+		case TYPEOBJECT::leaf:			
 			break;
-		case typeObject::mushroom_red:
+		case TYPEOBJECT::mushroom_red:
 			/*if (swept->AABBCheck(man->box, it_Object->second->box) && it_Object->second->life)
 			{
 				it_Object->second->Die();
 			}*/
 			break;
-		case typeObject::p:
+		case TYPEOBJECT::p:
 			break;
-		case typeObject::star:
+		case TYPEOBJECT::star:
 			break;
 		default:
 			break;

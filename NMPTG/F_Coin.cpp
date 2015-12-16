@@ -15,7 +15,7 @@ void F_Coin::Load()
 {	
 	m_hCurrentSprite= ResourcesManager::GetInstance()->GetSprite(SpriteID::Coin);
 	Object::Load();
-	type = typeObject::coin;
+	type = TYPEOBJECT::coin;
 }
 
 void F_Coin::Update(float gameTime)

@@ -17,7 +17,7 @@ void F_P::Load()
 	KickP = ResourcesManager::GetInstance()->GetSprite(SpriteID::KickP);
 	setCurrentSprite(P);
 	Object::Load();
-	type = typeObject::p;
+	type = TYPEOBJECT::p;
 }
 
 void F_P::Update(float gameTime)

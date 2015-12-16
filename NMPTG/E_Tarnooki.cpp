@@ -19,7 +19,7 @@ void E_Tarnooki::Load()
 	Object::Load();
 	m_hSpeed.x = 0.1;
 	m_hSpeed.y = -0.2;
-	type = typeObject::tarnooki;
+	type = TYPEOBJECT::tarnooki;
 }
 
 void E_Tarnooki::Update(float gameTime)

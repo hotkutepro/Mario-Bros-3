@@ -22,8 +22,8 @@ Box* Collision::GetBoardPhaseBox(Box* box)
 	Box* result = new Box(RECT(),D3DXVECTOR2());
 	result->position.left = box->v.x > 0 ? box->position.left : box->position.left + box->v.x;
 	result->position.top = box->v.y > 0 ? box->position.top : box->position.top + box->v.y;
-	result->position.right = box->position.right + abs(box->v.x);
-	result->position.bottom = box->position.bottom + abs(box->v.y);
+	result->position.right = box->v.x > 0 ? box->position.right + abs(box->v.x) : box->position.right;
+	result->position.bottom = box->v.y > 0 ? box->position.bottom + abs(box->v.y) : box->position.bottom;
 	return result;
 }
 

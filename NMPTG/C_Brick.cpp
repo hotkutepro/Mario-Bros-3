@@ -11,7 +11,7 @@ C_Brick::C_Brick(D3DXVECTOR2 pos, D3DXVECTOR2 speed) :Object(pos,speed)
 
 }
 
-C_Brick::C_Brick(typeObject _t) : Object(_t)
+C_Brick::C_Brick(TYPEOBJECT _t) : Object(_t)
 {
 
 }
@@ -26,7 +26,7 @@ void C_Brick::Load()
 	brick = ResourcesManager::GetInstance()->GetSprite(SpriteID::Brick);
 	CoinBoxNull = ResourcesManager::GetInstance()->GetSprite(SpriteID::CoinBoxNull);
 	setCurrentSprite(brick);
-	type = typeObject::brick;
+	type = TYPEOBJECT::brick;
 	Object::Load();
 }
 

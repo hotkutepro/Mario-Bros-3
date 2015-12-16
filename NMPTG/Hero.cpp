@@ -170,12 +170,7 @@ void Hero::Update(float gameTime)
 		}
 	}
 
-#pragma endregion
 
-
-
-	//xử lý phím 
-#pragma region KeyDown
 	_LocalKeyboard->GetDeviceState();
 	//quán tính vận tốc
 	if (m_hSpeed.x != 0 && !_LocalKeyboard->IsKeyDown(DIK_LEFT) && !_LocalKeyboard->IsKeyDown(DIK_RIGHT) && (!_LocalKeyboard->IsKeyDown(DIK_LCONTROL) || _LocalKeyboard->IsKeyDown(DIK_LCONTROL)))
