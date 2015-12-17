@@ -48,57 +48,24 @@ D3DXVECTOR2 Object::GetPosition()
 }
 
 void Object::Load()
-{
-	
+{	
 	life = true;
 	m_hSpeed.x = 0;
 	m_hSpeed.y = 0;
 	m_hBox = new Box();
 	m_hBox->_size.x = getCurrentSprite()->_Width;
 	m_hBox->_size.y = getCurrentSprite()->_Height;
-	m_hBox->_position.x = m_hPosition.x;
-	m_hBox->_position.y = m_hPosition.y;
+	m_hBoundBox = new Box();
+	m_hBoundBox->_size.x = getCurrentSprite()->_Width + 25;
+	m_hBoundBox->_size.y = getCurrentSprite()->_Height + 25;
 	if (type == land || type == box){
 		m_hBox->_size.x = m_hSize.x;
 		m_hBox->_size.y = m_hSize.y;
 	}
-
-	/*m_hBox->position.left = m_hPosition.x;
-	m_hBox->position.top = m_hPosition.y;
-	m_hBox->position.right = m_hPosition.x + m_hCurrentSprite->_Width;
-	m_hBox->position.bottom = m_hPosition.y + m_hCurrentSprite->_Height;*/
-	//if (type == land || type == box)
-	//{
-	//	m_hBox->position.right = m_hBox->position.left+ m_hSize.x;
-	//	m_hBox->position.bottom = m_hBox->position.top+ m_hSize.y;
-	//}
-	//m_hBox->_v.x = m_hBox->_v.y = 0;
-	//m_hObjectGround = NULL;
-
-	//m_hBox_Colis = new Box();
-	/*m_hBox_Colis->position.left = m_hBox->position.left;
-	m_hBox_Colis->position.right = m_hBox->position.right;
-	m_hBox_Colis->position.top = m_hBox->position.top;
-	m_hBox_Colis->position.bottom = m_hBox->position.bottom - 1;*/
-	//m_hBox_Colis->v.x = 0;
-	//m_hBox_Colis->v.y = m_hBox->v.y - 1.1;;
-
 }
 void Object::Update(float gameTime)
 {	
-	/*m_hBox->position.top += m_hBox->v.y;
-	m_hBox->position.bottom += m_hBox->v.y;
-	m_hBox->position.left += m_hBox->v.x;
-	m_hBox->position.right += m_hBox->v.x;	*/
 
-	/*m_hBox_Colis->position.left = m_hBox->position.left;
-	m_hBox_Colis->position.right = m_hBox->position.right;
-	m_hBox_Colis->position.top = m_hBox->position.top;
-	m_hBox_Colis->position.bottom = m_hBox->position.bottom - 0.3;
-	m_hBox_Colis->v.y = m_hBox->v.y - 0.4;;*/
-
-	/*m_hPosition.x = m_hBox->position.left;
-	m_hPosition.y = m_hBox->position.top;*/
 }
 void Object::setCurrentSprite(FrkSprite* s)
 {
@@ -110,16 +77,6 @@ FrkSprite* Object::getCurrentSprite()
 	return m_hCurrentSprite;
 }
 
-void Object::UpdateBox(float gameTime)
-{
-	m_hBox->_position.x = m_hPosition.x;
-	m_hBox->_position.y = m_hPosition.y;
-}
-
-void Object::Tortoise_Shell()
-{
-
-}
 
 void Object::Die()
 {
@@ -140,10 +97,7 @@ void Object::RenderDebug()
 	src.top = 0;
 	src.bottom = src.top + 16;
 	RECT a;
-	a.left = m_hBox->getLeft();
-	a.right = m_hBox->getRight();
-	a.top = m_hBox->getTop();
-	a.bottom = m_hBox->getBottom();
+	a = m_hBox->getRect();
 	_LocalGraphic->tDrawTexture(_LocalContent->LoadTexture("brick.png"), src, a, D3DXVECTOR2(8, 8), D3DCOLOR_XRGB(255, 255, 255), 0);
 }
 
@@ -181,4 +135,24 @@ list<Object*> Object::GetStaticObject()
 		}
 	}
 	return listobject;
+}
+
+Box* Object::GetBoundBox()
+{
+	m_hBoundBox->_position.x = m_hPosition.x;
+	m_hBoundBox->_position.y = m_hPosition.y;
+	m_hBoundBox->_v.x = m_hSpeed.x;
+	m_hBoundBox->_v.y = m_hSpeed.y;
+	return m_hBoundBox;
+}
+
+void Object::RenderBoundBox()
+{
+	RECT src;
+	src.left = 0;
+	src.right = src.left + 16;
+	src.top = 0;
+	src.bottom = src.top + 16;
+	RECT a = m_hBoundBox->getRect();
+	_LocalGraphic->tDrawTexture(_LocalContent->LoadTexture("abc.png"), src, a, D3DXVECTOR2(8, 8), D3DCOLOR_XRGB(255, 255, 255), 0);
 }

@@ -40,11 +40,11 @@ public:
 	FrkSprite* getCurrentSprite();
 	virtual void Load();
 	virtual void Render();	
-	virtual void Update(float gameTime);
-	virtual void Tortoise_Shell();
+	virtual void Update(float gameTime);	
 	virtual void Die();
 	virtual void RenderDebug();
 	virtual void RenderBoxDebug();
+	virtual void RenderBoundBox();
 	virtual Box* GetBox();
 	virtual Box* GetBoundBox();
 	void FallDown(float remainingtime);

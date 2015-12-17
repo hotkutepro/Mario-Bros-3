@@ -99,8 +99,7 @@ void Hero::Load()
 
 
 void Hero::Update(float gameTime)
-{
-	Object::UpdateBox(gameTime);
+{	
 	double sx = m_hSpeed.x;
 	double sy = m_hSpeed.y;
 
