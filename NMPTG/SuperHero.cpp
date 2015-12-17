@@ -12,6 +12,7 @@ SuperHero::~SuperHero()
 
 void SuperHero::Load()
 {
+#pragma region LoadSprite
 	Strike = ResourcesManager::GetInstance()->GetSprite(SpriteID::Strike);
 	BigMarioDriftToLeft = ResourcesManager::GetInstance()->GetSprite(SpriteID::BigMarioDriftToLeft);
 	BigMarioDriftToRight = ResourcesManager::GetInstance()->GetSprite(SpriteID::BigMarioDriftToRight);
@@ -78,7 +79,7 @@ void SuperHero::Load()
 
 void SuperHero::Update(float gametime)
 {
-	if (m_hBox->v.y == 0){
+	if (m_hSpeed.y== 0){
 		if (direction == true)
 		{
 			switch (status)
@@ -191,11 +192,12 @@ void SuperHero::Update(float gametime)
 
 void SuperHero::GoLeft(float gameTime)
 {		
-	m_hBox->v.x -= _tx_frame;
-	if (m_hBox->v.x <= -_hero_SPEED)
+	m_hSpeed.x -= _tx_frame;
+	if (m_hSpeed.x <= -_hero_SPEED)
 	{
-		m_hBox->v.x = -_hero_SPEED;
+		m_hSpeed.x = -_hero_SPEED;
 	}	
+	m_hPosition.x += m_hSpeed.x;
 	if (isJump == true)
 	{
 		switch (status)
@@ -204,7 +206,7 @@ void SuperHero::GoLeft(float gameTime)
 			setCurrentSprite(MarioJumpLeft);
 			break;
 		case BIGMARIO:
-			if (m_hBox->v.y > 0)
+			if (m_hBox->_v.y > 0)
 			{
 				setCurrentSprite(BigMarioJumpLeft);
 			}
@@ -224,7 +226,7 @@ void SuperHero::GoLeft(float gameTime)
 	//ngược lại thì tạo animation
 	else
 	{
-		if (m_hBox->v.x > 0)
+		if (m_hBox->_v.x > 0)
 		{
 			switch (status)
 			{
@@ -264,12 +266,12 @@ void SuperHero::GoLeft(float gameTime)
 
 void SuperHero::GoRight(float gameTime)
 {
-	m_hBox->v.x += _tx_frame;
-	if (m_hBox->v.x >= _hero_SPEED)
+	m_hSpeed.x += _tx_frame;
+	if (m_hSpeed.x >= _hero_SPEED)
 	{
-		m_hBox->v.x = _hero_SPEED;
+		m_hSpeed.x = _hero_SPEED;
 	}
-	m_hPosition.x += m_hBox->v.x;
+	m_hPosition.x += m_hSpeed.x;
 	//nếu mario đang nhảy thì chỉ update tọa độ x qua phải
 	if (isJump == true)
 	{
@@ -284,7 +286,7 @@ void SuperHero::GoRight(float gameTime)
 
 			break;
 		case BIGMARIO:
-			if (m_hBox->v.y > 0)
+			if (m_hBox->_v.y > 0)
 			{
 				setCurrentSprite(BigMarioJumpRight);
 			}
@@ -304,7 +306,7 @@ void SuperHero::GoRight(float gameTime)
 	{
 
 		//chuyển spirte
-		if (m_hBox->v.x < 0)
+		if (m_hBox->_v.x < 0)
 		{
 			switch (status)
 			{
@@ -348,17 +350,17 @@ void SuperHero::RunLeft(float gameTime)
 {
 	direction = false;
 	isRun = true;
-	if (m_hBox->v.x > -_hero_SPEED)
+	if (m_hBox->_v.x > -_hero_SPEED)
 	{
-		m_hBox->v.x -= _tx_frame;
+		m_hBox->_v.x -= _tx_frame;
 	}
 	else
 	{
-		m_hBox->v.x -= level*_SPEED_RUN;
+		m_hBox->_v.x -= level*_SPEED_RUN;
 	}
-	if (m_hBox->v.x <= -_max_SPEED_RUN)
+	if (m_hBox->_v.x <= -_max_SPEED_RUN)
 	{
-		m_hBox->v.x = -_max_SPEED_RUN;
+		m_hBox->_v.x = -_max_SPEED_RUN;
 	}
 }
 
@@ -366,38 +368,38 @@ void SuperHero::RunRight(float gameTime)
 {
 	direction = true;
 	isRun = true;
-	if (m_hBox->v.x < _hero_SPEED)
+	if (m_hBox->_v.x < _hero_SPEED)
 	{
-		m_hBox->v.x += _tx_frame;
+		m_hBox->_v.x += _tx_frame;
 	}
 	else
 	{
-		m_hBox->v.x += level*_SPEED_RUN;
+		m_hBox->_v.x += level*_SPEED_RUN;
 	}
-	if (m_hBox->v.x >= _max_SPEED_RUN)
+	if (m_hBox->_v.x >= _max_SPEED_RUN)
 	{
-		m_hBox->v.x = _max_SPEED_RUN;
+		m_hBox->_v.x = _max_SPEED_RUN;
 	}
 }
 
 void SuperHero::Inertia(float gameTime)
 {
-	if (m_hBox->v.x > 0)
+	if (m_hSpeed.x > 0)
 	{		
-		m_hBox->v.x -= _tx_frame;		
-		if (m_hBox->v.x < 0)
+		m_hSpeed.x -= _tx_frame;		
+		if (m_hSpeed.x < 0)
 		{
-			m_hBox->v.x = 0;
+			m_hSpeed.x = 0;
 		}
 
 	}
 	//nếu thả phím qua trái thì vận tốc tăng từ min đến 0
-	if (m_hBox->v.x < 0)
+	if (m_hSpeed.x < 0)
 	{		
-		m_hBox->v.x += _tx_frame;		
-		if (m_hBox->v.x > 0)
+		m_hSpeed.x += _tx_frame;		
+		if (m_hSpeed.x > 0)
 		{
-			m_hBox->v.x = 0;
+			m_hSpeed.x = 0;
 		}
 	}	
 }
@@ -412,7 +414,7 @@ void SuperHero::Jump(float gameTime)
 	if (m_hState==ON_SPACE)
 		return;
 	isJump = true;
-	m_hBox->v.y = 10;
+	m_hSpeed.y = 10;
 	m_hState = ON_SPACE;
 	//set sprite
 #pragma region Set Sprite
@@ -506,18 +508,19 @@ void SuperHero::Jump(float gameTime)
 
 void SuperHero::JumpKeyUp(float gameTime)
 {
-	if (m_hBox->v.y > 0)
-		m_hBox->v.y /= 2;
+	if (m_hSpeed.y > 0)
+		m_hSpeed.y /= 2;
 }
 
 void SuperHero::Fall(float remaintime)//binh thuong =1
 {
 	if (m_hState != ON_SPACE)
 		return;
-	m_hBox->v.y -= _SPEED_JUMP*remaintime;
-	if (isJump == true)
+	m_hSpeed.y -= _SPEED_JUMP*remaintime;
+	m_hPosition.y += m_hSpeed.y;
+	/*if (isJump == true)
 	{
-		if (m_hBox->v.y < 0)
+		if (m_hSpeed.y < 0)
 		{
 			switch (status)
 			{
@@ -536,7 +539,7 @@ void SuperHero::Fall(float remaintime)//binh thuong =1
 			}
 		}
 
-	}
+	}*/
 }
 
 void SuperHero::Squat(float gameTime)

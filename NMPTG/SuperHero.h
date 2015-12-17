@@ -7,7 +7,7 @@
 #define _hero_SPEED 2//2
 
 #define _max_SPEED_JUMP 5
-#define _SPEED_JUMP 0.5f
+#define _SPEED_JUMP 0.1f
 
 #define _max_SPEED_RUN 4
 #define _SPEED_RUN 0.4f//
@@ -20,6 +20,7 @@ enum Status
 class SuperHero:public Object
 {
 private:
+#pragma region Sprite
 	FrkSprite* Strike;
 	FrkSprite* BigMarioDriftToLeft;
 	FrkSprite* BigMarioDriftToRight;
@@ -74,7 +75,7 @@ private:
 	FrkSprite* MarioRunRight;
 	FrkSprite* MarioSuperJumpLeft;
 	FrkSprite* MarioSuperJumpRight;
-	
+#pragma endregion
 public:
 	bool isJump;
 	int status;

@@ -282,7 +282,7 @@ void Hero::GoLeft(float gameTime)
 
 
 	//update position qua trái
-	m_hSpeed.x -= m_hAcceleration*gameTime*_hero_LIMITTIME;
+	m_hSpeed.x -= m_hAcceleration*_hero_LIMITTIME;
 	if (m_hSpeed.x <= -_hero_SPEED)
 	{
 		m_hSpeed.x = -_hero_SPEED;
@@ -372,7 +372,7 @@ void Hero::GoRight(float gameTime)
 
 
 	//update position phải
-	m_hSpeed.x += m_hAcceleration*gameTime*_hero_LIMITTIME;
+	m_hSpeed.x += m_hAcceleration*_hero_LIMITTIME;
 	if (m_hSpeed.x >= _hero_SPEED)
 	{
 		m_hSpeed.x = _hero_SPEED;

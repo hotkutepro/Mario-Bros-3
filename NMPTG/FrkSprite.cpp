@@ -29,10 +29,9 @@ void FrkSprite::Render(D3DXVECTOR2 position)
 	frame.bottom = _Y + _Height;
 
 	RECT des;
-	int desx = (int)position.x/1;
-	int desy = (int)position.y/1;
-	des.left = desx;
-	des.top = desy;
+
+	des.left = position.x;
+	des.top = position.y;
 	des.right = des.left + _Width;
 	des.bottom = des.top + _Height;
 	D3DXVECTOR2 center;

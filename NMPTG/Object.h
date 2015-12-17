@@ -42,6 +42,9 @@ public:
 	virtual void Update(float gameTime);
 	virtual void Tortoise_Shell();
 	virtual void Die();
+	virtual void RenderDebug();
+	virtual void RenderBoxDebug();
+	virtual Box GetBox();
 	void FallDown(float remainingtime);
 	void Jump();
 	void SetPosition(int x, int y);

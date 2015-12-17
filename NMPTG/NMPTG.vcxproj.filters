@@ -9,10 +9,6 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
     <Filter Include="Framework">
       <UniqueIdentifier>{c85813c5-90e4-4461-b1b0-25678860de50}</UniqueIdentifier>
     </Filter>
@@ -76,12 +72,6 @@
       <Filter>Framework</Filter>
     </ClInclude>
     <ClInclude Include="State.h">
-      <Filter>GameState</Filter>
-    </ClInclude>
-    <ClInclude Include="State_1.h">
-      <Filter>GameState</Filter>
-    </ClInclude>
-    <ClInclude Include="State_2.h">
       <Filter>GameState</Filter>
     </ClInclude>
     <ClInclude Include="StateManager.h">
@@ -159,11 +149,11 @@
     <ClInclude Include="C_Brick.h">
       <Filter>GameObject</Filter>
     </ClInclude>
-    <ClInclude Include="State3.h">
-      <Filter>GameState</Filter>
-    </ClInclude>
     <ClInclude Include="Collision.h">
       <Filter>SweptAABB</Filter>
+    </ClInclude>
+    <ClInclude Include="State_4.h">
+      <Filter>GameState</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -195,12 +185,6 @@
       <Filter>Framework</Filter>
     </ClCompile>
     <ClCompile Include="State.cpp">
-      <Filter>GameState</Filter>
-    </ClCompile>
-    <ClCompile Include="State_1.cpp">
-      <Filter>GameState</Filter>
-    </ClCompile>
-    <ClCompile Include="State_2.cpp">
       <Filter>GameState</Filter>
     </ClCompile>
     <ClCompile Include="StateManager.cpp">
@@ -269,9 +253,6 @@
     <ClCompile Include="C_Brick.cpp">
       <Filter>GameObject</Filter>
     </ClCompile>
-    <ClCompile Include="State3.cpp">
-      <Filter>GameState</Filter>
-    </ClCompile>
     <ClCompile Include="Hero.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
@@ -302,104 +283,9 @@
     <ClCompile Include="Collision.cpp">
       <Filter>SweptAABB</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="resources\Cut\1-up.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="resources\Cut\CoinBox.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="resources\Cut\CoinBoxNull.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="resources\Cut\E_FlyTortoiseGreenLeft.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="resources\Cut\E_FlyTortoiseGreenRight.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="resources\Cut\E_FlyTortoiseRedLeft.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="resources\Cut\E_FlyTortoiseRedRight.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="resources\Cut\E_Mushroom.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="resources\Cut\E_MushroomDeath.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="resources\Cut\E_MushroomRed.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="resources\Cut\E_MushroomRedDeath.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="resources\Cut\E_TortoiseGreenLeft.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="resources\Cut\E_TortoiseGreenRight.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="resources\Cut\E_TortoiseRedRight.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="resources\Cut\E_TortoiseshellGreenLeft.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="resources\Cut\E_TortoiseshellGreenRight.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="resources\Cut\E_TortoiseshellRedLeft.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="resources\Cut\E_TortoiseshellRedRight.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="resources\Cut\E_TurtoiseRedLeft.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="resources\Cut\F_MushroomPower.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="resources\Cut\Leaf.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="resources\Cut\MarioDriftToLeft.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="resources\Cut\MarioDriftToRight.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="resources\Cut\MarioJumpLeft.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="resources\Cut\MarioJumpRight.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="resources\Cut\marioleft.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="resources\Cut\marioleft32.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="resources\Cut\marioright.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="resources\Cut\marioright32.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="resources\Cut\MarioRunLeft.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="resources\Cut\MarioRunRight.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="resources\Cut\Wood_1.png">
-      <Filter>Resource Files</Filter>
-    </Image>
+    <ClCompile Include="State_4.cpp">
+      <Filter>GameState</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

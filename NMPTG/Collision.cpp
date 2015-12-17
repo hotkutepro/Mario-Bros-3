@@ -1,7 +1,6 @@
 ﻿#include "Collision.h"
-#define TIME 1
-
-
+#include <limits>
+#include "Box.h"
 
 Collision::Collision(void)
 {
@@ -12,136 +11,162 @@ Collision::~Collision(void)
 {
 }
 
-bool Collision::AABBCheck(Box* b1, Box* b2)
+bool Collision::checkAABB(Box *b1, Box* b2)
 {
-	return !(b1->position.right < b2->position.left || b1->position.bottom < b2->position.top || b2->position.right < b1->position.left || b2->position.bottom < b1->position.top);
+	return !(b1->getRight() < b2->_position.x || b1->getBottom() < b2->_position.y || b2->getRight() < b1->_position.x || b2->getBottom() < b1->_position.y);
 }
 
-Box* Collision::GetBoardPhaseBox(Box* box)
+float Collision::sweptAABBCheck(Box* b1, Box* b2, float& x, float& y)
 {
-	Box* result = new Box(RECT(),D3DXVECTOR2());
-	result->position.left = box->v.x > 0 ? box->position.left : box->position.left + box->v.x;
-	result->position.top = box->v.y > 0 ? box->position.top : box->position.top + box->v.y;
-	result->position.right = box->v.x > 0 ? box->position.right + abs(box->v.x) : box->position.right;
-	result->position.bottom = box->v.y > 0 ? box->position.bottom + abs(box->v.y) : box->position.bottom;
-	return result;
-}
+	float dxEntry, dyEntry;//khoang cach gan nhat
+	float dxExit, dyExit;//khang cach xa nhat
+	float txEntry, txExit;// thoi gian bat dau va cham theo cac truc
+	float tyEntry, tyExit;//thoi gian ket thuc va cham theo cac truc
+	float tEntry, tExit;//thoi gian bat dau/ket thuc va cham
+	x = y = 0.0f;
 
-float Collision::SweptAABB(Box* b1, Box* b2,float &x,float &y)
-{
-	float dxEntry,dyEntry;//khoang cach gan nhat
-	float dxExit,dyExit;//khoang cach xa nhat
-	float txEntry,txExit;
-	float tyEntry,tyExit;
-	float EntryTime,ExitTime;//thoi gian bắt đâu, thoi gian ket thuc
-	if(b1->v.x > 0.0f)//chi quan tam toi cac b2 o ben phai
+	//khoang cach luon luon lay b2 - b1
+	if (b1->_v.x > 0.0f)
 	{
-
-		dxEntry = b2->position.left - b1->position.right;//chi quan quan tam canh trai cua b2
-		dxExit = b2->position.right - b1->position.left;//chỉ quan tam toi canh phai
-	}
-	else//di chuyen qua trai => chi can quan tan cac b2 nam ben trai
-	{
-		dxEntry = (b2->position.right) - b1->position.left;//quan tam toi canh phai b2
-		dxExit = b2->position.left - b1->position.right;//chi quan tam toi canh trai b2
-	}
-
-	if(b1->v.y > 0.0f)
-	{
-		dyEntry = b2->position.top - b1->position.bottom;
-		dyExit = b2->position.bottom - b1->position.top;
+		//vat di qua phai => chi can quan tam den cac b2 ben phai
+		dxEntry = b2->_position.x - b1->getRight();
+		dxExit = b2->getRight() - b1->_position.x;
 	}
 	else
 	{
-		dyEntry = b2->position.bottom - b1->position.top;
-		dyExit = b2->position.top - b1->position.bottom;
+		//vat di qua trai => chi can quan tam den cac b2 ben trai
+		dxEntry = b2->getRight() - b1->_position.x;
+		dxExit = b2->_position.x - b1->getRight();
 	}
 
-	//ta can lay Max cua EntryTime va Min cua ExitTime => cong thuc tinh thoi gian
-	if(b1->v.x == 0.0f)
+
+	if (b1->_v.y > 0.0f)
+	{
+		//vat di len => ta chi can quan tam de cac b2 nam ben tren
+		dyEntry = b2->_position.y - b1->getBottom();
+		dyExit = b2->getBottom() - b1->_position.y;
+	}
+	else
+	{
+		//vat di xuong => ta chi can quan tam den cac b2 o ben duoi		
+		dyEntry = b2->getBottom() - b1->_position.y;
+		dyExit = b2->_position.y - b1->getBottom();
+	}
+
+	//tinh thoi gian va cham//ket thuc theo cac truc
+	//ta co tEntry = max(txEntry,tyEntry) 
+	//neu v = 0 se khong bao gio xay ra va cham. => gan bang cac gia tri tai vo cuc
+	if (b1->_v.x == 0.0f)
 	{
 		txEntry = -std::numeric_limits<float>::infinity();
 		txExit = std::numeric_limits<float>::infinity();
 	}
 	else
 	{
-		txEntry = dxEntry / (b1->v.x * TIME);
-		txExit = dxExit / (b1->v.x * TIME);
+		txEntry = dxEntry / b1->_v.x;
+		txExit = dxExit / b1->_v.x;
 	}
 
-	if(b1->v.y == 0.0f)
+	if (b1->_v.y == 0.0f)
 	{
 		tyEntry = -std::numeric_limits<float>::infinity();
 		tyExit = std::numeric_limits<float>::infinity();
 	}
 	else
 	{
-		tyEntry = dyEntry / (b1->v.y * TIME);
-		tyExit = dyExit / (b1->v.y * TIME);
+		tyEntry = dyEntry / b1->_v.y;
+		tyExit = dyExit / b1->_v.y;
 	}
 
 
-	EntryTime = max(txEntry,tyEntry);
-	ExitTime = min(txExit,tyExit);
-	
-	bool c1 = EntryTime > ExitTime ;
-	bool c2 = txEntry < 0.0f && tyEntry < 0.0f;
-	
-	bool c3 = tyEntry > 1.0f;
-	bool c4 =	txEntry > 1.0f;	
-	if(c3)
+	tEntry = max(txEntry, tyEntry);
+	tExit = min(txExit, tyExit);
+
+	if (tEntry > tExit || //truc va cham sau cung chua xay ra thi va cham o truc truc da kt
+		txEntry < 0.0f && tyEntry < 0.0f ||//truong hop b1 nam tren/ duoi/ trai/ phai 
+		txEntry > 1.0f ||// b1 cach xa b2 theo truc x
+		tyEntry > 1.0f)//b1 cach xa b2 theo truc y
 	{
-		int x = 5;
-	}
-	if(c1 || c2 || c3 || c4)
-	{
-		x = 0; y = 0; 
 		return 1.0f;
 	}
 	//nghi ngo co va cham
-	if(txEntry < 0.0f)
+	if (txEntry < 0.0f)
 	{
-		if(b1->position.right < b2->position.left || b2->position.right < b1->position.left)
-		{
-			x = 0; y = 0; 
-			return 1.0f;
-		}
-	}
-	//nghi ngo co va cham
-	if(tyEntry < 0.0f)
-	{
-		if(b1->position.bottom < b2->position.top || b2->position.bottom < b1->position.top)
-		{
-			x = 0; y = 0; 
-			return 1.0f;
-		}
-	}
+		if (b1->getRight() < b2->_position.x || b2->getRight() < b1->_position.x) return 1.0f;
 
-	//xay ra va cham
-	if(txEntry > tyEntry)
+	}
+	if (tyEntry < 0.0f)
 	{
-		if (dxEntry < 0)
+		if (b1->getBottom() < b2->_position.y || b2->getBottom() < b1->_position.y) return 1.0f;
+	}
+	if (txEntry > tyEntry)// va cham xay ra tren truc x
+	{
+		if (dxEntry > 0.0f)
 		{
-			x = 1.0f; y = 0.0f;
-		}
-		else
-		{
+			//b1 nam ben trai
 			x = -1.0f; y = 0.0f;
 		}
-
-	}
-	else
-	{
-		if(dyEntry < 0)
+		else
 		{
-			x = 0.0f; y = 1.0f;
+			//truong hop dx == 0
+			if (dxEntry == 0.0f)
+			{
+				if (b1->getRight() > b2->getRight())
+				{
+					x = 1.0f; y = 0.0f;
+				}
+				else
+				{
+					x = -1.0f; y = 0.0f;
+				}
+			}
+			else
+			{
+				//b1 nam ben phai
+				x = 1.0f; y = 0.0f;
+			}
+		}
+	}
+	else// va cham xay ra tren truc y
+	{
+		if (dyEntry > 0.0f)
+		{
+			//b1 nam o duoi
+			x = 0.0f; y = -1.0f;
 		}
 		else
 		{
-			x = 1.0f; y = 0.0f;
+			if (dyEntry == 0.0f)
+			{
+				if (b1->getBottom() > b2->getBottom())
+				{
+					x = 0.0f;
+					y = 1.0f;
+				}
+				else
+				{
+					x = 0.0f;
+					y = -1.0f;
+				}
+			}
+			else
+			{
+				//b1 nam o tren
+				x = 0.0f; y = 1.0f;
+			}
 		}
 	}
 
+	return tEntry;// thoi gian sap xay ra va cham
+}
 
-	return EntryTime;
+Box* Collision::getBoardPhaseBox(Box* box)
+{
+	Box* result = new Box(box->_position, box->_size, box->_v);
+	//vx > 0 ?
+	result->_position.x = box->_v.x > 0.0f ? box->_position.x : box->_position.x + box->_v.x;
+	result->_position.y = box->_v.y > 0.0f ? box->_position.y : box->_position.y + box->_v.y;
+	result->_size.x = box->_size.x + abs(box->_v.x);
+	result->_size.y = box->_size.y + abs(box->_v.y);
+	return result;
 }

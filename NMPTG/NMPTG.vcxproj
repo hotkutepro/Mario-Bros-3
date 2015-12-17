@@ -121,10 +121,8 @@
     <ClInclude Include="QNode.h" />
     <ClInclude Include="ResourcesManager.h" />
     <ClInclude Include="State.h" />
-    <ClInclude Include="State3.h" />
     <ClInclude Include="StateManager.h" />
-    <ClInclude Include="State_1.h" />
-    <ClInclude Include="State_2.h" />
+    <ClInclude Include="State_4.h" />
     <ClInclude Include="SuperHero.h" />
   </ItemGroup>
   <ItemGroup>
@@ -167,46 +165,10 @@
     <ClCompile Include="QNode.cpp" />
     <ClCompile Include="ResourcesManager.cpp" />
     <ClCompile Include="State.cpp" />
-    <ClCompile Include="State3.cpp" />
     <ClCompile Include="StateManager.cpp" />
-    <ClCompile Include="State_1.cpp" />
-    <ClCompile Include="State_2.cpp" />
+    <ClCompile Include="State_4.cpp" />
     <ClCompile Include="SuperHero.cpp" />
     <ClCompile Include="WinMain.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="resources\Cut\1-up.png" />
-    <Image Include="resources\Cut\CoinBox.png" />
-    <Image Include="resources\Cut\CoinBoxNull.png" />
-    <Image Include="resources\Cut\E_FlyTortoiseGreenLeft.png" />
-    <Image Include="resources\Cut\E_FlyTortoiseGreenRight.png" />
-    <Image Include="resources\Cut\E_FlyTortoiseRedLeft.png" />
-    <Image Include="resources\Cut\E_FlyTortoiseRedRight.png" />
-    <Image Include="resources\Cut\E_Mushroom.png" />
-    <Image Include="resources\Cut\E_MushroomDeath.png" />
-    <Image Include="resources\Cut\E_MushroomRed.png" />
-    <Image Include="resources\Cut\E_MushroomRedDeath.png" />
-    <Image Include="resources\Cut\E_TortoiseGreenLeft.png" />
-    <Image Include="resources\Cut\E_TortoiseGreenRight.png" />
-    <Image Include="resources\Cut\E_TortoiseRedRight.png" />
-    <Image Include="resources\Cut\E_TortoiseshellGreenLeft.png" />
-    <Image Include="resources\Cut\E_TortoiseshellGreenRight.png" />
-    <Image Include="resources\Cut\E_TortoiseshellRedLeft.png" />
-    <Image Include="resources\Cut\E_TortoiseshellRedRight.png" />
-    <Image Include="resources\Cut\E_TurtoiseRedLeft.png" />
-    <Image Include="resources\Cut\F_MushroomPower.png" />
-    <Image Include="resources\Cut\Leaf.png" />
-    <Image Include="resources\Cut\MarioDriftToLeft.png" />
-    <Image Include="resources\Cut\MarioDriftToRight.png" />
-    <Image Include="resources\Cut\MarioJumpLeft.png" />
-    <Image Include="resources\Cut\MarioJumpRight.png" />
-    <Image Include="resources\Cut\marioleft.png" />
-    <Image Include="resources\Cut\marioleft32.png" />
-    <Image Include="resources\Cut\marioright.png" />
-    <Image Include="resources\Cut\marioright32.png" />
-    <Image Include="resources\Cut\MarioRunLeft.png" />
-    <Image Include="resources\Cut\MarioRunRight.png" />
-    <Image Include="resources\Cut\Wood_1.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
