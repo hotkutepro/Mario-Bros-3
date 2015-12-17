@@ -64,6 +64,7 @@ void State_4::Render()
 		if (it_Object->second->getCurrentSprite() != NULL)
 			it_Object->second->getCurrentSprite()->Render(it_Object->second->GetPosition());
 	}
+	
 	hero->RenderDebug();
 	_LocalGraphic->End();
 

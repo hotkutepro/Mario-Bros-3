@@ -28,7 +28,7 @@ public:
 	STATE m_hState = ON_GROUND;
 	DIRECT m_hDirect;
 	Box* m_hBox;
-	Box* m_hBox_Colis;
+	Box* m_hBoundBox;
 	TYPEOBJECT type;
 //dung cho quadtree
 	int id;
@@ -39,14 +39,14 @@ public:
 	void setCurrentSprite(FrkSprite*);
 	FrkSprite* getCurrentSprite();
 	virtual void Load();
-	virtual void Render();
-	virtual void UpdateBox(float gameTime);
+	virtual void Render();	
 	virtual void Update(float gameTime);
 	virtual void Tortoise_Shell();
 	virtual void Die();
 	virtual void RenderDebug();
 	virtual void RenderBoxDebug();
-	virtual Box GetBox();
+	virtual Box* GetBox();
+	virtual Box* GetBoundBox();
 	void FallDown(float remainingtime);
 	void Jump();
 	void SetPosition(int x, int y);

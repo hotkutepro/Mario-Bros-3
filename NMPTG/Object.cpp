@@ -147,7 +147,7 @@ void Object::RenderDebug()
 	_LocalGraphic->tDrawTexture(_LocalContent->LoadTexture("brick.png"), src, a, D3DXVECTOR2(8, 8), D3DCOLOR_XRGB(255, 255, 255), 0);
 }
 
-Box Object::GetBox()
+Box* Object::GetBox()
 {
 	m_hBox->_position.x = m_hPosition.x;
 	m_hBox->_position.y = m_hPosition.y;
