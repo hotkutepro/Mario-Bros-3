@@ -23,6 +23,7 @@
 
 
 sId QNode::s_IdObjectInViewPort;
+mapObject  QNode::m_Objects;
 
 QNode::QNode()
 {

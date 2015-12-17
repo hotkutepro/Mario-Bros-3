@@ -1,7 +1,7 @@
 #include "Object.h"
 #include"Box.h"
-#include"Hero.h"
 #include "Collision.h"
+#include "QNode.h"
 
 Object::Object()
 {
@@ -85,7 +85,7 @@ void Object::Load()
 
 }
 void Object::Update(float gameTime)
-{
+{	
 	/*m_hBox->position.top += m_hBox->v.y;
 	m_hBox->position.bottom += m_hBox->v.y;
 	m_hBox->position.left += m_hBox->v.x;
@@ -163,10 +163,22 @@ void Object::RenderBoxDebug()
 	src.right = src.left + 16;
 	src.top = 0;
 	src.bottom = src.top + 16;
-	RECT a;
-	a.left = m_hBox->getLeft();
-	a.right = m_hBox->getRight();
-	a.top = m_hBox->getTop();
-	a.bottom = m_hBox->getBottom();
+	RECT a=m_hBox->getRect();	
 	_LocalGraphic->tDrawTexture(_LocalContent->LoadTexture("abc.png"), src, a, D3DXVECTOR2(8, 8), D3DCOLOR_XRGB(255, 255, 255), 0);
+}
+
+list<Object*> Object::GetStaticObject()
+{
+	list<Object*> listobject;
+	sId::iterator id_Objects;	
+	mapObject::iterator it_Object;		
+	for (id_Objects = QNode::s_IdObjectInViewPort.begin(); id_Objects != QNode::s_IdObjectInViewPort.end(); id_Objects++)
+	{
+		it_Object = QNode::m_Objects.find(*id_Objects);
+		if (it_Object->second->type == land || it_Object->second->type == box || it_Object->second->type == brick)
+		{
+			listobject.push_back(it_Object->second);
+		}
+	}
+	return listobject;
 }

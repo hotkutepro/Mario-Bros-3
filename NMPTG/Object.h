@@ -6,6 +6,7 @@
 #include"FrkSprite.h"
 #include"Box.h"
 #include"Operate.h"
+#include <list>
 #define GRAVITY -0.5f
 enum TYPEOBJECT{
 	brick, coin, drain, land, leaf, mushroom_red, p, box, question_block, star, tarnooki, tarnooki_fly,
@@ -33,6 +34,7 @@ public:
 	int id;
 	bool life=true;
 	bool connect=false;//Kiểm tra có kết nối với brick ko.
+	list<Object*> GetStaticObject();
 	//
 	void setCurrentSprite(FrkSprite*);
 	FrkSprite* getCurrentSprite();
