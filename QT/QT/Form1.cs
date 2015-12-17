@@ -543,6 +543,8 @@ namespace QT
                 int j0 = c_land[c_land.Count - 1].oRect.Y / 16;
                 c_land[c_land.Count - 1].oRect.Width = (Math.Abs(i - i0) + 1) * 16;
                 c_land[c_land.Count - 1].oRect.Height= (Math.Abs(j - j0) + 1) * 16;
+                c_land[c_land.Count - 1].gameObject.Size = new Size(c_land[c_land.Count - 1].oRect.Width, c_land[c_land.Count - 1].oRect.Height);
+                c_land[c_land.Count - 1].gameObject.BackColor = Color.Cyan;
             }
             if (ctype == typeO.Box)
             {
@@ -552,6 +554,8 @@ namespace QT
                 int j0 = c_box[c_box.Count - 1].oRect.Y / 16;
                 c_box[c_box.Count - 1].oRect.Width = (i - i0 + 1) * 16;
                 c_box[c_box.Count - 1].oRect.Height = (j - j0 + 1) * 16;
+                c_box[c_box.Count - 1].gameObject.Size = new Size(c_box[c_box.Count - 1].oRect.Width, c_box[c_box.Count - 1].oRect.Height);
+                c_box[c_box.Count - 1].gameObject.BackColor = Color.DeepPink;
             }
             mousedown = 0;            
         }
@@ -985,3 +989,4 @@ namespace QT
             
     }
 }
+
