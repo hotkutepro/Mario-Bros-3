@@ -114,11 +114,15 @@ void Object::RenderBoxDebug()
 {
 	RECT src;
 	src.left = 0;
-	src.right = src.left + 16;
 	src.top = 0;
+	src.right = src.left + 16;	
 	src.bottom = src.top + 16;
-	RECT a=m_hBox->getRect();	
-	_LocalGraphic->tDrawTexture(_LocalContent->LoadTexture("abc.png"), src, a, D3DXVECTOR2(8, 8), D3DCOLOR_XRGB(255, 255, 255), 0);
+	RECT a;
+	a.left = m_hBox->_position.x;
+	a.top = m_hBox->_position.y ;
+	a.right = a.left + m_hBox->_size.x;
+	a.bottom = a.top+ m_hBox->_size.y;
+	_LocalGraphic->tDrawTexture(_LocalContent->LoadTexture("abc.png"), src, a, D3DXVECTOR2(m_hBox->_size.x / 2, m_hBox->_size.y / 2), D3DCOLOR_XRGB(255, 255, 255), 0);
 }
 
 list<Object*> Object::GetStaticObject()
