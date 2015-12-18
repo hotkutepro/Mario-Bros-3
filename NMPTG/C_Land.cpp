@@ -12,7 +12,8 @@ C_Land::~C_Land()
 
 void C_Land::Load()
 {			
-	m_hCurrentSprite = ResourcesManager::GetInstance()->GetSprite(SpriteID::Brick);
+	//m_hCurrentSprite = ResourcesManager::GetInstance()->GetSprite(SpriteID::Brick);
+	m_hCurrentSprite = NULL;
 	Object::Load();
 	
 	type = TYPEOBJECT::land;

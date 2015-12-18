@@ -41,15 +41,8 @@ void State_3::Load()
 void State_3::Update(float gameTime)
 {
 	camera->Update(s_hero->GetPosition());
-
-	s_hero->Update(gameTime);	
-	bool isRound = false;/////////////////////xem mario tiep dat chua
-
-	_LocalKeyboard->GetDeviceState();
-	//b1->v.x = b1->v.y = 0;
-	float time = 0;
-	float time2 = 0;
-
+	s_hero->Update(gameTime);		
+	float time = 0;	
 	mapQNode::iterator it_Node;
 	it_Node = qnode->m_QNode.find(0);
 	qnode->s_IdObjectInViewPort.clear();
@@ -58,63 +51,43 @@ void State_3::Update(float gameTime)
 	sId::iterator id_ONext;
 	mapObject::iterator it_Object;
 	mapObject::iterator it_ONext;
-
-	//float time = 0;
 	float nx = 0; float ny = 0;//swept aabb
 	float nx2, ny2;
 	float mx, my;//swept aabb
-	//Box*b1; Box*b2;
 	for (id_Objects = qnode->s_IdObjectInViewPort.begin(); id_Objects != qnode->s_IdObjectInViewPort.end(); id_Objects++)
 	{
-		it_Object = qnode->m_Objects.find(*id_Objects);		//Object đang xét
-		Box* b = new Box();//box của object đang xét
-		b->v.x = b->v.y = 0;
-		b->position.left = it_Object->second->m_hPosition.x;
-		b->position.top = it_Object->second->m_hPosition.y;
-		b->position.right = b->position.left + it_Object->second->m_hSize.x;
-		b->position.bottom = b->position.top + it_Object->second->m_hSize.y;
 		it_Object = qnode->m_Objects.find(*id_Objects);		//Object đang xét		
-		Box* box_hero = Collision::GetBoardPhaseBox(s_hero->m_hBox);
-		time = Collision::SweptAABB(s_hero->m_hBox, b, nx, ny);
-		//time2 = Collision::SweptAABB(s_hero->m_hBox_Colis, b, nx2, ny2);				
-			if (time < 1)
+		time = Collision::SweptAABB(s_hero->m_hBox, it_Object->second->m_hBox, nx, ny);
+		if (time!=1)
+		{
+			if (nx == -1)
 			{
-				if (ny==1)
-				if (it_Object->second->type == land || it_Object->second->type == box || it_Object->second->type == Brick)
-				{					
-					s_hero->m_hBox->position.top -= s_hero->m_hBox->v.y*time;
-					s_hero->m_hBox->position.bottom -= s_hero->m_hBox->v.y*time;
-					s_hero->m_hBox->v.y = 0;
-					//isRound = true;
-
-					s_hero->m_hObjectGround = it_Object->second;
-
-					s_hero->m_hBox_Colis->position.left = s_hero->m_hBox->position.left;
-					s_hero->m_hBox_Colis->position.right = s_hero->m_hBox->position.right;
-					s_hero->m_hBox_Colis->position.top = s_hero->m_hBox->position.top;
-					s_hero->m_hBox_Colis->position.bottom = s_hero->m_hBox->position.bottom+2;
-					s_hero->m_hState = ON_GROUND;
-				}				
+				s_hero->m_hBox->position.left += s_hero->m_hBox->v.x*nx*time;
+				s_hero->m_hBox->v.x = 0;
+				s_hero->canmoveright = false;
 			}
-			if (s_hero->m_hObjectGround!=NULL)
-			if (!Collision::AABBCheck(s_hero->m_hBox_Colis, s_hero->m_hObjectGround->m_hBox))
+			if (nx == 1)
 			{
-				s_hero->Fall(1);
+				s_hero->m_hBox->position.left += s_hero->m_hBox->v.x*nx*time;
+    				s_hero->m_hBox->v.x = 0;
+				s_hero->canmoveleft = false;
 			}
-			/*else if (time2 < 1){
-				if (it_Object->second->type == land || it_Object->second->type == box || it_Object->second->type == Brick)
-				{
-					//s_hero->Fall(time);
-					//s_hero->m_hBox->v.y = 0;
-					//isRound = true;
-					s_hero->m_hObjectGround = it_Object->second;
-					s_hero->m_hState = ON_GROUND;
-				}
-			}*/					
-	}
-	if (s_hero->m_hState == ON_SPACE)
-		s_hero->Fall(1);
-	_LocalKeyboard->ClearBuffer();
+			if (ny == -1)
+			{
+				s_hero->m_hBox->v.y = 0;
+			}
+			if (ny == 1)
+			{
+ 				s_hero->m_hBox->position.top += s_hero->m_hBox->v.y*time;
+				s_hero->m_hBox->position.bottom += s_hero->m_hBox->v.y*time;
+				s_hero->m_hBox->v.y = 0;
+				s_hero->canfall = false;
+				s_hero->m_hState = ON_GROUND;
+			}
+		}
+				
+	}	
+
 }
 
 void State_3::Render()

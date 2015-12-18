@@ -72,7 +72,7 @@ void SuperHero::Load()
 	m_hPosition.x = 100;
 	m_hPosition.y = 320;
 	status = 0;
-	level = 5;
+	level = 0;
 	m_hState = ON_SPACE;
 	Object::Load();
 }

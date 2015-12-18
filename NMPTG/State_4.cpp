@@ -73,6 +73,7 @@ void State_4::Render()
 void State_4::Update(float gameTime)
 {
 	hero->Update(gameTime);
+	hero->GetStaticObject();
 	camera->Update(hero->GetPosition());
 	mapQNode::iterator it_Node;
 	it_Node = qnode->m_QNode.find(0);
@@ -104,6 +105,7 @@ void State_4::Update(float gameTime)
 			{			
 				hero->m_hSpeed.y = 0;
 				hero->m_hState = ON_GROUND;
+				hero->m_hBox->_position.x = 0;
 			}
 		
 		}
