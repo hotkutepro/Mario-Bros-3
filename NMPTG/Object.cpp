@@ -52,12 +52,15 @@ void Object::Load()
 	life = true;
 	m_hSpeed.x = 0;
 	m_hSpeed.y = 0;
+
 	m_hBox = new Box();
 	m_hBox->_size.x = getCurrentSprite()->_Width;
 	m_hBox->_size.y = getCurrentSprite()->_Height;
 	m_hBoundBox = new Box();
 	m_hBoundBox->_size.x = getCurrentSprite()->_Width + 25;
 	m_hBoundBox->_size.y = getCurrentSprite()->_Height + 25;
+	m_hBox->_position.x = m_hPosition.x;
+	m_hBox->_position.y = m_hPosition.y;
 	if (type == land || type == box){
 		m_hBox->_size.x = m_hSize.x;
 		m_hBox->_size.y = m_hSize.y;
@@ -65,6 +68,7 @@ void Object::Load()
 }
 void Object::Update(float gameTime)
 {	
+	
 
 }
 void Object::setCurrentSprite(FrkSprite* s)

@@ -98,7 +98,7 @@ void State_4::Update(float gameTime)
 		it_Object = qnode->m_Objects.find(*id_Objects);
 		if (it_Object->second->type == land || it_Object->second->type == box || it_Object->second->type == Brick)
 		{
-			if (collision->checkAABB(hero->GetBoundBox(), it_Object->second->m_hBox))
+			//if (collision->checkAABB(hero->GetBoundBox(), it_Object->second->m_hBox))
 			time = collision->sweptAABBCheck(hero->GetBox(), it_Object->second->m_hBox, nx, ny);				
 			if (time < 1.0f && ny == 1 && nx == 0)
 			{			
