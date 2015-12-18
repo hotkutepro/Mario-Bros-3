@@ -24,7 +24,7 @@ C_Brick::~C_Brick()
 void C_Brick::Load()
 {		
 	brick = ResourcesManager::GetInstance()->GetSprite(SpriteID::Brick);
-	CoinBoxNull = ResourcesManager::GetInstance()->GetSprite(SpriteID::CoinBoxNull);
+	Coin = ResourcesManager::GetInstance()->GetSprite(SpriteID::Coin);
 	setCurrentSprite(brick);
 	type = TYPEOBJECT::brick;
 	Object::Load();

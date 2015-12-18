@@ -2,6 +2,7 @@
 #include"Object.h"
 class C_Question_Block:public Object
 {
+	FrkSprite* brick;
 	FrkSprite* Coin;
 	FrkSprite* CoinBox;
 	FrkSprite* CoinBoxNull;

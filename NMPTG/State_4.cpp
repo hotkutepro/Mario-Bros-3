@@ -32,6 +32,8 @@ void State_4::Load()
 	mapObject::iterator it;
 	for (it = qnode->m_Objects.begin(); it != qnode->m_Objects.end(); it++)
 	{
+		//if (it->second == NULL)
+			//continue;
 		it->second->Load();
 		if (it->second->type == TYPEOBJECT::question_block)
 		{
@@ -103,9 +105,11 @@ void State_4::Update(float gameTime)
 			time = collision->sweptAABBCheck(hero->GetBox(), it_Object->second->m_hBox, nx, ny);				
 			if (time < 1.0f && ny == 1 && nx == 0)
 			{			
+				hero->m_hPosition.y += time*hero->m_hSpeed.y;/////////
 				hero->m_hSpeed.y = 0;
 				hero->m_hState = ON_GROUND;
 				hero->m_hBox->_position.x = 0;
+				hero->m_hObjectGround = it_Object->second;///////
 			}
 		
 		}
@@ -114,6 +118,10 @@ void State_4::Update(float gameTime)
 	if (hero->m_hState != ON_GROUND)
 	{
 		hero->Fall(time);
+	}
+	else if (hero->m_hObjectGround != NULL){
+		if (!Collision::checkAABB(hero->GetBox_CGround(), hero->m_hObjectGround->m_hBox))
+			hero->m_hState = ON_SPACE;
 	}
 
 }

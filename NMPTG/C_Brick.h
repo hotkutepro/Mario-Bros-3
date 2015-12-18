@@ -6,7 +6,7 @@ class C_Brick:public Object
 {
 private:
 	FrkSprite* brick;
-	FrkSprite* CoinBoxNull;
+	FrkSprite* Coin;	
 public:
 	Box* m_hBox;	
 	void Load();	

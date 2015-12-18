@@ -13,7 +13,9 @@ E_Plant_Gun::~E_Plant_Gun()
 
 void E_Plant_Gun::Load()
 {	
-	m_hCurrentSprite = ResourcesManager::GetInstance()->GetSprite(SpriteID::Wood_1);
+	Tree_left = ResourcesManager::GetInstance()->GetSprite(SpriteID::Tree_left);
+	Tree_right = ResourcesManager::GetInstance()->GetSprite(SpriteID::Tree_right);
+	m_hCurrentSprite = ResourcesManager::GetInstance()->GetSprite(SpriteID::Tree_left);
 	Object::Load();
 	type = TYPEOBJECT::tree_shoot;
 }

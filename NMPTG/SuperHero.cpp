@@ -286,7 +286,7 @@ void SuperHero::GoRight(float gameTime)
 
 			break;
 		case BIGMARIO:
-			if (m_hBox->_v.y > 0)
+			if (m_hSpeed.y> 0)
 			{
 				setCurrentSprite(BigMarioJumpRight);
 			}
@@ -306,7 +306,7 @@ void SuperHero::GoRight(float gameTime)
 	{
 
 		//chuyển spirte
-		if (m_hBox->_v.x < 0)
+		if (m_hSpeed.x < 0)
 		{
 			switch (status)
 			{
@@ -350,36 +350,38 @@ void SuperHero::RunLeft(float gameTime)
 {
 	direction = false;
 	isRun = true;
-	if (m_hBox->_v.x > -_hero_SPEED)
+	if (m_hSpeed.x > -_hero_SPEED)
 	{
-		m_hBox->_v.x -= _tx_frame;
+		m_hSpeed.x -= _tx_frame;
 	}
 	else
 	{
-		m_hBox->_v.x -= level*_SPEED_RUN;
+		m_hSpeed.x -= level*_SPEED_RUN;
 	}
-	if (m_hBox->_v.x <= -_max_SPEED_RUN)
+	if (m_hSpeed.x <= -_max_SPEED_RUN)
 	{
-		m_hBox->_v.x = -_max_SPEED_RUN;
+		m_hSpeed.x = -_max_SPEED_RUN;
 	}
+	m_hPosition.x += m_hSpeed.x;
 }
 
 void SuperHero::RunRight(float gameTime)
 {
 	direction = true;
 	isRun = true;
-	if (m_hBox->_v.x < _hero_SPEED)
+	if (m_hSpeed.x < _hero_SPEED)
 	{
-		m_hBox->_v.x += _tx_frame;
+		m_hSpeed.x += _tx_frame;
 	}
 	else
 	{
-		m_hBox->_v.x += level*_SPEED_RUN;
+		m_hSpeed.x += level*_SPEED_RUN;
 	}
-	if (m_hBox->_v.x >= _max_SPEED_RUN)
+	if (m_hSpeed.x >= _max_SPEED_RUN)
 	{
-		m_hBox->_v.x = _max_SPEED_RUN;
+		m_hSpeed.x = _max_SPEED_RUN;
 	}
+	m_hPosition.x += m_hSpeed.x;
 }
 
 void SuperHero::Inertia(float gameTime)

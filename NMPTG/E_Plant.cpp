@@ -12,7 +12,7 @@ E_Plant::~E_Plant()
 
 void E_Plant::Load()
 {	
-	m_hCurrentSprite = ResourcesManager::GetInstance()->GetSprite(SpriteID::Wood_1);
+	m_hCurrentSprite = ResourcesManager::GetInstance()->GetSprite(SpriteID::Tree);
 	Object::Load();
 	type = TYPEOBJECT::tree;
 }

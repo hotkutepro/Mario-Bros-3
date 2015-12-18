@@ -14,9 +14,8 @@ void C_Land::Load()
 {			
 	//m_hCurrentSprite = ResourcesManager::GetInstance()->GetSprite(SpriteID::Brick);
 	m_hCurrentSprite = NULL;
-	Object::Load();
-	
 	type = TYPEOBJECT::land;
+	Object::Load();		
 	//box->vx = 0;
 	//box->vy = 0;	
 }

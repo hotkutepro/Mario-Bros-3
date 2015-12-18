@@ -109,7 +109,7 @@ void QNode::LoadObjects(string path)//Viet lai
 	string line;
 	TYPEOBJECT typeO[19] = { brick, coin, drain, land, leaf, mushroom_red, p,box , question_block, star, tarnooki, 
 		tarnooki_fly, tortoise, tortoise_fly, tortoise_red, tree, tree_red, tree_red_shoot, tree_shoot };
-	for (int i = 0; i < 18; i++)
+	for (int i = 0; i < 19; i++)
 	{
 		open >> stype;
 		open >> count;

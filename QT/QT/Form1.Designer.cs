@@ -43,13 +43,13 @@
             this.btTree_Shoot = new System.Windows.Forms.Button();
             this.btTree = new System.Windows.Forms.Button();
             this.pTortoise_red = new System.Windows.Forms.Panel();
-            this.btTarnooki = new System.Windows.Forms.Button();
             this.btQuestion_Block = new System.Windows.Forms.Button();
             this.btTarnooki_fly = new System.Windows.Forms.Button();
             this.btCoin = new System.Windows.Forms.Button();
             this.bt_leaf = new System.Windows.Forms.Button();
             this.btStar = new System.Windows.Forms.Button();
             this.pTortoise = new System.Windows.Forms.Panel();
+            this.btTarnooki = new System.Windows.Forms.Button();
             this.btMushroom_red = new System.Windows.Forms.Button();
             this.btTortoise_red = new System.Windows.Forms.Button();
             this.btTortoise_fly = new System.Windows.Forms.Button();
@@ -120,6 +120,7 @@
             this.panel2.Controls.Add(this.btReset);
             this.panel2.Controls.Add(this.pleaf);
             this.panel2.Controls.Add(this.pTortoise_red);
+            this.panel2.Controls.Add(this.btTree_Shoot);
             this.panel2.Controls.Add(this.pTortoise);
             this.panel2.Controls.Add(this.panel3);
             this.panel2.Location = new System.Drawing.Point(807, 46);
@@ -153,7 +154,6 @@
             this.pleaf.Controls.Add(this.btP);
             this.pleaf.Controls.Add(this.btTree_red);
             this.pleaf.Controls.Add(this.btDrain);
-            this.pleaf.Controls.Add(this.btTree_Shoot);
             this.pleaf.Controls.Add(this.btTree);
             this.pleaf.Location = new System.Drawing.Point(27, 424);
             this.pleaf.Name = "pleaf";
@@ -162,7 +162,7 @@
             // 
             // btTree_Red_Shoot
             // 
-            this.btTree_Red_Shoot.Location = new System.Drawing.Point(201, 103);
+            this.btTree_Red_Shoot.Location = new System.Drawing.Point(213, 32);
             this.btTree_Red_Shoot.Name = "btTree_Red_Shoot";
             this.btTree_Red_Shoot.Size = new System.Drawing.Size(99, 23);
             this.btTree_Red_Shoot.TabIndex = 2;
@@ -202,7 +202,7 @@
             // 
             // btTree_Shoot
             // 
-            this.btTree_Shoot.Location = new System.Drawing.Point(211, 32);
+            this.btTree_Shoot.Location = new System.Drawing.Point(452, 577);
             this.btTree_Shoot.Name = "btTree_Shoot";
             this.btTree_Shoot.Size = new System.Drawing.Size(75, 23);
             this.btTree_Shoot.TabIndex = 2;
@@ -231,16 +231,6 @@
             this.pTortoise_red.Name = "pTortoise_red";
             this.pTortoise_red.Size = new System.Drawing.Size(324, 127);
             this.pTortoise_red.TabIndex = 3;
-            // 
-            // btTarnooki
-            // 
-            this.btTarnooki.Location = new System.Drawing.Point(0, 90);
-            this.btTarnooki.Name = "btTarnooki";
-            this.btTarnooki.Size = new System.Drawing.Size(75, 23);
-            this.btTarnooki.TabIndex = 1;
-            this.btTarnooki.Text = "Tarnooki";
-            this.btTarnooki.UseVisualStyleBackColor = true;
-            this.btTarnooki.Click += new System.EventHandler(this.btTarnooki_Click);
             // 
             // btQuestion_Block
             // 
@@ -306,6 +296,16 @@
             this.pTortoise.Name = "pTortoise";
             this.pTortoise.Size = new System.Drawing.Size(324, 127);
             this.pTortoise.TabIndex = 3;
+            // 
+            // btTarnooki
+            // 
+            this.btTarnooki.Location = new System.Drawing.Point(0, 90);
+            this.btTarnooki.Name = "btTarnooki";
+            this.btTarnooki.Size = new System.Drawing.Size(75, 23);
+            this.btTarnooki.TabIndex = 1;
+            this.btTarnooki.Text = "Tarnooki";
+            this.btTarnooki.UseVisualStyleBackColor = true;
+            this.btTarnooki.Click += new System.EventHandler(this.btTarnooki_Click);
             // 
             // btMushroom_red
             // 
@@ -478,7 +478,7 @@
             // 
             // btCheckOut
             // 
-            this.btCheckOut.Location = new System.Drawing.Point(338, 12);
+            this.btCheckOut.Location = new System.Drawing.Point(338, 17);
             this.btCheckOut.Name = "btCheckOut";
             this.btCheckOut.Size = new System.Drawing.Size(75, 23);
             this.btCheckOut.TabIndex = 18;
