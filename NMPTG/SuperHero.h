@@ -15,7 +15,7 @@
 #define _hero_ACCELERATION 0.7
 enum Status
 {
-	MARIO, BIGMARIO, BROS, RUN
+	MARIO, BIGMARIO, BROS
 };
 class SuperHero:public Object
 {
@@ -77,11 +77,14 @@ private:
 	FrkSprite* MarioSuperJumpRight;
 #pragma endregion
 public:
+	string f_str;
+	char* a;
 	bool isJump;
 	int status;
-	bool direction;
+	DIRECT direction;
 	bool isRun;
 	float level;
+	float delayMaxSpeed;
 	void Load();
 	void Update(float gametime);
 	void GoLeft(float gameTime);
@@ -94,6 +97,8 @@ public:
 	void JumpKeyUp(float gameTime);
 	void Fall(float gameTime);
 	void Squat(float gameTime);
+	void BrosFly(float gameTime);
+	void RenderV();
 	SuperHero();
 	~SuperHero();
 };
