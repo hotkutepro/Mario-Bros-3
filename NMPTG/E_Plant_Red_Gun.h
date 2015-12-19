@@ -7,9 +7,12 @@ private:
 	FrkSprite* Tree_red_left_up;
 	FrkSprite* Tree_red_right_down;
 	FrkSprite* Tree_red_right_up;
+	FrkSprite* ZPipe_md;
+	D3DXVECTOR2 pos;
 public:
 	void Load();
 	void Update(float gameTime);
+	void Render();
 	E_Plant_Red_Gun();
 	~E_Plant_Red_Gun();
 };

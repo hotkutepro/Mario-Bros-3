@@ -28,9 +28,6 @@
     <ClInclude Include="Map.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Hero.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="QNode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -248,9 +245,6 @@
     </ClCompile>
     <ClCompile Include="C_Brick.cpp">
       <Filter>GameObject</Filter>
-    </ClCompile>
-    <ClCompile Include="Hero.cpp">
-      <Filter>Header Files</Filter>
     </ClCompile>
     <ClCompile Include="Man.cpp">
       <Filter>Header Files</Filter>

@@ -192,6 +192,7 @@ void FrkGame::Run()
 	}
 }
 void FrkGame::InitLocal(){
+	_LocalHero = new Object();
 	_LocalGraphic = new FrkGraphic(this);
 	_LocalContent = new FrkContent(this);
 	_LocalKeyboard = new FrkKeyboard(this);

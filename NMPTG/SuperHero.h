@@ -14,10 +14,7 @@
 #define _SPEED_RUN 0.4//
 
 #define _hero_ACCELERATION 0.7
-enum Status
-{
-	MARIO, BIGMARIO, BROS
-};
+
 class SuperHero:public Object
 {
 private:
@@ -80,8 +77,7 @@ private:
 public:
 	string f_str;
 	char* a;
-	bool isJump;
-	int status;
+	bool isJump;	
 	DIRECT direction;
 	bool isRun;
 	float level;

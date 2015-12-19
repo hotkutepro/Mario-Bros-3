@@ -99,14 +99,11 @@ bool FrkKeyboard::IsKeyPressed(int key)
 	{
 		int state = _KeyEvents[i].dwData;
 		int keycode = _KeyEvents[i].dwOfs;
-		if (keycode == key)
+		if (state & 0x80)
 		{
-			if (state & 0x80)
-			{
-				return true;				
-			}
-
-		}
+			if (keycode==key)
+				return true;
+		}		
 	}
 	return false;
 }

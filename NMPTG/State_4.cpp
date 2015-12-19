@@ -1,5 +1,6 @@
 #include "State_4.h"
 #include "ResourcesManager.h"
+#include"FrkShareControl.h"
 
 
 
@@ -28,6 +29,7 @@ void State_4::Load()
 	map1->Init("hihi.txt", ResourcesManager::GetInstance()->GetTexture(TextureID::TileMap1));
 	hero = new SuperHero();
 	hero->Load();
+	_LocalHero = hero;
 	camera->Update(hero->GetPosition());
 	mapObject::iterator it;
 	for (it = qnode->m_Objects.begin(); it != qnode->m_Objects.end(); it++)
@@ -94,16 +96,19 @@ void State_4::Update(float gameTime)
 	//Box*b1; Box*b2;
 	for (id_Objects = qnode->s_IdObjectInViewPort.begin(); id_Objects != qnode->s_IdObjectInViewPort.end(); id_Objects++)
 	{
-		it_Object = qnode->m_Objects.find(*id_Objects);
-		it_Object->second->Update(gameTime);
+		it_Object = qnode->m_Objects.find(*id_Objects); 
+			it_Object->second->Update(gameTime); 
 		if (it_Object->second->m_hCurrentSprite!=NULL)
 			it_Object->second->m_hCurrentSprite->Next();
-		if (it_Object->second->type == tarnooki || it_Object->second->type == tarnooki_fly || it_Object->second->type == tortoise || it_Object->second->type == tortoise_fly || it_Object->second->type == tortoise_red)
+		if (it_Object->second->type == tarnooki || it_Object->second->type == tarnooki_fly || it_Object->second->type == tortoise || it_Object->second->type == tortoise_fly || it_Object->second->type == tortoise_red){
 			it_Object->second->MoveObject();
+			//it_Object->second->FallDown(1);
+		}
 	}
 	hero->EatFood();
 	hero->KillEnemy();
 	hero->Move();
+	//hero->FallDown(1);//sai j roi
 	float time = 1.0f;	
 	if (hero->m_hState != ON_GROUND)
 	{

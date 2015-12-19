@@ -107,8 +107,8 @@ void Object::Die()
 
 void Object::FallDown(float remainingtime)
 {
-	if (m_hState == ON_GROUND)
-		return;
+
+	m_hObjectGround = NULL;	
 	vector<Object*> Objects_Static = GetStaticObject();
 	float time, nx, ny;
 	for (int i = 0; i < Objects_Static.size(); i++)
@@ -125,6 +125,18 @@ void Object::FallDown(float remainingtime)
 			}
 		}
 	}	
+	if (m_hState == ON_GROUND && isOnGround() != 1||m_hObjectGround==NULL)
+	{
+		m_hSpeed.y -= 0.5;
+		m_hState = ON_SPACE;
+	}
+	else if (m_hState == ON_SPACE)
+	{
+		m_hSpeed.y -= 0.5;
+		m_hPosition.y += m_hSpeed.y;
+		m_hState = ON_SPACE;
+	}
+
 }
 
 void Object::RenderDebug()
@@ -371,6 +383,7 @@ void Object::Move()
 	case ON_FLY:
 		break;
 	case FALL_DOWN:
+
 		break;
 	case ON_SPACE:
 		object_static_can_collision = GetStaticObjectCanCollision();
@@ -502,13 +515,13 @@ void Object::MoveObject()
 				if (nx == 1 && object_static_can_collision.at(i)->type != box)
 				{
 					m_hPosition.x += time*m_hSpeed.x;
-					m_hSpeed.x = 0;
+					m_hSpeed.x = -m_hSpeed.x;
 					m_hObjectLeft = object_static_can_collision.at(i);
 				}
 				if (nx == -1 && object_static_can_collision.at(i)->type != box)
 				{
 					m_hPosition.x += time*m_hSpeed.x;
-					m_hSpeed.x = 0;
+					m_hSpeed.x = -m_hSpeed.x;
 					m_hObjectRight = object_static_can_collision.at(i);
 				}
 				if (ny == 1)
@@ -527,9 +540,9 @@ void Object::MoveObject()
 			}
 		}
 
-		if (m_hObjectLeft == NULL || m_hObjectRight == NULL)
-			m_hPosition.x += m_hSpeed.x;
-		break;
+		//if (m_hObjectLeft == NULL || m_hObjectRight == NULL)
+			//m_hPosition.x += m_hSpeed.x;
+		//break;
 	case ON_GROUND:
 
 		object_static_can_collision = GetStaticObjectCanCollision();
@@ -584,6 +597,27 @@ int Object::isOnGround()
 			return 0;
 	}
 	return -1;
+}
+
+int Object::getDirectWithHero(Object* hero)
+{
+	if (m_hPosition.y < hero->m_hPosition.y)
+	{
+		if (m_hPosition.x < hero->m_hPosition.x)
+			return 3;
+		else
+		{
+			return 2;
+		}
+	}
+	if (m_hPosition.x < hero->m_hPosition.x)
+		return 4;
+	return 1;
+}
+
+void Object::WatchUp()
+{
+	life = true;
 }
 
 

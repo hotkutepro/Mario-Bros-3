@@ -17,6 +17,10 @@ enum TYPEOBJECT{
 };
 enum STATE{ ON_GROUND, ON_SPACE, FALL_DOWN, ON_FLY };
 enum DIRECT{left,right};
+enum Status
+{
+	MARIO, BIGMARIO, BROS
+};
 class Object:public Operate
 {
 protected:		
@@ -34,6 +38,7 @@ public:
 	STATE m_hState = ON_GROUND;
 	DIRECT m_hDirect;
 	Box* m_hBox;
+	int status;//chi dung cho hero
 	//Box* m_hBoundBox; viet ham get la duoc roi
 	TYPEOBJECT type;
 //dung cho quadtree
@@ -54,10 +59,13 @@ public:
 
 	void setCurrentSprite(FrkSprite*);
 	FrkSprite* getCurrentSprite();
-	virtual void Load();
+
+	virtual int getDirectWithHero(Object*);//dùng cho xet huong tree, 1: bl 2: tl 3: tr 4 br, hoac dùng xet hướng rùa, tarnooki....
+	virtual void Load();	 
 	virtual void Render();	
 	virtual void Update(float gameTime);	
 	virtual void Die();
+	virtual void WatchUp();//dung cho coin, leaf...xet life=true
 	virtual void Move();
 	virtual void MoveObject();	
 	virtual void FallDown(float remainingtime);//dung cho object

@@ -15,6 +15,7 @@ void E_Plant_Red::Load()
 {	
 	m_hCurrentSprite = ResourcesManager::GetInstance()->GetSprite(SpriteID::Wood_1);
 	Object::Load();
+	m_hPosition.x += 8;
 	type = TYPEOBJECT::tree_red;
 }
 

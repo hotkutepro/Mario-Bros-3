@@ -2,6 +2,7 @@
 #include"FrkContent.h"
 #include"FrkGraphic.h"
 #include"FrkKeyboard.h"
+#include "Object.h"
 #define FrkControl
 
 FrkGraphic* _LocalGraphic;
@@ -10,5 +11,6 @@ FrkKeyboard* _LocalKeyboard;
 float Zoom = 1.0f;
 float _delay = 0.0f;
 RECT R_Viewport;
+Object* _LocalHero;
 
 #endif FrkControl

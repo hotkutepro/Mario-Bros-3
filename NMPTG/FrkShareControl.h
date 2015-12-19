@@ -2,6 +2,7 @@
 #include"FrkContent.h"
 #include"FrkGraphic.h"
 #include"FrkKeyboard.h"
+#include"Object.h"
 #include <map>
 class Object;
 class QNode;
@@ -15,4 +16,5 @@ extern FrkKeyboard* _LocalKeyboard;
 extern float Zoom;
 extern float _delay;
 extern RECT R_Viewport;
+extern Object* _LocalHero;
 #endif ShareControl

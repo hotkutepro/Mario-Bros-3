@@ -122,8 +122,7 @@ void SuperHero::Update(float gametime)
 			}
 
 		}
-	}
-	_LocalKeyboard->GetDeviceState();
+	}	
 #pragma region KeyDown
 	_LocalKeyboard->GetDeviceState();
 	//quán tính vận tốc
@@ -199,11 +198,12 @@ void SuperHero::Update(float gametime)
 	{
 		m_hCurrentSprite->Reset();
 	}	
-	if (_LocalKeyboard->IsKeyDown(DIK_SPACE))
+	if (_LocalKeyboard->IsKeyPressed(DIK_SPACE))
 		Jump(1);
 	if (_LocalKeyboard->IsKeyUp(DIK_SPACE))
 		JumpKeyUp(1);
-
+	if (_LocalKeyboard->IsKeyPressed(DIK_A))
+		GoRight(1);
 	/*for (DWORD i = 0; i < _LocalKeyboard->dwElements; i++)
 	{
 		int state = _LocalKeyboard->_KeyEvents[i].dwData;
