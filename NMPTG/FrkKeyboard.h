@@ -26,6 +26,7 @@ public:
 	void ClearBuffer();
 	void GetDeviceState();
 	bool IsKeyDown(int key);//trạng thái key đang được nhấn	
+	bool IsKeyUp(int key);
 	bool IsKeyPressed(int key);//lấy trong buffer
 	FrkKeyboard(FrkGame* game);
 	FrkKeyboard();  

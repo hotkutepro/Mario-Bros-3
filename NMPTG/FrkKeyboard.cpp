@@ -110,3 +110,24 @@ bool FrkKeyboard::IsKeyPressed(int key)
 	}
 	return false;
 }
+
+bool FrkKeyboard::IsKeyUp(int key)
+{
+	for (DWORD i = 0; i < dwElements; i++)
+	{
+		int state = _KeyEvents[i].dwData;
+		int keycode = _KeyEvents[i].dwOfs;
+		if (state & 0x80)
+		{			
+		}
+		else
+		{
+			if (keycode == key)
+			{
+				return true;
+			}
+
+		}
+	}
+		return false;
+}
