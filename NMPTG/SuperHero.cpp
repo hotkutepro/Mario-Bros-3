@@ -198,11 +198,13 @@ void SuperHero::Update(float gametime)
 	else
 	{
 		m_hCurrentSprite->Reset();
-	}
-	_LocalKeyboard->ClearBuffer();
+	}	
+	if (_LocalKeyboard->IsKeyDown(DIK_SPACE))
+		Jump(1);
+	if (_LocalKeyboard->IsKeyUp(DIK_SPACE))
+		JumpKeyUp(1);
 
-
-	for (DWORD i = 0; i < _LocalKeyboard->dwElements; i++)
+	/*for (DWORD i = 0; i < _LocalKeyboard->dwElements; i++)
 	{
 		int state = _LocalKeyboard->_KeyEvents[i].dwData;
 		int keycode = _LocalKeyboard->_KeyEvents[i].dwOfs;
@@ -210,7 +212,7 @@ void SuperHero::Update(float gametime)
 		{
 			if (keycode == DIK_SPACE)
 			{
-				Jump(gametime);
+ 				Jump(gametime);
 				//m_hBox->v.y = 10;
 				//m_hState = ON_SPACE;
 			}
@@ -227,8 +229,8 @@ void SuperHero::Update(float gametime)
 				m_hState = ON_SPACE;
 			}
 		}
-	}
-
+	}*/
+	_LocalKeyboard->ClearBuffer();
 	Object::Update(gametime);
 }
 
@@ -245,7 +247,7 @@ void SuperHero::GoLeft(float gameTime)
 	{
 		m_hSpeed.x = -_hero_SPEED;
 	}
-	m_hPosition.x += m_hSpeed.x;
+	//m_hPosition.x += m_hSpeed.x;
 	if (m_hState == ON_SPACE)
 	{
 		switch (status)
@@ -325,7 +327,7 @@ void SuperHero::GoRight(float gameTime)
 	{
 		m_hSpeed.x = _hero_SPEED;
 	}
-	m_hPosition.x += m_hSpeed.x;
+	//m_hPosition.x += m_hSpeed.x;
 	//nếu mario đang nhảy thì chỉ update tọa độ x qua phải
 	if (m_hState == ON_SPACE)
 	{
@@ -414,8 +416,7 @@ void SuperHero::RunLeft(float gameTime)
 	if (m_hSpeed.x <= -_hero_MAXSPEED)
 	{
 		m_hSpeed.x = -_hero_MAXSPEED;
-	}
-	m_hPosition.x += m_hSpeed.x;
+	}	
 #pragma region Set Sprite
 	if (m_hState == ON_SPACE)
 	{
@@ -528,8 +529,7 @@ void SuperHero::RunRight(float gameTime)
 	if (m_hSpeed.x >= _hero_MAXSPEED)
 	{
 		m_hSpeed.x = _hero_MAXSPEED;
-	}
-	m_hPosition.x += m_hSpeed.x;
+	}	
 #pragma region Set Sprite
 	if (m_hState == ON_SPACE)
 	{

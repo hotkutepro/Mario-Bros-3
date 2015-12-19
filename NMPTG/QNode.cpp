@@ -65,25 +65,6 @@ void QNode::LoadQNode(string path)
 	}
 	
 }
-/*
-void QNode::LoadQNode(string path)
-{
-fstream open(path);
-int count_Node = 0;
-open >> count_Node;
-for (int i = 0; i < count_Node; i++){
-QNode* tmp=new QNode;
-open >> tmp->nodeId;
-open >> tmp->Rect.left;
-open >> tmp->Rect.top;
-open >> tmp->Rect.right;
-open >> tmp->Rect.bottom;
-m_QNode.insert(pair<int, QNode*>(tmp->nodeId, tmp));
-}
-
-}
-*/
-
 void QNode::Connect()
 {	
 	mapQNode::iterator it;

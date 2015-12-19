@@ -17,8 +17,8 @@ void E_Tarnooki::Load()
 	E_MushroomDeath = ResourcesManager::GetInstance()->GetSprite(SpriteID::E_MushroomDeath);
 	setCurrentSprite(E_Mushroom);
 	Object::Load();
-	m_hSpeed.x = 0.1;
-	m_hSpeed.y = -0.2;
+	m_hSpeed.x = 1;
+	m_hSpeed.y = 0;
 	type = TYPEOBJECT::tarnooki;
 }
 

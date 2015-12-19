@@ -20,6 +20,8 @@ void E_Tortoise_Red::Load()
 	setCurrentSprite(E_TortoiseRedRight);
 	Object::Load();
 	type = TYPEOBJECT::tortoise_red;
+	m_hSpeed.x = 2;
+	m_hSpeed.y = -2;
 }
 
 void E_Tortoise_Red::Update(float gameTime)

@@ -26,3 +26,9 @@ void C_Question_Block::Update(float gameTime)
 {
 	
 }
+
+void C_Question_Block::Die()
+{
+	life_state = 1;
+	setCurrentSprite(CoinBoxNull);
+}

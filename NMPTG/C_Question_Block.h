@@ -9,6 +9,7 @@ class C_Question_Block:public Object
 public:
 	void Load();	
 	void Update(float gameTime);
+	void Die();
 	C_Question_Block();
 	~C_Question_Block();
 };

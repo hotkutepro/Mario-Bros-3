@@ -41,6 +41,8 @@ void State_4::Load()
 			it_up = qnode->m_Objects.find(it->first - 178);
 			if (it_up != qnode->m_Objects.end())
 			{
+				//qnode->m_Objects.find(it->first - 178)->second->life = false;
+				//qnode->m_Objects.find(it->first - 178)->second->connect = true;
 				it_up->second->life = false;
 				it_up->second->connect = true;
 			}
@@ -53,8 +55,7 @@ void State_4::Render()
 	_LocalGraphic->Begin(camera->GetTransformMatrix());
 
 	//_LocalGraphic->DrawTexture(wall, D3DXVECTOR2(720,450), D3DXVECTOR2(720, 450), D3DCOLOR_XRGB(255, 255, 255), 0.2);
-	map1->Render();
-	hero->Render();
+	map1->Render();	
 
 	sId::iterator id_Objects;
 	mapObject::iterator it_Object;
@@ -62,12 +63,13 @@ void State_4::Render()
 	{
 
 		it_Object = qnode->m_Objects.find(*id_Objects);
-		it_Object->second->RenderBoxDebug();
+		//it_Object->second->RenderBoxDebug();
 		if (it_Object->second->getCurrentSprite() != NULL)
-			it_Object->second->getCurrentSprite()->Render(it_Object->second->GetPosition());
+			it_Object->second->Render();
 	}
-	hero->RenderBoundBox();
-	hero->RenderDebug();
+	//hero->RenderBoundBox();
+	//hero->RenderDebug();
+	hero->Render();
 	_LocalGraphic->End();
 
 }
@@ -94,27 +96,15 @@ void State_4::Update(float gameTime)
 	{
 		it_Object = qnode->m_Objects.find(*id_Objects);
 		it_Object->second->Update(gameTime);
+		if (it_Object->second->m_hCurrentSprite!=NULL)
+			it_Object->second->m_hCurrentSprite->Next();
+		if (it_Object->second->type == tarnooki || it_Object->second->type == tarnooki_fly || it_Object->second->type == tortoise || it_Object->second->type == tortoise_fly || it_Object->second->type == tortoise_red)
+			it_Object->second->MoveObject();
 	}
-	float time = 1.0f;
-	for (id_Objects = qnode->s_IdObjectInViewPort.begin(); id_Objects != qnode->s_IdObjectInViewPort.end(); id_Objects++)
-	{
-		it_Object = qnode->m_Objects.find(*id_Objects);
-		if (it_Object->second->type == land || it_Object->second->type == box || it_Object->second->type == Brick)
-		{
-			//if (collision->checkAABB(hero->GetBoundBox(), it_Object->second->m_hBox))
-			time = collision->sweptAABBCheck(hero->GetBox(), it_Object->second->m_hBox, nx, ny);				
-			if (time < 1.0f && ny == 1 && nx == 0)
-			{			
-				hero->m_hPosition.y += time*hero->m_hSpeed.y;/////////
-				hero->m_hSpeed.y = 0;
-				hero->m_hState = ON_GROUND;
-				hero->m_hBox->_position.x = 0;
-				hero->m_hObjectGround = it_Object->second;///////
-			}
-		
-		}
-	}
-	//hero->Fall(time);
+	hero->EatFood();
+	hero->KillEnemy();
+	hero->Move();
+	float time = 1.0f;	
 	if (hero->m_hState != ON_GROUND)
 	{
 		hero->Fall(time);
@@ -122,6 +112,8 @@ void State_4::Update(float gameTime)
 	else if (hero->m_hObjectGround != NULL){
 		if (!Collision::checkAABB(hero->GetBox_CGround(), hero->m_hObjectGround->m_hBox))
 			hero->m_hState = ON_SPACE;
+		else
+			hero->m_hState = ON_GROUND;
 	}
 
 }
