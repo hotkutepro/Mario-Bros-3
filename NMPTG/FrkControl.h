@@ -12,5 +12,6 @@ float Zoom = 1.0f;
 float _delay = 0.0f;
 RECT R_Viewport;
 Object* _LocalHero;
+float _LocalTimeDelay = 0;
 
 #endif FrkControl

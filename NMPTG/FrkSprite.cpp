@@ -41,7 +41,8 @@ void FrkSprite::Render(D3DXVECTOR2 position)
 }
 void FrkSprite::Next()
 {
-	_Index = (_Index + 1) % _Count;
+	if (_LocalTimeDelay==4)
+		_Index = (_Index + 1) % _Count;
 }
 void FrkSprite::Reset()
 {

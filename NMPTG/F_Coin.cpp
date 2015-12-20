@@ -32,8 +32,9 @@ void F_Coin::Die()
 void F_Coin::Show()
 {	
 	n++;
-	m_hSpeed.y = 0.05;
-	if (n >= 15)
+	m_hSpeed.y += 1.5;
+	m_hPosition.y += m_hSpeed.y;
+	if (n >= 4)
 	{
 		life = false;
 		m_hCurrentSprite = NULL;

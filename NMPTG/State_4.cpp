@@ -78,6 +78,10 @@ void State_4::Render()
 
 void State_4::Update(float gameTime)
 {
+	_LocalTimeDelay++;
+	if (_LocalTimeDelay>4)
+		_LocalTimeDelay = 0;
+
 	hero->Update(gameTime);
 	hero->GetStaticObject();
 	camera->Update(hero->GetPosition());
@@ -95,11 +99,11 @@ void State_4::Update(float gameTime)
 	float mx, my;//swept aabb
 	//Box*b1; Box*b2;
 	for (id_Objects = qnode->s_IdObjectInViewPort.begin(); id_Objects != qnode->s_IdObjectInViewPort.end(); id_Objects++)
-	{
+	{		
 		it_Object = qnode->m_Objects.find(*id_Objects); 
 			it_Object->second->Update(gameTime); 
-		if (it_Object->second->m_hCurrentSprite!=NULL)
-			it_Object->second->m_hCurrentSprite->Next();
+		//if (it_Object->second->m_hCurrentSprite!=NULL)
+			//it_Object->second->m_hCurrentSprite->Next();
 		if (it_Object->second->type == tarnooki || it_Object->second->type == tarnooki_fly || it_Object->second->type == tortoise || it_Object->second->type == tortoise_fly || it_Object->second->type == tortoise_red){
 			it_Object->second->MoveObject();
 			//it_Object->second->FallDown(1);

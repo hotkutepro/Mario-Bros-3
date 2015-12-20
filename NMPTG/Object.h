@@ -16,7 +16,7 @@ enum TYPEOBJECT{
 	tortoise, tortoise_fly, tortoise_red, tree, tree_red, tree_red_shoot, tree_shoot,bullet
 };
 enum STATE{ ON_GROUND, ON_SPACE, FALL_DOWN, ON_FLY };
-enum DIRECT{left,right};
+enum DIRECT{ left,right };
 enum Status
 {
 	MARIO, BIGMARIO, BROS
@@ -36,7 +36,7 @@ public:
 	D3DXVECTOR2 m_hPosition;
 	D3DXVECTOR2 m_hSize;//chỉ dùng cho box, land.
 	STATE m_hState = ON_GROUND;
-	DIRECT m_hDirect;
+	DIRECT m_hDirect= DIRECT::left;
 	Box* m_hBox;
 	float delayNext = 0;
 	int status;//chi dung cho hero

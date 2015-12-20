@@ -32,7 +32,7 @@ Object::~Object()
 }
 
 void Object::Render()
-{
+{	
 	if (m_hCurrentSprite != NULL&&life)
 		m_hCurrentSprite->Render(m_hPosition);
 }
