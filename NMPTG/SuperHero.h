@@ -77,9 +77,10 @@ private:
 public:
 	string f_str;
 	char* a;
-	bool isJump;	
+	bool isJump = false;	
 	DIRECT direction;
-	bool isRun;
+	bool isRun = false;
+	bool isSquat = false;
 	float level;
 	float delayMaxSpeed;
 	void Load();
@@ -90,11 +91,12 @@ public:
 	void RunRight(float gameTime);
 	void Inertia(float gameTime);
 	void InertiaRun(float gameTime);
-	void Jump(float gameTime);
+	void Jump(float gameTime,float vJump);
 	void JumpKeyUp(float gameTime);
 	void Fall(float gameTime);
 	void Squat(float gameTime);
 	void BrosFly(float gameTime);
+	void BrosFall(float gameTime);
 	void RenderV();
 	SuperHero();
 	~SuperHero();

@@ -38,6 +38,7 @@ public:
 	STATE m_hState = ON_GROUND;
 	DIRECT m_hDirect;
 	Box* m_hBox;
+	float delayNext = 0;
 	int status;//chi dung cho hero
 	//Box* m_hBoundBox; viet ham get la duoc roi
 	TYPEOBJECT type;
@@ -62,6 +63,7 @@ public:
 
 	virtual int getDirectWithHero(Object*);//dùng cho xet huong tree, 1: bl 2: tl 3: tr 4 br, hoac dùng xet hướng rùa, tarnooki....
 	virtual void Load();	 
+	virtual void DelayNext(float gameTime, float frame);
 	virtual void Render();	
 	virtual void Update(float gameTime);	
 	virtual void Die();

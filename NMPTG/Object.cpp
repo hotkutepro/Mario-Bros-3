@@ -20,7 +20,7 @@ Object::Object(int _id, D3DXVECTOR2 pos, TYPEOBJECT _type)
 	m_hPosition = pos;
 	type = _type;
 }
-
+ 
 Object::Object(TYPEOBJECT _type)
 {
 	type = _type;
@@ -107,36 +107,8 @@ void Object::Die()
 
 void Object::FallDown(float remainingtime)
 {
-
-	m_hObjectGround = NULL;	
-	vector<Object*> Objects_Static = GetStaticObject();
-	float time, nx, ny;
-	for (int i = 0; i < Objects_Static.size(); i++)
-	{
-		time = Collision::sweptAABBCheck(GetBox(), Objects_Static.at(i)->GetBox(), nx, ny);
-		if (time >= 0 && time < 1)
-		{
-			if (ny == 1)
-			{
-				m_hPosition.y += time*m_hSpeed.y;
-				m_hObjectGround = Objects_Static.at(i);
-				m_hSpeed.y = 0;
-				m_hState = ON_GROUND;
-			}
-		}
-	}	
-	if (m_hState == ON_GROUND && isOnGround() != 1||m_hObjectGround==NULL)
-	{
-		m_hSpeed.y -= 0.5;
-		m_hState = ON_SPACE;
-	}
-	else if (m_hState == ON_SPACE)
-	{
-		m_hSpeed.y -= 0.5;
-		m_hPosition.y += m_hSpeed.y;
-		m_hState = ON_SPACE;
-	}
-
+	m_hPosition.y += m_hSpeed.y*remainingtime;
+	m_hSpeed.y +=-0.5f;
 }
 
 void Object::RenderDebug()
@@ -381,9 +353,10 @@ void Object::Move()
 	switch (m_hState)
 	{
 	case ON_FLY:
+		
 		break;
 	case FALL_DOWN:
-
+		m_hPosition.y += m_hSpeed.y;
 		break;
 	case ON_SPACE:
 		object_static_can_collision = GetStaticObjectCanCollision();
@@ -407,10 +380,9 @@ void Object::Move()
 				}
 				if (ny == 1)
 				{
-					m_hPosition.y += time*m_hSpeed.y;/////////
-					m_hSpeed.y = 0;
-					m_hState = ON_GROUND;
-					m_hBox->_position.x = 0;
+					FallDown(time);/////////
+					m_hSpeed.y = 0;					
+					m_hState = ON_GROUND;					
 					m_hObjectGround = object_static_can_collision.at(i);///////
 				}
 				if (ny == -1 && object_static_can_collision.at(i)->type != box)
@@ -420,7 +392,7 @@ void Object::Move()
 				}
 			}
 		}
-
+		FallDown(1);
 		if (m_hObjectLeft == NULL || m_hObjectRight == NULL)
 			m_hPosition.x += m_hSpeed.x;
 		break;
@@ -444,21 +416,17 @@ void Object::Move()
 					m_hPosition.x += time*m_hSpeed.x;
 					m_hSpeed.x = 0;
 					m_hObjectRight = object_static_can_collision.at(i);
-				}
-				if (ny == 1)
-				{
-					m_hPosition.y += time*m_hSpeed.y;/////////
-					m_hSpeed.y = 0;
-					m_hState = ON_GROUND;
-					m_hBox->_position.x = 0;
-					m_hObjectGround = object_static_can_collision.at(i);///////
-				}
-				if (ny == -1)
-				{
-
-				}
+				}			
 			}
 		}
+		if (this->m_hObjectGround != NULL)
+		{
+			if (!Collision::checkAABB(this->GetBox_CGround(), this->m_hObjectGround->m_hBox))
+			{
+				m_hState = ON_SPACE;
+			}
+		}
+					
 		/*if (m_hObjectLeft != NULL)
 			if (!Collision::checkAABB(GetBox_CLeft(), m_hObjectLeft->GetBox()))
 			m_hObjectLeft = NULL;
@@ -469,7 +437,7 @@ void Object::Move()
 			{
 			m_hPosition.x += m_hSpeed.x;
 			}*/
-		if (m_hObjectLeft == NULL || m_hObjectRight == NULL)
+		//if (m_hObjectLeft == NULL || m_hObjectRight == NULL)
 			m_hPosition.x += m_hSpeed.x;
 		break;
 
@@ -618,6 +586,16 @@ int Object::getDirectWithHero(Object* hero)
 void Object::WatchUp()
 {
 	life = true;
+}
+
+void Object::DelayNext(float gameTime, float frame)
+{
+	delayNext += gameTime;
+	if (delayNext > gameTime*frame)
+	{
+		getCurrentSprite()->Next();
+		delayNext = 0;
+	}
 }
 
 

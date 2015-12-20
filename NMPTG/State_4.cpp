@@ -107,18 +107,18 @@ void State_4::Update(float gameTime)
 	}
 	hero->EatFood();
 	hero->KillEnemy();
-	hero->Move();
+	
 	//hero->FallDown(1);//sai j roi
-	float time = 1.0f;	
-	if (hero->m_hState != ON_GROUND)
-	{
-		hero->Fall(time);
-	}
-	else if (hero->m_hObjectGround != NULL){
-		if (!Collision::checkAABB(hero->GetBox_CGround(), hero->m_hObjectGround->m_hBox))
-			hero->m_hState = ON_SPACE;
-		else
-			hero->m_hState = ON_GROUND;
-	}
+	//float time = 1.0f;	
+	//if (hero->m_hState != ON_GROUND)
+	//{
+	//	hero->Fall(time);
+	//}
+	//else if (hero->m_hObjectGround != NULL){
+	//	if (!Collision::checkAABB(hero->GetBox_CGround(), hero->m_hObjectGround->m_hBox))
+	//		hero->m_hState = ON_SPACE;
+	//	else
+	//		hero->m_hState = ON_GROUND;
+	//}
 
 }

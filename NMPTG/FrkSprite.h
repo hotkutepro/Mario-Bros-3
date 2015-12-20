@@ -20,6 +20,7 @@ public:
 	void Set(int index);		
 	void Render2(D3DXVECTOR2 position);
 	void Render(D3DXVECTOR2 position);
+	bool IsSprite(FrkSprite* compare);
 	FrkSprite(FrkSprite* sprite);
 	FrkSprite(FrkTexture* img,int count, int spriteperrow);
 	FrkSprite();

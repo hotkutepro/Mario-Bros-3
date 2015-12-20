@@ -70,3 +70,8 @@ FrkSprite::FrkSprite(FrkTexture* img,int count, int spriteperrow)
 FrkSprite::~FrkSprite()
 {
 }
+
+bool FrkSprite::IsSprite(FrkSprite* compare)
+{
+	return (this->_X == compare->_X && this->_Y == compare->_Y);
+}
