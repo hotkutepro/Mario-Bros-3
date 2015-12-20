@@ -13,7 +13,7 @@
 #define GRAVITY -0.5f
 enum TYPEOBJECT{
 	brick, coin, drain, land, leaf, mushroom_red, p, box, question_block, star, tarnooki, tarnooki_fly,
-	tortoise, tortoise_fly, tortoise_red, tree, tree_red, tree_red_shoot, tree_shoot,bullet
+	tortoise, tortoise_fly, tortoise_red, tree, tree_red, tree_red_shoot, tree_shoot, bullet, mario
 };
 enum STATE{ ON_GROUND, ON_SPACE, FALL_DOWN, ON_FLY };
 enum DIRECT{ left,right };
@@ -70,7 +70,7 @@ public:
 	virtual void WatchUp();//dung cho coin, leaf...xet life=true
 	virtual void Move();
 	virtual void MoveObject();	
-	virtual void FallDown(float remainingtime);//dung cho object
+	virtual void FallDown(float remainingtime, float Vy);//dung cho object
 	virtual int isOnGround();//kiem tra xem object co dang dung tren ground ko, 1 neu co, 0 neu ko, -1 kxd
 	virtual void EatFood();
 	virtual void KillEnemy();

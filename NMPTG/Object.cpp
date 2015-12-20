@@ -105,10 +105,18 @@ void Object::Die()
 	m_hSpeed.x = 0;
 }
 
-void Object::FallDown(float remainingtime)
+void Object::FallDown(float remainingtime,float Vy)
 {
+	
+	if (Vy != 0)
+	{
+		m_hSpeed.y = Vy;
+	}
+	else
+	{
+		m_hSpeed.y += -0.5f;
+	}	
 	m_hPosition.y += m_hSpeed.y*remainingtime;
-	m_hSpeed.y +=-0.5f;
 }
 
 void Object::RenderDebug()
@@ -356,7 +364,42 @@ void Object::Move()
 		
 		break;
 	case FALL_DOWN:
-		m_hPosition.y += m_hSpeed.y;
+		object_static_can_collision = GetStaticObjectCanCollision();
+		m_hObjectLeft = NULL;
+		m_hObjectRight = NULL;
+		for (int i = 0; i < object_static_can_collision.size(); i++)
+		{
+			time = Collision::sweptAABBCheck(GetBox(), object_static_can_collision.at(i)->GetBox(), nx, ny);
+			if (time < 1 && time >= 0){
+				if (nx == 1 && object_static_can_collision.at(i)->type != box)
+				{
+					m_hPosition.x += time*m_hSpeed.x;
+					m_hSpeed.x = 0;
+					m_hObjectLeft = object_static_can_collision.at(i);
+				}
+				if (nx == -1 && object_static_can_collision.at(i)->type != box)
+				{
+					m_hPosition.x += time*m_hSpeed.x;
+					m_hSpeed.x = 0;
+					m_hObjectRight = object_static_can_collision.at(i);
+				}
+				if (ny == 1)
+				{
+					FallDown(time, 0.5f);/////////
+					m_hSpeed.y = 0;
+					m_hState = ON_GROUND;
+					m_hObjectGround = object_static_can_collision.at(i);///////
+				}
+				if (ny == -1 && object_static_can_collision.at(i)->type != box)
+				{
+					m_hPosition.y += time*m_hSpeed.y;
+					m_hSpeed.y = 0;
+				}
+			}
+		}
+		FallDown(1, 0.5f);
+		if (m_hObjectLeft == NULL || m_hObjectRight == NULL)
+			m_hPosition.x += m_hSpeed.x;
 		break;
 	case ON_SPACE:
 		object_static_can_collision = GetStaticObjectCanCollision();
@@ -380,7 +423,7 @@ void Object::Move()
 				}
 				if (ny == 1)
 				{
-					FallDown(time);/////////
+					FallDown(time,0);/////////
 					m_hSpeed.y = 0;					
 					m_hState = ON_GROUND;					
 					m_hObjectGround = object_static_can_collision.at(i);///////
@@ -392,7 +435,7 @@ void Object::Move()
 				}
 			}
 		}
-		FallDown(1);
+		FallDown(1,0);
 		if (m_hObjectLeft == NULL || m_hObjectRight == NULL)
 			m_hPosition.x += m_hSpeed.x;
 		break;
@@ -404,14 +447,19 @@ void Object::Move()
 		for (int i = 0; i < object_static_can_collision.size(); i++)
 		{
 			time = Collision::sweptAABBCheck(GetBox(), object_static_can_collision.at(i)->GetBox(), nx, ny);
-			if (time < 1 && time >= 0){
-				if (nx == 1 && object_static_can_collision.at(i)->type != box)
+			if (time < 1 && time >= 0 && object_static_can_collision.at(i)->type != box){
+				if (type != mario&&nx != 0){
+					//m_hPosition.x += time*m_hSpeed.x;
+					m_hSpeed.x = -m_hSpeed.x;
+				}
+				else if (nx == 1 && object_static_can_collision.at(i)->type != box)
 				{
+				
 					m_hPosition.x += time*m_hSpeed.x;
 					m_hSpeed.x = 0;
 					m_hObjectLeft = object_static_can_collision.at(i);
 				}
-				if (nx == -1 && object_static_can_collision.at(i)->type != box)
+				else if (nx == -1 && object_static_can_collision.at(i)->type != box)
 				{
 					m_hPosition.x += time*m_hSpeed.x;
 					m_hSpeed.x = 0;
@@ -426,18 +474,7 @@ void Object::Move()
 				m_hState = ON_SPACE;
 			}
 		}
-					
-		/*if (m_hObjectLeft != NULL)
-			if (!Collision::checkAABB(GetBox_CLeft(), m_hObjectLeft->GetBox()))
-			m_hObjectLeft = NULL;
-			if (m_hObjectRight != NULL)
-			if (!Collision::checkAABB(GetBox_CRight(), m_hObjectRight->GetBox()))
-			m_hObjectRight = NULL;
-			if (m_hObjectLeft == NULL&&m_hSpeed.x>0 ||m_hObjectRight == NULL&&m_hSpeed<0)
-			{
-			m_hPosition.x += m_hSpeed.x;
-			}*/
-		//if (m_hObjectLeft == NULL || m_hObjectRight == NULL)
+		if (m_hObjectLeft == NULL && m_hObjectRight == NULL)
 			m_hPosition.x += m_hSpeed.x;
 		break;
 

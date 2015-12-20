@@ -68,7 +68,7 @@ void SuperHero::Load()
 	MarioSuperJumpLeft = ResourcesManager::GetInstance()->GetSprite(SpriteID::MarioSuperJumpLeft);
 	MarioSuperJumpRight = ResourcesManager::GetInstance()->GetSprite(SpriteID::MarioSuperJumpRight);
 #pragma endregion
-
+	type = mario;
 	setCurrentSprite(MarioRight);
 	m_hPosition.x = 100;
 	m_hPosition.y = 320;
@@ -873,7 +873,10 @@ void SuperHero::BrosFly(float gameTime)
 		else
 		{
 			Jump(1, 4);
-
+			if (m_hState == ON_SPACE&&m_hSpeed.y <0)
+			{
+				m_hState = FALL_DOWN;				
+			}
 		}
 		break;
 	}

@@ -102,8 +102,8 @@ void State_4::Update(float gameTime)
 	{		
 		it_Object = qnode->m_Objects.find(*id_Objects); 
 			it_Object->second->Update(gameTime); 
-		//if (it_Object->second->m_hCurrentSprite!=NULL)
-			//it_Object->second->m_hCurrentSprite->Next();
+		if (it_Object->second->m_hCurrentSprite!=NULL)
+			it_Object->second->DelayNext(gameTime,3);
 		if (it_Object->second->type == tarnooki || it_Object->second->type == tarnooki_fly || it_Object->second->type == tortoise || it_Object->second->type == tortoise_fly || it_Object->second->type == tortoise_red){
 			it_Object->second->MoveObject();
 			//it_Object->second->FallDown(1);
