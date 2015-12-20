@@ -81,7 +81,7 @@ void State_4::Update(float gameTime)
 	_LocalTimeDelay++;
 	if (_LocalTimeDelay>4)
 		_LocalTimeDelay = 0;
-
+	
 	hero->Update(gameTime);
 	hero->GetStaticObject();
 	camera->Update(hero->GetPosition());
@@ -108,9 +108,7 @@ void State_4::Update(float gameTime)
 			it_Object->second->MoveObject();
 			//it_Object->second->FallDown(1);
 		}
-	}
-	hero->EatFood();
-	hero->KillEnemy();
+	}	
 	
 	//hero->FallDown(1);//sai j roi
 	//float time = 1.0f;	

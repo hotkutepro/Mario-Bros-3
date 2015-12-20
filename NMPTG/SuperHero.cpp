@@ -243,6 +243,8 @@ void SuperHero::Update(float gametime)
 		}
 	}
 #pragma endregion
+	KillEnemy();
+	EatFood();
 	this->Move();
 }
 
