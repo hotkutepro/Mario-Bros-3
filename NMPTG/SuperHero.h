@@ -77,8 +77,9 @@ private:
 public:
 	string f_str;
 	char* a;
-	bool isJump = false;	
-	DIRECT direction;
+	string f_str1;
+	char* a1;
+	bool isJump = false;		
 	bool isRun = false;
 	bool isSquat = false;
 	float level;
@@ -97,7 +98,7 @@ public:
 	void Squat(float gameTime);
 	void BrosFly(float gameTime);
 	void BrosFall(float gameTime);
-	void RenderV();
+	void RenderV();	
 	SuperHero();
 	~SuperHero();
 };
