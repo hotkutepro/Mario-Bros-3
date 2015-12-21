@@ -107,16 +107,16 @@ void Object::Die()
 
 void Object::FallDown(float remainingtime,float Vy)
 {
-	
+	m_hPosition.y += m_hSpeed.y*remainingtime;
 	if (Vy != 0)
 	{
 		m_hSpeed.y = Vy;
 	}
 	else
 	{
-		m_hSpeed.y += -0.5f;
+		m_hSpeed.y += GRAVITY;
 	}	
-	m_hPosition.y += m_hSpeed.y*remainingtime;
+	
 }
 
 void Object::RenderDebug()
@@ -385,10 +385,11 @@ void Object::Move()
 				}
 				if (ny == 1)
 				{
-					FallDown(time, 0.5f);/////////
+					FallDown(time, V_FALLDOWN);/////////
 					m_hSpeed.y = 0;
 					m_hState = ON_GROUND;
 					m_hObjectGround = object_static_can_collision.at(i);///////
+					return;
 				}
 				if (ny == -1 && object_static_can_collision.at(i)->type != box)
 				{
@@ -397,7 +398,9 @@ void Object::Move()
 				}
 			}
 		}
-		FallDown(1, 0.5f);
+	//	m_hSpeed.y = -0.5f;
+	//	m_hPosition.y += m_hSpeed.y;
+		FallDown(1, V_FALLDOWN);
 		if (m_hObjectLeft == NULL || m_hObjectRight == NULL)
 			m_hPosition.x += m_hSpeed.x;
 		break;
@@ -427,6 +430,7 @@ void Object::Move()
 					m_hSpeed.y = 0;					
 					m_hState = ON_GROUND;					
 					m_hObjectGround = object_static_can_collision.at(i);///////
+					return;
 				}
 				if (ny == -1 && object_static_can_collision.at(i)->type != box)
 				{
@@ -625,10 +629,10 @@ void Object::WatchUp()
 	life = true;
 }
 
-void Object::DelayNext(float gameTime, float frame)
+void Object::DelayNext(float frame)
 {
-	delayNext += gameTime;
-	if (delayNext > gameTime*frame)
+	delayNext++;
+	if (delayNext >= frame)
 	{
 		getCurrentSprite()->Next();
 		delayNext = 0;

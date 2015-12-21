@@ -82,7 +82,7 @@ void SuperHero::Load()
 
 void SuperHero::Update(float gametime)
 {
-	f_str = "Vx = " + std::to_string(m_hSpeed.x);
+	f_str = "Vx = " + std::to_string(m_hSpeed.y);
 	a = new char[f_str.length() + 1];
 	strcpy(a, f_str.c_str());
 
@@ -164,13 +164,14 @@ void SuperHero::Update(float gametime)
 	_LocalKeyboard->ClearBuffer();
 #pragma endregion
 #pragma region Process next sprite
+#pragma  region ON_GROUND
 	if (m_hState == ON_GROUND)
 	{				
 		if (!isSquat)
 		{
 			if (m_hSpeed.x != 0)
 			{
-				DelayNext(gametime, 2);
+				DelayNext(3);
 			}
 			else
 			{
@@ -213,6 +214,8 @@ void SuperHero::Update(float gametime)
 			}
 		}
 	}
+#pragma endregion
+#pragma region On_SPACE
 	if (m_hState == ON_SPACE)
 	{
 		if (m_hSpeed.y < 0)
@@ -242,6 +245,27 @@ void SuperHero::Update(float gametime)
 			}
 		}
 	}
+#pragma endregion
+#pragma region FALL_DOWN
+	if (m_hState == FALL_DOWN)
+	{
+		if (direction == DIRECT::right)
+		{
+			if (!getCurrentSprite()->IsSprite(BrosFallRight))
+			{
+				setCurrentSprite(BrosFallRight);
+			}
+		}
+		else
+		{
+			if (!getCurrentSprite()->IsSprite(BrosFallLeft))
+			{
+				setCurrentSprite(BrosFallLeft);
+			}
+		}
+		getCurrentSprite()->Next();
+	}
+#pragma endregion
 #pragma endregion
 	KillEnemy();
 	EatFood();
@@ -672,7 +696,7 @@ void SuperHero::InertiaRun(float gameTime)
 
 void SuperHero::Jump(float gameTime, float vJump)
 {
-	if (m_hState == ON_SPACE)
+	if (m_hState != ON_GROUND)
 		return;
 	isJump = true;
 	m_hSpeed.y = vJump;
@@ -873,10 +897,7 @@ void SuperHero::BrosFly(float gameTime)
 		else
 		{
 			Jump(1, 4);
-			if (m_hState == ON_SPACE&&m_hSpeed.y <0)
-			{
-				m_hState = FALL_DOWN;				
-			}
+			BrosFall(gameTime);
 		}
 		break;
 	}
@@ -885,5 +906,16 @@ void SuperHero::BrosFly(float gameTime)
 
 void SuperHero::BrosFall(float gameTime)
 {
-
+	if (m_hState != ON_SPACE)
+	{
+		return;
+	}
+	if (m_hSpeed.y >= 0)
+	{
+		return;
+	}
+	else
+	{
+		m_hState = FALL_DOWN;
+	}
 }

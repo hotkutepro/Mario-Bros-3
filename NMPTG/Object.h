@@ -10,7 +10,8 @@
 #include <vector>
 #define Range_x 10// dung cho ham lay danh sach cac doi tuong cach object mot khoang rang_x theo chieu ngang
 #define Range_y 10// dung cho ham lay danh sach cac doi tuong cach object mot khoang rang_y theo chieu doc
-#define GRAVITY -0.5f
+#define GRAVITY -0.7f
+#define  V_FALLDOWN -1
 enum TYPEOBJECT{
 	brick, coin, drain, land, leaf, mushroom_red, p, box, question_block, star, tarnooki, tarnooki_fly,
 	tortoise, tortoise_fly, tortoise_red, tree, tree_red, tree_red_shoot, tree_shoot, bullet, mario
@@ -63,7 +64,7 @@ public:
 
 	virtual int getDirectWithHero(Object*);//dùng cho xet huong tree, 1: bl 2: tl 3: tr 4 br, hoac dùng xet hướng rùa, tarnooki....
 	virtual void Load();	 
-	virtual void DelayNext(float gameTime, float frame);
+	virtual void DelayNext(float frame);
 	virtual void Render();	
 	virtual void Update(float gameTime);	
 	virtual void Die();

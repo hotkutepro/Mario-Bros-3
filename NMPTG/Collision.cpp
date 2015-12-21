@@ -82,7 +82,7 @@ float Collision::sweptAABBCheck(Box* b1, Box* b2, float& x, float& y)
 	tEntry = max(txEntry, tyEntry);
 	tExit = min(txExit, tyExit);
 
-	if (tEntry > tExit || //truc va cham sau cung chua xay ra thi va cham o truc truc da kt
+	if (tEntry > tExit || //truc va cham sau cung chua xay ra thi va cham o truc truoc da kt
 		txEntry < 0.0f && tyEntry < 0.0f ||//truong hop b1 nam tren/ duoi/ trai/ phai 
 		txEntry > 1.0f ||// b1 cach xa b2 theo truc x
 		tyEntry > 1.0f)//b1 cach xa b2 theo truc y
