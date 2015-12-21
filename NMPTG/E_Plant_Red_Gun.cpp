@@ -111,3 +111,23 @@ void E_Plant_Red_Gun::shoot()
 		bullet.m_hSpeed.y = -vy;
 	}
 }
+
+void E_Plant_Red_Gun::Collision_Up()
+{
+
+}
+
+void E_Plant_Red_Gun::Collision_Down()
+{
+
+}
+
+void E_Plant_Red_Gun::Collision_Left()
+{
+
+}
+
+void E_Plant_Red_Gun::Collision_Right()
+{
+
+}

@@ -73,6 +73,7 @@ void State_4::Render()
 	//hero->RenderDebug();
 	hero->RenderV();
 	hero->Render();
+	//hero->ReanderGroundBox();
 	_LocalGraphic->End();
 
 }
@@ -105,11 +106,11 @@ void State_4::Update(float gameTime)
 			it_Object->second->Update(gameTime); 
 		if (it_Object->second->m_hCurrentSprite!=NULL)
 			it_Object->second->DelayNext(3);
-		if (it_Object->second->type == tarnooki || it_Object->second->type == tarnooki_fly || it_Object->second->type == tortoise || it_Object->second->type == tortoise_fly || it_Object->second->type == tortoise_red){
-			it_Object->second->MoveObject();
+		//if (it_Object->second->type == tarnooki || it_Object->second->type == tarnooki_fly || it_Object->second->type == tortoise || it_Object->second->type == tortoise_fly || it_Object->second->type == tortoise_red){
+			//it_Object->second->MoveObject();
 			//it_Object->second->FallDown(1);
 		}
-	}	
+	
 	
 	//hero->FallDown(1);//sai j roi
 	//float time = 1.0f;	

@@ -10,6 +10,10 @@ public:
 	void Load();
 	void Update(float gameTime);
 	void Render();
+	void Collision_Up();
+	void Collision_Down();
+	void Collision_Left();
+	void Collision_Right();
 	E_Plant();
 	~E_Plant();
 };

@@ -194,10 +194,40 @@ void Object::RenderBoundBox()
 Box* Object::GetBox_CGround()
 {
 	Box* x = new Box();
+	if (status == BROS||status==BIGMARIO)
+	{
+		if (m_hDirect == DIRECT::left)
+		{
+			x->_position.x = m_hPosition.x+20;
+			x->_position.y = m_hPosition.y;
+			x->_size.x = m_hCurrentSprite->_Width-20;
+			x->_size.y += 5;
+		}
+		else{
+			x->_position.x = m_hPosition.x-20;
+			x->_position.y = m_hPosition.y;
+			x->_size.x = m_hCurrentSprite->_Width-20 ;
+			x->_size.y += 5;
+		}
+	}else
+		if (m_hDirect == DIRECT::left)
+		{
+		x->_position.x = m_hPosition.x-3;
+		x->_position.y = m_hPosition.y;
+		x->_size.x = m_hCurrentSprite->_Width;
+		x->_size.y += 5;
+		}
+		else{
+			x->_position.x = m_hPosition.x + 3;
+			x->_position.y = m_hPosition.y;
+			x->_size.x = m_hCurrentSprite->_Width ;
+			x->_size.y += 5;
+		}
 	x->_position.x = m_hPosition.x;
 	x->_position.y = m_hPosition.y;
 	x->_size = m_hBox->_size;
 	x->_size.y += 5;
+
 	return x;
 }
 
@@ -337,19 +367,19 @@ void Object::KillEnemy()
 		{
 			if (nx == 1)
 			{
-
+				objects_Enemy.at(i)->Collision_Right();
+			}		
+			if (nx == -1)
+			{
+				objects_Enemy.at(i)->Collision_Left();
 			}
 			if (ny == 1)
 			{
-
-			}
-			if (ny == 1)
-			{
-				objects_Enemy.at(i)->Die();
+				objects_Enemy.at(i)->Collision_Up();
 			}
 			if (ny == -1)
 			{
-
+				objects_Enemy.at(i)->Collision_Down();
 			}
 		}
 	}
@@ -370,7 +400,7 @@ void Object::Move()
 		for (int i = 0; i < object_static_can_collision.size(); i++)
 		{
 			time = Collision::sweptAABBCheck(GetBox(), object_static_can_collision.at(i)->GetBox(), nx, ny);
-			if (time < 1 && time >= 0){
+			if (time < 1){
 				if (nx == 1 && object_static_can_collision.at(i)->type != box)
 				{
 					m_hPosition.x += time*m_hSpeed.x;
@@ -405,13 +435,14 @@ void Object::Move()
 			m_hPosition.x += m_hSpeed.x;
 		break;
 	case ON_SPACE:
-		object_static_can_collision = GetStaticObjectCanCollision();
+		object_static_can_collision = GetStaticObject();
 		m_hObjectLeft = NULL;
 		m_hObjectRight = NULL;
 		for (int i = 0; i < object_static_can_collision.size(); i++)
 		{
 			time = Collision::sweptAABBCheck(GetBox(), object_static_can_collision.at(i)->GetBox(), nx, ny);
-			if (time < 1 && time >= 0){
+			if (time < 1){
+				//time = Collision::sweptAABBCheck(GetBox(), object_static_can_collision.at(i)->GetBox(), nx, ny);
 				if (nx == 1 && object_static_can_collision.at(i)->type != box)
 				{
 					m_hPosition.x += time*m_hSpeed.x;
@@ -424,7 +455,7 @@ void Object::Move()
 					m_hSpeed.x = 0;
 					m_hObjectRight = object_static_can_collision.at(i);
 				}
-				if (ny == 1)
+				if (ny == 1 && nx == 0)
 				{
 					FallDown(time,0);/////////
 					m_hSpeed.y = 0;					
@@ -432,7 +463,7 @@ void Object::Move()
 					m_hObjectGround = object_static_can_collision.at(i);///////
 					return;
 				}
-				if (ny == -1 && object_static_can_collision.at(i)->type != box)
+				if ((ny == 0 || ny == -1) && object_static_can_collision.at(i)->type != box)
 				{
 					m_hPosition.y += time*m_hSpeed.y;
 					m_hSpeed.y = 0;
@@ -637,6 +668,57 @@ void Object::DelayNext(float frame)
 		getCurrentSprite()->Next();
 		delayNext = 0;
 	}
+}
+
+void Object::ReanderGroundBox()
+{
+	RECT src;
+	src.left = 0;
+	src.right = src.left + 16;
+	src.top = 0;
+	src.bottom = src.top + 16;
+	RECT a;
+	a = GetBox_CGround()->getRect();
+	_LocalGraphic->tDrawTexture(_LocalContent->LoadTexture("brick.png"), src, a, D3DXVECTOR2(8, 8), D3DCOLOR_XRGB(255, 255, 255), 0);
+}
+
+void Object::Collision_Up()
+{
+
+}
+
+void Object::Collision_Down()
+{
+
+}
+
+void Object::Collision_Left()
+{
+
+}
+
+void Object::Collision_Right()
+{
+
+}
+
+vector<Object*> Object::GetListTortoise()
+{
+	vector<Object*> result;
+	sId::iterator id_Objects;
+	mapObject::iterator it_Object;
+	for (id_Objects = QNode::s_IdObjectInViewPort.find(id); id_Objects != QNode::s_IdObjectInViewPort.end(); id_Objects++)
+	{
+		it_Object = QNode::m_Objects.find(*id_Objects);
+		if (!it_Object->second->life)
+			continue;
+		if (it_Object->second->type == tortoise||it_Object->second->type==tortoise_fly)
+		{
+			result.push_back(it_Object->second);
+		}		
+	}
+
+	return result;
 }
 
 

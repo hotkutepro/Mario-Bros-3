@@ -46,3 +46,23 @@ void E_Plant::Render()
 	Object::Render();
 	ZPipe_sm->Render(pos);
 }
+
+void E_Plant::Collision_Up()
+{
+
+}
+
+void E_Plant::Collision_Down()
+{
+
+}
+
+void E_Plant::Collision_Left()
+{
+
+}
+
+void E_Plant::Collision_Right()
+{
+
+}

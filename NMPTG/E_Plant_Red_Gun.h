@@ -19,6 +19,10 @@ public:
 	void Update(float gameTime);
 	void Render();
 	void shoot();
+	void Collision_Up();
+	void Collision_Down();
+	void Collision_Left();
+	void Collision_Right();
 	E_Plant_Red_Gun();
 	~E_Plant_Red_Gun();
 };

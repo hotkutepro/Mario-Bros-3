@@ -19,10 +19,62 @@ void E_Tarnooki_Fly::Load()
 	setCurrentSprite(E_FlyMushroom);
 	Object::Load();
 	type = TYPEOBJECT::tarnooki_fly;
-	m_hSpeed.x = 0.02; m_hSpeed.y = -0.002;
+	m_hDirect = DIRECT::left;
+	m_hState = ON_SPACE;
+	m_hSpeed.x = -1; m_hSpeed.y = -2;
+	status = 0;
+	t = 0;
 }
 
 void E_Tarnooki_Fly::Update(float gameTime)
 {
+	if (t == 10)
+		life = false;
+	if (status==2)
+	{
+		t++;
+		return;
+	}
 	Object::Update(gameTime);
+	Move();
+}
+
+void E_Tarnooki_Fly::Collision_Up()
+{
+	if (status == 2)
+		return;
+	status++;
+	_LocalHero->m_hSpeed.y = 3;
+	SetSprite();
+}
+
+void E_Tarnooki_Fly::Collision_Down()
+{
+
+}
+
+void E_Tarnooki_Fly::Collision_Left()
+{
+
+}
+
+void E_Tarnooki_Fly::Collision_Right()
+{
+
+}
+
+void E_Tarnooki_Fly::SetSprite()
+{
+	if (status == 0)
+	{
+		setCurrentSprite(E_FlyMushroom);
+	}
+	if (status == 1)
+	{
+		setCurrentSprite(E_MushroomRed);
+	}
+	if (status == 2)
+	{
+		setCurrentSprite(E_MushroomRedDeath);
+	}
 }

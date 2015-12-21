@@ -24,6 +24,8 @@ enum Status
 };
 class Object:public Operate
 {
+private:
+	Box* m_hBox;
 protected:		
 
 public:
@@ -37,10 +39,9 @@ public:
 	D3DXVECTOR2 m_hPosition;
 	D3DXVECTOR2 m_hSize;//chỉ dùng cho box, land.
 	STATE m_hState = ON_GROUND;
-	DIRECT m_hDirect= DIRECT::left;
-	Box* m_hBox;
+	DIRECT m_hDirect= DIRECT::left;	
 	float delayNext = 0;
-	int status;//chi dung cho hero
+	int status;//chi dung cho hero, tortoise 0: bt , 1: shell, 3: reverse
 	//Box* m_hBoundBox; viet ham get la duoc roi
 	TYPEOBJECT type;
 //dung cho quadtree
@@ -57,7 +58,7 @@ public:
 	vector<Object*> GetFoodObject();//tra ve danh sach cac doi tuong dung yen va co the an duoc hoac pha huy: coin, brick, star, QUESTION_BLOCK, P DIEU KIEN: LIFE = TRUE
 	// lay danh sach cac doi tuong tinh co the va cham voi object
 	vector<Object*> GetStaticObjectCanCollision();
-
+	vector<Object*> GetListTortoise();//trả về danh sách các loại tortoise, bắt đầu từ tortoise tiếp theo nằm trong danh sách
 
 	void setCurrentSprite(FrkSprite*);
 	FrkSprite* getCurrentSprite();
@@ -67,6 +68,10 @@ public:
 	virtual void DelayNext(float frame);
 	virtual void Render();	
 	virtual void Update(float gameTime);	
+	virtual void Collision_Up();
+	virtual void Collision_Down();
+	virtual void Collision_Left();
+	virtual void Collision_Right();
 	virtual void Die();
 	virtual void WatchUp();//dung cho coin, leaf...xet life=true
 	virtual void Move();
@@ -78,6 +83,7 @@ public:
 	virtual void RenderDebug();
 	virtual void RenderBoxDebug();
 	virtual void RenderBoundBox();
+	virtual void ReanderGroundBox();
 	virtual Box* GetBox();
 	virtual Box* GetBoundBox();
 	virtual Box* GetBox_CGround();//va de xet va cham voi mat dat

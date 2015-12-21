@@ -9,9 +9,16 @@ class E_Tortoise_Fly :public Object
 	FrkSprite* E_TortoiseshellGreenRight;
 	FrkSprite* E_TortoiseGreenLeft;
 	FrkSprite* E_TortoiseGreenRight;
+	FrkSprite* E_TortoiseshellGreenLeftReverse;
+	FrkSprite* E_TortoiseshellGreenRightReverse;
 public:
 	void Load();	
 	void Update(float gameTime);
+	void SetSprite();
+	void Collision_Up();
+	void Collision_Down();
+	void Collision_Left();
+	void Collision_Right();
 	E_Tortoise_Fly();
 	~E_Tortoise_Fly();
 };
