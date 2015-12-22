@@ -4,7 +4,7 @@
 #define _hero_JUMP 36//36
 #define _hero_MAXJUM 45//45
 #define _hero_MAXSPEED 5//5
-#define _hero_SPEED 3//2
+#define _hero_SPEED 2.5//2
 #define _tx_frame .5f//.2f
 
 #define _max_SPEED_JUMP 5
@@ -81,7 +81,10 @@ public:
 	char* a1;
 	bool isJump = false;		
 	bool isRun = false;
-	bool isSquat = false;
+	bool isSquat = false;		
+	bool isFly = false;
+	bool attack = false;
+	float timeAttack = 0;
 	float level;
 	float delayMaxSpeed;
 	void Load();
@@ -98,6 +101,9 @@ public:
 	void Squat(float gameTime);
 	void BrosFly(float gameTime);
 	void BrosFall(float gameTime);
+	void Attack();
+	Box* GetBox();
+	//void RenderBoxDebug();
 	void RenderV();	
 	SuperHero();
 	~SuperHero();

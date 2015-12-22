@@ -25,10 +25,12 @@ enum Status
 class Object:public Operate
 {
 private:
-	Box* m_hBox;
+	
 protected:		
-
+	Box* m_hBox;
 public:
+	// thoi gian co the bay
+	int flyTime = 0;
 	//toc do
 	D3DXVECTOR2 m_hSpeed;
 	Object* m_hObjectGround;//

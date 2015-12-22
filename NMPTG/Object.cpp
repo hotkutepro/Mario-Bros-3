@@ -101,12 +101,12 @@ FrkSprite* Object::getCurrentSprite()
 
 void Object::Die()
 {
-	life = false;
+	life = false; 
 	m_hSpeed.x = 0;
 }
 
 void Object::FallDown(float remainingtime,float Vy)
-{
+{	
 	m_hPosition.y += m_hSpeed.y*remainingtime;
 	if (Vy != 0)
 	{
@@ -128,7 +128,7 @@ void Object::RenderDebug()
 	src.bottom = src.top + 16;
 	RECT a;
 	a = m_hBox->getRect();
-	_LocalGraphic->tDrawTexture(_LocalContent->LoadTexture("brick.png"), src, a, D3DXVECTOR2(8, 8), D3DCOLOR_XRGB(255, 255, 255), 0);
+	_LocalGraphic->tDrawTexture(_LocalContent->LoadTexture("brick.png"), src, a, D3DXVECTOR2(m_hBox->getCenter()), D3DCOLOR_XRGB(255, 255, 255), 0);
 }
 
 Box* Object::GetBox()
@@ -141,16 +141,7 @@ Box* Object::GetBox()
 		m_hBox->_size.x = m_hSize.x;
 		m_hBox->_size.y = m_hSize.y;
 	}
-	else
-	{
-		m_hBox->_position.x = m_hPosition.x;
-		m_hBox->_position.y = m_hPosition.y;
-		m_hSize.x = getCurrentSprite()->_Width;
-		m_hSize.y = getCurrentSprite()->_Height;		
-		m_hBox->_size.x = getCurrentSprite()->_Width;
-		m_hBox->_size.y = getCurrentSprite()->_Height;
-		m_hBox->_v = m_hSpeed;
-	}
+	
 	return m_hBox;
 }
 
@@ -161,12 +152,8 @@ void Object::RenderBoxDebug()
 	src.top = 0;
 	src.right = src.left + 16;
 	src.bottom = src.top + 16;
-	RECT a;
-	a.left = m_hBox->_position.x;
-	a.top = m_hBox->_position.y;
-	a.right = a.left + m_hBox->_size.x;
-	a.bottom = a.top + m_hBox->_size.y;
-	_LocalGraphic->tDrawTexture(_LocalContent->LoadTexture("abc.png"), src, a, D3DXVECTOR2(m_hBox->_size.x / 2, m_hBox->_size.y / 2), D3DCOLOR_XRGB(255, 255, 255), 0);
+	RECT a = m_hBox->getRect();
+	_LocalGraphic->tDrawTexture(_LocalContent->LoadTexture("abc.png"), src, a, D3DXVECTOR2(m_hBox->getCenter()), D3DCOLOR_XRGB(255, 255, 255), 0);
 }
 Box* Object::GetBoundBox()
 {
@@ -391,7 +378,8 @@ void Object::Move()
 	switch (m_hState)
 	{
 	case ON_FLY:
-		
+		m_hPosition.x += m_hSpeed.x;
+		m_hPosition.y += m_hSpeed.y;
 		break;
 	case FALL_DOWN:
 		object_static_can_collision = GetStaticObjectCanCollision();
@@ -409,6 +397,7 @@ void Object::Move()
 				}
 				if (nx == -1 && object_static_can_collision.at(i)->type != box)
 				{
+					
 					m_hPosition.x += time*m_hSpeed.x;
 					m_hSpeed.x = 0;
 					m_hObjectRight = object_static_can_collision.at(i);
@@ -445,15 +434,20 @@ void Object::Move()
 				//time = Collision::sweptAABBCheck(GetBox(), object_static_can_collision.at(i)->GetBox(), nx, ny);
 				if (nx == 1 && object_static_can_collision.at(i)->type != box)
 				{
+					time = Collision::sweptAABBCheck(GetBox(), object_static_can_collision.at(i)->GetBox(), nx, ny);
 					m_hPosition.x += time*m_hSpeed.x;
+					
 					m_hSpeed.x = 0;
 					m_hObjectLeft = object_static_can_collision.at(i);
+					
 				}
 				if (nx == -1 && object_static_can_collision.at(i)->type != box)
 				{
 					m_hPosition.x += time*m_hSpeed.x;
+				
 					m_hSpeed.x = 0;
 					m_hObjectRight = object_static_can_collision.at(i);
+					
 				}
 				if (ny == 1 && nx == 0)
 				{
@@ -463,7 +457,7 @@ void Object::Move()
 					m_hObjectGround = object_static_can_collision.at(i);///////
 					return;
 				}
-				if ((ny == 0 || ny == -1) && object_static_can_collision.at(i)->type != box)
+				if (ny == -1 && object_static_can_collision.at(i)->type != box)
 				{
 					m_hPosition.y += time*m_hSpeed.y;
 					m_hSpeed.y = 0;

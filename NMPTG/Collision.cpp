@@ -92,12 +92,12 @@ float Collision::sweptAABBCheck(Box* b1, Box* b2, float& x, float& y)
 	//nghi ngo co va cham
 	if (txEntry < 0.0f)
 	{
-		if (b1->getRight() < b2->_position.x || b2->getRight() < b1->_position.x) return 1.0f;
+		if (b1->getRight() <= b2->_position.x || b2->getRight() <= b1->_position.x) return 1.0f;
 
 	}
 	if (tyEntry < 0.0f)
 	{
-		if (b1->getBottom() < b2->_position.y || b2->getBottom() < b1->_position.y) return 1.0f;
+		if (b1->getBottom() <= b2->_position.y || b2->getBottom() <= b1->_position.y) return 1.0f;
 	}
 	if (txEntry > tyEntry)// va cham xay ra tren truc x
 	{

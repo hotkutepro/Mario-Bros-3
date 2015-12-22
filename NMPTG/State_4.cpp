@@ -65,14 +65,14 @@ void State_4::Render()
 	{
 
 		it_Object = qnode->m_Objects.find(*id_Objects);
-		//it_Object->second->RenderBoxDebug();
+		it_Object->second->RenderBoxDebug();
 		if (it_Object->second->getCurrentSprite() != NULL)
 			it_Object->second->Render();
 	}
 	//hero->RenderBoundBox();
-	//hero->RenderDebug();
+	hero->RenderDebug();
 	hero->RenderV();
-	hero->Render();
+	//hero->Render();
 	//hero->ReanderGroundBox();
 	_LocalGraphic->End();
 
@@ -80,9 +80,6 @@ void State_4::Render()
 
 void State_4::Update(float gameTime)
 {
-	_LocalTimeDelay++;
-	if (_LocalTimeDelay>4)
-		_LocalTimeDelay = 0;
 	
 	hero->Update(gameTime);
 	hero->GetStaticObject();
@@ -95,34 +92,11 @@ void State_4::Update(float gameTime)
 	sId::iterator id_ONext;
 	mapObject::iterator it_Object;
 	mapObject::iterator it_ONext;
-	//float time = 0;
-	float nx = 0; float ny = 0;//swept aabb
-	float nx2, ny2;
-	float mx, my;//swept aabb
-	//Box*b1; Box*b2;
+	
 	for (id_Objects = qnode->s_IdObjectInViewPort.begin(); id_Objects != qnode->s_IdObjectInViewPort.end(); id_Objects++)
-	{		
-		it_Object = qnode->m_Objects.find(*id_Objects); 
-			it_Object->second->Update(gameTime); 
-		if (it_Object->second->m_hCurrentSprite!=NULL)
-			it_Object->second->DelayNext(3);
-		//if (it_Object->second->type == tarnooki || it_Object->second->type == tarnooki_fly || it_Object->second->type == tortoise || it_Object->second->type == tortoise_fly || it_Object->second->type == tortoise_red){
-			//it_Object->second->MoveObject();
-			//it_Object->second->FallDown(1);
-		}
-	
-	
-	//hero->FallDown(1);//sai j roi
-	//float time = 1.0f;	
-	//if (hero->m_hState != ON_GROUND)
-	//{
-	//	hero->Fall(time);
-	//}
-	//else if (hero->m_hObjectGround != NULL){
-	//	if (!Collision::checkAABB(hero->GetBox_CGround(), hero->m_hObjectGround->m_hBox))
-	//		hero->m_hState = ON_SPACE;
-	//	else
-	//		hero->m_hState = ON_GROUND;
-	//}
+	{
+		it_Object = qnode->m_Objects.find(*id_Objects);
+		it_Object->second->Update(gameTime);
+	}
 
 }
