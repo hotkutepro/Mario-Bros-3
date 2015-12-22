@@ -32,7 +32,7 @@ void E_Plant::Update(float gameTime)
 		return;
 	if (n <= 33)
 		m_hPosition.y += m_hSpeed.y;
-	if (n++ == 60)
+	if (n++ == 100)
 	{
 		n = 0;
 		m_hSpeed.y = -m_hSpeed.y;

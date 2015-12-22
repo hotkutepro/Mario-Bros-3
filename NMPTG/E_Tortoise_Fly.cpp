@@ -21,23 +21,72 @@ void E_Tortoise_Fly::Load()
 	E_TortoiseshellGreenRight = ResourcesManager::GetInstance()->GetSprite(SpriteID::E_TortoiseshellGreenRight);
 	E_TortoiseshellGreenLeftReverse = ResourcesManager::GetInstance()->GetSprite(SpriteID::E_TortoiseshellGreenLeftReverse);
 	E_TortoiseshellGreenRightReverse = ResourcesManager::GetInstance()->GetSprite(SpriteID::E_TortoiseshellGreenRightReverse);
-	setCurrentSprite(E_FlyTortoiseGreenRight);
+	setCurrentSprite(E_FlyTortoiseGreenLeft);
 	Object::Load();
 	status = 0;
 	type = TYPEOBJECT::tortoise_fly;
 	m_hDirect = DIRECT::left;
 	m_hState = ON_SPACE;
 	m_hSpeed.x = -1; m_hSpeed.y = -2;
+	IsRun = false;
 }
 
 void E_Tortoise_Fly::Update(float gameTime)
 {	
 	Object::Update(gameTime);
-	Move();
-	SetSprite();
-	GetListTortoise();
+	UpdateDirect();
+	MoveObject();
 }
 
+void E_Tortoise_Fly::Collision_Up()
+{
+	_LocalHero->m_hSpeed.y = 5;
+	if (status == 1)
+		m_hSpeed.x = 0;
+	if (status == 2)
+	{
+		m_hSpeed.x = 0;
+		IsRun = !IsRun;
+		if (IsRun)
+		{
+			if (m_hDirect == DIRECT::left)
+				m_hSpeed.x = -3;
+			else
+				m_hSpeed.x = 3;
+		}
+
+		return;
+	}
+	status++;
+	SetSprite();
+}
+
+void E_Tortoise_Fly::Collision_Down()
+{
+
+}
+
+void E_Tortoise_Fly::Collision_Left()
+{
+	if (status == 2)
+	{
+		m_hSpeed.x = 0;
+		IsRun = true;
+		m_hSpeed.x = 3;
+	}
+	SetSprite();
+}
+
+void E_Tortoise_Fly::Collision_Right()
+{
+	if (status == 2)
+	{
+		m_hSpeed.x = 0;
+		IsRun = true;
+		m_hSpeed.x = -3;		
+	}
+	SetSprite();
+}
 void E_Tortoise_Fly::SetSprite()
 {
 	if (status == 0)
@@ -67,23 +116,10 @@ void E_Tortoise_Fly::SetSprite()
 			setCurrentSprite(E_TortoiseshellGreenRightReverse);
 	}
 }
-
-void E_Tortoise_Fly::Collision_Up()
+void E_Tortoise_Fly::UpdateDirect()
 {
-
-}
-
-void E_Tortoise_Fly::Collision_Down()
-{
-
-}
-
-void E_Tortoise_Fly::Collision_Left()
-{
-
-}
-
-void E_Tortoise_Fly::Collision_Right()
-{
-
+	if (m_hSpeed.x > 0)
+		m_hDirect = DIRECT::right;
+	else if (m_hSpeed.x < 0)
+		m_hDirect = DIRECT::left;
 }

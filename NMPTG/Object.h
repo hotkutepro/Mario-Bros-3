@@ -74,6 +74,7 @@ public:
 	virtual void Collision_Down();
 	virtual void Collision_Left();
 	virtual void Collision_Right();
+	virtual void IsAttacked();
 	virtual void Die();
 	virtual void WatchUp();//dung cho coin, leaf...xet life=true
 	virtual void Move();

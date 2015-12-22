@@ -36,7 +36,7 @@ void E_Tarnooki_Fly::Update(float gameTime)
 		return;
 	}
 	Object::Update(gameTime);
-	Move();
+	MoveObject();
 }
 
 void E_Tarnooki_Fly::Collision_Up()
@@ -44,7 +44,7 @@ void E_Tarnooki_Fly::Collision_Up()
 	if (status == 2)
 		return;
 	status++;
-	_LocalHero->m_hSpeed.y = 3;
+	_LocalHero->m_hSpeed.y = 5;
 	SetSprite();
 }
 

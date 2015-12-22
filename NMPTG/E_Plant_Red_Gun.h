@@ -23,6 +23,7 @@ public:
 	void Collision_Down();
 	void Collision_Left();
 	void Collision_Right();
+	void SetSprite();
 	E_Plant_Red_Gun();
 	~E_Plant_Red_Gun();
 };

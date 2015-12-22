@@ -23,13 +23,17 @@ void E_Tortoise::Load()
 	Object::Load();
 	type = TYPEOBJECT::tortoise;
 	m_hDirect = DIRECT::left;
-	m_hSpeed.x = 1; m_hSpeed.y = -0.5;
+	m_hSpeed.x = -1; m_hSpeed.y = -2;
+	m_hState = ON_SPACE;
+	IsRun = false;
+	status = 0;
 }
 
 void E_Tortoise::Update(float gameTime)
 {	
 	Object::Update(gameTime);
-	Move();
+	UpdateDirect();
+	MoveObject();
 }
 
 void E_Tortoise::Tortoise_Shell()
@@ -38,19 +42,32 @@ void E_Tortoise::Tortoise_Shell()
 }
 
 void E_Tortoise::Die()
-{
-	if (v == 2)
-	{
-		setCurrentSprite(E_TortoiseshellGreenLeft);
-		v--;		
-		life = 0;
-	}
+{	
+
 
 }
 
 void E_Tortoise::Collision_Up()
-{
+{	
+	_LocalHero->m_hSpeed.y = 5;
+	if (status == 0)
+		m_hSpeed.x = 0;
+	if (status == 1)
+	{
+		m_hSpeed.x = 0;
+		IsRun = !IsRun;
+		if (IsRun)
+		{
+			if (m_hDirect == DIRECT::left)
+				m_hSpeed.x = -3;
+			else
+				m_hSpeed.x = 3;
+		}
+
+		return;
+	}
 	status++;
+	SetSprite();
 }
 
 void E_Tortoise::Collision_Down()
@@ -60,15 +77,55 @@ void E_Tortoise::Collision_Down()
 
 void E_Tortoise::Collision_Left()
 {
+	if (status == 1)
+	{
+		m_hSpeed.x = 0;
+		IsRun = true;
+		m_hSpeed.x = 3;
 
+		return;
+	}
 }
 
 void E_Tortoise::Collision_Right()
 {
-
+	if (status == 1)
+	{
+		m_hSpeed.x = 0;
+		IsRun = true;
+		m_hSpeed.x = -3;
+		return;
+	}
 }
 
 void E_Tortoise::SetSprite()
 {
-	
+	if (status == 0)
+	{
+		if (m_hDirect == DIRECT::left)
+			setCurrentSprite(E_TortoiseGreenLeft);
+		else
+			setCurrentSprite(E_TortoiseGreenRight);
+	}
+	if (status == 1)
+	{
+		if (m_hDirect == DIRECT::left)
+			setCurrentSprite(E_TortoiseshellGreenLeft);
+		else
+			setCurrentSprite(E_TortoiseshellGreenRight);
+	}
+	if (status == 2)
+	{
+		if (m_hDirect == DIRECT::left)
+			setCurrentSprite(E_TortoiseshellGreenLeftReverse);
+		else
+			setCurrentSprite(E_TortoiseshellGreenRightReverse);
+	}
+}
+void E_Tortoise::UpdateDirect()
+{
+	if (m_hSpeed.x > 0)
+		m_hDirect = DIRECT::right;
+	else if (m_hSpeed.x < 0)
+		m_hDirect = DIRECT::left;
 }

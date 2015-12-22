@@ -52,7 +52,7 @@ void E_Tarnooki::Collision_Up()
 	if (t != 0)
 		return;
 	t++;
-	_LocalHero->m_hSpeed.y = 3;
+	_LocalHero->m_hSpeed.y = 5;
 	status++;
 	SetSprite();	
 }

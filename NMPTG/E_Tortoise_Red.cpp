@@ -28,27 +28,39 @@ void E_Tortoise_Red::Load()
 	m_hSpeed.x = -1;
 	m_hSpeed.y = -2;
 	status = 0;
+	IsRun = false;
 }
 
 void E_Tortoise_Red::Update(float gameTime)
 {
 
+	UpdateDirect();
+	SetSprite();
+	SetMove();
 	Object::Update(gameTime);
 	Move();
-	if (m_hSpeed.x > 0)
+
+}
+void E_Tortoise_Red::Collision_Up()
+{
+	_LocalHero->m_hSpeed.y = 5;
+	if (status == 0)
+		m_hSpeed.x = 0;
+	if (status == 1)
 	{
-		m_hDirect = DIRECT::right;
-		if (m_hObjectGround != NULL)
-			if (!Collision::checkAABB(GetBox_CRight(), m_hObjectGround->GetBox()))
-				m_hSpeed.x = -m_hSpeed.x;
+		m_hSpeed.x = 0;
+		IsRun = !IsRun;
+		if (IsRun)
+		{
+			if (m_hDirect == DIRECT::left)
+				m_hSpeed.x = -3;
+			else
+				m_hSpeed.x = 3;
+		}
+
+		return;
 	}
-	else
-	{
-		m_hDirect = DIRECT::left;
-		if (m_hObjectGround != NULL)
-			if (!Collision::checkAABB(GetBox_CLeft(), m_hObjectGround->GetBox()))
-				m_hSpeed.x = -m_hSpeed.x;
-	}
+	status++;
 	SetSprite();
 }
 
@@ -83,27 +95,23 @@ void E_Tortoise_Red::SetSprite()
 		else
 			setCurrentSprite(E_TortoiseRedRight);
 	}
-	else if (status==2)
+	else if (status == 1)
 	{
 		if (m_hDirect == DIRECT::left)
 			setCurrentSprite(E_TortoiseshellRedLeft);
 		else
 			setCurrentSprite(E_TortoiseshellRedRight);
 	}
-	else
+	else if (status == 2)
 	{
 		if (m_hDirect == DIRECT::left)
-			setCurrentSprite(E_TortoiseshellRedLeft);
+			setCurrentSprite(E_TortoiseshellRedLeftReverse);
 		else
 			setCurrentSprite(E_TortoiseshellRedRightReverse);
 
 	}
 }
 
-void E_Tortoise_Red::Collision_Up()
-{
-
-}
 
 void E_Tortoise_Red::Collision_Down()
 {
@@ -112,10 +120,50 @@ void E_Tortoise_Red::Collision_Down()
 
 void E_Tortoise_Red::Collision_Left()
 {
+	if (status == 1)
+	{
+		m_hSpeed.x = 0;
+		IsRun = true;		
+			m_hSpeed.x = 3;		
 
+		return;
+	}
 }
 
 void E_Tortoise_Red::Collision_Right()
 {
+	if (status == 1)
+	{
+		m_hSpeed.x = 0;
+		IsRun = true;		
+		m_hSpeed.x = -3;
+		return;
+	}
+}
 
+void E_Tortoise_Red::SetMove()
+{
+	if (IsRun)
+		return;
+	if (m_hDirect == DIRECT::right)
+	{
+
+		if (m_hObjectGround != NULL)
+			if (!Collision::checkAABB(GetBox_CRight(), m_hObjectGround->GetBox()))
+				m_hSpeed.x = -m_hSpeed.x;
+	}
+	else
+	{
+		if (m_hObjectGround != NULL)
+			if (!Collision::checkAABB(GetBox_CLeft(), m_hObjectGround->GetBox()))
+				m_hSpeed.x = -m_hSpeed.x;
+	}
+}
+
+void E_Tortoise_Red::UpdateDirect()
+{
+	if (m_hSpeed.x > 0)
+		m_hDirect = DIRECT::right;
+	else if (m_hSpeed.x < 0)
+		m_hDirect = DIRECT::left;
 }

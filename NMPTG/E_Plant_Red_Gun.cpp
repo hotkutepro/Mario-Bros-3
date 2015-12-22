@@ -45,7 +45,7 @@ void E_Plant_Red_Gun::Update(float gameTime)
 	else
 		m_hCurrentSprite->Next();
 
-	if (n++ == 60)
+	if (n++ == 100)
 	{
 		n = 0;
 		m_hSpeed.y = -m_hSpeed.y;
@@ -58,22 +58,8 @@ void E_Plant_Red_Gun::Update(float gameTime)
 		bullet.Update(gameTime);
 		bullet.m_hCurrentSprite->Next();
 	}
-	Object::Update(gameTime);
-	int n = getDirectWithHero(_LocalHero);
-	if (n == 1)
-	{
-		setCurrentSprite(Tree_red_left_down);
-	}
-	else if (n == 2)
-	{
-		setCurrentSprite(Tree_red_left_up);
-	}
-	else if (n == 3){
-		setCurrentSprite(Tree_red_right_up);
-	}
-	else if (n == 4){
-		setCurrentSprite(Tree_red_right_down);
-	}
+	Object::Update(gameTime);	
+	SetSprite();
 }
 
 void E_Plant_Red_Gun::Render()
@@ -130,4 +116,23 @@ void E_Plant_Red_Gun::Collision_Left()
 void E_Plant_Red_Gun::Collision_Right()
 {
 
+}
+
+void E_Plant_Red_Gun::SetSprite()
+{
+	int n = getDirectWithHero(_LocalHero);
+	if (n == 1)
+	{
+		setCurrentSprite(Tree_red_left_down);
+	}
+	else if (n == 2)
+	{
+		setCurrentSprite(Tree_red_left_up);
+	}
+	else if (n == 3){
+		setCurrentSprite(Tree_red_right_up);
+	}
+	else if (n == 4){
+		setCurrentSprite(Tree_red_right_down);
+	}
 }

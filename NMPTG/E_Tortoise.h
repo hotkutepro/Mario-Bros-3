@@ -7,8 +7,8 @@ class E_Tortoise:public Object
 	FrkSprite* E_TortoiseGreenLeft;
 	FrkSprite* E_TortoiseGreenRight;
 	FrkSprite* E_TortoiseshellGreenLeftReverse;
-	FrkSprite* E_TortoiseshellGreenRightReverse;
-	int v = 2;
+	FrkSprite* E_TortoiseshellGreenRightReverse;	
+	bool IsRun;
 public:
 	void Load();
 	void Update(float gameTime);
@@ -19,6 +19,7 @@ public:
 	void Collision_Left();
 	void Collision_Right();
 	void SetSprite();
+	void UpdateDirect();
 	E_Tortoise();
 	~E_Tortoise();
 };
