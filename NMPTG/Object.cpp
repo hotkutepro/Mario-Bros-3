@@ -141,6 +141,20 @@ Box* Object::GetBox()
 		m_hBox->_size.x = m_hSize.x;
 		m_hBox->_size.y = m_hSize.y;
 	}
+	else if (type == mario)
+	{
+
+	}
+	else
+	{
+		m_hBox->_position.x = m_hPosition.x;
+		m_hBox->_position.y = m_hPosition.y;
+
+		m_hBox->_size.x = m_hCurrentSprite->_Width;
+		m_hBox->_size.y = m_hCurrentSprite->_Height;
+		m_hBox->_v.x = m_hSpeed.x;
+		m_hBox->_v.y = m_hSpeed.y;
+	}
 	
 	return m_hBox;
 }
@@ -429,6 +443,7 @@ void Object::Move()
 		m_hObjectRight = NULL;
 		for (int i = 0; i < object_static_can_collision.size(); i++)
 		{
+			
 			time = Collision::sweptAABBCheck(GetBox(), object_static_can_collision.at(i)->GetBox(), nx, ny);
 			if (time < 1){
 				//time = Collision::sweptAABBCheck(GetBox(), object_static_can_collision.at(i)->GetBox(), nx, ny);
@@ -475,26 +490,30 @@ void Object::Move()
 		m_hObjectRight = NULL;
 		for (int i = 0; i < object_static_can_collision.size(); i++)
 		{
-			time = Collision::sweptAABBCheck(GetBox(), object_static_can_collision.at(i)->GetBox(), nx, ny);
-			if (time < 1 && time >= 0 && object_static_can_collision.at(i)->type != box){
-				if (type != mario&&nx != 0){
-					//m_hPosition.x += time*m_hSpeed.x;
-					m_hSpeed.x = -m_hSpeed.x;
+			if (Collision::checkAABB(Collision::getBoardPhaseBox(GetBox()), object_static_can_collision.at(i)->GetBox()))
+			{
+				time = Collision::sweptAABBCheck(GetBox(), object_static_can_collision.at(i)->GetBox(), nx, ny);
+				if (time < 1 && time >= 0 && object_static_can_collision.at(i)->type != box){
+					if (type != mario&&nx != 0){
+						//m_hPosition.x += time*m_hSpeed.x;
+						m_hSpeed.x = -m_hSpeed.x;
+					}
+					else if (nx == 1 && object_static_can_collision.at(i)->type != box)
+					{
+
+						m_hPosition.x += time*m_hSpeed.x;
+						m_hSpeed.x = 0;
+						m_hObjectLeft = object_static_can_collision.at(i);
+					}
+					else if (nx == -1 && object_static_can_collision.at(i)->type != box)
+					{
+						m_hPosition.x += time*m_hSpeed.x;
+						m_hSpeed.x = 0;
+						m_hObjectRight = object_static_can_collision.at(i);
+					}
 				}
-				else if (nx == 1 && object_static_can_collision.at(i)->type != box)
-				{
-				
-					m_hPosition.x += time*m_hSpeed.x;
-					m_hSpeed.x = 0;
-					m_hObjectLeft = object_static_can_collision.at(i);
-				}
-				else if (nx == -1 && object_static_can_collision.at(i)->type != box)
-				{
-					m_hPosition.x += time*m_hSpeed.x;
-					m_hSpeed.x = 0;
-					m_hObjectRight = object_static_can_collision.at(i);
-				}			
 			}
+			
 		}
 		if (this->m_hObjectGround != NULL)
 		{
