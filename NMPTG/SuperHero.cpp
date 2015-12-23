@@ -74,7 +74,7 @@ void SuperHero::Load()
 	setCurrentSprite(MarioRight);
 	m_hPosition.x = 100;
 	m_hPosition.y = 320;
-	status = 2;	
+	status = 2;
 	m_hDirect = DIRECT::right;
 	delayMaxSpeed = 0;
 	m_hState = ON_SPACE;
@@ -87,7 +87,7 @@ void SuperHero::Update(float gametime)
 	a = new char[f_str.length() + 1];
 	strcpy(a, f_str.c_str());
 	f_str1 = "Vy = " + std::to_string(m_hSpeed.y);
-	a1= new char[f_str1.length() + 1];
+	a1 = new char[f_str1.length() + 1];
 	strcpy(a1, f_str1.c_str());
 
 #pragma region KeyDown
@@ -175,7 +175,7 @@ void SuperHero::Update(float gametime)
 #pragma region Process next sprite
 #pragma  region ON_GROUND
 	if (m_hState == ON_GROUND && !attack)
-	{				
+	{
 		if (!isSquat)
 		{
 			if (m_hSpeed.x != 0)
@@ -253,7 +253,7 @@ void SuperHero::Update(float gametime)
 				break;
 			}
 		}
-		
+
 	}
 #pragma endregion	
 #pragma region FALL_DOWN
@@ -319,7 +319,7 @@ void SuperHero::Update(float gametime)
 				setCurrentSprite(BrosBaleLeft);
 				DelayNext(2);
 			}
-			
+
 		}
 	}
 #pragma endregion
@@ -332,9 +332,9 @@ void SuperHero::GoLeft(float gameTime)
 {
 	m_hDirect = DIRECT::left;
 	if (m_hState == ON_FLY)
-	{		
+	{
 		return;
-	}	
+	}
 	m_hSpeed.x -= _hero_ACCELERATION;
 	if (m_hSpeed.x <= -_hero_SPEED)
 	{
@@ -402,7 +402,7 @@ void SuperHero::GoRight(float gameTime)
 	{
 		return;
 	}
-	
+
 	m_hSpeed.x += _hero_ACCELERATION;
 	if (m_hSpeed.x >= _hero_SPEED)
 	{
@@ -477,7 +477,7 @@ void SuperHero::RunLeft(float gameTime)
 	}
 	else
 	{
-		m_hSpeed.x -=_hero_RUN_ACCELERATION;
+		m_hSpeed.x -= _hero_RUN_ACCELERATION;
 	}
 	if (m_hSpeed.x <= -_hero_MAXSPEED)
 	{
@@ -699,7 +699,7 @@ void SuperHero::Inertia(float gameTime)
 	}
 	if (m_hSpeed.x > 0)
 	{
-		m_hSpeed.x -= _hero_ACCELERATION/3;
+		m_hSpeed.x -= _hero_ACCELERATION / 3;
 		if (m_hSpeed.x < 0)
 		{
 			m_hSpeed.x = 0;
@@ -709,7 +709,7 @@ void SuperHero::Inertia(float gameTime)
 	//nếu thả phím qua trái thì vận tốc tăng từ min đến 0
 	if (m_hSpeed.x < 0)
 	{
-		m_hSpeed.x += _hero_ACCELERATION/3;
+		m_hSpeed.x += _hero_ACCELERATION / 3;
 		if (m_hSpeed.x > 0)
 		{
 			m_hSpeed.x = 0;
@@ -774,7 +774,7 @@ void SuperHero::InertiaRun(float gameTime)
 			}
 		}
 	}
-	
+
 }
 
 void SuperHero::Jump(float vJump)
@@ -791,40 +791,40 @@ void SuperHero::Jump(float vJump)
 	}
 	//set sprite
 #pragma region Set Sprite	
-		switch (status)
+	switch (status)
+	{
+	case MARIO:
+		if (m_hDirect == DIRECT::right)
 		{
-		case MARIO:
-			if (m_hDirect == DIRECT::right)
-			{
-				setCurrentSprite(MarioJumpRight);
-			}
-			else
-			{
-				setCurrentSprite(MarioJumpLeft);
-			}
-			break;
-		case BIGMARIO:
-			if (m_hDirect == DIRECT::right)
-			{
-				setCurrentSprite(BigMarioJumpRight);
-			}
-			else
-			{
-				setCurrentSprite(BigMarioJumpLeft);
-			}
-			break;
-		case BROS:
-			if (m_hDirect == DIRECT::right)
-			{
-				setCurrentSprite(BrosJumpRight);
-			}
-			else
-			{
-				setCurrentSprite(BrosJumpLeft);
-			}
-		default:
-			break;
-		}	
+			setCurrentSprite(MarioJumpRight);
+		}
+		else
+		{
+			setCurrentSprite(MarioJumpLeft);
+		}
+		break;
+	case BIGMARIO:
+		if (m_hDirect == DIRECT::right)
+		{
+			setCurrentSprite(BigMarioJumpRight);
+		}
+		else
+		{
+			setCurrentSprite(BigMarioJumpLeft);
+		}
+		break;
+	case BROS:
+		if (m_hDirect == DIRECT::right)
+		{
+			setCurrentSprite(BrosJumpRight);
+		}
+		else
+		{
+			setCurrentSprite(BrosJumpLeft);
+		}
+	default:
+		break;
+	}
 #pragma endregion
 }
 
@@ -878,7 +878,7 @@ void SuperHero::BrosFly(float gameTime)
 	case BROS:
 		if (abs(m_hSpeed.x) == _hero_MAXSPEED)
 		{
-			m_hState = ON_FLY;									
+			m_hState = ON_FLY;
 			m_hObjectGround = NULL;
 			if (m_hDirect == DIRECT::right)
 			{
@@ -889,7 +889,7 @@ void SuperHero::BrosFly(float gameTime)
 				m_hSpeed.x = -_hero_MAXSPEED;
 			}
 			m_hSpeed.y += 0.1;
-		
+
 #pragma region Set Sprite
 			if (m_hDirect == DIRECT::right)
 			{
@@ -903,7 +903,7 @@ void SuperHero::BrosFly(float gameTime)
 		}
 		else
 		{
-			Jump(_hero_JUMP-5);//nhảy liên tục khi giữ X
+			Jump(_hero_JUMP - 5);//nhảy liên tục khi giữ X
 			BrosFall(gameTime);
 		}
 		break;
@@ -929,11 +929,11 @@ void SuperHero::BrosFall(float gameTime)
 
 void SuperHero::Attack()
 {
-	if (status == BROS&&attack==false)
+	if (status == BROS&&!attack)
 	{
 		attack = true;
 	}
-	
+
 }
 
 
@@ -1002,8 +1002,8 @@ Box* SuperHero::GetBox()
 		}
 		else
 		{
-			m_hBox->_position.x = m_hPosition.x -3 + _hero_BOX_ADJUST_POS_LEFT;
-			m_hBox->_size.x = _hero_BOX_WIDTH-1;
+			m_hBox->_position.x = m_hPosition.x - 3 + _hero_BOX_ADJUST_POS_LEFT;
+			m_hBox->_size.x = _hero_BOX_WIDTH - 1;
 		}
 		break;
 	}
@@ -1014,17 +1014,17 @@ Box* SuperHero::GetBox()
 Box* SuperHero::GetBox_CGround()
 {
 	Box* x = new Box();
-	x->_position.y = m_hPosition.y-10;
-	x->_size.y = getCurrentSprite()->_Height/2;	
+	x->_position.y = m_hPosition.y - 10;
+	x->_size.y = getCurrentSprite()->_Height / 2;
 	if (m_hDirect == DIRECT::right)
 	{
 		x->_position.x = m_hPosition.x + _hero_BOX_ADJUST_POS_RIGHT;
-		x->_size.x = _hero_BOX_WIDTH-5;
+		x->_size.x = _hero_BOX_WIDTH - 5;
 	}
 	else
 	{
 		x->_position.x = m_hPosition.x + _hero_BOX_ADJUST_POS_LEFT;
-		x->_size.x= _hero_BOX_WIDTH-5;
+		x->_size.x = _hero_BOX_WIDTH - 5;
 	}
 	return x;
 }
@@ -1180,6 +1180,55 @@ void SuperHero::Move()
 		if (m_hObjectLeft == NULL && m_hObjectRight == NULL)
 			m_hPosition.x += m_hSpeed.x;
 		break;
+
+	}
+}
+
+Box* SuperHero::GetBoxTop()
+{
+	Box* x;
+	return x;
+}
+
+Box* SuperHero::GetBoxAttack()
+{
+
+	Box* x;
+	x->_position.x = m_hPosition.x;
+	x->_position.y = m_hPosition.y;
+	x->_v.x = 5;
+	x->_v.y = 0;
+	x->_size.x = 10;
+	x->_size.y = 5;
+	return x;
+}
+
+void SuperHero::IsAttacked()
+{
+	switch (status)
+	{
+	case BROS:
+		status = BIGMARIO;
+		if (m_hDirect == DIRECT::right)
+		{
+			setCurrentSprite(BigMarioRight);
+		}
+		else
+		{
+			setCurrentSprite(BigMarioLeft);
+		}
+		break;
+	case BIGMARIO:
+		status = MARIO;
+		if (m_hDirect == DIRECT::right)
+		{
+			setCurrentSprite(MarioRight);
+		}
+		else
+		{
+			setCurrentSprite(MarioLeft);
+		}
+	default:
 
 	}
 }
