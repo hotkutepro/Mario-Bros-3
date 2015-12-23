@@ -1,20 +1,15 @@
 #pragma once
 #include"Object.h"
-#define _hero_GRAVITY 9//9
-#define _hero_JUMP 36//36
-#define _hero_MAXJUM 45//45
+#define _hero_JUMP 9.7f//10
+#define _hero_MAXJUM 11//45
 #define _hero_MAXSPEED 5//5
-#define _hero_SPEED 2.5//2
-#define _tx_frame .5f//.2f
-
-#define _max_SPEED_JUMP 5
-#define _SPEED_JUMP 0.5f
-
-#define _max_SPEED_RUN 4
-#define _SPEED_RUN 0.4//
-
-#define _hero_ACCELERATION 0.7
-
+#define _hero_SPEED 2.5f//2
+#define _hero_ACCELERATION 0.5f//.2f
+#define _hero_RUN_ACCELERATION 0.048f//
+//dung cho box
+#define _hero_BOX_WIDTH 11
+#define  _hero_BOX_ADJUST_POS_RIGHT 11;
+#define  _hero_BOX_ADJUST_POS_LEFT 7;
 class SuperHero:public Object
 {
 private:
@@ -84,8 +79,7 @@ public:
 	bool isSquat = false;		
 	bool isFly = false;
 	bool attack = false;
-	float timeAttack = 0;
-	float level;
+	float timeAttack = 0;	
 	float delayMaxSpeed;
 	void Load();
 	void Update(float gametime);
@@ -95,16 +89,19 @@ public:
 	void RunRight(float gameTime);
 	void Inertia(float gameTime);
 	void InertiaRun(float gameTime);
-	void Jump(float gameTime,float vJump);
-	void JumpKeyUp(float gameTime);
-	void Fall(float gameTime);
+	void Jump(float vJump);
+	void SuperJump();
+	void JumpKeyUp(float gameTime);	
 	void Squat(float gameTime);
 	void BrosFly(float gameTime);
 	void BrosFall(float gameTime);
 	void Attack();
 	Box* GetBox();
+	Box* GetBox_CGround();//va de xet va cham voi mat dat
 	//void RenderBoxDebug();
 	void RenderV();	
+	void ReanderBoxBottom();
+	virtual void Move();
 	SuperHero();
 	~SuperHero();
 };

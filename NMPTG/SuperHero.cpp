@@ -1,6 +1,7 @@
 ﻿#include "SuperHero.h"
 #include"ResourcesManager.h"
 #include <stdlib.h>
+#include "Collision.h"
 
 SuperHero::SuperHero()
 {
@@ -73,8 +74,7 @@ void SuperHero::Load()
 	setCurrentSprite(MarioRight);
 	m_hPosition.x = 100;
 	m_hPosition.y = 320;
-	status = 2;
-	level = 0.12f;
+	status = 2;	
 	m_hDirect = DIRECT::right;
 	delayMaxSpeed = 0;
 	m_hState = ON_SPACE;
@@ -152,7 +152,8 @@ void SuperHero::Update(float gametime)
 	}
 	if (_LocalKeyboard->IsKeyPressed(DIK_SPACE))
 	{
-		Jump(1, 10);
+		SuperJump();
+		Jump(_hero_JUMP);
 	}
 
 	if (_LocalKeyboard->IsKeyUp(DIK_SPACE))
@@ -334,7 +335,7 @@ void SuperHero::GoLeft(float gameTime)
 	{		
 		return;
 	}	
-	m_hSpeed.x -= _tx_frame;
+	m_hSpeed.x -= _hero_ACCELERATION;
 	if (m_hSpeed.x <= -_hero_SPEED)
 	{
 		m_hSpeed.x = -_hero_SPEED;
@@ -402,7 +403,7 @@ void SuperHero::GoRight(float gameTime)
 		return;
 	}
 	
-	m_hSpeed.x += _tx_frame;
+	m_hSpeed.x += _hero_ACCELERATION;
 	if (m_hSpeed.x >= _hero_SPEED)
 	{
 		m_hSpeed.x = _hero_SPEED;
@@ -472,11 +473,11 @@ void SuperHero::RunLeft(float gameTime)
 	isRun = true;
 	if (m_hSpeed.x > -_hero_SPEED)
 	{
-		m_hSpeed.x -= _tx_frame;
+		m_hSpeed.x -= _hero_ACCELERATION;
 	}
 	else
 	{
-		m_hSpeed.x -= level*_SPEED_RUN;
+		m_hSpeed.x -=_hero_RUN_ACCELERATION;
 	}
 	if (m_hSpeed.x <= -_hero_MAXSPEED)
 	{
@@ -585,11 +586,11 @@ void SuperHero::RunRight(float gameTime)
 	isRun = true;
 	if (m_hSpeed.x < _hero_SPEED)
 	{
-		m_hSpeed.x += _tx_frame;
+		m_hSpeed.x += _hero_ACCELERATION;
 	}
 	else
 	{
-		m_hSpeed.x += level*_SPEED_RUN;
+		m_hSpeed.x += _hero_RUN_ACCELERATION;
 	}
 	if (m_hSpeed.x >= _hero_MAXSPEED)
 	{
@@ -698,7 +699,7 @@ void SuperHero::Inertia(float gameTime)
 	}
 	if (m_hSpeed.x > 0)
 	{
-		m_hSpeed.x -= _tx_frame/3;
+		m_hSpeed.x -= _hero_ACCELERATION/3;
 		if (m_hSpeed.x < 0)
 		{
 			m_hSpeed.x = 0;
@@ -708,7 +709,7 @@ void SuperHero::Inertia(float gameTime)
 	//nếu thả phím qua trái thì vận tốc tăng từ min đến 0
 	if (m_hSpeed.x < 0)
 	{
-		m_hSpeed.x += _tx_frame/3;
+		m_hSpeed.x += _hero_ACCELERATION/3;
 		if (m_hSpeed.x > 0)
 		{
 			m_hSpeed.x = 0;
@@ -729,7 +730,7 @@ void SuperHero::InertiaRun(float gameTime)
 		{
 			if (m_hSpeed.x > _hero_SPEED)
 			{
-				m_hSpeed.x -= _tx_frame / 10;
+				m_hSpeed.x -= _hero_ACCELERATION / 10;
 				if (m_hSpeed.x < _hero_SPEED)
 				{
 					delayMaxSpeed = 0;
@@ -740,7 +741,7 @@ void SuperHero::InertiaRun(float gameTime)
 			//nếu thả phím qua trái thì vận tốc tăng từ min đến 0
 			if (m_hSpeed.x < -_hero_SPEED)
 			{
-				m_hSpeed.x += _tx_frame / 10;
+				m_hSpeed.x += _hero_ACCELERATION / 10;
 				if (m_hSpeed.x > -_hero_SPEED)
 				{
 					delayMaxSpeed = 0;
@@ -754,7 +755,7 @@ void SuperHero::InertiaRun(float gameTime)
 
 		if (m_hSpeed.x > _hero_SPEED)
 		{
-			m_hSpeed.x -= _tx_frame / 10;
+			m_hSpeed.x -= _hero_ACCELERATION / 10;
 			if (m_hSpeed.x < _hero_SPEED)
 			{
 				delayMaxSpeed = 0;
@@ -765,7 +766,7 @@ void SuperHero::InertiaRun(float gameTime)
 		//nếu thả phím qua trái thì vận tốc tăng từ min đến 0
 		if (m_hSpeed.x < -_hero_SPEED)
 		{
-			m_hSpeed.x += _tx_frame / 10;
+			m_hSpeed.x += _hero_ACCELERATION / 10;
 			if (m_hSpeed.x > -_hero_SPEED)
 			{
 				delayMaxSpeed = 0;
@@ -776,7 +777,7 @@ void SuperHero::InertiaRun(float gameTime)
 	
 }
 
-void SuperHero::Jump(float gameTime, float vJump)
+void SuperHero::Jump(float vJump)
 {
 	if (m_hState != ON_GROUND)
 		return;
@@ -784,48 +785,12 @@ void SuperHero::Jump(float gameTime, float vJump)
 	m_hSpeed.y = vJump;
 	m_hState = ON_SPACE;
 	m_hObjectGround = NULL;
-	//set sprite
-#pragma region Set Sprite
-
-	if (abs(m_hSpeed.x) >= _max_SPEED_RUN)
+	if (m_hSpeed.y == _hero_MAXJUM)
 	{
-		switch (status)
-		{
-		case MARIO:
-			if (m_hDirect == DIRECT::right)
-			{
-				setCurrentSprite(MarioSuperJumpRight);
-			}
-			else
-			{
-				setCurrentSprite(MarioSuperJumpLeft);
-			}
-			break;
-		case BIGMARIO:
-			if (m_hDirect == DIRECT::right)
-			{
-				setCurrentSprite(BigMarioSuperJumpRight);
-			}
-			else
-			{
-				setCurrentSprite(BigMarioSuperJumpLeft);
-			}
-			break;
-		case BROS:
-			if (m_hDirect == DIRECT::right)
-			{
-				setCurrentSprite(BrosFlyRight);
-			}
-			else
-			{
-				setCurrentSprite(BrosFlyLeft);
-			}
-		default:
-			break;
-		}
+		return;
 	}
-	else
-	{
+	//set sprite
+#pragma region Set Sprite	
 		switch (status)
 		{
 		case MARIO:
@@ -859,19 +824,8 @@ void SuperHero::Jump(float gameTime, float vJump)
 			}
 		default:
 			break;
-		}
-	}
+		}	
 #pragma endregion
-	//if (m_hBox->v.y<_max_SPEED_JUMP)
-	//{
-	//	m_hBox->v.y += _SPEED_JUMP;
-	//}
-	//else
-	//{
-	//	m_hState = STATE::ON_SPACE;
-	//}
-
-
 }
 
 void SuperHero::JumpKeyUp(float gameTime)
@@ -880,35 +834,6 @@ void SuperHero::JumpKeyUp(float gameTime)
 		m_hSpeed.y /= 2;
 }
 
-void SuperHero::Fall(float remaintime)//binh thuong =1
-{
-	if (m_hState != ON_SPACE)
-		return;
-	m_hSpeed.y -= _SPEED_JUMP*remaintime;
-	m_hPosition.y += m_hSpeed.y;
-	/*if (isJump == true)
-	{
-	if (m_hSpeed.y < 0)
-	{
-	switch (status)
-	{
-
-	case BIGMARIO:
-	if (direction == true)
-	{
-	setCurrentSprite(BigMarioFallRight);
-	}
-	else
-	{
-	setCurrentSprite(BigMarioFallLeft);
-	}
-	break;
-
-	}
-	}
-
-	}*/
-}
 
 void SuperHero::Squat(float gameTime)
 {
@@ -978,7 +903,7 @@ void SuperHero::BrosFly(float gameTime)
 		}
 		else
 		{
-			Jump(1, 4);
+			Jump(_hero_JUMP-5);//nhảy liên tục khi giữ X
 			BrosFall(gameTime);
 		}
 		break;
@@ -1004,24 +929,257 @@ void SuperHero::BrosFall(float gameTime)
 
 void SuperHero::Attack()
 {
-	if (status==BROS)
-	attack = true;
+	if (status == BROS&&attack==false)
+	{
+		attack = true;
+	}
+	
 }
 
+
+void SuperHero::SuperJump()
+{
+	if (m_hState != ON_GROUND)
+	{
+		return;
+	}
+	if (abs(m_hSpeed.x) >= _hero_MAXSPEED)
+	{
+		Jump(_hero_MAXJUM);
+		switch (status)
+		{
+		case MARIO:
+			if (m_hDirect == DIRECT::right)
+			{
+				setCurrentSprite(MarioSuperJumpRight);
+			}
+			else
+			{
+				setCurrentSprite(MarioSuperJumpLeft);
+			}
+			break;
+		case BIGMARIO:
+			if (m_hDirect == DIRECT::right)
+			{
+				setCurrentSprite(BigMarioSuperJumpRight);
+			}
+			else
+			{
+				setCurrentSprite(BigMarioSuperJumpLeft);
+			}
+			break;
+		case BROS:
+			if (m_hDirect == DIRECT::right)
+			{
+				setCurrentSprite(BrosFlyRight);
+			}
+			else
+			{
+				setCurrentSprite(BrosFlyLeft);
+			}
+		default:
+			break;
+		}
+		return;
+	}
+	else
+	{
+		return;
+	}
+}
 Box* SuperHero::GetBox()
-{	
-		m_hBox->_position.x = m_hPosition.x;
-		m_hBox->_position.y = m_hPosition.y;		
+{
+	switch (status)
+	{
+	case  BROS:
+		m_hBox->_position.y = m_hPosition.y;
 		m_hBox->_size.y = getCurrentSprite()->_Height;
-		m_hBox->_v = m_hSpeed;	
+		m_hBox->_v = m_hSpeed;
 		if (m_hDirect == DIRECT::right)
 		{
-			m_hBox->_size.x = BigMarioFallRight->_Width;
+			m_hBox->_position.x = m_hPosition.x + _hero_BOX_ADJUST_POS_RIGHT;
+			m_hBox->_size.x = _hero_BOX_WIDTH;
 		}
 		else
 		{
-			m_hBox->_size.x = BigMarioFallLeft->_Width;
+			m_hBox->_position.x = m_hPosition.x -3 + _hero_BOX_ADJUST_POS_LEFT;
+			m_hBox->_size.x = _hero_BOX_WIDTH-1;
 		}
-		return m_hBox;
+		break;
+	}
+
+	return m_hBox;
 }
 
+Box* SuperHero::GetBox_CGround()
+{
+	Box* x = new Box();
+	x->_position.y = m_hPosition.y-10;
+	x->_size.y = getCurrentSprite()->_Height/2;	
+	if (m_hDirect == DIRECT::right)
+	{
+		x->_position.x = m_hPosition.x + _hero_BOX_ADJUST_POS_RIGHT;
+		x->_size.x = _hero_BOX_WIDTH-5;
+	}
+	else
+	{
+		x->_position.x = m_hPosition.x + _hero_BOX_ADJUST_POS_LEFT;
+		x->_size.x= _hero_BOX_WIDTH-5;
+	}
+	return x;
+}
+void SuperHero::ReanderBoxBottom()
+{
+	RECT src;
+	src.left = 0;
+	src.right = src.left + 1;
+	src.top = 0;
+	src.bottom = src.top + 1;
+	RECT a;
+	a = GetBox_CGround()->getRect();
+	_LocalGraphic->tDrawTexture(_LocalContent->LoadTexture("boxbottom.png"), src, a, D3DXVECTOR2(GetBox_CGround()->getCenter()), D3DCOLOR_XRGB(255, 255, 255), 0);
+}
+
+void SuperHero::Move()
+{
+	vector<Object*> object_static_can_collision = GetStaticObjectCanCollision();
+	float time, nx, ny;
+	switch (m_hState)
+	{
+	case ON_FLY:
+		m_hPosition.x += m_hSpeed.x;
+		m_hPosition.y += m_hSpeed.y;
+		break;
+	case FALL_DOWN:
+		object_static_can_collision = GetStaticObjectCanCollision();
+		m_hObjectLeft = NULL;
+		m_hObjectRight = NULL;
+		for (int i = 0; i < object_static_can_collision.size(); i++)
+		{
+			time = Collision::sweptAABBCheck(GetBox(), object_static_can_collision.at(i)->GetBox(), nx, ny);
+			if (time < 1){
+				if (nx == 1 && object_static_can_collision.at(i)->type != box)
+				{
+					m_hPosition.x += time*m_hSpeed.x;
+					m_hSpeed.x = 0;
+					m_hObjectLeft = object_static_can_collision.at(i);
+				}
+				if (nx == -1 && object_static_can_collision.at(i)->type != box)
+				{
+
+					m_hPosition.x += time*m_hSpeed.x;
+					m_hSpeed.x = 0;
+					m_hObjectRight = object_static_can_collision.at(i);
+				}
+				if (ny == 1)
+				{
+					FallDown(time, V_FALLDOWN);/////////
+					m_hSpeed.y = 0;
+					m_hState = ON_GROUND;
+					m_hObjectGround = object_static_can_collision.at(i);///////
+					return;
+				}
+				if (ny == -1 && object_static_can_collision.at(i)->type != box)
+				{
+					m_hPosition.y += time*m_hSpeed.y;
+					m_hSpeed.y = 0;
+				}
+			}
+		}
+		//	m_hSpeed.y = -0.5f;
+		//	m_hPosition.y += m_hSpeed.y;
+		FallDown(1, V_FALLDOWN);
+		if (m_hObjectLeft == NULL || m_hObjectRight == NULL)
+			m_hPosition.x += m_hSpeed.x;
+		break;
+	case ON_SPACE:
+		object_static_can_collision = GetStaticObject();
+		m_hObjectLeft = NULL;
+		m_hObjectRight = NULL;
+		for (int i = 0; i < object_static_can_collision.size(); i++)
+		{
+
+			time = Collision::sweptAABBCheck(GetBox(), object_static_can_collision.at(i)->GetBox(), nx, ny);
+			if (time < 1){
+				//time = Collision::sweptAABBCheck(GetBox(), object_static_can_collision.at(i)->GetBox(), nx, ny);
+				if (nx == 1 && object_static_can_collision.at(i)->type != box)
+				{
+					time = Collision::sweptAABBCheck(GetBox(), object_static_can_collision.at(i)->GetBox(), nx, ny);
+					m_hPosition.x += time*m_hSpeed.x;
+
+					m_hSpeed.x = 0;
+					m_hObjectLeft = object_static_can_collision.at(i);
+
+				}
+				if (nx == -1 && object_static_can_collision.at(i)->type != box)
+				{
+					m_hPosition.x += time*m_hSpeed.x;
+
+					m_hSpeed.x = 0;
+					m_hObjectRight = object_static_can_collision.at(i);
+
+				}
+				if (ny == 1 && nx == 0)
+				{
+					FallDown(time, 0);/////////
+					m_hSpeed.y = 0;
+					m_hState = ON_GROUND;
+					m_hObjectGround = object_static_can_collision.at(i);///////
+					return;
+				}
+				if (ny == -1 && object_static_can_collision.at(i)->type != box)
+				{
+					m_hPosition.y += time*m_hSpeed.y;
+					m_hSpeed.y = 0;
+				}
+			}
+		}
+		FallDown(1, 0);
+		if (m_hObjectLeft == NULL || m_hObjectRight == NULL)
+			m_hPosition.x += m_hSpeed.x;
+		break;
+	case ON_GROUND:
+
+		object_static_can_collision = GetStaticObjectCanCollision();
+		m_hObjectLeft = NULL;
+		m_hObjectRight = NULL;
+		for (int i = 0; i < object_static_can_collision.size(); i++)
+		{
+			if (Collision::checkAABB(Collision::getBoardPhaseBox(GetBox()), object_static_can_collision.at(i)->GetBox()))
+			{
+				time = Collision::sweptAABBCheck(GetBox(), object_static_can_collision.at(i)->GetBox(), nx, ny);
+				if (time < 1 && time >= 0 && object_static_can_collision.at(i)->type != box){
+					if (type != mario&&nx != 0){
+						//m_hPosition.x += time*m_hSpeed.x;
+						m_hSpeed.x = -m_hSpeed.x;
+					}
+					else if (nx == 1 && object_static_can_collision.at(i)->type != box)
+					{
+
+						m_hPosition.x += time*m_hSpeed.x;
+						m_hSpeed.x = 0;
+						m_hObjectLeft = object_static_can_collision.at(i);
+					}
+					else if (nx == -1 && object_static_can_collision.at(i)->type != box)
+					{
+						m_hPosition.x += time*m_hSpeed.x;
+						m_hSpeed.x = 0;
+						m_hObjectRight = object_static_can_collision.at(i);
+					}
+				}
+			}
+
+		}
+		if (this->m_hObjectGround != NULL)
+		{
+			if (!Collision::checkAABB(this->GetBox_CGround(), this->m_hObjectGround->m_hBox))
+			{
+				m_hState = ON_SPACE;
+			}
+		}
+		if (m_hObjectLeft == NULL && m_hObjectRight == NULL)
+			m_hPosition.x += m_hSpeed.x;
+		break;
+
+	}
+}
