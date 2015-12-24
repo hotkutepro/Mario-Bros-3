@@ -275,7 +275,7 @@ void Object::EatFood()
 		}
 	}
 }
-void Object::KillEnemy()
+void Object::KillEnemy() 
 {
 	vector<Object*> objects_Enemy = GetDynamicObject();
 	float nx, ny, time;

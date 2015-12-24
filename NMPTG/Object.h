@@ -25,7 +25,7 @@ enum Status
 class Object:public Operate
 {
 private:
-	
+	 
 protected:		
 	
 public:
