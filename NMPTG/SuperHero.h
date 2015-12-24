@@ -3,7 +3,7 @@
 #define _hero_JUMP 9.7f//10
 #define _hero_MAXJUM 11//45
 #define _hero_MAXSPEED 5//5
-#define _hero_SPEED 2.5f//2
+#define _hero_SPEED 3//2
 #define _hero_ACCELERATION 0.5f//.2f
 #define _hero_RUN_ACCELERATION 0.048f//
 //dung cho box
@@ -79,6 +79,7 @@ public:
 	bool isSquat = false;		
 	bool isFly = false;
 	bool attack = false;
+	bool ready = false;
 	float timeAttack = 0;	
 	float delayMaxSpeed;
 	void Load();
@@ -96,11 +97,16 @@ public:
 	void BrosFly(float gameTime);
 	void BrosFall(float gameTime);
 	void Attack();
+	void IsAttacked();
 	Box* GetBox();
+	Box* GetBoxTop();
+	Box* GetBoxAttack();
 	Box* GetBox_CGround();//va de xet va cham voi mat dat
 	//void RenderBoxDebug();
 	void RenderV();	
-	void ReanderBoxBottom();
+	void RenderBoxBottom();
+	void RenderBoxAttack();
+	void RendeBoxTop();
 	virtual void Move();
 	SuperHero();
 	~SuperHero();

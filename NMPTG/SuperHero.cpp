@@ -114,6 +114,7 @@ void SuperHero::Update(float gametime)
 	//chạy qua trái
 	if (_LocalKeyboard->IsKeyDown(DIK_LEFT) && _LocalKeyboard->IsKeyDown(DIK_LCONTROL) && !_LocalKeyboard->IsKeyDown(DIK_DOWN) && !_LocalKeyboard->IsKeyDown(DIK_DOWN))
 	{
+		ready = true;
 		RunLeft(gametime);
 	}
 	//đi qua phải
@@ -132,6 +133,7 @@ void SuperHero::Update(float gametime)
 	//chạy qua phải
 	if (_LocalKeyboard->IsKeyDown(DIK_RIGHT) && _LocalKeyboard->IsKeyDown(DIK_LCONTROL) && !_LocalKeyboard->IsKeyDown(DIK_LEFT) && !_LocalKeyboard->IsKeyDown(DIK_DOWN))
 	{
+		ready = true;
 		RunRight(gametime);
 	}
 
@@ -168,6 +170,10 @@ void SuperHero::Update(float gametime)
 	if (_LocalKeyboard->IsKeyUp(DIK_DOWN))
 	{
 		isSquat = false;
+	}
+	if (_LocalKeyboard->IsKeyUp(DIK_LCONTROL))
+	{
+		ready = false;
 	}
 
 	_LocalKeyboard->ClearBuffer();
@@ -1028,7 +1034,7 @@ Box* SuperHero::GetBox_CGround()
 	}
 	return x;
 }
-void SuperHero::ReanderBoxBottom()
+void SuperHero::RenderBoxBottom()
 {
 	RECT src;
 	src.left = 0;
@@ -1192,14 +1198,22 @@ Box* SuperHero::GetBoxTop()
 
 Box* SuperHero::GetBoxAttack()
 {
-
-	Box* x;
-	x->_position.x = m_hPosition.x;
-	x->_position.y = m_hPosition.y;
-	x->_v.x = 5;
-	x->_v.y = 0;
+	
+	Box* x = new Box();
 	x->_size.x = 10;
 	x->_size.y = 5;
+	x->_v.x = 5;
+	x->_v.y = 0;
+	if (m_hDirect == DIRECT::right)
+	{
+		x->_position.x = m_hPosition.x + 20;
+		x->_position.y = m_hPosition.y;				
+	}
+	else
+	{
+		x->_position.x = m_hPosition.x-5;
+		x->_position.y = m_hPosition.y;
+	}
 	return x;
 }
 
@@ -1229,6 +1243,26 @@ void SuperHero::IsAttacked()
 			setCurrentSprite(MarioLeft);
 		}
 	default:
-
+		break;
 	}
+}
+
+void SuperHero::RenderBoxAttack()
+{
+	if (attack)
+	{
+		RECT src;
+		src.left = 0;
+		src.right = src.left + 1;
+		src.top = 0;
+		src.bottom = src.top + 1;
+		RECT a;
+		a = GetBoxAttack()->getRect();
+		_LocalGraphic->tDrawTexture(_LocalContent->LoadTexture("boxbottom.png"), src, a, D3DXVECTOR2(GetBoxAttack()->getCenter()), D3DCOLOR_XRGB(255, 255, 255), 0);
+	}
+}
+
+void SuperHero::RendeBoxTop()
+{
+
 }
