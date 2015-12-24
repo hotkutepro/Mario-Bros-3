@@ -256,7 +256,10 @@ void Object::EatFood()
 		if (objects_Food.at(i)->type == coin || objects_Food.at(i)->type == leaf || objects_Food.at(i)->type == p || objects_Food.at(i)->type == star)
 		{
 			if (Collision::checkAABB(GetBox(), objects_Food.at(i)->GetBox()))
+			{			
 				objects_Food.at(i)->life = false;
+			}
+				
 		}
 		if (objects_Food.at(i)->type == question_block)
 		{
@@ -495,7 +498,7 @@ vector<Object*> Object::GetListTortoise()
 
 	return result;
 }
-
+ 
 void Object::IsAttacked()
 {
 	life = false;
