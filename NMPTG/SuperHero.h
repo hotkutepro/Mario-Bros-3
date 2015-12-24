@@ -74,6 +74,10 @@ public:
 	char* a;
 	string f_str1;
 	char* a1;
+	bool isUp = false;
+	bool isDown = false;
+	bool isLeft = false;
+	bool isRight = false;
 	bool isJump = false;		
 	bool isRun = false;
 	bool isSquat = false;		

@@ -56,37 +56,11 @@ void Object::Load()
 	m_hObjectRight = NULL;
 	m_hSpeed.x = 0;
 	m_hSpeed.y = 0;
-
 	m_hBox = new Box();
-	//m_hBoundBox = new Box();
-
-	/*if (type == land || type == box || type == drain)// drain chua biet load sao
-	{
-		//m_hBoundBox->_size.x = m_hSize.x + 25;
-		//m_hBoundBox->_size.y = m_hSize.y + 25;
-		m_hBox->_position.x = m_hPosition.x;
-		m_hBox->_position.y = m_hPosition.y;
-
-		m_hBox->_size.x = m_hSize.x;
-		m_hBox->_size.y = m_hSize.y;
-	}
-	else
-	{
-		m_hBox->_position.x = m_hPosition.x;
-		m_hBox->_position.y = m_hPosition.y;
-		m_hSize.x = getCurrentSprite()->_Width;//can cap nhat trong mario
-		m_hSize.y = getCurrentSprite()->_Height;
-		//m_hBoundBox->_size.x = getCurrentSprite()->_Width + 25;
-		//m_hBoundBox->_size.y = getCurrentSprite()->_Height + 25;
-		m_hBox->_size.x = getCurrentSprite()->_Width;
-		m_hBox->_size.y = getCurrentSprite()->_Height;
-	}*/
-
 }
 void Object::Update(float gameTime)
 {
-
-
+	
 }
 void Object::setCurrentSprite(FrkSprite* s)
 {
@@ -169,68 +143,9 @@ void Object::RenderBoxDebug()
 	RECT a = m_hBox->getRect();
 	_LocalGraphic->tDrawTexture(_LocalContent->LoadTexture("abc.png"), src, a, D3DXVECTOR2(m_hBox->getCenter()), D3DCOLOR_XRGB(255, 255, 255), 0);
 }
-Box* Object::GetBoundBox()
-{
-	Box* m_hBoundBox = new Box();
-	m_hBoundBox->_position.x = m_hPosition.x - 12.5;
-	m_hBoundBox->_position.y = m_hPosition.y + 12.5;
-	m_hBoundBox->_size.x = m_hBox->_size.x + 25;
-	m_hBoundBox->_size.y = m_hBox->_size.y + 25;
-	m_hBoundBox->_v.x = m_hSpeed.x;
-	m_hBoundBox->_v.y = m_hSpeed.y;
-	return m_hBoundBox;
-}
 
-void Object::RenderBoundBox()
-{
-	RECT src;
-	src.left = 0;
-	src.right = src.left + 16;
-	src.top = 0;
-	src.bottom = src.top + 16;
-	RECT a = GetBoundBox()->getRect();
-	_LocalGraphic->tDrawTexture(_LocalContent->LoadTexture("abc.png"), src, a, D3DXVECTOR2(8, 8), D3DCOLOR_XRGB(255, 255, 255), 0);
-}
 
-Box* Object::GetBox_CGround()
-{
-	Box* x = new Box();
-	if (status == BROS||status==BIGMARIO)
-	{
-		if (m_hDirect == DIRECT::left)
-		{
-			x->_position.x = m_hPosition.x+20;
-			x->_position.y = m_hPosition.y;
-			x->_size.x = m_hCurrentSprite->_Width-20;
-			x->_size.y += 5;
-		}
-		else{
-			x->_position.x = m_hPosition.x-20;
-			x->_position.y = m_hPosition.y;
-			x->_size.x = m_hCurrentSprite->_Width-20 ;
-			x->_size.y += 5;
-		}
-	}else
-		if (m_hDirect == DIRECT::left)
-		{
-		x->_position.x = m_hPosition.x-3;
-		x->_position.y = m_hPosition.y;
-		x->_size.x = m_hCurrentSprite->_Width;
-		x->_size.y += 5;
-		}
-		else{
-			x->_position.x = m_hPosition.x + 3;
-			x->_position.y = m_hPosition.y;
-			x->_size.x = m_hCurrentSprite->_Width ;
-			x->_size.y += 5;
-		}
-	x->_position.x = m_hPosition.x;
-	x->_position.y = m_hPosition.y;
-	x->_size = m_hBox->_size;
-	x->_size.y += 5;
 
-	return x;
-}
 
 list<Object*> Object::GetStaticObject_vx()
 {
@@ -363,11 +278,17 @@ void Object::KillEnemy()
 	float nx, ny, time;
 	for (int i = 0; i < objects_Enemy.size(); i++)
 	{
+		if (Collision::checkAABB(_LocalHero->GetBoxAttack(), objects_Enemy.at(i)->GetBox()))
+		{
+			objects_Enemy.at(i)->IsAttacked();
+		}
 		time = Collision::sweptAABBCheck(GetBox(), objects_Enemy.at(i)->GetBox(), nx, ny);
 		if (time < 1 && time >= 0)
 		{
+		
 			if (nx == 1)
 			{
+				
 				objects_Enemy.at(i)->Collision_Right();
 			}		
 			if (nx == -1)
@@ -383,149 +304,6 @@ void Object::KillEnemy()
 				objects_Enemy.at(i)->Collision_Down();
 			}
 		}
-	}
-}
-void Object::Move()
-{
-	vector<Object*> object_static_can_collision = GetStaticObjectCanCollision();
-	float time, nx, ny;
-	switch (m_hState)
-	{
-	case ON_FLY:
-		m_hPosition.x += m_hSpeed.x;
-		m_hPosition.y += m_hSpeed.y;
-		break;
-	case FALL_DOWN:
-		object_static_can_collision = GetStaticObjectCanCollision();
-		m_hObjectLeft = NULL;
-		m_hObjectRight = NULL;
-		for (int i = 0; i < object_static_can_collision.size(); i++)
-		{
-			time = Collision::sweptAABBCheck(GetBox(), object_static_can_collision.at(i)->GetBox(), nx, ny);
-			if (time < 1){
-				if (nx == 1 && object_static_can_collision.at(i)->type != box)
-				{
-					m_hPosition.x += time*m_hSpeed.x;
-					m_hSpeed.x = 0;
-					m_hObjectLeft = object_static_can_collision.at(i);
-				}
-				if (nx == -1 && object_static_can_collision.at(i)->type != box)
-				{
-					
-					m_hPosition.x += time*m_hSpeed.x;
-					m_hSpeed.x = 0;
-					m_hObjectRight = object_static_can_collision.at(i);
-				}
-				if (ny == 1)
-				{
-					FallDown(time, V_FALLDOWN);/////////
-					m_hSpeed.y = 0;
-					m_hState = ON_GROUND;
-					m_hObjectGround = object_static_can_collision.at(i);///////
-					return;
-				}
-				if (ny == -1 && object_static_can_collision.at(i)->type != box)
-				{
-					m_hPosition.y += time*m_hSpeed.y;
-					m_hSpeed.y = 0;
-				}
-			}
-		}
-	//	m_hSpeed.y = -0.5f;
-	//	m_hPosition.y += m_hSpeed.y;
-		FallDown(1, V_FALLDOWN);
-		if (m_hObjectLeft == NULL || m_hObjectRight == NULL)
-			m_hPosition.x += m_hSpeed.x;
-		break;
-	case ON_SPACE:
-		object_static_can_collision = GetStaticObject();
-		m_hObjectLeft = NULL;
-		m_hObjectRight = NULL;
-		for (int i = 0; i < object_static_can_collision.size(); i++)
-		{
-			
-			time = Collision::sweptAABBCheck(GetBox(), object_static_can_collision.at(i)->GetBox(), nx, ny);
-			if (time < 1){
-				//time = Collision::sweptAABBCheck(GetBox(), object_static_can_collision.at(i)->GetBox(), nx, ny);
-				if (nx == 1 && object_static_can_collision.at(i)->type != box)
-				{
-					time = Collision::sweptAABBCheck(GetBox(), object_static_can_collision.at(i)->GetBox(), nx, ny);
-					m_hPosition.x += time*m_hSpeed.x;
-					
-					m_hSpeed.x = 0;
-					m_hObjectLeft = object_static_can_collision.at(i);
-					
-				}
-				if (nx == -1 && object_static_can_collision.at(i)->type != box)
-				{
-					m_hPosition.x += time*m_hSpeed.x;
-				
-					m_hSpeed.x = 0;
-					m_hObjectRight = object_static_can_collision.at(i);
-					
-				}
-				if (ny == 1 && nx == 0)
-				{
-					FallDown(time,0);/////////
-					m_hSpeed.y = 0;					
-					m_hState = ON_GROUND;					
-					m_hObjectGround = object_static_can_collision.at(i);///////
-					return;
-				}
-				if (ny == -1 && object_static_can_collision.at(i)->type != box)
-				{
-					m_hPosition.y += time*m_hSpeed.y;
-					m_hSpeed.y = 0;
-				}
-			}
-		}
-		FallDown(1,0);
-		if (m_hObjectLeft == NULL || m_hObjectRight == NULL)
-			m_hPosition.x += m_hSpeed.x;
-		break;
-	case ON_GROUND:
-
-		object_static_can_collision = GetStaticObjectCanCollision();
-		m_hObjectLeft = NULL;
-		m_hObjectRight = NULL;
-		for (int i = 0; i < object_static_can_collision.size(); i++)
-		{
-			if (Collision::checkAABB(Collision::getBoardPhaseBox(GetBox()), object_static_can_collision.at(i)->GetBox()))
-			{
-				time = Collision::sweptAABBCheck(GetBox(), object_static_can_collision.at(i)->GetBox(), nx, ny);
-				if (time < 1 && time >= 0 && object_static_can_collision.at(i)->type != box){
-					if (type != mario&&nx != 0){
-						//m_hPosition.x += time*m_hSpeed.x;
-						m_hSpeed.x = -m_hSpeed.x;
-					}
-					else if (nx == 1 && object_static_can_collision.at(i)->type != box)
-					{
-
-						m_hPosition.x += time*m_hSpeed.x;
-						m_hSpeed.x = 0;
-						m_hObjectLeft = object_static_can_collision.at(i);
-					}
-					else if (nx == -1 && object_static_can_collision.at(i)->type != box)
-					{
-						m_hPosition.x += time*m_hSpeed.x;
-						m_hSpeed.x = 0;
-						m_hObjectRight = object_static_can_collision.at(i);
-					}
-				}
-			}
-			
-		}
-		if (this->m_hObjectGround != NULL)
-		{
-			if (!Collision::checkAABB(this->GetBox_CGround(), this->m_hObjectGround->m_hBox))
-			{
-				m_hState = ON_SPACE;
-			}
-		}
-		if (m_hObjectLeft == NULL && m_hObjectRight == NULL)
-			m_hPosition.x += m_hSpeed.x;
-		break;
-
 	}
 }
 
@@ -618,13 +396,13 @@ void Object::MoveObject()
 				}
 			}
 		}
-		if (this->m_hObjectGround != NULL)
+		/*if (this->m_hObjectGround != NULL)
 		{
 			if (!Collision::checkAABB(this->GetBox_CGround(), this->m_hObjectGround->m_hBox))
 			{
 				m_hState = ON_SPACE;
 			}
-		}
+		}*/
 		if (m_hObjectLeft == NULL && m_hObjectRight == NULL)
 			m_hPosition.x += m_hSpeed.x;
 		break;
@@ -632,19 +410,19 @@ void Object::MoveObject()
 	}
 }
 
-int Object::isOnGround()
-{
-	if (m_hObjectGround != NULL)
-	{
-		if (Collision::checkAABB(GetBox_CGround(), m_hObjectGround->GetBox()))
-		{
-			return 1;
-		}
-		else
-			return 0;
-	}
-	return -1;
-}
+//int Object::isOnGround()
+//{
+//	if (m_hObjectGround != NULL)
+//	{
+//		if (Collision::checkAABB(GetBox_CGround(), m_hObjectGround->GetBox()))
+//		{
+//			return 1;
+//		}
+//		else
+//			return 0;
+//	}
+//	return -1;
+//}
 
 int Object::getDirectWithHero(Object* hero)
 {
@@ -677,17 +455,7 @@ void Object::DelayNext(float frame)
 	}
 }
 
-void Object::ReanderGroundBox()
-{
-	RECT src;
-	src.left = 0;
-	src.right = src.left + 16;
-	src.top = 0;
-	src.bottom = src.top + 16;
-	RECT a;
-	a = GetBox_CGround()->getRect();
-	_LocalGraphic->tDrawTexture(_LocalContent->LoadTexture("brick.png"), src, a, D3DXVECTOR2(8, 8), D3DCOLOR_XRGB(255, 255, 255), 0);
-}
+
 
 void Object::Collision_Up()
 {
@@ -730,7 +498,22 @@ vector<Object*> Object::GetListTortoise()
 
 void Object::IsAttacked()
 {
+	life = false;
+}
 
+Box* Object::GetBoxTop()
+{
+	return new Box;
+}
+
+Box* Object::GetBoxAttack()
+{	
+	return new Box;
+}
+
+Box* Object::GetBox_CGround()
+{
+	return new Box;
 }
 
 

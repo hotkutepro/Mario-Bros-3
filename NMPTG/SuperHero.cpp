@@ -101,6 +101,7 @@ void SuperHero::Update(float gametime)
 	//đi qua trái
 	if (_LocalKeyboard->IsKeyDown(DIK_LEFT) && !_LocalKeyboard->IsKeyDown(DIK_LCONTROL) && !_LocalKeyboard->IsKeyDown(DIK_RIGHT) && !_LocalKeyboard->IsKeyDown(DIK_DOWN))
 	{
+		isLeft = true;
 		if (isRun && m_hSpeed.x < -_hero_SPEED)
 		{
 			InertiaRun(gametime);
@@ -114,12 +115,14 @@ void SuperHero::Update(float gametime)
 	//chạy qua trái
 	if (_LocalKeyboard->IsKeyDown(DIK_LEFT) && _LocalKeyboard->IsKeyDown(DIK_LCONTROL) && !_LocalKeyboard->IsKeyDown(DIK_DOWN) && !_LocalKeyboard->IsKeyDown(DIK_DOWN))
 	{
+		isLeft = true;
 		ready = true;
 		RunLeft(gametime);
 	}
 	//đi qua phải
 	if (_LocalKeyboard->IsKeyDown(DIK_RIGHT) && !_LocalKeyboard->IsKeyDown(DIK_LCONTROL) && !_LocalKeyboard->IsKeyDown(DIK_LEFT) && !_LocalKeyboard->IsKeyDown(DIK_DOWN))
 	{
+		isRight = true;
 		if (isRun && m_hSpeed.x > _hero_SPEED)
 		{
 			InertiaRun(gametime);
@@ -133,17 +136,23 @@ void SuperHero::Update(float gametime)
 	//chạy qua phải
 	if (_LocalKeyboard->IsKeyDown(DIK_RIGHT) && _LocalKeyboard->IsKeyDown(DIK_LCONTROL) && !_LocalKeyboard->IsKeyDown(DIK_LEFT) && !_LocalKeyboard->IsKeyDown(DIK_DOWN))
 	{
+		isRight = true;
 		ready = true;
 		RunRight(gametime);
 	}
 
 	if (_LocalKeyboard->IsKeyDown(DIK_DOWN))
 	{
+		isDown = true;
 		Squat(gametime);
 	}
 	if (_LocalKeyboard->IsKeyDown(DIK_X))
 	{
 		BrosFly(gametime);
+	}
+	if (_LocalKeyboard->IsKeyDown(DIK_UP))
+	{
+		isUp = true;
 	}
 #pragma endregion
 
@@ -167,15 +176,28 @@ void SuperHero::Update(float gametime)
 	{
 		m_hState = ON_SPACE;
 	}
-	if (_LocalKeyboard->IsKeyUp(DIK_DOWN))
-	{
-		isSquat = false;
-	}
+	
 	if (_LocalKeyboard->IsKeyUp(DIK_LCONTROL))
 	{
 		ready = false;
 	}
-
+	if (_LocalKeyboard->IsKeyUp(DIK_DOWN))
+	{
+		isDown = false;
+		isSquat = false;
+	}
+	if (_LocalKeyboard->IsKeyUp(DIK_UP))
+	{
+		isUp = false;
+	}
+	if (_LocalKeyboard->IsKeyUp(DIK_LEFT))
+	{
+		isLeft = false;
+	}
+	if (_LocalKeyboard->IsKeyUp(DIK_RIGHT))
+	{
+		isRight = false;
+	}
 	_LocalKeyboard->ClearBuffer();
 #pragma endregion
 #pragma region Process next sprite
@@ -282,6 +304,7 @@ void SuperHero::Update(float gametime)
 		getCurrentSprite()->Next();
 	}
 #pragma endregion
+#pragma region ATTACK
 	if (attack && m_hState != ON_FLY)
 	{
 		timeAttack++;
@@ -328,6 +351,7 @@ void SuperHero::Update(float gametime)
 
 		}
 	}
+#pragma endregion
 #pragma endregion
 	KillEnemy();
 	EatFood();
@@ -1200,20 +1224,23 @@ Box* SuperHero::GetBoxAttack()
 {
 	
 	Box* x = new Box();
-	x->_size.x = 10;
-	x->_size.y = 5;
-	x->_v.x = 5;
-	x->_v.y = 0;
-	if (m_hDirect == DIRECT::right)
+	if (attack)
 	{
-		x->_position.x = m_hPosition.x + 20;
-		x->_position.y = m_hPosition.y;				
-	}
-	else
-	{
-		x->_position.x = m_hPosition.x-5;
-		x->_position.y = m_hPosition.y;
-	}
+		x->_size.x = 10;
+		x->_size.y = 5;
+		x->_v.x = 5;
+		x->_v.y = 0;
+		if (m_hDirect == DIRECT::right)
+		{
+			x->_position.x = m_hPosition.x + 20;
+			x->_position.y = m_hPosition.y;
+		}
+		else
+		{
+			x->_position.x = m_hPosition.x - 5;
+			x->_position.y = m_hPosition.y;
+		}
+	}	
 	return x;
 }
 

@@ -10,8 +10,8 @@
 #include <vector>
 #define Range_x 10// dung cho ham lay danh sach cac doi tuong cach object mot khoang rang_x theo chieu ngang
 #define Range_y 10// dung cho ham lay danh sach cac doi tuong cach object mot khoang rang_y theo chieu doc
-#define GRAVITY -0.7f
-#define  V_FALLDOWN -1
+#define GRAVITY -0.7f // trọng lực
+#define  V_FALLDOWN -1 // tốc độ rơi khi press X
 enum TYPEOBJECT{
 	brick, coin, drain, land, leaf, mushroom_red, p, box, question_block, star, tarnooki, tarnooki_fly,
 	tortoise, tortoise_fly, tortoise_red, tree, tree_red, tree_red_shoot, tree_shoot, bullet, mario
@@ -27,8 +27,9 @@ class Object:public Operate
 private:
 	
 protected:		
-	Box* m_hBox;
+	
 public:
+	Box* m_hBox;
 	// thoi gian co the bay
 	int flyTime = 0;
 	//toc do
@@ -77,19 +78,20 @@ public:
 	virtual void IsAttacked();
 	virtual void Die();
 	virtual void WatchUp();//dung cho coin, leaf...xet life=true
-	virtual void Move();
+	
 	virtual void MoveObject();	
 	virtual void FallDown(float remainingtime, float Vy);//dung cho object
-	virtual int isOnGround();//kiem tra xem object co dang dung tren ground ko, 1 neu co, 0 neu ko, -1 kxd
+//	virtual int isOnGround();//kiem tra xem object co dang dung tren ground ko, 1 neu co, 0 neu ko, -1 kxd
 	virtual void EatFood();
 	virtual void KillEnemy();
 	virtual void RenderDebug();
 	virtual void RenderBoxDebug();
-	virtual void RenderBoundBox();
-	virtual void ReanderGroundBox();
+	
+	
 	virtual Box* GetBox();
-	virtual Box* GetBoundBox();
-	virtual Box* GetBox_CGround();//va de xet va cham voi mat dat
+	virtual Box* GetBoxTop();
+	virtual Box* GetBoxAttack();
+	virtual Box* GetBox_CGround();
 	virtual Box* GetBox_CLeft();
 	virtual Box* GetBox_CRight();	
 	void Jump();

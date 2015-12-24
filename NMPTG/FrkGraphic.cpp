@@ -236,7 +236,7 @@ bool FrkGraphic::initFont()
 void FrkGraphic::sDraw(char* text, D3DXVECTOR2 pos, D3DCOLOR color)
 {
 	int index;
-	RECT s_rect;
+	RECT s_rect; 
 
 	float str_width = strlen(text)*fontSize.x;
 	float str_height = fontSize.y;
@@ -253,6 +253,7 @@ void FrkGraphic::sDraw(char* text, D3DXVECTOR2 pos, D3DCOLOR color)
 		DT_TOP | DT_LEFT,
 		color);
 }
+
 
 void FrkGraphic::SetFontSize(D3DXVECTOR2 size)
 {

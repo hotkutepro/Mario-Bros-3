@@ -873,7 +873,7 @@ namespace QT
         private void Write_Object()
         {
             int mapHeight = pbImgMap.Height;
-            using (StreamWriter sw = new StreamWriter("C:/Users/HomeSK/Desktop/Mario-Bros-3.git/trunk/NMPTG/Object.txt"))
+            using (StreamWriter sw = new StreamWriter("C:/Users/pumpa/Desktop/Mario-Bros-3-final.git/trunk/NMPTG/Object.txt"))
             {
                 sw.WriteLine("brick" + " " + c_brick.Count);
                 for (int i = 0; i < c_brick.Count; i++)

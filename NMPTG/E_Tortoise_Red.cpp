@@ -38,7 +38,7 @@ void E_Tortoise_Red::Update(float gameTime)
 	SetSprite();
 	SetMove();
 	Object::Update(gameTime);
-	Move();
+	MoveObject();
 
 }
 void E_Tortoise_Red::Collision_Up()
