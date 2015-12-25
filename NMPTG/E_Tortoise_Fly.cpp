@@ -63,11 +63,16 @@ void E_Tortoise_Fly::Collision_Up()
 
 void E_Tortoise_Fly::Collision_Down()
 {
-
+	if (status == 0){
+		_LocalHero->IsAttacked();
+	}
 }
 
 void E_Tortoise_Fly::Collision_Left()
 {
+	if (status == 0){
+		_LocalHero->IsAttacked();
+	}
 	if (status == 2)
 	{
 		m_hSpeed.x = 0;
@@ -79,6 +84,9 @@ void E_Tortoise_Fly::Collision_Left()
 
 void E_Tortoise_Fly::Collision_Right()
 {
+	if (status == 0){
+		_LocalHero->IsAttacked();
+	}
 	if (status == 2)
 	{
 		m_hSpeed.x = 0;
