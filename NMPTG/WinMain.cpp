@@ -26,7 +26,7 @@ int WINAPI WinMain(HINSTANCE h, HINSTANCE p, LPTSTR a, int c)
 	
 	StateManager* SM = new StateManager();
 	
-	State* state = new State_5(h, 320, 240, "demo", SM);
+	State* state = new State_4(h, 320, 240, "demo", SM);
 
 	SM->Add(state);
 	

@@ -72,8 +72,8 @@ void SuperHero::Load()
 #pragma endregion
 	type = mario;
 	setCurrentSprite(MarioRight);
-	m_hPosition.x = 100;
-	m_hPosition.y = 320;
+	m_hPosition.x = 30;
+	m_hPosition.y = 600;
 	status = 2;
 	m_hDirect = DIRECT::right;
 	delayMaxSpeed = 0;

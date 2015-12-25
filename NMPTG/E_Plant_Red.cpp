@@ -26,5 +26,5 @@ void E_Plant_Red::Update(float gameTime)
 
 void E_Plant_Red::IsAttacked()
 {
-
+	life = false;
 }

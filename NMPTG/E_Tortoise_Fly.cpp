@@ -127,5 +127,7 @@ void E_Tortoise_Fly::UpdateDirect()
 
 void E_Tortoise_Fly::IsAttacked()
 {
-
+	status = 3;
+	m_hSpeed.x = 0;
+	SetSprite();
 }

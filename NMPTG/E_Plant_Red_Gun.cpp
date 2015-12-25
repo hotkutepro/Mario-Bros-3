@@ -139,5 +139,5 @@ void E_Plant_Red_Gun::SetSprite()
 
 void E_Plant_Red_Gun::IsAttacked()
 {
-
+	life = false;
 }

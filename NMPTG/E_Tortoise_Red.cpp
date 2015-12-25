@@ -120,6 +120,9 @@ void E_Tortoise_Red::Collision_Down()
 
 void E_Tortoise_Red::Collision_Left()
 {	
+	if (status == 0){
+		_LocalHero->IsAttacked();
+	}
 	if (status == 1)
 	{
 		m_hSpeed.x = 0;
@@ -132,6 +135,9 @@ void E_Tortoise_Red::Collision_Left()
 
 void E_Tortoise_Red::Collision_Right()
 {
+	if (status == 0){
+		_LocalHero->IsAttacked();
+	}
 	if (status == 1)
 	{
 		m_hSpeed.x = 0;
@@ -170,5 +176,8 @@ void E_Tortoise_Red::UpdateDirect()
 
 void E_Tortoise_Red::IsAttacked()
 {
+	status = 2;
+	m_hSpeed.x = 0;
+	SetSprite();
 
 }

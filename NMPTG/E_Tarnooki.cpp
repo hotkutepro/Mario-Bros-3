@@ -64,12 +64,12 @@ void E_Tarnooki::Collision_Down()
 
 void E_Tarnooki::Collision_Left()
 {
-
+	_LocalHero->IsAttacked();
 }
 
 void E_Tarnooki::Collision_Right()
 {
-
+	_LocalHero->IsAttacked();
 }
 
 void E_Tarnooki::SetSprite()
@@ -82,5 +82,5 @@ void E_Tarnooki::SetSprite()
 
 void E_Tarnooki::IsAttacked()
 {
-
+	life = false;
 }
