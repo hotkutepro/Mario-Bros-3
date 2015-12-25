@@ -1324,7 +1324,7 @@ void SuperHero::IsAttacked()
 	switch (status)
 	{
 	case BROS:
-		status = BIGMARIO;
+		status --;
 		if (m_hDirect == DIRECT::right)
 		{
 			setCurrentSprite(BigMarioRight);
@@ -1335,7 +1335,7 @@ void SuperHero::IsAttacked()
 		}
 		break;
 	case BIGMARIO:
-		status = MARIO;
+		status --;
 		if (m_hDirect == DIRECT::right)
 		{
 			setCurrentSprite(MarioRight);

@@ -12,8 +12,8 @@
 #define  _hero_BOX_ADJUST_POS_RIGHT 4
 #define  _hero_BOX_ADJUST_POS_LEFT 3
 //dung cho box top
-#define  _hero_BOX_TOP_WIDTH 2
-#define  _hero_BOX_TOP_HEIGHT 2
+#define  _hero_BOX_TOP_WIDTH 10
+#define  _hero_BOX_TOP_HEIGHT 10
 class SuperHero:public Object
 {
 private:

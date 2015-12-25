@@ -79,10 +79,10 @@ void State_4::Render()
 	hero->RenderBoxAttack();
 	hero->RenderBoxBottom();
 	
-	//hero->RenderDebug();
+	hero->RenderDebug();
 	
 	//hero->ReanderViewPort();
-	//hero->Render();
+	hero->Render();
 	hero->RendeBoxTop();
 	//hero->ReanderGroundBox();
 	_LocalGraphic->End();
