@@ -16,7 +16,7 @@ enum TYPEOBJECT{
 	brick, coin, drain, land, leaf, mushroom_red, p, box, question_block, star, tarnooki, tarnooki_fly,
 	tortoise, tortoise_fly, tortoise_red, tree, tree_red, tree_red_shoot, tree_shoot, bullet, mario
 };
-enum STATE{ ON_GROUND, ON_SPACE, FALL_DOWN, ON_FLY };
+enum STATE{ ON_GROUND, ON_SPACE, FALL_DOWN, ON_FLY,OTHER };
 enum DIRECT{ left,right };
 enum Status
 {

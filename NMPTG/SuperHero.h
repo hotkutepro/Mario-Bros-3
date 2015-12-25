@@ -1,5 +1,6 @@
 #pragma once
 #include"Object.h"
+#include "Infomation.h"
 #define _hero_JUMP 9.7f//10
 #define _hero_MAXJUM 11//45
 #define _hero_MAXSPEED 5//5
@@ -7,9 +8,9 @@
 #define _hero_ACCELERATION 0.5f//.2f
 #define _hero_RUN_ACCELERATION 0.048f//
 //dung cho box
-#define _hero_BOX_WIDTH 11
-#define  _hero_BOX_ADJUST_POS_RIGHT 11;
-#define  _hero_BOX_ADJUST_POS_LEFT 7;
+#define _hero_BOX_WIDTH 9
+#define  _hero_BOX_ADJUST_POS_RIGHT 4
+#define  _hero_BOX_ADJUST_POS_LEFT 3
 class SuperHero:public Object
 {
 private:
@@ -70,22 +71,42 @@ private:
 	FrkSprite* MarioSuperJumpRight;
 #pragma endregion
 public:
+	Infomation* infomation;
 	string f_str;
 	char* a;
 	string f_str1;
 	char* a1;
+
+	//xu ly phim khi keyup
 	bool isUp = false;
 	bool isDown = false;
 	bool isLeft = false;
 	bool isRight = false;
-	bool isJump = false;		
+
+	//dang nhay
+	bool isJump = false;	
+
+	//dang chay
 	bool isRun = false;
-	bool isSquat = false;		
+
+	//dang ngoi
+	bool isSquat = false;	
+
+	//dang bay
 	bool isFly = false;
+
+	//ba le
 	bool attack = false;
+	//thoi gian ba le
+	float timeAttack = 0;
+
+	// chuan bi cam rua
 	bool ready = false;
-	float timeAttack = 0;	
+
+	//thoi gian delay khi dat max speed
 	float delayMaxSpeed;
+	//bien delay khi die
+	float delayDie;
 	void Load();
 	void Update(float gametime);
 	void GoLeft(float gameTime);
@@ -111,6 +132,11 @@ public:
 	void RenderBoxBottom();
 	void RenderBoxAttack();
 	void RendeBoxTop();
+	void Collision_Coin();
+	void Collision_Leaf();
+	void Collision_Mushroom();
+	void Collision_1up();
+	void KillEnemy();
 	virtual void Move();
 	SuperHero();
 	~SuperHero();

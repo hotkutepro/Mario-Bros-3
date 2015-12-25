@@ -279,7 +279,9 @@
     <ClCompile Include="State_4.cpp">
       <Filter>GameState</Filter>
     </ClCompile>
-    <ClCompile Include="Infomation.cpp" />
+    <ClCompile Include="Infomation.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

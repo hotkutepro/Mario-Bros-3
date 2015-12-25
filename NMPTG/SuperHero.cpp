@@ -1019,23 +1019,40 @@ void SuperHero::SuperJump()
 }
 Box* SuperHero::GetBox()
 {
-	switch (status)
+	m_hBox->_position.y = m_hPosition.y;
+	m_hBox->_size.y = getCurrentSprite()->_Height;
+	m_hBox->_v = m_hSpeed;
+	if (status == MARIO)
 	{
-	case  BROS:
-		m_hBox->_position.y = m_hPosition.y;
-		m_hBox->_size.y = getCurrentSprite()->_Height;
-		m_hBox->_v = m_hSpeed;
+		m_hBox->_position.x = m_hPosition.x + 4;
+		m_hBox->_size.x = 9;
+	}
+	else
+	{		
+		m_hBox->_size.x = _hero_BOX_WIDTH;
 		if (m_hDirect == DIRECT::right)
 		{
-			m_hBox->_position.x = m_hPosition.x + _hero_BOX_ADJUST_POS_RIGHT;
-			m_hBox->_size.x = _hero_BOX_WIDTH;
+			if (m_hState == BIGMARIO)
+			{
+				m_hBox->_position.x = m_hPosition.x + _hero_BOX_ADJUST_POS_LEFT;
+			}
+			else
+			{
+				m_hBox->_position.x = m_hPosition.x + _hero_BOX_ADJUST_POS_LEFT;
+			}
+
 		}
 		else
 		{
-			m_hBox->_position.x = m_hPosition.x - 3 + _hero_BOX_ADJUST_POS_LEFT;
-			m_hBox->_size.x = _hero_BOX_WIDTH - 1;
+			if (m_hState == BIGMARIO)
+			{
+				m_hBox->_position.x = m_hPosition.x + _hero_BOX_ADJUST_POS_LEFT;
+			}
+			else
+			{
+				m_hBox->_position.x = m_hPosition.x + _hero_BOX_ADJUST_POS_LEFT;
+			}
 		}
-		break;
 	}
 
 	return m_hBox;
@@ -1046,15 +1063,31 @@ Box* SuperHero::GetBox_CGround()
 	Box* x = new Box();
 	x->_position.y = m_hPosition.y - 10;
 	x->_size.y = getCurrentSprite()->_Height / 2;
+	x->_size.x = _hero_BOX_WIDTH ;
+
 	if (m_hDirect == DIRECT::right)
 	{
-		x->_position.x = m_hPosition.x + _hero_BOX_ADJUST_POS_RIGHT;
-		x->_size.x = _hero_BOX_WIDTH - 5;
+		if (status == MARIO)
+		{
+			x->_position.x = m_hPosition.x;			
+		}
+		else
+		{
+			x->_position.x = m_hPosition.x + _hero_BOX_ADJUST_POS_RIGHT;
+		}
+	
 	}
 	else
 	{
-		x->_position.x = m_hPosition.x + _hero_BOX_ADJUST_POS_LEFT;
-		x->_size.x = _hero_BOX_WIDTH - 5;
+		if (status == MARIO)
+		{
+			x->_position.x = m_hPosition.x;			
+		}
+		else
+		{
+			x->_position.x = m_hPosition.x + _hero_BOX_ADJUST_POS_LEFT;
+		}
+
 	}
 	return x;
 }
@@ -1072,16 +1105,48 @@ void SuperHero::RenderBoxBottom()
 
 void SuperHero::Move()
 {
-	vector<Object*> object_static_can_collision = GetStaticObjectCanCollision();
+	vector<Object*> object_static_can_collision = GetStaticObject();
 	float time, nx, ny;
 	switch (m_hState)
 	{
+	case OTHER:		
+		m_hPosition.y += m_hSpeed.y;
+		m_hSpeed.y += GRAVITY/2;
 	case ON_FLY:
+		
+		for (int i = 0; i < object_static_can_collision.size(); i++)
+		{
+			time = Collision::sweptAABBCheck(GetBox(), object_static_can_collision.at(i)->GetBox(), nx, ny);
+			if (time < 1){
+				if (nx == 1 && object_static_can_collision.at(i)->type != box)
+				{
+					m_hPosition.x += time*m_hSpeed.x;
+					m_hSpeed.x = 0;
+					m_hObjectLeft = object_static_can_collision.at(i);
+				}
+				if (nx == -1 && object_static_can_collision.at(i)->type != box)
+				{
+
+					m_hPosition.x += time*m_hSpeed.x;
+					m_hSpeed.x = 0;
+					m_hObjectRight = object_static_can_collision.at(i);
+				}
+				if (ny == 1)
+				{					
+					return;
+				}
+				if (ny == -1 && object_static_can_collision.at(i)->type != box)
+				{
+					m_hPosition.y += time*m_hSpeed.y;
+					m_hSpeed.y = 0;
+				}
+			}
+		}
 		m_hPosition.x += m_hSpeed.x;
 		m_hPosition.y += m_hSpeed.y;
 		break;
 	case FALL_DOWN:
-		object_static_can_collision = GetStaticObjectCanCollision();
+	
 		m_hObjectLeft = NULL;
 		m_hObjectRight = NULL;
 		for (int i = 0; i < object_static_can_collision.size(); i++)
@@ -1123,7 +1188,7 @@ void SuperHero::Move()
 			m_hPosition.x += m_hSpeed.x;
 		break;
 	case ON_SPACE:
-		object_static_can_collision = GetStaticObject();
+	
 		m_hObjectLeft = NULL;
 		m_hObjectRight = NULL;
 		for (int i = 0; i < object_static_can_collision.size(); i++)
@@ -1170,7 +1235,7 @@ void SuperHero::Move()
 		break;
 	case ON_GROUND:
 
-		object_static_can_collision = GetStaticObjectCanCollision();
+		
 		m_hObjectLeft = NULL;
 		m_hObjectRight = NULL;
 		for (int i = 0; i < object_static_can_collision.size(); i++)
@@ -1270,6 +1335,9 @@ void SuperHero::IsAttacked()
 			setCurrentSprite(MarioLeft);
 		}
 	default:
+		setCurrentSprite(MarioDeath);
+		m_hSpeed.y = 5;
+		m_hState = OTHER;
 		break;
 	}
 }
@@ -1292,4 +1360,34 @@ void SuperHero::RenderBoxAttack()
 void SuperHero::RendeBoxTop()
 {
 
+}
+
+void SuperHero::Collision_Coin()
+{
+	infomation->I_Coin++;
+	infomation->I_Score += 10;
+}
+
+void SuperHero::Collision_Leaf()
+{
+	if (status != BROS)
+	{
+		status++;
+	}	
+	infomation->I_Score += 100;
+}
+
+void SuperHero::Collision_1up()
+{
+	infomation->I_Life++;
+}
+
+void SuperHero::KillEnemy()
+{
+
+}
+
+void SuperHero::Collision_Mushroom()
+{
+	status++;
 }
