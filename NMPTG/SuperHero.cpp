@@ -90,116 +90,121 @@ void SuperHero::Update(float gametime)
 	a1 = new char[f_str1.length() + 1];
 	strcpy(a1, f_str1.c_str());
 
-#pragma region KeyDown
 	_LocalKeyboard->GetDeviceState();
-	//quán tính vận tốc
-	if (m_hSpeed.x != 0 && !_LocalKeyboard->IsKeyDown(DIK_LEFT) && !_LocalKeyboard->IsKeyDown(DIK_RIGHT) && (!_LocalKeyboard->IsKeyDown(DIK_LCONTROL) || _LocalKeyboard->IsKeyDown(DIK_LCONTROL)))
+	if (m_hState != OTHER)
 	{
-		Inertia(gametime);
-	}
+#pragma region KeyDown
 
-	//đi qua trái
-	if (_LocalKeyboard->IsKeyDown(DIK_LEFT) && !_LocalKeyboard->IsKeyDown(DIK_LCONTROL) && !_LocalKeyboard->IsKeyDown(DIK_RIGHT) && !_LocalKeyboard->IsKeyDown(DIK_DOWN))
-	{
-		isLeft = true;
-		if (isRun && m_hSpeed.x < -_hero_SPEED)
+		//quán tính vận tốc
+		if (m_hSpeed.x != 0 && !_LocalKeyboard->IsKeyDown(DIK_LEFT) && !_LocalKeyboard->IsKeyDown(DIK_RIGHT) && (!_LocalKeyboard->IsKeyDown(DIK_LCONTROL) || _LocalKeyboard->IsKeyDown(DIK_LCONTROL)))
 		{
-			InertiaRun(gametime);
+			Inertia(gametime);
 		}
-		else
-		{
-			isRun = false;
-			GoLeft(gametime);
-		}
-	}
-	//chạy qua trái
-	if (_LocalKeyboard->IsKeyDown(DIK_LEFT) && _LocalKeyboard->IsKeyDown(DIK_LCONTROL) && !_LocalKeyboard->IsKeyDown(DIK_DOWN) && !_LocalKeyboard->IsKeyDown(DIK_DOWN))
-	{
-		isLeft = true;
-		ready = true;
-		RunLeft(gametime);
-	}
-	//đi qua phải
-	if (_LocalKeyboard->IsKeyDown(DIK_RIGHT) && !_LocalKeyboard->IsKeyDown(DIK_LCONTROL) && !_LocalKeyboard->IsKeyDown(DIK_LEFT) && !_LocalKeyboard->IsKeyDown(DIK_DOWN))
-	{
-		isRight = true;
-		if (isRun && m_hSpeed.x > _hero_SPEED)
-		{
-			InertiaRun(gametime);
-		}
-		else
-		{
-			isRun = false;
-			GoRight(gametime);
-		}
-	}
-	//chạy qua phải
-	if (_LocalKeyboard->IsKeyDown(DIK_RIGHT) && _LocalKeyboard->IsKeyDown(DIK_LCONTROL) && !_LocalKeyboard->IsKeyDown(DIK_LEFT) && !_LocalKeyboard->IsKeyDown(DIK_DOWN))
-	{
-		isRight = true;
-		ready = true;
-		RunRight(gametime);
-	}
 
-	if (_LocalKeyboard->IsKeyDown(DIK_DOWN) && !_LocalKeyboard->IsKeyDown(DIK_RIGHT) && !_LocalKeyboard->IsKeyDown(DIK_LEFT))
-	{
-		isDown = true;
-		Squat(gametime);
-	}
-	if (_LocalKeyboard->IsKeyDown(DIK_X))
-	{
-		BrosFly(gametime);
-	}
-	if (_LocalKeyboard->IsKeyDown(DIK_UP))
-	{
-		isUp = true;
-	}
-#pragma endregion
+		//đi qua trái
+		if (_LocalKeyboard->IsKeyDown(DIK_LEFT) && !_LocalKeyboard->IsKeyDown(DIK_LCONTROL) && !_LocalKeyboard->IsKeyDown(DIK_RIGHT) && !_LocalKeyboard->IsKeyDown(DIK_DOWN))
+		{
+			isLeft = true;
+			if (isRun && m_hSpeed.x < -_hero_SPEED)
+			{
+				InertiaRun(gametime);
+			}
+			else
+			{
+				isRun = false;
+				GoLeft(gametime);
+			}
+		}
+		//chạy qua trái
+		if (_LocalKeyboard->IsKeyDown(DIK_LEFT) && _LocalKeyboard->IsKeyDown(DIK_LCONTROL) && !_LocalKeyboard->IsKeyDown(DIK_DOWN) && !_LocalKeyboard->IsKeyDown(DIK_DOWN))
+		{
+			isLeft = true;
+			ready = true;
+			RunLeft(gametime);
+		}
+		//đi qua phải
+		if (_LocalKeyboard->IsKeyDown(DIK_RIGHT) && !_LocalKeyboard->IsKeyDown(DIK_LCONTROL) && !_LocalKeyboard->IsKeyDown(DIK_LEFT) && !_LocalKeyboard->IsKeyDown(DIK_DOWN))
+		{
+			isRight = true;
+			if (isRun && m_hSpeed.x > _hero_SPEED)
+			{
+				InertiaRun(gametime);
+			}
+			else
+			{
+				isRun = false;
+				GoRight(gametime);
+			}
+		}
+		//chạy qua phải
+		if (_LocalKeyboard->IsKeyDown(DIK_RIGHT) && _LocalKeyboard->IsKeyDown(DIK_LCONTROL) && !_LocalKeyboard->IsKeyDown(DIK_LEFT) && !_LocalKeyboard->IsKeyDown(DIK_DOWN))
+		{
+			isRight = true;
+			ready = true;
+			RunRight(gametime);
+		}
+
+		if (_LocalKeyboard->IsKeyDown(DIK_DOWN) && !_LocalKeyboard->IsKeyDown(DIK_RIGHT) && !_LocalKeyboard->IsKeyDown(DIK_LEFT))
+		{
+			isDown = true;
+			Squat(gametime);
+		}
+		if (_LocalKeyboard->IsKeyDown(DIK_X))
+		{
+			BrosFly(gametime);
+		}
+		if (_LocalKeyboard->IsKeyDown(DIK_UP))
+		{
+			isUp = true;
+		}
+#pragma endregion	
 
 #pragma region KeyPressed/Up
-	if (_LocalKeyboard->IsKeyPressed(DIK_LCONTROL))
-	{
-		Attack();
-	}
-	if (_LocalKeyboard->IsKeyPressed(DIK_SPACE))
-	{
-		SuperJump();
-		Jump(_hero_JUMP);
-	}
+		if (_LocalKeyboard->IsKeyPressed(DIK_LCONTROL))
+		{
+			Attack();
+		}
+		if (_LocalKeyboard->IsKeyPressed(DIK_SPACE))
+		{
+			SuperJump();
+			Jump(_hero_JUMP);
+		}
 
-	if (_LocalKeyboard->IsKeyUp(DIK_SPACE))
-	{
-		JumpKeyUp(1);
-	}
+		if (_LocalKeyboard->IsKeyUp(DIK_SPACE))
+		{
+			JumpKeyUp(1);
+		}
 
-	if (_LocalKeyboard->IsKeyUp(DIK_X))
-	{
-		m_hState = ON_SPACE;
-	}
+		if (_LocalKeyboard->IsKeyUp(DIK_X))
+		{
+			m_hState = ON_SPACE;
+		}
 
-	if (_LocalKeyboard->IsKeyUp(DIK_LCONTROL))
-	{
-		ready = false;
-	}
-	if (_LocalKeyboard->IsKeyUp(DIK_DOWN))
-	{
-		isDown = false;
-		isSquat = false;
-	}
-	if (_LocalKeyboard->IsKeyUp(DIK_UP))
-	{
-		isUp = false;
-	}
-	if (_LocalKeyboard->IsKeyUp(DIK_LEFT))
-	{
-		isLeft = false;
-	}
-	if (_LocalKeyboard->IsKeyUp(DIK_RIGHT))
-	{
-		isRight = false;
+		if (_LocalKeyboard->IsKeyUp(DIK_LCONTROL))
+		{
+			ready = false;
+		}
+		if (_LocalKeyboard->IsKeyUp(DIK_DOWN))
+		{
+			isDown = false;
+			isSquat = false;
+		}
+		if (_LocalKeyboard->IsKeyUp(DIK_UP))
+		{
+			isUp = false;
+		}
+		if (_LocalKeyboard->IsKeyUp(DIK_LEFT))
+		{
+			isLeft = false;
+		}
+		if (_LocalKeyboard->IsKeyUp(DIK_RIGHT))
+		{
+			isRight = false;
+		}
+#pragma endregion
 	}
 	_LocalKeyboard->ClearBuffer();
-#pragma endregion
+
 #pragma region Process next sprite
 #pragma  region ON_GROUND
 	if (m_hState == ON_GROUND && !attack)
@@ -253,7 +258,7 @@ void SuperHero::Update(float gametime)
 	}
 #pragma endregion
 #pragma region On_SPACE
-	
+
 	if (m_hState == ON_SPACE && !attack && !isDown)
 	{
 		if (m_hSpeed.y < 0)
@@ -279,7 +284,7 @@ void SuperHero::Update(float gametime)
 				{
 					setCurrentSprite(BigMarioFallLeft);
 				}
-				break;
+				break;			
 			}
 		}
 
@@ -354,8 +359,12 @@ void SuperHero::Update(float gametime)
 	}
 #pragma endregion
 #pragma endregion
-	KillEnemy();
-	EatFood();
+	if (m_hState != OTHER)
+	{
+		KillEnemy();
+		EatFood();
+	}
+	
 	this->Move();
 }
 
@@ -757,7 +766,7 @@ void SuperHero::InertiaRun(float gameTime)
 	if (abs(m_hSpeed.x) == _hero_MAXSPEED)
 	{
 		delayMaxSpeed += gameTime;
-		if (delayMaxSpeed > gameTime * 15)
+		if (delayMaxSpeed > gameTime * 13)
 		{
 			if (m_hSpeed.x > _hero_SPEED)
 			{
@@ -812,7 +821,7 @@ void SuperHero::Jump(float vJump)
 {
 	if (m_hState != ON_GROUND)
 		return;
-	isJump = true;
+	
 	m_hSpeed.y = vJump;
 	m_hState = ON_SPACE;
 	m_hObjectGround = NULL;
@@ -1041,7 +1050,7 @@ Box* SuperHero::GetBox()
 		}
 		else
 		{
-			m_hBox->_position.x = m_hPosition.x + _hero_BOX_ADJUST_POS_LEFT;
+			m_hBox->_position.x = m_hPosition.x + _hero_BOX_ADJUST_POS_LEFT + 1;
 		}
 		break;
 	case BROS:
@@ -1051,24 +1060,26 @@ Box* SuperHero::GetBox()
 		}
 		else
 		{
-			m_hBox->_position.x = m_hPosition.x + _hero_BOX_ADJUST_POS_LEFT+3;
+			m_hBox->_position.x = m_hPosition.x + _hero_BOX_ADJUST_POS_LEFT + 3;
 		}
 		break;
 	}
 
 	return m_hBox;
 }
-
-Box* SuperHero::GetBox_CGround()
+Box* SuperHero::GetBoxWithObject(Object* object)
 {
 	Box* x = new Box();
-	x->_position.y = m_hPosition.y - 10;
-	x->_size.y = getCurrentSprite()->_Height / 2;
+	x->_position.y = m_hPosition.y;
+	x->_size.y = getCurrentSprite()->_Height;
+	x->_v.x = m_hSpeed.x - object->m_hSpeed.x;
+	x->_v.y = m_hSpeed.y - object->m_hSpeed.y;
 	x->_size.x = _hero_BOX_WIDTH;
 	switch (status)
 	{
-	case MARIO:				
-			x->_position.x = m_hPosition.x;								
+	case MARIO:
+		x->_position.x = m_hPosition.x + 4;
+		x->_size.x = 9;
 		break;
 	case BIGMARIO:
 		if (m_hDirect == DIRECT::right)
@@ -1077,21 +1088,57 @@ Box* SuperHero::GetBox_CGround()
 		}
 		else
 		{
-			x->_position.x = m_hPosition.x + _hero_BOX_ADJUST_POS_LEFT;
+			x->_position.x = m_hPosition.x + _hero_BOX_ADJUST_POS_LEFT + 1;
 		}
 		break;
 	case BROS:
 		if (m_hDirect == DIRECT::right)
 		{
-			x->_position.x = m_hPosition.x + _hero_BOX_ADJUST_POS_RIGHT+8;
+			x->_position.x = m_hPosition.x + _hero_BOX_ADJUST_POS_RIGHT + 8;
 		}
 		else
 		{
-			x->_position.x = m_hPosition.x + _hero_BOX_ADJUST_POS_LEFT+3;
+			x->_position.x = m_hPosition.x + _hero_BOX_ADJUST_POS_LEFT + 3;
 		}
 		break;
 	}
+
 	
+	return x;
+}
+Box* SuperHero::GetBox_CGround()
+{
+	Box* x = new Box();
+	x->_position.y = m_hPosition.y - 10;
+	x->_size.y = getCurrentSprite()->_Height / 2;
+	x->_size.x = _hero_BOX_WIDTH;
+	switch (status)
+	{
+	case MARIO:
+		x->_position.x = m_hPosition.x + 4;
+		break;
+	case BIGMARIO:
+		if (m_hDirect == DIRECT::right)
+		{
+			x->_position.x = m_hPosition.x + _hero_BOX_ADJUST_POS_RIGHT;
+		}
+		else
+		{
+			x->_position.x = m_hPosition.x + _hero_BOX_ADJUST_POS_LEFT + 1;
+		}
+		break;
+	case BROS:
+		if (m_hDirect == DIRECT::right)
+		{
+			x->_position.x = m_hPosition.x + _hero_BOX_ADJUST_POS_RIGHT + 8;
+		}
+		else
+		{
+			x->_position.x = m_hPosition.x + _hero_BOX_ADJUST_POS_LEFT + 3;
+		}
+		break;
+	}
+
 	return x;
 }
 
@@ -1105,12 +1152,14 @@ void SuperHero::Move()
 	case OTHER:
 		m_hPosition.y += m_hSpeed.y;
 		m_hSpeed.y += GRAVITY / 2;
+		break;
 	case ON_FLY:
 
 		for (int i = 0; i < object_static_can_collision.size(); i++)
 		{
 			time = Collision::sweptAABBCheck(GetBox(), object_static_can_collision.at(i)->GetBox(), nx, ny);
-			if (time < 1){
+			if (time < 1&&time>0)
+			{
 				if (nx == 1 && object_static_can_collision.at(i)->type != box)
 				{
 					m_hPosition.x += time*m_hSpeed.x;
@@ -1133,7 +1182,7 @@ void SuperHero::Move()
 					m_hPosition.y += time*m_hSpeed.y;
 					m_hSpeed.y = 0;
 				}
-			}
+			}			
 		}
 		m_hPosition.x += m_hSpeed.x;
 		m_hPosition.y += m_hSpeed.y;
@@ -1279,18 +1328,35 @@ Box* SuperHero::GetBoxTop()
 	x->_size.x = _hero_BOX_TOP_WIDTH;
 	x->_size.y = _hero_BOX_TOP_HEIGHT;
 	x->_v = m_hSpeed;
-	x->_position.y = m_hPosition.y;
+	x->_position.y = m_hPosition.y + getCurrentSprite()->_Height - _hero_BOX_TOP_HEIGHT;
 	switch (status)
 	{
 	case BROS:
-		x->_position.x = m_hPosition.x + getCurrentSprite()->_Height / 2;
-		break;	
+		if (m_hDirect == DIRECT::right)
+		{
+			x->_position.x = m_hPosition.x + getCurrentSprite()->_Height / 2 + 2;
+		}
+		else
+		{
+			x->_position.x = m_hPosition.x + getCurrentSprite()->_Height / 2 - 4;
+		}
+		break;
+	case BIGMARIO:
+		if (m_hDirect == DIRECT::right)
+		{
+			x->_position.x = m_hPosition.x + getCurrentSprite()->_Height / 2 - 5;
+		}
+		else
+		{
+			x->_position.x = m_hPosition.x + getCurrentSprite()->_Height / 2 - 4;
+		}
+		break;
 	default:
 		x->_position.x = m_hPosition.x + getCurrentSprite()->_Height / 2;
 		break;
 	}
-	
-	
+
+
 
 	return x;
 }
@@ -1324,7 +1390,7 @@ void SuperHero::IsAttacked()
 	switch (status)
 	{
 	case BROS:
-		status --;
+		status--;
 		if (m_hDirect == DIRECT::right)
 		{
 			setCurrentSprite(BigMarioRight);
@@ -1335,7 +1401,7 @@ void SuperHero::IsAttacked()
 		}
 		break;
 	case BIGMARIO:
-		status --;
+		status--;
 		if (m_hDirect == DIRECT::right)
 		{
 			setCurrentSprite(MarioRight);
@@ -1344,6 +1410,7 @@ void SuperHero::IsAttacked()
 		{
 			setCurrentSprite(MarioLeft);
 		}
+		break;
 	default:
 		setCurrentSprite(MarioDeath);
 		m_hSpeed.y = 5;
@@ -1373,11 +1440,11 @@ void SuperHero::RenderBoxBottom()
 	src.right = src.left + 1;
 	src.top = 0;
 	src.bottom = src.top + 1;
-	
+
 	RECT a;
 	a = GetBox_CGround()->getRect();
 	_LocalGraphic->tDrawTexture(_LocalContent->LoadTexture("boxbottom.png"), src, a, D3DXVECTOR2(GetBox_CGround()->getCenter()), D3DCOLOR_XRGB(255, 255, 255), 0);
-	
+
 }
 void SuperHero::RendeBoxTop()
 {
@@ -1416,3 +1483,5 @@ void SuperHero::Collision_Mushroom()
 {
 	status++;
 }
+
+

@@ -273,7 +273,7 @@ void Object::EatFood()
 		}
 		if (objects_Food.at(i)->type == question_block)
 		{
-			time = Collision::sweptAABBCheck(GetBox(), objects_Food.at(i)->GetBox(), nx, ny);
+			time = Collision::sweptAABBCheck(GetBoxTop(), objects_Food.at(i)->GetBox(), nx, ny);
 			if (time < 1 && time >= 0 && ny == -1)
 			{
 				mapObject::iterator it_up;
