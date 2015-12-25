@@ -78,3 +78,8 @@ void E_Tarnooki_Fly::SetSprite()
 		setCurrentSprite(E_MushroomRedDeath);
 	}
 }
+
+void E_Tarnooki_Fly::IsAttacked()
+{
+
+}

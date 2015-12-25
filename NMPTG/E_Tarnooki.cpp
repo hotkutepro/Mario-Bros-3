@@ -79,3 +79,8 @@ void E_Tarnooki::SetSprite()
 	else
 		setCurrentSprite(E_MushroomDeath);
 }
+
+void E_Tarnooki::IsAttacked()
+{
+
+}

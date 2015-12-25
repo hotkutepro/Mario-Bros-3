@@ -29,6 +29,7 @@ void State_4::Load()
 	map1->Init("hihi.txt", ResourcesManager::GetInstance()->GetTexture(TextureID::TileMap1));
 	hero = new SuperHero();
 	hero->Load();
+	hero->status = BROS;
 	_LocalHero = hero;
 	camera->Update(hero->GetPosition());
 	mapObject::iterator it;
@@ -67,15 +68,13 @@ void State_4::Render()
 		it_Object = qnode->m_Objects.find(*id_Objects);
 		//it_Object->second->RenderBoxDebug();
 		if (it_Object->second->getCurrentSprite() != NULL)
-			it_Object->second->Render();
+			 it_Object->second->Render();
 	}
 	//hero->RenderBoundBox();
-	
 	hero->RenderDebug();
-	hero->RenderBoxBottom();
 	hero->RenderV();
-	hero->Render();
-	hero->RenderBoxAttack();
+	//hero->ReanderViewPort();
+	//hero->Render();
 	//hero->ReanderGroundBox();
 	_LocalGraphic->End();
 
@@ -83,9 +82,9 @@ void State_4::Render()
 
 void State_4::Update(float gameTime)
 {
-	
+	map1->Update();
 	hero->Update(gameTime);
-	hero->GetStaticObject();
+	//hero->GetStaticObject();
 	camera->Update(hero->GetPosition());
 	mapQNode::iterator it_Node;
 	it_Node = qnode->m_QNode.find(0);

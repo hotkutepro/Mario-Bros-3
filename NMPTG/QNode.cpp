@@ -19,11 +19,12 @@
 #include "F_Mushroom.h"
 #include "F_P.h"
 #include "F_Star.h"
-
+#include"C_Uprise.h"
 
 
 sId QNode::s_IdObjectInViewPort;
 mapObject  QNode::m_Objects;
+mapObject QNode::m_Object_Dynamic;
 
 QNode::QNode()
 {
@@ -81,6 +82,76 @@ void QNode::Connect()
 		}
 	}
 }
+
+void QNode::InsertObject(string path)
+{
+	fstream open(path);
+	int n;//số node lá có số đối tượng lớn hơn 0
+	int id_Node; //id của node
+	int count;//số object trong node
+	open >> n;
+	int id_Object;
+	for (int i = 0; i < n; i++){
+		open >> id_Node;
+		open >> count;
+		for (int j = 0; j < count; j++){
+			open >> id_Object;			
+			//objects.insert(&m_Objects[id_Object]);
+			m_QNode[id_Node]->objects.push_back(m_Objects[id_Object]);
+
+		}
+	}
+}
+
+void QNode::getIdObjectInViewPort(RECT _rectViewport, QNode* node)
+{
+
+	if (IsRootNode(node))
+		s_IdObjectInViewPort.clear();
+
+	if (node->tl==NULL)
+	{
+		if (Intersect(_rectViewport,node->Rect))
+		{
+			if (node->objects.size()!=0)
+			{
+				for (int i = 0; i < node->objects.size(); i++)
+				{
+					if (node->objects.at(i)->life==false)
+						continue;;
+					int id = node->objects.at(i)->id;
+					node->s_IdObjectInViewPort.insert(id);
+				}
+			}
+		}
+	}
+	else
+	{
+		getIdObjectInViewPort(_rectViewport, node->tl);
+		getIdObjectInViewPort(_rectViewport, node->tr);
+		getIdObjectInViewPort(_rectViewport, node->bl);
+		getIdObjectInViewPort(_rectViewport, node->br);
+	}
+}
+
+bool QNode::IsRootNode(QNode* node)
+{
+	if (node->nodeId!=0)
+		return false;
+	return true;
+}
+
+bool QNode::Intersect(RECT _r1, RECT _r2)
+{	
+	return !(_r1.right<_r2.left||_r1.left>_r2.right||_r1.bottom<_r2.top||_r1.top>_r2.bottom );
+}
+
+bool QNode::IsLeafNode()
+{
+	if (tl == NULL)
+		return true;
+	return false;
+}
 void QNode::LoadObjects(string path)//Viet lai
 {
 	int count;
@@ -88,15 +159,15 @@ void QNode::LoadObjects(string path)//Viet lai
 	string stype;
 	fstream open(path);
 	string line;
-	TYPEOBJECT typeO[19] = { brick, coin, drain, land, leaf, mushroom_red, p,box , question_block, star, tarnooki, 
-		tarnooki_fly, tortoise, tortoise_fly, tortoise_red, tree, tree_red, tree_red_shoot, tree_shoot };
-	for (int i = 0; i < 19; i++)
+	TYPEOBJECT typeO[20] = { brick, coin, drain, land, leaf, mushroom_red, p, box, question_block, star, tarnooki,
+		tarnooki_fly, tortoise, tortoise_fly, tortoise_red, tree, tree_red, tree_red_shoot, tree_shoot,uprise };
+	for (int i = 0; i < 20; i++)
 	{
 		open >> stype;
 		open >> count;
 		for (int j = 0; j < count; j++)
 		{
-			Object *tmp;			
+			Object *tmp;
 			switch (i)
 			{
 			case 0:
@@ -155,7 +226,102 @@ void QNode::LoadObjects(string path)//Viet lai
 				break;
 			case 18:
 				tmp = new E_Plant_Gun();
-				break;			
+				break;
+				case  19:
+					tmp = new C_Uprise();
+			}
+			open >> tmp->id;			
+			open >> tmp->m_hPosition.x;
+			open >> tmp->m_hPosition.y;
+			open >> tmp->m_hSize.x;
+			open >> tmp->m_hSize.y;			
+			tmp->type = typeO[i];			
+			if (tmp->type ==uprise)
+			{
+				open>> tmp->m_hVector.x;
+				open >> tmp->m_hVector.y;
+			}
+			m_Objects.insert(pair<int, Object*>(tmp->id, tmp));			
+		}
+	}	
+	LoadObjects_Dynamic(path);
+}
+
+void QNode::LoadObjects_Dynamic(string path)
+{
+	int count;
+	TYPEOBJECT type;
+	string stype;
+	fstream open(path);
+	string line;
+	TYPEOBJECT typeO[19] = { brick, coin, drain, land, leaf, mushroom_red, p, box, question_block, star, tarnooki,
+		tarnooki_fly, tortoise, tortoise_fly, tortoise_red, tree, tree_red, tree_red_shoot, tree_shoot };
+	for (int i = 0; i < 19; i++)
+	{
+		open >> stype;
+		open >> count;
+		for (int j = 0; j < count; j++)
+		{
+			Object *tmp;
+			switch (i)
+			{
+			case 0:
+				tmp = new C_Brick();
+				break;
+			case 1:
+				tmp = new F_Coin();
+				break;
+			case 2:
+				tmp = new C_Drain();
+				break;
+			case 3:
+				tmp = new C_Land();
+				break;
+			case 4:
+				tmp = new F_Leaf();
+				break;
+			case 5:
+				tmp = new F_Mushroom();
+				break;
+			case 6:
+				tmp = new F_P();
+				break;
+			case 7:
+				tmp = new C_Box();
+				break;
+			case 8:
+				tmp = new C_Question_Block();
+				break;
+			case 9:
+				tmp = new F_Star();
+				break;
+			case 10:
+				tmp = new E_Tarnooki();
+				break;
+			case 11:
+				tmp = new E_Tarnooki_Fly();
+				break;
+			case 12:
+				tmp = new E_Tortoise();
+				break;
+			case 13:
+				tmp = new E_Tortoise_Fly();
+				break;
+			case 14:
+				tmp = new E_Tortoise_Red();
+				break;
+			case 15:
+				tmp = new E_Plant();
+				break;
+			case 16:
+				tmp = new E_Plant_Red();
+				break;
+			case 17:
+				tmp = new E_Plant_Red_Gun();
+				break;
+			case 18:
+				tmp = new E_Plant_Gun();
+				break;
 			}
 			open >> tmp->id;
 			D3DXVECTOR2 pos;
@@ -168,101 +334,9 @@ void QNode::LoadObjects(string path)//Viet lai
 			tmp->type = typeO[i];
 			tmp->m_hSize.x = size.x;
 			tmp->m_hSize.y = size.y;
-			m_Objects.insert(pair<int, Object*>(tmp->id, tmp));
-		}				
-	}
-}
-void QNode::LoadObjects2(string path)
-{
-	int count;
-	TYPEOBJECT type;
-	string stype;
-	fstream open(path);
-	string line;
-	TYPEOBJECT typeO[18] = { brick, coin, drain, land, leaf, mushroom_red, p, question_block, star, tarnooki, tarnooki_fly, tortoise, tortoise_fly, tortoise_red, tree, tree_red, tree_red_shoot, tree_shoot };
-	for (int i = 0; i < 18; i++)
-	{
-		open >> stype;
-		open >> count;
-		for (int j = 0; j < count;j++)
-		{
-			Object * tmp=new Object();
-			open >> tmp->id;						
-			D3DXVECTOR2 pos;
-			open >> pos.x;
-			open >> pos.y;	
-			tmp->SetPosition(pos.x, pos.y);
-			tmp->type = typeO[i];			
-			m_Objects.insert(pair<int, Object*>(tmp->id, tmp));
+			if(tmp->type == tarnooki || tmp->type == tarnooki_fly || tmp->type == tortoise || tmp->type == tortoise_fly || tmp->type == tortoise_red)
+			m_Object_Dynamic.insert(pair<int, Object*>(tmp->id, tmp));
 		}
 	}
-}
-
-void QNode::InsertObject(string path)
-{
-	fstream open(path);
-	int n;//số node lá có số đối tượng lớn hơn 0
-	int id_Node; //id của node
-	int count;//số object trong node
-	open >> n;
-	int id_Object;
-	for (int i = 0; i < n; i++){
-		open >> id_Node;
-		open >> count;
-		for (int j = 0; j < count; j++){
-			open >> id_Object;			
-			//objects.insert(&m_Objects[id_Object]);
-			m_QNode[id_Node]->objects.push_back(m_Objects[id_Object]);
-
-		}
-	}
-}
-
-void QNode::getIdObjectInViewPort(RECT _rectViewport, QNode* node)
-{
-
-	if (IsRootNode(node))
-		s_IdObjectInViewPort.clear();
-
-	if (node->tl==NULL)
-	{
-		if (Intersect(_rectViewport,node->Rect))
-		{
-			if (node->objects.size()!=0)
-			{
-				for (int i = 0; i < node->objects.size(); i++)
-				{
-					int id = node->objects.at(i)->id;
-					node->s_IdObjectInViewPort.insert(id);
-				}
-			}
-		}
-	}
-	else
-	{
-		getIdObjectInViewPort(_rectViewport, node->tl);
-		getIdObjectInViewPort(_rectViewport, node->tr);
-		getIdObjectInViewPort(_rectViewport, node->bl);
-		getIdObjectInViewPort(_rectViewport, node->br);
-	}
-}
-
-bool QNode::IsRootNode(QNode* node)
-{
-	if (node->nodeId!=0)
-		return false;
-	return true;
-}
-
-bool QNode::Intersect(RECT _r1, RECT _r2)
-{	
-	return !(_r1.right<_r2.left||_r1.left>_r2.right||_r1.bottom<_r2.top||_r1.top>_r2.bottom );
-}
-
-bool QNode::IsLeafNode()
-{
-	if (tl == NULL)
-		return true;
-	return false;
 }
 

@@ -8,6 +8,7 @@ class E_Tarnooki:public Object
 public:
 	void Load();
 	void Update(float gameTime);
+	void IsAttacked();
 	void Collision_Up();
 	void Collision_Down();
 	void Collision_Left();

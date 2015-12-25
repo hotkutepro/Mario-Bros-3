@@ -49,7 +49,7 @@ void E_Tortoise::Die()
 
 void E_Tortoise::Collision_Up()
 {	
-	_LocalHero->m_hSpeed.y = 5;
+	_LocalHero->m_hSpeed.y = 5;	
 	if (status == 0)
 		m_hSpeed.x = 0;
 	if (status == 1)
@@ -128,4 +128,9 @@ void E_Tortoise::UpdateDirect()
 		m_hDirect = DIRECT::right;
 	else if (m_hSpeed.x < 0)
 		m_hDirect = DIRECT::left;
+}
+
+void E_Tortoise::IsAttacked()
+{
+
 }

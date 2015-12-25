@@ -60,7 +60,14 @@ void Object::Load()
 }
 void Object::Update(float gameTime)
 {
-	
+	if (m_hPosition.y < 0)
+	{
+		Object* tmp = QNode::m_Object_Dynamic.find(id)->second;
+		m_hPosition.y = tmp->m_hPosition.y;
+		m_hPosition.x = tmp->m_hPosition.x;
+		status = 0;
+		SetSprite();
+	}
 }
 void Object::setCurrentSprite(FrkSprite* s)
 {
@@ -107,7 +114,7 @@ void Object::RenderDebug()
 
 Box* Object::GetBox()
 {	
-	if (type == land || type == box || type == drain)// drain chua biet load sao
+	if (type == land || type == box || type == drain ||type==uprise)// drain chua biet load sao
 	{		
 		m_hBox->_position.x = m_hPosition.x;
 		m_hBox->_position.y = m_hPosition.y;
@@ -216,7 +223,7 @@ vector<Object*> Object::GetStaticObject()
 	for (id_Objects = QNode::s_IdObjectInViewPort.begin(); id_Objects != QNode::s_IdObjectInViewPort.end(); id_Objects++)
 	{
 		it_Object = QNode::m_Objects.find(*id_Objects);		
-		if (it_Object->second->type == land || it_Object->second->type == question_block || it_Object->second->type == box)
+		if (it_Object->second->type == land || it_Object->second->type == question_block || it_Object->second->type == box||it_Object->second->type==uprise)
 		{
 			result.push_back(it_Object->second);
 		}
@@ -346,22 +353,29 @@ void Object::MoveObject()
 				if (nx == 1 && object_static_can_collision.at(i)->type != box)
 				{
 					m_hPosition.x += time*m_hSpeed.x;
-					m_hSpeed.x = 0;
+					m_hSpeed.x = -m_hSpeed.x;
 					m_hObjectLeft = object_static_can_collision.at(i);
+					SetSprite();
 				}
 				if (nx == -1 && object_static_can_collision.at(i)->type != box)
 				{
 					m_hPosition.x += time*m_hSpeed.x;
-					m_hSpeed.x = 0;
+					m_hSpeed.x = -m_hSpeed.x;
 					m_hObjectRight = object_static_can_collision.at(i);
+					SetSprite();
 				}
 				if (ny == 1 && nx == 0)
 				{
+					if (status==0&&(type == tarnooki_fly || type == tortoise_fly)){
+						FallDown(time, 0);
+						m_hSpeed.y = 5;
+						return;
+					}
 					FallDown(time, 0);/////////
 					m_hSpeed.y = 0;
 					m_hState = ON_GROUND;
 					m_hObjectGround = object_static_can_collision.at(i);///////
-					return;
+					//return;
 				}
 				if ((ny == 0 || ny == -1) && object_static_can_collision.at(i)->type != box)
 				{
@@ -390,22 +404,24 @@ void Object::MoveObject()
 					m_hPosition.x += time*m_hSpeed.x;
 					m_hSpeed.x = -m_hSpeed.x;
 					m_hObjectLeft = object_static_can_collision.at(i);
+					SetSprite();
 				}
 				if (nx == -1 && object_static_can_collision.at(i)->type != box)
 				{
 					m_hPosition.x += time*m_hSpeed.x;
 					m_hSpeed.x = -m_hSpeed.x;
 					m_hObjectRight = object_static_can_collision.at(i);
+ 					SetSprite();
 				}
 			}
 		}
-		/*if (this->m_hObjectGround != NULL)
+		if (this->m_hObjectGround != NULL)
 		{
 			if (!Collision::checkAABB(this->GetBox_CGround(), this->m_hObjectGround->m_hBox))
 			{
 				m_hState = ON_SPACE;
 			}
-		}*/
+		}
 		if (m_hObjectLeft == NULL && m_hObjectRight == NULL)
 			m_hPosition.x += m_hSpeed.x;
 		break;
@@ -517,6 +533,11 @@ Box* Object::GetBoxAttack()
 Box* Object::GetBox_CGround()
 {
 	return new Box;
+}
+
+void Object::SetSprite()
+{
+
 }
 
 

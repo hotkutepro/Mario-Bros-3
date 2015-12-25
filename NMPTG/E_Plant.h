@@ -9,6 +9,7 @@ class E_Plant:public Object
 public:
 	void Load();
 	void Update(float gameTime);
+	void IsAttacked();
 	void Render();
 	void Collision_Up();
 	void Collision_Down();

@@ -13,6 +13,7 @@ private:
 public:
 	void Load();
 	void Update(float gameTime);
+	void IsAttacked();
 	void UpdateDirect();
 	Box* GetBox_CLeft();
 	Box* GetBox_CRight();

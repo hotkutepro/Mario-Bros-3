@@ -136,3 +136,8 @@ void E_Plant_Red_Gun::SetSprite()
 		setCurrentSprite(Tree_red_right_down);
 	}
 }
+
+void E_Plant_Red_Gun::IsAttacked()
+{
+
+}

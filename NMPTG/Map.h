@@ -7,6 +7,8 @@ using namespace std;
 class Map
 {
 private: 	
+	int c;//view port
+	int r;//	
 	FrkTexture* _texture;
 	int** _matrix;
 	int _row;

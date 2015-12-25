@@ -10,6 +10,7 @@ private:
 public:
 	void Load();
 	void Update(float gameTime);
+	void IsAttacked();
 	void Collision_Up();
 	void Collision_Down();
 	void Collision_Left();

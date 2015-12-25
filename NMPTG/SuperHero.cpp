@@ -1267,7 +1267,7 @@ void SuperHero::Move()
 		}
 		if (this->m_hObjectGround != NULL)
 		{
-			if (!Collision::checkAABB(this->GetBox_CGround(), this->m_hObjectGround->m_hBox))
+			if (!Collision::checkAABB(this->GetBox_CGround(), this->m_hObjectGround->GetBox()))
 			{
 				m_hState = ON_SPACE;
 			}

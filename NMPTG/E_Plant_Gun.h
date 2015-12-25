@@ -11,6 +11,7 @@ public:
 	void Load();
 	void Update(float gameTime);
 	void Render();
+	void IsAttacked();
 	E_Plant_Gun();
 	~E_Plant_Gun();
 };

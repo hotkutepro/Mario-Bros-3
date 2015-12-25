@@ -66,3 +66,8 @@ void E_Plant::Collision_Right()
 {
 
 }
+
+void E_Plant::IsAttacked()
+{
+
+}

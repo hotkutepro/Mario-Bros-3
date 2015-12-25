@@ -12,6 +12,7 @@ class E_Tortoise:public Object
 public:
 	void Load();
 	void Update(float gameTime);
+	void IsAttacked();
 	void Tortoise_Shell();
 	void Die();
 	void Collision_Up();

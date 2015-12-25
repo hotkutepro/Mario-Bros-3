@@ -35,3 +35,8 @@ void E_Plant_Gun::Render()
 	Object::Render();
 	ZPipe_md->Render(pos);
 }
+
+void E_Plant_Gun::IsAttacked()
+{
+
+}

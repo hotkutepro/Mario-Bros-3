@@ -34,7 +34,7 @@ void E_Tortoise_Fly::Load()
 void E_Tortoise_Fly::Update(float gameTime)
 {	
 	Object::Update(gameTime);
-	UpdateDirect();
+	//UpdateDirect();
 	MoveObject();
 }
 
@@ -89,6 +89,7 @@ void E_Tortoise_Fly::Collision_Right()
 }
 void E_Tortoise_Fly::SetSprite()
 {
+	UpdateDirect();
 	if (status == 0)
 	{
 		if (m_hDirect == DIRECT::left)
@@ -122,4 +123,9 @@ void E_Tortoise_Fly::UpdateDirect()
 		m_hDirect = DIRECT::right;
 	else if (m_hSpeed.x < 0)
 		m_hDirect = DIRECT::left;
+}
+
+void E_Tortoise_Fly::IsAttacked()
+{
+
 }

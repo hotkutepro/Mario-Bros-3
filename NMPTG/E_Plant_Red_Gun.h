@@ -19,6 +19,7 @@ public:
 	void Update(float gameTime);
 	void Render();
 	void shoot();
+	void IsAttacked();
 	void Collision_Up();
 	void Collision_Down();
 	void Collision_Left();

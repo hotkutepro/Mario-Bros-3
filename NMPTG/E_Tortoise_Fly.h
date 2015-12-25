@@ -15,6 +15,7 @@ class E_Tortoise_Fly :public Object
 public:
 	void Load();	
 	void Update(float gameTime);
+	void IsAttacked();
 	void SetSprite();
 	void Collision_Up();
 	void Collision_Down();

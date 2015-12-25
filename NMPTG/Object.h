@@ -14,7 +14,7 @@
 #define  V_FALLDOWN -1 // tốc độ rơi khi press X
 enum TYPEOBJECT{
 	brick, coin, drain, land, leaf, mushroom_red, p, box, question_block, star, tarnooki, tarnooki_fly,
-	tortoise, tortoise_fly, tortoise_red, tree, tree_red, tree_red_shoot, tree_shoot, bullet, mario
+	tortoise, tortoise_fly, tortoise_red, tree, tree_red, tree_red_shoot, tree_shoot, bullet, mario,uprise
 };
 enum STATE{ ON_GROUND, ON_SPACE, FALL_DOWN, ON_FLY,OTHER };
 enum DIRECT{ left,right };
@@ -37,6 +37,7 @@ public:
 	Object* m_hObjectGround;//
 	Object* m_hObjectLeft;
 	Object* m_hObjectRight;
+	D3DXVECTOR2 m_hVector;
 
 	FrkSprite* m_hCurrentSprite;
 	D3DXVECTOR2 m_hPosition;
@@ -53,7 +54,7 @@ public:
 	bool life_state;//dung cho question_block
 	bool connect=false;//Kiểm tra có kết nối với brick ko.
 	//khong dieu kien
-	vector<Object*> GetStaticObject();///tra ve danh sach land, box, brick, QUESTION_BLOCK  de kiem tra khi object roi
+	vector<Object*> GetStaticObject();///tra ve danh sach land, box, brick, QUESTION_BLOCK, uprise  de kiem tra khi object roi
 	list<Object*> GetStaticObject_vx();//tra ve danh sach object khi di chuyen doi tuong qua trai phai land, brick, QUESTION_BLOCK 
 	//Dieu kien life = true
 	vector<Object*> GetDynamicObject();//tra ve danh sach cac doi tuong di chuyen tortoise, mushroom, tarnooki, tree,	leaf	DIEU KIEN: LIFE = TRUE
@@ -78,7 +79,7 @@ public:
 	virtual void IsAttacked();
 	virtual void Die();
 	virtual void WatchUp();//dung cho coin, leaf...xet life=true
-	
+	virtual void SetSprite();
 	virtual void MoveObject();	
 	virtual void FallDown(float remainingtime, float Vy);//dung cho object
 //	virtual int isOnGround();//kiem tra xem object co dang dung tren ground ko, 1 neu co, 0 neu ko, -1 kxd

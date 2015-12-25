@@ -23,3 +23,8 @@ void E_Plant_Red::Update(float gameTime)
 {
 	Object::Update(gameTime);
 }
+
+void E_Plant_Red::IsAttacked()
+{
+
+}

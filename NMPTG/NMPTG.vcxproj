@@ -89,6 +89,7 @@
     <ClInclude Include="C_Drain.h" />
     <ClInclude Include="C_Land.h" />
     <ClInclude Include="C_Question_Block.h" />
+    <ClInclude Include="C_Uprise.h" />
     <ClInclude Include="DSutil.h" />
     <ClInclude Include="E_Plant_Red.h" />
     <ClInclude Include="E_Plant.h" />
@@ -114,7 +115,6 @@
     <ClInclude Include="F_Mushroom.h" />
     <ClInclude Include="F_P.h" />
     <ClInclude Include="F_Star.h" />
-    <ClInclude Include="Infomation.h" />
     <ClInclude Include="Man.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="Object.h" />
@@ -135,6 +135,7 @@
     <ClCompile Include="C_Drain.cpp" />
     <ClCompile Include="C_Land.cpp" />
     <ClCompile Include="C_Question_Block.cpp" />
+    <ClCompile Include="C_Uprise.cpp" />
     <ClCompile Include="DSutil.cpp" />
     <ClCompile Include="E_Plant_Red.cpp" />
     <ClCompile Include="E_Plant.cpp" />
@@ -158,7 +159,6 @@
     <ClCompile Include="F_Mushroom.cpp" />
     <ClCompile Include="F_P.cpp" />
     <ClCompile Include="F_Star.cpp" />
-    <ClCompile Include="Infomation.cpp" />
     <ClCompile Include="Man.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="Object.cpp" />

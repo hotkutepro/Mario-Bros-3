@@ -119,7 +119,7 @@ void E_Tortoise_Red::Collision_Down()
 }
 
 void E_Tortoise_Red::Collision_Left()
-{
+{	
 	if (status == 1)
 	{
 		m_hSpeed.x = 0;
@@ -166,4 +166,9 @@ void E_Tortoise_Red::UpdateDirect()
 		m_hDirect = DIRECT::right;
 	else if (m_hSpeed.x < 0)
 		m_hDirect = DIRECT::left;
+}
+
+void E_Tortoise_Red::IsAttacked()
+{
+
 }
