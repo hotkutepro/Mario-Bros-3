@@ -109,7 +109,7 @@ public:
 	//thoi gian delay khi dat max speed
 	float delayMaxSpeed;
 	//bien delay khi die
-	float delayDie;
+	float timeSuper = 0;
 	void Load();
 	void Update(float gametime);
 	void GoLeft(float gameTime);

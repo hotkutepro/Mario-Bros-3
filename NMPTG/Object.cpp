@@ -295,13 +295,11 @@ void Object::KillEnemy()
 		{
 			objects_Enemy.at(i)->IsAttacked();
 		}
-		time = Collision::sweptAABBCheck(GetBox(), objects_Enemy.at(i)->GetBox(), nx, ny);
+		time = Collision::sweptAABBCheck(GetBoxWithObject(objects_Enemy.at(i)), objects_Enemy.at(i)->GetBox(), nx, ny);
 		if (time < 1 && time >= 0)
-		{
-		
+		{		
 			if (nx == 1)
-			{
-				
+			{				
 				objects_Enemy.at(i)->Collision_Right();
 			}		
 			if (nx == -1)
@@ -546,6 +544,18 @@ void Object::SetSprite()
 void Object::ResetObject()
 {
 
+}
+
+Box* Object::GetBoxWithObject(Object* object)
+{
+	Box* x = new Box();
+	x->_position.y = m_hPosition.y;
+	x->_position.x = m_hPosition.x;
+	x->_size.y = getCurrentSprite()->_Height;
+	x->_size.x = getCurrentSprite()->_Width;
+	x->_v.x = m_hSpeed.x - object->m_hSpeed.x;
+	x->_v.y = m_hSpeed.y - object->m_hSpeed.y;
+	return x;
 }
 
 

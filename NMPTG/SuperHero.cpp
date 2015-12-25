@@ -78,11 +78,14 @@ void SuperHero::Load()
 	m_hDirect = DIRECT::right;
 	delayMaxSpeed = 0;
 	m_hState = ON_SPACE;
+	timeSuper = 0;
 	Object::Load();
 }
 
 void SuperHero::Update(float gametime)
 {
+	if (timeSuper < 30)
+		timeSuper++;
 	f_str = "Vx = " + std::to_string(m_hSpeed.x);
 	a = new char[f_str.length() + 1];
 	strcpy(a, f_str.c_str());
@@ -206,6 +209,10 @@ void SuperHero::Update(float gametime)
 	_LocalKeyboard->ClearBuffer();
 
 #pragma region Process next sprite
+	if (m_hState == ON_FLY)
+	{
+
+	}
 #pragma  region ON_GROUND
 	if (m_hState == ON_GROUND && !attack)
 	{
@@ -1387,6 +1394,10 @@ Box* SuperHero::GetBoxAttack()
 
 void SuperHero::IsAttacked()
 {
+	if (timeSuper != 30)
+		return;
+	else
+		timeSuper = 0;
 	switch (status)
 	{
 	case BROS:

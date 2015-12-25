@@ -91,6 +91,7 @@ public:
 	
 	
 	virtual Box* GetBox();
+	virtual Box* GetBoxWithObject(Object* object);
 	virtual Box* GetBoxTop();
 	virtual Box* GetBoxAttack();
 	virtual Box* GetBox_CGround();
