@@ -141,7 +141,7 @@ void SuperHero::Update(float gametime)
 		RunRight(gametime);
 	}
 
-	if (_LocalKeyboard->IsKeyDown(DIK_DOWN))
+	if (_LocalKeyboard->IsKeyDown(DIK_DOWN) && !_LocalKeyboard->IsKeyDown(DIK_RIGHT) && !_LocalKeyboard->IsKeyDown(DIK_LEFT))
 	{
 		isDown = true;
 		Squat(gametime);
@@ -176,7 +176,7 @@ void SuperHero::Update(float gametime)
 	{
 		m_hState = ON_SPACE;
 	}
-	
+
 	if (_LocalKeyboard->IsKeyUp(DIK_LCONTROL))
 	{
 		ready = false;
@@ -253,7 +253,8 @@ void SuperHero::Update(float gametime)
 	}
 #pragma endregion
 #pragma region On_SPACE
-	if (m_hState == ON_SPACE && !attack)
+	
+	if (m_hState == ON_SPACE && !attack && !isDown)
 	{
 		if (m_hSpeed.y < 0)
 		{
@@ -821,6 +822,10 @@ void SuperHero::Jump(float vJump)
 	}
 	//set sprite
 #pragma region Set Sprite	
+	if (isSquat)
+	{
+		return;
+	}
 	switch (status)
 	{
 	case MARIO:
@@ -1022,37 +1027,33 @@ Box* SuperHero::GetBox()
 	m_hBox->_position.y = m_hPosition.y;
 	m_hBox->_size.y = getCurrentSprite()->_Height;
 	m_hBox->_v = m_hSpeed;
-	if (status == MARIO)
+	m_hBox->_size.x = _hero_BOX_WIDTH;
+	switch (status)
 	{
+	case MARIO:
 		m_hBox->_position.x = m_hPosition.x + 4;
 		m_hBox->_size.x = 9;
-	}
-	else
-	{		
-		m_hBox->_size.x = _hero_BOX_WIDTH;
+		break;
+	case BIGMARIO:
 		if (m_hDirect == DIRECT::right)
 		{
-			if (m_hState == BIGMARIO)
-			{
-				m_hBox->_position.x = m_hPosition.x + _hero_BOX_ADJUST_POS_LEFT;
-			}
-			else
-			{
-				m_hBox->_position.x = m_hPosition.x + _hero_BOX_ADJUST_POS_LEFT;
-			}
-
+			m_hBox->_position.x = m_hPosition.x + _hero_BOX_ADJUST_POS_RIGHT;
 		}
 		else
 		{
-			if (m_hState == BIGMARIO)
-			{
-				m_hBox->_position.x = m_hPosition.x + _hero_BOX_ADJUST_POS_LEFT;
-			}
-			else
-			{
-				m_hBox->_position.x = m_hPosition.x + _hero_BOX_ADJUST_POS_LEFT;
-			}
+			m_hBox->_position.x = m_hPosition.x + _hero_BOX_ADJUST_POS_LEFT;
 		}
+		break;
+	case BROS:
+		if (m_hDirect == DIRECT::right)
+		{
+			m_hBox->_position.x = m_hPosition.x + _hero_BOX_ADJUST_POS_RIGHT + 8;
+		}
+		else
+		{
+			m_hBox->_position.x = m_hPosition.x + _hero_BOX_ADJUST_POS_LEFT+3;
+		}
+		break;
 	}
 
 	return m_hBox;
@@ -1063,45 +1064,37 @@ Box* SuperHero::GetBox_CGround()
 	Box* x = new Box();
 	x->_position.y = m_hPosition.y - 10;
 	x->_size.y = getCurrentSprite()->_Height / 2;
-	x->_size.x = _hero_BOX_WIDTH ;
-
-	if (m_hDirect == DIRECT::right)
+	x->_size.x = _hero_BOX_WIDTH;
+	switch (status)
 	{
-		if (status == MARIO)
-		{
-			x->_position.x = m_hPosition.x;			
-		}
-		else
+	case MARIO:				
+			x->_position.x = m_hPosition.x;								
+		break;
+	case BIGMARIO:
+		if (m_hDirect == DIRECT::right)
 		{
 			x->_position.x = m_hPosition.x + _hero_BOX_ADJUST_POS_RIGHT;
-		}
-	
-	}
-	else
-	{
-		if (status == MARIO)
-		{
-			x->_position.x = m_hPosition.x;			
 		}
 		else
 		{
 			x->_position.x = m_hPosition.x + _hero_BOX_ADJUST_POS_LEFT;
 		}
-
+		break;
+	case BROS:
+		if (m_hDirect == DIRECT::right)
+		{
+			x->_position.x = m_hPosition.x + _hero_BOX_ADJUST_POS_RIGHT+8;
+		}
+		else
+		{
+			x->_position.x = m_hPosition.x + _hero_BOX_ADJUST_POS_LEFT+3;
+		}
+		break;
 	}
+	
 	return x;
 }
-void SuperHero::RenderBoxBottom()
-{
-	RECT src;
-	src.left = 0;
-	src.right = src.left + 1;
-	src.top = 0;
-	src.bottom = src.top + 1;
-	RECT a;
-	a = GetBox_CGround()->getRect();
-	_LocalGraphic->tDrawTexture(_LocalContent->LoadTexture("boxbottom.png"), src, a, D3DXVECTOR2(GetBox_CGround()->getCenter()), D3DCOLOR_XRGB(255, 255, 255), 0);
-}
+
 
 void SuperHero::Move()
 {
@@ -1109,11 +1102,11 @@ void SuperHero::Move()
 	float time, nx, ny;
 	switch (m_hState)
 	{
-	case OTHER:		
+	case OTHER:
 		m_hPosition.y += m_hSpeed.y;
-		m_hSpeed.y += GRAVITY/2;
+		m_hSpeed.y += GRAVITY / 2;
 	case ON_FLY:
-		
+
 		for (int i = 0; i < object_static_can_collision.size(); i++)
 		{
 			time = Collision::sweptAABBCheck(GetBox(), object_static_can_collision.at(i)->GetBox(), nx, ny);
@@ -1132,7 +1125,7 @@ void SuperHero::Move()
 					m_hObjectRight = object_static_can_collision.at(i);
 				}
 				if (ny == 1)
-				{					
+				{
 					return;
 				}
 				if (ny == -1 && object_static_can_collision.at(i)->type != box)
@@ -1146,7 +1139,7 @@ void SuperHero::Move()
 		m_hPosition.y += m_hSpeed.y;
 		break;
 	case FALL_DOWN:
-	
+
 		m_hObjectLeft = NULL;
 		m_hObjectRight = NULL;
 		for (int i = 0; i < object_static_can_collision.size(); i++)
@@ -1188,7 +1181,7 @@ void SuperHero::Move()
 			m_hPosition.x += m_hSpeed.x;
 		break;
 	case ON_SPACE:
-	
+
 		m_hObjectLeft = NULL;
 		m_hObjectRight = NULL;
 		for (int i = 0; i < object_static_can_collision.size(); i++)
@@ -1235,7 +1228,7 @@ void SuperHero::Move()
 		break;
 	case ON_GROUND:
 
-		
+
 		m_hObjectLeft = NULL;
 		m_hObjectRight = NULL;
 		for (int i = 0; i < object_static_can_collision.size(); i++)
@@ -1282,12 +1275,29 @@ void SuperHero::Move()
 Box* SuperHero::GetBoxTop()
 {
 	Box* x;
+	x = new Box();
+	x->_size.x = _hero_BOX_TOP_WIDTH;
+	x->_size.y = _hero_BOX_TOP_HEIGHT;
+	x->_v = m_hSpeed;
+	x->_position.y = m_hPosition.y;
+	switch (status)
+	{
+	case BROS:
+		x->_position.x = m_hPosition.x + getCurrentSprite()->_Height / 2;
+		break;	
+	default:
+		x->_position.x = m_hPosition.x + getCurrentSprite()->_Height / 2;
+		break;
+	}
+	
+	
+
 	return x;
 }
 
 Box* SuperHero::GetBoxAttack()
 {
-	
+
 	Box* x = new Box();
 	if (attack)
 	{
@@ -1305,7 +1315,7 @@ Box* SuperHero::GetBoxAttack()
 			x->_position.x = m_hPosition.x - 5;
 			x->_position.y = m_hPosition.y;
 		}
-	}	
+	}
 	return x;
 }
 
@@ -1356,10 +1366,29 @@ void SuperHero::RenderBoxAttack()
 		_LocalGraphic->tDrawTexture(_LocalContent->LoadTexture("boxbottom.png"), src, a, D3DXVECTOR2(GetBoxAttack()->getCenter()), D3DCOLOR_XRGB(255, 255, 255), 0);
 	}
 }
-
+void SuperHero::RenderBoxBottom()
+{
+	RECT src;
+	src.left = 0;
+	src.right = src.left + 1;
+	src.top = 0;
+	src.bottom = src.top + 1;
+	
+	RECT a;
+	a = GetBox_CGround()->getRect();
+	_LocalGraphic->tDrawTexture(_LocalContent->LoadTexture("boxbottom.png"), src, a, D3DXVECTOR2(GetBox_CGround()->getCenter()), D3DCOLOR_XRGB(255, 255, 255), 0);
+	
+}
 void SuperHero::RendeBoxTop()
 {
-
+	RECT src;
+	src.left = 0;
+	src.right = src.left + 1;
+	src.top = 0;
+	src.bottom = src.top + 1;
+	RECT a;
+	a = GetBoxTop()->getRect();
+	_LocalGraphic->tDrawTexture(_LocalContent->LoadTexture("boxbottom.png"), src, a, D3DXVECTOR2(GetBoxTop()->getCenter()), D3DCOLOR_XRGB(255, 255, 255), 0);
 }
 
 void SuperHero::Collision_Coin()
@@ -1373,7 +1402,7 @@ void SuperHero::Collision_Leaf()
 	if (status != BROS)
 	{
 		status++;
-	}	
+	}
 	infomation->I_Score += 100;
 }
 

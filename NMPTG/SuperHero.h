@@ -7,10 +7,13 @@
 #define _hero_SPEED 3//2
 #define _hero_ACCELERATION 0.5f//.2f
 #define _hero_RUN_ACCELERATION 0.048f//
-//dung cho box
+//dung cho box binh thuong
 #define _hero_BOX_WIDTH 9
 #define  _hero_BOX_ADJUST_POS_RIGHT 4
 #define  _hero_BOX_ADJUST_POS_LEFT 3
+//dung cho box top
+#define  _hero_BOX_TOP_WIDTH 2
+#define  _hero_BOX_TOP_HEIGHT 2
 class SuperHero:public Object
 {
 private:
@@ -135,7 +138,8 @@ public:
 	void Collision_Coin();
 	void Collision_Leaf();
 	void Collision_Mushroom();
-	void Collision_1up();	
+	void Collision_1up();
+	
 	virtual void Move();
 	SuperHero();
 	~SuperHero();

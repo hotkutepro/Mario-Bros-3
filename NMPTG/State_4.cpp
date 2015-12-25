@@ -28,8 +28,7 @@ void State_4::Load()
 	map1 = new Map();
 	map1->Init("hihi.txt", ResourcesManager::GetInstance()->GetTexture(TextureID::TileMap1));
 	hero = new SuperHero();
-	hero->Load();
-	hero->status = BROS;
+	hero->Load();	
 	_LocalHero = hero;
 	camera->Update(hero->GetPosition());
 	mapObject::iterator it;
@@ -75,10 +74,16 @@ void State_4::Render()
 			 it_Object->second->Render();
 	}
 	//hero->RenderBoundBox();
+	
+	hero->RenderV();
+	hero->RenderBoxAttack();
+	hero->RenderBoxBottom();
+	
 	//hero->RenderDebug();
-	//hero->RenderV();
+	
 	//hero->ReanderViewPort();
-	hero->Render();
+	//hero->Render();
+	hero->RendeBoxTop();
 	//hero->ReanderGroundBox();
 	_LocalGraphic->End();
 

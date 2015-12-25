@@ -53,29 +53,29 @@ void Map::Render()
 		}
 	}
 }
-/*void Map::Render()
-{	
-
-	for (int i= r ; i <r+15; i++)
-	{
-		for (int j = c; j < c+21; j++)
-		{
-			RECT s_rect;
-			s_rect.left = (this->_matrix[i][j]) * 16;
-			s_rect.right = s_rect.left + 16;
-			s_rect.top = 0;
-			s_rect.bottom = 16;
-
-			RECT des_rect;
-			des_rect.left = j * 16;
-			des_rect.right = (j + 1) * 16;
-
-			des_rect.top = i * 16;
-			des_rect.bottom = des_rect.top + 16;
-			_LocalGraphic->tDrawTexture(this->_texture, s_rect, des_rect, D3DXVECTOR2(8, 8), D3DCOLOR_XRGB(255, 255, 255), 0.1);
-		}
-	}
-}*/
+//void Map::Render()
+//{	
+//
+//	for (int i= r ; i <r+15; i++)
+//	{
+//		for (int j = c; j < c+21; j++)
+//		{
+//			RECT s_rect;
+//			s_rect.left = (this->_matrix[i][j]) * 16;
+//			s_rect.right = s_rect.left + 16;
+//			s_rect.top = 0;
+//			s_rect.bottom = 16;
+//
+//			RECT des_rect;
+//			des_rect.left = j * 16;
+//			des_rect.right = (j + 1) * 16;
+//
+//			des_rect.top = i * 16;
+//			des_rect.bottom = des_rect.top + 16;
+//			_LocalGraphic->tDrawTexture(this->_texture, s_rect, des_rect, D3DXVECTOR2(8, 8), D3DCOLOR_XRGB(255, 255, 255), 0.1);
+//		}
+//	}
+//}
 Map::Map()
 {
 		
