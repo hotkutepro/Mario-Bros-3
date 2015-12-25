@@ -62,11 +62,14 @@ void Object::Update(float gameTime)
 {
 	if (m_hPosition.y < 0)
 	{
-		Object* tmp = QNode::m_Object_Dynamic.find(id)->second;
+		Object* tmp = QNode::m_Objects_Dynamic.find(id)->second;
 		m_hPosition.y = tmp->m_hPosition.y;
 		m_hPosition.x = tmp->m_hPosition.x;
-		status = 0;
-		SetSprite();
+		status = tmp->status;
+		m_hState = tmp->m_hState;
+		m_hDirect = tmp->m_hDirect;		
+		m_hSpeed = tmp->m_hSpeed;
+		SetSprite();		
 	}
 }
 void Object::setCurrentSprite(FrkSprite* s)
@@ -364,7 +367,7 @@ void Object::MoveObject()
 					m_hObjectRight = object_static_can_collision.at(i);
 					SetSprite();
 				}
-				if (ny == 1 && nx == 0)
+				if (ny == 1 )
 				{
 					if (status==0&&(type == tarnooki_fly || type == tortoise_fly)){
 						FallDown(time, 0);
@@ -377,7 +380,7 @@ void Object::MoveObject()
 					m_hObjectGround = object_static_can_collision.at(i);///////
 					//return;
 				}
-				if ((ny == 0 || ny == -1) && object_static_can_collision.at(i)->type != box)
+				if ( ny == -1 && object_static_can_collision.at(i)->type != box)
 				{
 					m_hPosition.y += time*m_hSpeed.y;
 					m_hSpeed.y = 0;
@@ -536,6 +539,11 @@ Box* Object::GetBox_CGround()
 }
 
 void Object::SetSprite()
+{
+
+}
+
+void Object::ResetObject()
 {
 
 }

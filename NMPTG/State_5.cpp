@@ -1,32 +1,32 @@
-#include "State_4.h"
+#include "State_5.h"
 #include "ResourcesManager.h"
 #include"FrkShareControl.h"
 
 
 
-State_4::State_4(HINSTANCE hIns, int width, int height, char* wName, StateManager* SM) :State(hIns, width, height, wName, SM)
+State_5::State_5(HINSTANCE hIns, int width, int height, char* wName, StateManager* SM) :State(hIns, width, height, wName, SM)
 {
 
 }
 
 
-State_4::~State_4()
+State_5::~State_5()
 {
 }
 
-void State_4::Load()
+void State_5::Load()
 {
 	collision = new Collision();
 	qnode = new QNode();
-	qnode->LoadQNode("QNode.txt");
-	qnode->LoadObjects("Object.txt");
+	qnode->LoadQNode("QNode2.txt");
+	qnode->LoadObjects("Object2.txt");
 	qnode->Connect();
-	qnode->InsertObject("OiNode.txt");
+	qnode->InsertObject("OiNode2.txt");
 	qnode->getIdObjectInViewPort(R_Viewport, qnode);
 
 	camera = new FrkCamera(2848, 720);
 	map1 = new Map();
-	map1->Init("hihi.txt", ResourcesManager::GetInstance()->GetTexture(TextureID::TileMap1));
+	map1->Init("hihi2.txt", ResourcesManager::GetInstance()->GetTexture(TextureID::TileMap2));
 	hero = new SuperHero();
 	hero->Load();
 	hero->status = BROS;
@@ -36,7 +36,7 @@ void State_4::Load()
 	for (it = qnode->m_Objects.begin(); it != qnode->m_Objects.end(); it++)
 	{
 		//if (it->second == NULL)
-			//continue;
+		//continue;
 		it->second->Load();
 		if (it->second->type == TYPEOBJECT::question_block)
 		{
@@ -52,17 +52,17 @@ void State_4::Load()
 		}
 	}
 	for (it = qnode->m_Objects_Dynamic.begin(); it != qnode->m_Objects_Dynamic.end(); it++)
-	{		
+	{
 		it->second->Load();
 	}
 }
 
-void State_4::Render()
+void State_5::Render()
 {
 	_LocalGraphic->Begin(camera->GetTransformMatrix());
 
 	//_LocalGraphic->DrawTexture(wall, D3DXVECTOR2(720,450), D3DXVECTOR2(720, 450), D3DCOLOR_XRGB(255, 255, 255), 0.2);
-	map1->Render();	
+	map1->Render();
 
 	sId::iterator id_Objects;
 	mapObject::iterator it_Object;
@@ -70,9 +70,9 @@ void State_4::Render()
 	{
 
 		it_Object = qnode->m_Objects.find(*id_Objects);
-		//it_Object->second->RenderBoxDebug();
+		it_Object->second->RenderBoxDebug();
 		if (it_Object->second->getCurrentSprite() != NULL)
-			 it_Object->second->Render();
+			it_Object->second->Render();
 	}
 	//hero->RenderBoundBox();
 	hero->RenderDebug();
@@ -84,7 +84,7 @@ void State_4::Render()
 
 }
 
-void State_4::Update(float gameTime)
+void State_5::Update(float gameTime)
 {
 	map1->Update();
 	hero->Update(gameTime);
@@ -98,7 +98,7 @@ void State_4::Update(float gameTime)
 	sId::iterator id_ONext;
 	mapObject::iterator it_Object;
 	mapObject::iterator it_ONext;
-	
+
 	for (id_Objects = qnode->s_IdObjectInViewPort.begin(); id_Objects != qnode->s_IdObjectInViewPort.end(); id_Objects++)
 	{
 		it_Object = qnode->m_Objects.find(*id_Objects);

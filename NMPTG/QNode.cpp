@@ -24,7 +24,7 @@
 
 sId QNode::s_IdObjectInViewPort;
 mapObject  QNode::m_Objects;
-mapObject QNode::m_Object_Dynamic;
+mapObject QNode::m_Objects_Dynamic;
 
 QNode::QNode()
 {
@@ -335,7 +335,7 @@ void QNode::LoadObjects_Dynamic(string path)
 			tmp->m_hSize.x = size.x;
 			tmp->m_hSize.y = size.y;
 			if(tmp->type == tarnooki || tmp->type == tarnooki_fly || tmp->type == tortoise || tmp->type == tortoise_fly || tmp->type == tortoise_red)
-			m_Object_Dynamic.insert(pair<int, Object*>(tmp->id, tmp));
+			m_Objects_Dynamic.insert(pair<int, Object*>(tmp->id, tmp));
 		}
 	}
 }

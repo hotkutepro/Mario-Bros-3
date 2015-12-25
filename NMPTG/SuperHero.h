@@ -135,8 +135,7 @@ public:
 	void Collision_Coin();
 	void Collision_Leaf();
 	void Collision_Mushroom();
-	void Collision_1up();
-	void KillEnemy();
+	void Collision_1up();	
 	virtual void Move();
 	SuperHero();
 	~SuperHero();

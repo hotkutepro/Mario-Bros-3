@@ -20,7 +20,7 @@ enum SpriteID
 };
 enum TextureID
 {
-	TileMap1
+	TileMap1,TileMap2
 };
 class ResourcesManager
 {
@@ -28,6 +28,7 @@ private:
 		
 	vector<FrkSprite*> sprite_vector;
 	FrkTexture* tileMap1;
+	FrkTexture* tileMap2;
 	FrkTexture* sprite_texture;
 public:
 	int Count_Sprite;

@@ -80,6 +80,7 @@ public:
 	virtual void Die();
 	virtual void WatchUp();//dung cho coin, leaf...xet life=true
 	virtual void SetSprite();
+	virtual void ResetObject();
 	virtual void MoveObject();	
 	virtual void FallDown(float remainingtime, float Vy);//dung cho object
 //	virtual int isOnGround();//kiem tra xem object co dang dung tren ground ko, 1 neu co, 0 neu ko, -1 kxd

@@ -1382,10 +1382,6 @@ void SuperHero::Collision_1up()
 	infomation->I_Life++;
 }
 
-void SuperHero::KillEnemy()
-{
-
-}
 
 void SuperHero::Collision_Mushroom()
 {

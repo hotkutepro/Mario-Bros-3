@@ -19,7 +19,7 @@ void E_Tarnooki::Load()
 	setCurrentSprite(E_Mushroom);
 	Object::Load();	
 	m_hState = ON_SPACE;
-	m_hSpeed.x = 1;
+	m_hSpeed.x = -1;
 	m_hSpeed.y = -2;
 	status = 0;
 	t = 0;

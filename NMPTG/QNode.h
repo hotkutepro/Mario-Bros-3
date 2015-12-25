@@ -13,7 +13,7 @@ public:
 	v_Objects objects;//danh sách objects mà QNode này chứa
 	mapQNode m_QNode;//danh sách chứa tất cả các node
 	static mapObject m_Objects;//danh sách chứa tất cả các object	
-	static mapObject m_Object_Dynamic;//danh sach rua, tarnooki trong game
+	static mapObject m_Objects_Dynamic;//danh sach rua, tarnooki trong game
 	QNode *tl, *tr, *bl, *br;//
 	int nodeId;
 	

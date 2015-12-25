@@ -26,6 +26,7 @@ ResourcesManager* ResourcesManager::GetInstance()
 void ResourcesManager::Init()
 {	
 	tileMap1 = _LocalContent->LoadTexture("hihi.png");		
+	tileMap2 = _LocalContent->LoadTexture("hihi2.png");
 }
 
 FrkTexture* ResourcesManager::GetTexture(TextureID ID)
@@ -34,6 +35,8 @@ FrkTexture* ResourcesManager::GetTexture(TextureID ID)
 	{	
 	case TileMap1:
 		return this->tileMap1;	
+	case TileMap2:
+		return this->tileMap2;
 	}
 	return NULL;
 }

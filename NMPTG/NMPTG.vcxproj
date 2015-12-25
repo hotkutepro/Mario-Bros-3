@@ -115,6 +115,7 @@
     <ClInclude Include="F_Mushroom.h" />
     <ClInclude Include="F_P.h" />
     <ClInclude Include="F_Star.h" />
+    <ClInclude Include="Infomation.h" />
     <ClInclude Include="Man.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="Object.h" />
@@ -124,6 +125,7 @@
     <ClInclude Include="State.h" />
     <ClInclude Include="StateManager.h" />
     <ClInclude Include="State_4.h" />
+    <ClInclude Include="State_5.h" />
     <ClInclude Include="SuperHero.h" />
   </ItemGroup>
   <ItemGroup>
@@ -159,6 +161,7 @@
     <ClCompile Include="F_Mushroom.cpp" />
     <ClCompile Include="F_P.cpp" />
     <ClCompile Include="F_Star.cpp" />
+    <ClCompile Include="Infomation.cpp" />
     <ClCompile Include="Man.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="Object.cpp" />
@@ -168,6 +171,7 @@
     <ClCompile Include="State.cpp" />
     <ClCompile Include="StateManager.cpp" />
     <ClCompile Include="State_4.cpp" />
+    <ClCompile Include="State_5.cpp" />
     <ClCompile Include="SuperHero.cpp" />
     <ClCompile Include="WinMain.cpp" />
   </ItemGroup>

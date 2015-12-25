@@ -151,6 +151,12 @@
     <ClInclude Include="C_Uprise.h">
       <Filter>GameObject</Filter>
     </ClInclude>
+    <ClInclude Include="Infomation.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="State_5.h">
+      <Filter>GameState</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="FrkCamera.cpp">
@@ -281,6 +287,12 @@
     </ClCompile>
     <ClCompile Include="C_Uprise.cpp">
       <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Infomation.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="State_5.cpp">
+      <Filter>GameState</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
