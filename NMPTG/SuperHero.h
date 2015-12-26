@@ -74,7 +74,7 @@ private:
 	FrkSprite* MarioSuperJumpRight;
 #pragma endregion
 public:
-	Infomation* infomation;
+	Infomation* info;
 	string f_str;
 	char* a;
 	string f_str1;
@@ -107,6 +107,7 @@ public:
 	float timeSuper = 0;
 	void Load();
 	void Update(float gametime);
+	void Render();
 	void GoLeft(float gameTime);
 	void GoRight(float gameTime);
 	void RunLeft(float gameTime);

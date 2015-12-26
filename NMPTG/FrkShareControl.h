@@ -14,7 +14,7 @@ extern FrkGraphic* _LocalGraphic;
 extern FrkContent* _LocalContent;
 extern FrkKeyboard* _LocalKeyboard;
 extern float Zoom;
-extern float _delay;
+
 extern float _LocalTimeDelay;
 extern RECT R_Viewport;
 extern Object* _LocalHero;

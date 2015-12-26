@@ -70,6 +70,8 @@ void SuperHero::Load()
 	MarioSuperJumpLeft = ResourcesManager::GetInstance()->GetSprite(SpriteID::MarioSuperJumpLeft);
 	MarioSuperJumpRight = ResourcesManager::GetInstance()->GetSprite(SpriteID::MarioSuperJumpRight);
 #pragma endregion
+	info = new Infomation(300, 0, 0, 4, 0);
+	info->Load();
 	type = mario;
 	setCurrentSprite(MarioRight);
 	m_hPosition.x = 30;
@@ -84,6 +86,7 @@ void SuperHero::Load()
 
 void SuperHero::Update(float gametime)
 {
+	info->Update();
 	if (timeSuper < 30)
 		timeSuper++;
 	f_str = "Vx = " + std::to_string(m_hSpeed.x);
@@ -374,6 +377,13 @@ void SuperHero::Update(float gametime)
 	
 	this->Move();
 }
+
+void SuperHero::Render()
+{
+	Object::Render();
+	info->Render();
+}
+
 
 void SuperHero::GoLeft(float gameTime)
 {
@@ -1470,8 +1480,8 @@ void SuperHero::RendeBoxTop()
 
 void SuperHero::Collision_Coin()
 {
-	infomation->I_Coin++;
-	infomation->I_Score += 10;
+	info->I_Coin++;
+	info->I_Score += 10;
 }
 
 void SuperHero::Collision_Leaf()
@@ -1480,12 +1490,12 @@ void SuperHero::Collision_Leaf()
 	{
 		status++;
 	}
-	infomation->I_Score += 100;
+	info->I_Score += 100;
 }
 
 void SuperHero::Collision_1up()
 {
-	infomation->I_Life++;
+	info->I_Life++;
 }
 
 
