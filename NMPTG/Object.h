@@ -14,7 +14,7 @@
 #define  V_FALLDOWN -1 // tốc độ rơi khi press X
 enum TYPEOBJECT{
 	brick, coin, drain, land, leaf, mushroom_red, p, box, question_block, star, tarnooki, tarnooki_fly,
-	tortoise, tortoise_fly, tortoise_red, tree, tree_red, tree_red_shoot, tree_shoot, bullet, mario,uprise
+	tortoise, tortoise_fly, tortoise_red, tree, tree_red, tree_red_shoot, tree_shoot, bullet, mario,uprise,oneup
 };
 enum STATE{ ON_GROUND, ON_SPACE, FALL_DOWN, ON_FLY,OTHER };
 enum DIRECT{ left,right };
@@ -29,6 +29,14 @@ private:
 protected:		
 	
 public:
+	//xu ly phim khi keyup
+	bool isUp = false;
+	bool isDown = false;
+	bool isLeft = false;
+	bool isRight = false;
+	// chuan bi cam rua
+	bool ready = false;
+
 	Box* m_hBox;
 	// thoi gian co the bay
 	int flyTime = 0;
@@ -54,12 +62,11 @@ public:
 	bool life_state;//dung cho question_block
 	bool connect=false;//Kiểm tra có kết nối với brick ko.
 	//khong dieu kien
-	vector<Object*> GetStaticObject();///tra ve danh sach land, box, brick, QUESTION_BLOCK, uprise  de kiem tra khi object roi
-	list<Object*> GetStaticObject_vx();//tra ve danh sach object khi di chuyen doi tuong qua trai phai land, brick, QUESTION_BLOCK 
+	vector<Object*> GetStaticObject();///tra ve danh sach land, box, brick, QUESTION_BLOCK, uprise  de kiem tra khi object roi	
 	//Dieu kien life = true
 	vector<Object*> GetDynamicObject();//tra ve danh sach cac doi tuong di chuyen tortoise, mushroom, tarnooki, tree,	leaf	DIEU KIEN: LIFE = TRUE
 
-	vector<Object*> GetFoodObject();//tra ve danh sach cac doi tuong dung yen va co the an duoc hoac pha huy: coin, brick, star, QUESTION_BLOCK, P DIEU KIEN: LIFE = TRUE
+	vector<Object*> GetFoodObject();//tra ve danh sach cac doi tuong dung yen va co the an duoc hoac pha huy: coin, brick, star, QUESTION_BLOCK, P, F_Mushroom DIEU KIEN: LIFE = TRUE
 	// lay danh sach cac doi tuong tinh co the va cham voi object
 	vector<Object*> GetStaticObjectCanCollision();
 	vector<Object*> GetListTortoise();//trả về danh sách các loại tortoise, bắt đầu từ tortoise tiếp theo nằm trong danh sách

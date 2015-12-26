@@ -1,4 +1,4 @@
-#include "State_4.h"
+﻿#include "State_4.h"
 #include "ResourcesManager.h"
 #include"FrkShareControl.h"
 
@@ -28,14 +28,15 @@ void State_4::Load()
 	map1 = new Map();
 	map1->Init("hihi.txt", ResourcesManager::GetInstance()->GetTexture(TextureID::TileMap1));
 	hero = new SuperHero();
-	hero->Load();	
+	hero->Load();
+	hero->status = BROS;
 	_LocalHero = hero;
 	camera->Update(hero->GetPosition());
 	mapObject::iterator it;
 	for (it = qnode->m_Objects.begin(); it != qnode->m_Objects.end(); it++)
 	{
-		//if (it->second == NULL)
-			//continue;
+		if (it->second == NULL)
+			continue;
 		it->second->Load();
 		if (it->second->type == TYPEOBJECT::question_block)
 		{
@@ -74,16 +75,10 @@ void State_4::Render()
 			 it_Object->second->Render();
 	}
 	//hero->RenderBoundBox();
-	
-	hero->RenderV();
-	hero->RenderBoxAttack();
-	hero->RenderBoxBottom();
-	
 	hero->RenderDebug();
-	
+	//hero->RenderV();
 	//hero->ReanderViewPort();
 	hero->Render();
-	hero->RendeBoxTop();
 	//hero->ReanderGroundBox();
 	_LocalGraphic->End();
 
@@ -104,10 +99,12 @@ void State_4::Update(float gameTime)
 	mapObject::iterator it_Object;
 	mapObject::iterator it_ONext;
 	
-	for (id_Objects = qnode->s_IdObjectInViewPort.begin(); id_Objects != qnode->s_IdObjectInViewPort.end(); id_Objects++)
+	for (id_Objects = qnode->s_IdObjectInViewPort.begin(); id_Objects != qnode->s_IdObjectInViewPort.end(); id_Objects++)//sửa lại, chỉ chọn đối tượng tĩnh
 	{
-		it_Object = qnode->m_Objects.find(*id_Objects);
+		it_Object = qnode->m_Objects.find(*id_Objects);		
 		it_Object->second->Update(gameTime);
+		if (it_Object->second->m_hCurrentSprite!=NULL)
+			it_Object->second->m_hCurrentSprite->Next();
 	}
 
 }

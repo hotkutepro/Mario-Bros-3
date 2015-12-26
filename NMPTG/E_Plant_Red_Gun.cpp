@@ -1,6 +1,7 @@
 #include "E_Plant_Red_Gun.h"
 #include"ResourcesManager.h"
-
+#include"Collision.h"
+#include"FrkShareControl.h"
 
 E_Plant_Red_Gun::E_Plant_Red_Gun()
 {
@@ -27,8 +28,9 @@ void E_Plant_Red_Gun::Load()
 	m_hSpeed.y = -1;
 	type = tree_red_shoot;
 	n = 0;
-	bullet.Load();
-	bullet.life = false;
+	bullet = new Bullet();
+	bullet->Load();
+	bullet->life = false;
 
 }
 
@@ -53,10 +55,17 @@ void E_Plant_Red_Gun::Update(float gameTime)
 
 	if (n == 40&&m_hSpeed.y>0)
 		shoot();
-	if (bullet.life)
+	if (bullet->life)
 	{ 
-		bullet.Update(gameTime);
-		bullet.m_hCurrentSprite->Next();
+		float time = 2,nx,ny;
+		time = Collision::sweptAABBCheck(_LocalHero->GetBoxWithObject(bullet), bullet->GetBox(),nx,ny);
+		if (time<1)
+		{			
+			_LocalHero->IsAttacked();
+		}
+			
+		bullet->Update(gameTime);
+		bullet->m_hCurrentSprite->Next();
 	}
 	Object::Update(gameTime);	
 	SetSprite();
@@ -68,54 +77,54 @@ void E_Plant_Red_Gun::Render()
 		return;
 	Object::Render();
 	ZPipe_md->Render(pos);
-	if (bullet.life)
-		bullet.Render();
+	if (bullet->life)
+		bullet->Render();
 }
 
 void E_Plant_Red_Gun::shoot()
 {
-	bullet.life = true;
-	bullet.m_hPosition.x = m_hPosition.x + 8;
-	bullet.m_hPosition.y = m_hPosition.y + 24;
+	bullet->life = true;
+	bullet->m_hPosition.x = m_hPosition.x + 8;
+	bullet->m_hPosition.y = m_hPosition.y + 24;
 	int n = getDirectWithHero(_LocalHero);
 	if (n == 1)
 	{
-		bullet.m_hSpeed.x = -vx;
-		bullet.m_hSpeed.y = -vy;
+		bullet->m_hSpeed.x = -vx;
+		bullet->m_hSpeed.y = -vy;
 	}
 	else if (n == 2)
 	{
-		bullet.m_hSpeed.x = -vx;
-		bullet.m_hSpeed.y = vy;
+		bullet->m_hSpeed.x = -vx;
+		bullet->m_hSpeed.y = vy;
 	}
 	else if (n == 3){
-		bullet.m_hSpeed.x = vx;
-		bullet.m_hSpeed.y = vy;
+		bullet->m_hSpeed.x = vx;
+		bullet->m_hSpeed.y = vy;
 	}
 	else if (n == 4){
-		bullet.m_hSpeed.x = vx;
-		bullet.m_hSpeed.y = -vy;
+		bullet->m_hSpeed.x = vx;
+		bullet->m_hSpeed.y = -vy;
 	}
 }
 
 void E_Plant_Red_Gun::Collision_Up()
 {
-
+	_LocalHero->IsAttacked();
 }
 
 void E_Plant_Red_Gun::Collision_Down()
 {
-
+	_LocalHero->IsAttacked();
 }
 
 void E_Plant_Red_Gun::Collision_Left()
 {
-
+	_LocalHero->IsAttacked();
 }
 
 void E_Plant_Red_Gun::Collision_Right()
 {
-
+	_LocalHero->IsAttacked();
 }
 
 void E_Plant_Red_Gun::SetSprite()

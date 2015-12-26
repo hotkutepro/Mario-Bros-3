@@ -60,7 +60,7 @@ void Object::Load()
 }
 void Object::Update(float gameTime)
 {
-	if (m_hPosition.y < 0)
+	if (m_hPosition.y < 0&&type!=oneup)
 	{
 		Object* tmp = QNode::m_Objects_Dynamic.find(id)->second;
 		m_hPosition.y = tmp->m_hPosition.y;
@@ -157,26 +157,6 @@ void Object::RenderBoxDebug()
 
 
 
-list<Object*> Object::GetStaticObject_vx()
-{
-
-	list<Object*> listobject;
-	sId::iterator id_Objects;
-	mapObject::iterator it_Object;
-	for (id_Objects = QNode::s_IdObjectInViewPort.begin(); id_Objects != QNode::s_IdObjectInViewPort.end(); id_Objects++)
-	{
-		it_Object = QNode::m_Objects.find(*id_Objects);
-		if (it_Object->second->type == land || it_Object->second->type == question_block)
-		{
-			listobject.push_back(it_Object->second);
-		}
-		if (it_Object->second->life == true && it_Object->second->type == brick)
-			listobject.push_back(it_Object->second);
-	}
-	return listobject;
-
-}
-
 vector<Object*> Object::GetDynamicObject()
 {
 	vector<Object*> result;
@@ -209,7 +189,7 @@ vector<Object*> Object::GetFoodObject()
 		if (it_Object->second->life == false)
 			continue;
 		if (it_Object->second->type == question_block || it_Object->second->type == coin || it_Object->second->type == leaf ||
-			it_Object->second->type == leaf || it_Object->second->type == star || it_Object->second->type == p || it_Object->second->type == brick)
+			it_Object->second->type == leaf || it_Object->second->type == star || it_Object->second->type == p || it_Object->second->type == brick || it_Object->second->type == oneup)
 		{
 			result.push_back(it_Object->second);
 		}
@@ -263,7 +243,7 @@ void Object::EatFood()
 	float nx, ny, time;
 	for (int i = 0; i < objects_Food.size(); i++)
 	{
-		if (objects_Food.at(i)->type == coin || objects_Food.at(i)->type == leaf || objects_Food.at(i)->type == p || objects_Food.at(i)->type == star)
+		if (objects_Food.at(i)->type == coin || objects_Food.at(i)->type == leaf || objects_Food.at(i)->type == p || objects_Food.at(i)->type == star || objects_Food.at(i)->type==oneup)
 		{
 			if (Collision::checkAABB(GetBox(), objects_Food.at(i)->GetBox()))
 			{			
@@ -279,7 +259,7 @@ void Object::EatFood()
 				mapObject::iterator it_up;
 				it_up = QNode::m_Objects.find(objects_Food.at(i)->id - 178);
 				if (objects_Food.at(i)->life_state == 0)
-					it_up->second->life = true;
+					it_up->second->WatchUp();
 				objects_Food.at(i)->Die();
 			}
 		}

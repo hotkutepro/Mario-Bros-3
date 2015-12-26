@@ -13,7 +13,7 @@ private:
 	int n ;
 	int vx = 3;
 	int vy = 1.5;
-	Bullet bullet;
+	Bullet* bullet;
 public:
 	void Load();
 	void Update(float gameTime);

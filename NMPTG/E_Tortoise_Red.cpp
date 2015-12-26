@@ -123,7 +123,7 @@ void E_Tortoise_Red::Collision_Left()
 	if (status == 0){
 		_LocalHero->IsAttacked();
 	}
-	if (status == 1)
+	if (status == 1||status==2)
 	{
 		m_hSpeed.x = 0;
 		IsRun = true;		
@@ -138,12 +138,11 @@ void E_Tortoise_Red::Collision_Right()
 	if (status == 0){
 		_LocalHero->IsAttacked();
 	}
-	if (status == 1)
+	if (status == 1||status==2)
 	{
 		m_hSpeed.x = 0;
 		IsRun = true;		
-		m_hSpeed.x = -3;
-		return;
+		m_hSpeed.x = -3;		
 	}
 }
 

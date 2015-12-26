@@ -1282,13 +1282,12 @@ void SuperHero::Move()
 		if (m_hObjectLeft == NULL || m_hObjectRight == NULL)
 			m_hPosition.x += m_hSpeed.x;
 		break;
-	case ON_GROUND:
-
+	case ON_GROUND:		
 
 		m_hObjectLeft = NULL;
 		m_hObjectRight = NULL;
 		for (int i = 0; i < object_static_can_collision.size(); i++)
-		{
+		{			
 			if (Collision::checkAABB(Collision::getBoardPhaseBox(GetBox()), object_static_can_collision.at(i)->GetBox()))
 			{
 				time = Collision::sweptAABBCheck(GetBox(), object_static_can_collision.at(i)->GetBox(), nx, ny);

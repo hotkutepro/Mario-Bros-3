@@ -79,6 +79,12 @@ void E_Tortoise_Fly::Collision_Left()
 		IsRun = true;
 		m_hSpeed.x = 3;
 	}
+	if (status == 3)
+	{
+		m_hSpeed.x = 0;
+		IsRun = true;
+		m_hSpeed.x = 3;
+	}
 	SetSprite();
 }
 
@@ -92,6 +98,12 @@ void E_Tortoise_Fly::Collision_Right()
 		m_hSpeed.x = 0;
 		IsRun = true;
 		m_hSpeed.x = -3;		
+	}
+	if (status == 3)
+	{
+		m_hSpeed.x = 0;
+		IsRun = true;
+		m_hSpeed.x = -3;
 	}
 	SetSprite();
 }

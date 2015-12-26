@@ -80,11 +80,7 @@ public:
 	string f_str1;
 	char* a1;
 
-	//xu ly phim khi keyup
-	bool isUp = false;
-	bool isDown = false;
-	bool isLeft = false;
-	bool isRight = false;
+	
 
 	//dang nhay
 	bool isJump = false;	
@@ -103,8 +99,7 @@ public:
 	//thoi gian ba le
 	float timeAttack = 0;
 
-	// chuan bi cam rua
-	bool ready = false;
+	
 
 	//thoi gian delay khi dat max speed
 	float delayMaxSpeed;

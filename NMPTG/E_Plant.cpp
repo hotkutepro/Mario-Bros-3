@@ -49,25 +49,25 @@ void E_Plant::Render()
 
 void E_Plant::Collision_Up()
 {
-
+	_LocalHero->IsAttacked();
 }
 
 void E_Plant::Collision_Down()
 {
-
+	_LocalHero->IsAttacked();
 }
 
 void E_Plant::Collision_Left()
 {
-
+	_LocalHero->IsAttacked();
 }
 
 void E_Plant::Collision_Right()
 {
-
+	_LocalHero->IsAttacked();
 }
 
 void E_Plant::IsAttacked()
 {
-
+	life = false;
 }
