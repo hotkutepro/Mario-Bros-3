@@ -34,8 +34,11 @@ void E_Tortoise::Update(float gameTime)
 {	
 	Object::Update(gameTime);
 	UpdateDirect();
-	MoveObject();
-	SetControl();
+	if (IsControl)
+		SetControl();
+	else
+		MoveObject();
+	
 }
 
 void E_Tortoise::Tortoise_Shell()

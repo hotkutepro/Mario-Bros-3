@@ -60,7 +60,7 @@ void Object::Load()
 }
 void Object::Update(float gameTime)
 {
-	if (m_hPosition.y < 0&&type!=oneup)
+	if (m_hPosition.y < 0&&type!=oneup&&type!=leaf)
 	{
 		Object* tmp = QNode::m_Objects_Dynamic.find(id)->second;
 		m_hPosition.y = tmp->m_hPosition.y;
@@ -85,8 +85,7 @@ FrkSprite* Object::getCurrentSprite()
 
 void Object::Die()
 {
-	life = false; 
-	m_hSpeed.x = 0;
+	
 }
 
 void Object::FallDown(float remainingtime,float Vy)
@@ -247,7 +246,7 @@ void Object::EatFood()
 		{
 			if (Collision::checkAABB(GetBox(), objects_Food.at(i)->GetBox()))
 			{			
-				objects_Food.at(i)->life = false;
+				objects_Food.at(i)->Die();
 			}
 				
 		}
@@ -536,6 +535,26 @@ Box* Object::GetBoxWithObject(Object* object)
 	x->_v.x = m_hSpeed.x - object->m_hSpeed.x;
 	x->_v.y = m_hSpeed.y - object->m_hSpeed.y;
 	return x;
+}
+
+void Object::Collision_Leaf()
+{
+
+}
+
+void Object::Collision_Coin()
+{
+
+}
+
+void Object::Collision_Mushroom()
+{
+
+}
+
+void Object::Collision_1up()
+{
+
 }
 
 

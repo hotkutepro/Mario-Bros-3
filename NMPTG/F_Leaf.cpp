@@ -32,7 +32,9 @@ void F_Leaf::Update(float gameTime)
 
 void F_Leaf::Die()
 {
-	m_hCurrentSprite = NULL;
+	life = false;
+	_LocalHero->Collision_Leaf();
+
 }
 
 void F_Leaf::WatchUp()

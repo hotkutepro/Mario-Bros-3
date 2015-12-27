@@ -1,6 +1,6 @@
 #include "F_Coin.h"
 #include"ResourcesManager.h"
-
+#include "FrkShareControl.h"
 
 F_Coin::F_Coin()
 {
@@ -26,7 +26,8 @@ void F_Coin::Update(float gameTime)
 
 void F_Coin::Die()
 {
-	m_hCurrentSprite = NULL;
+	life = false;
+	_LocalHero->Collision_Coin();
 }
 
 void F_Coin::Show()
