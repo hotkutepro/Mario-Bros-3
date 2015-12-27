@@ -188,7 +188,8 @@ vector<Object*> Object::GetFoodObject()
 		if (it_Object->second->life == false)
 			continue;
 		if (it_Object->second->type == question_block || it_Object->second->type == coin || it_Object->second->type == leaf ||
-			it_Object->second->type == leaf || it_Object->second->type == star || it_Object->second->type == p || it_Object->second->type == brick || it_Object->second->type == oneup)
+			it_Object->second->type == leaf || it_Object->second->type == star || it_Object->second->type == p || it_Object->second->type == brick || it_Object->second->type == oneup
+			||it_Object->second->type == brick)
 		{
 			result.push_back(it_Object->second);
 		}
@@ -242,6 +243,7 @@ void Object::EatFood()
 	float nx, ny, time;
 	for (int i = 0; i < objects_Food.size(); i++)
 	{
+
 		if (objects_Food.at(i)->type == coin || objects_Food.at(i)->type == leaf || objects_Food.at(i)->type == p || objects_Food.at(i)->type == star || objects_Food.at(i)->type==oneup)
 		{
 			if (Collision::checkAABB(GetBox(), objects_Food.at(i)->GetBox()))
@@ -258,8 +260,8 @@ void Object::EatFood()
 				mapObject::iterator it_up;
 				it_up = QNode::m_Objects.find(objects_Food.at(i)->id - 178);
 				if (objects_Food.at(i)->life_state == 0)
-					it_up->second->WatchUp();
-				objects_Food.at(i)->Die();
+					objects_Food.at(i)->Die();
+				
 			}
 		}
 	}
@@ -317,7 +319,7 @@ Box* Object::GetBox_CRight()
 
 void Object::MoveObject()
 {
-	vector<Object*> object_static_can_collision = GetStaticObjectCanCollision();
+	vector<Object*> object_static_can_collision = GetStaticObject();
 	float time, nx, ny;
 	switch (m_hState)
 	{		
@@ -370,7 +372,7 @@ void Object::MoveObject()
 		break;
 	case ON_GROUND:
 
-		object_static_can_collision = GetStaticObjectCanCollision();
+		object_static_can_collision = GetStaticObject();
 		m_hObjectLeft = NULL;
 		m_hObjectRight = NULL;
 		for (int i = 0; i < object_static_can_collision.size(); i++)

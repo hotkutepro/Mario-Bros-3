@@ -22,3 +22,8 @@ void F_Star::Update(float gameTime)
 {
 	Object::Update(gameTime);
 }
+
+void F_Star::Die()
+{
+	life = false;
+}

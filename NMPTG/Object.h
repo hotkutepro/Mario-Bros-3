@@ -95,7 +95,7 @@ public:
 	virtual void MoveObject();	
 	virtual void FallDown(float remainingtime, float Vy);//dung cho object
 //	virtual int isOnGround();//kiem tra xem object co dang dung tren ground ko, 1 neu co, 0 neu ko, -1 kxd
-	virtual void EatFood();
+	virtual void EatFood();//xử lý va chạm với coin, leaf, ...đụng bên dưới quật đuôi, question block, brick, 
 	virtual void KillEnemy();
 	virtual void RenderDebug();
 	virtual void RenderBoxDebug();
