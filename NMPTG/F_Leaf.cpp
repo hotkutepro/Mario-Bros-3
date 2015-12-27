@@ -24,7 +24,7 @@ void F_Leaf::Load()
 void F_Leaf::Update(float gameTime)
 {	
 	Object::Update(gameTime);
-	if (life == true)
+	if (life == true&&m_hCurrentSprite==F_MushroomPower)
 	{
 		MoveObject();
 	}
@@ -43,6 +43,7 @@ void F_Leaf::WatchUp()
 	if (_LocalHero->status != MARIO)
 	{
 		setCurrentSprite(Leaf);
+		m_hSpeed.y = -3;
 	}
 	else
 	{

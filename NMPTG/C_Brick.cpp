@@ -34,3 +34,8 @@ void C_Brick::Update(float gameTime)
 {
 	Object::Update(gameTime);
 }
+
+void C_Brick::IsAttacked()
+{
+	life = false;
+}

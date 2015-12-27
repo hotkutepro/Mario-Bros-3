@@ -493,7 +493,7 @@ vector<Object*> Object::GetListTortoise()
 
 void Object::IsAttacked()
 {
-	life = false;
+	
 }
 
 Box* Object::GetBoxTop()
