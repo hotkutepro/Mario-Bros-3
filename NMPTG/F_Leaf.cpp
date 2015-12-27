@@ -22,7 +22,7 @@ void F_Leaf::Load()
 }
 
 void F_Leaf::Update(float gameTime)
-{
+{	
 	Object::Update(gameTime);
 	if (life == true)
 	{

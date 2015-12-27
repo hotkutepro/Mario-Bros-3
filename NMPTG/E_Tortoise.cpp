@@ -32,6 +32,7 @@ void E_Tortoise::Load()
 
 void E_Tortoise::Update(float gameTime)
 {	
+	
 	Object::Update(gameTime);
 	UpdateDirect();
 	if (IsControl)
