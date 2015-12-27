@@ -38,3 +38,15 @@ void C_Question_Block::Die()
 	life_state = 1;
 	setCurrentSprite(CoinBoxNull);
 }
+
+void C_Question_Block::IsAttacked()
+{
+	if (life_state == 0)
+	{
+		mapObject::iterator it_up;
+		it_up = QNode::m_Objects.find(id - 178);
+		it_up->second->WatchUp();
+	}
+	life_state = 1;
+	setCurrentSprite(CoinBoxNull);
+}

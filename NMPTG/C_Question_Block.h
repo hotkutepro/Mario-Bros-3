@@ -10,6 +10,7 @@ public:
 	void Load();	
 	void Update(float gameTime);
 	void Die();
+	void IsAttacked();
 	C_Question_Block();
 	~C_Question_Block();
 };

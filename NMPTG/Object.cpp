@@ -252,6 +252,13 @@ void Object::EatFood()
 			}
 				
 		}
+		if (objects_Food.at(i)->type == question_block || objects_Food.at(i)->type == brick)
+		{
+			if (Collision::checkAABB(_LocalHero->GetBoxAttack(), objects_Food.at(i)->GetBox()))
+			{
+				objects_Food.at(i)->IsAttacked();
+			}
+		}
 		if (objects_Food.at(i)->type == question_block)
 		{
 			time = Collision::sweptAABBCheck(GetBoxTop(), objects_Food.at(i)->GetBox(), nx, ny);
