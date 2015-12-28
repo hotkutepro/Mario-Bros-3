@@ -214,16 +214,32 @@ void SuperHero::Update(float gametime)
 #pragma region Process next sprite
 	if (m_hState == ON_FLY)
 	{
-
+		if (m_hDirect == DIRECT::right)
+		{
+			setCurrentSprite(BrosFlyRight);
+		}
+		else
+		{
+			setCurrentSprite(BrosFlyLeft);
+		}
+		getCurrentSprite()->Next();
 	}
 #pragma  region ON_GROUND
 	if (m_hState == ON_GROUND && !attack)
-	{
+	{		
+		isSuperJump = false;
 		if (!isSquat)
 		{
 			if (m_hSpeed.x != 0)
 			{
-				DelayNext(3);
+				if (abs(m_hSpeed.x) <= _hero_SPEED)
+				{
+					DelayNext(3);
+				}
+				else
+				{
+					getCurrentSprite()->Next();
+				}
 			}
 			else
 			{
@@ -271,7 +287,43 @@ void SuperHero::Update(float gametime)
 
 	if (m_hState == ON_SPACE && !attack && !isDown)
 	{
-		if (m_hSpeed.y < 0)
+		if (isSuperJump)
+		{
+			switch (status)
+			{
+			case BROS:
+				if (m_hDirect == DIRECT::right)
+				{
+					setCurrentSprite(BrosFlyRight);
+				}
+				else
+				{
+					setCurrentSprite(BrosFlyLeft);
+				}
+				break;
+			case BIGMARIO:
+				if (m_hDirect == DIRECT::right)
+				{
+					setCurrentSprite(BigMarioSuperJumpRight);
+				}
+				else
+				{
+					setCurrentSprite(BigMarioSuperJumpLeft);
+				}
+				break;
+			case MARIO:
+				if (m_hDirect == DIRECT::right)
+				{
+					setCurrentSprite(MarioSuperJumpRight);
+				}
+				else
+				{
+					setCurrentSprite(MarioSuperJumpLeft);
+				}
+				break;
+			}			
+		}
+		else if (m_hSpeed.y < 0)
 		{
 			switch (status)
 			{
@@ -295,6 +347,43 @@ void SuperHero::Update(float gametime)
 					setCurrentSprite(BigMarioFallLeft);
 				}
 				break;			
+		
+			}
+		}
+		else
+		{
+			switch (status)
+			{
+			case BROS:
+				if (m_hDirect == DIRECT::right)
+				{
+					setCurrentSprite(BrosJumpRight);
+				}
+				else
+				{
+					setCurrentSprite(BrosJumpLeft);
+				}
+				break;
+			case BIGMARIO:
+				if (m_hDirect == DIRECT::right)
+				{
+					setCurrentSprite(BigMarioJumpRight);
+				}
+				else
+				{
+					setCurrentSprite(BigMarioJumpLeft);
+				}
+				break;
+			case MARIO:
+				if (m_hDirect == DIRECT::right)
+				{
+					setCurrentSprite(MarioJumpRight);
+				}
+				else
+				{
+					setCurrentSprite(MarioJumpLeft);
+				}
+				break;
 			}
 		}
 
@@ -681,8 +770,6 @@ void SuperHero::RunRight(float gameTime)
 	else
 	{
 		//chuyển spirte
-
-
 		switch (status)
 		{
 		case MARIO:
@@ -852,40 +939,7 @@ void SuperHero::Jump(float vJump)
 	{
 		return;
 	}
-	switch (status)
-	{
-	case MARIO:
-		if (m_hDirect == DIRECT::right)
-		{
-			setCurrentSprite(MarioJumpRight);
-		}
-		else
-		{
-			setCurrentSprite(MarioJumpLeft);
-		}
-		break;
-	case BIGMARIO:
-		if (m_hDirect == DIRECT::right)
-		{
-			setCurrentSprite(BigMarioJumpRight);
-		}
-		else
-		{
-			setCurrentSprite(BigMarioJumpLeft);
-		}
-		break;
-	case BROS:
-		if (m_hDirect == DIRECT::right)
-		{
-			setCurrentSprite(BrosJumpRight);
-		}
-		else
-		{
-			setCurrentSprite(BrosJumpLeft);
-		}
-	default:
-		break;
-	}
+	
 #pragma endregion
 }
 
@@ -949,18 +1003,7 @@ void SuperHero::BrosFly(float gameTime)
 			{
 				m_hSpeed.x = -_hero_MAXSPEED;
 			}
-			m_hSpeed.y += 0.1;
-
-#pragma region Set Sprite
-			if (m_hDirect == DIRECT::right)
-			{
-				setCurrentSprite(BrosFlyRight);
-			}
-			else
-			{
-				setCurrentSprite(BrosFlyLeft);
-			}
-#pragma endregion
+			m_hSpeed.y += 0.1;		
 		}
 		else
 		{
@@ -1006,41 +1049,8 @@ void SuperHero::SuperJump()
 	}
 	if (abs(m_hSpeed.x) >= _hero_MAXSPEED)
 	{
+		isSuperJump = true;
 		Jump(_hero_MAXJUM);
-		switch (status)
-		{
-		case MARIO:
-			if (m_hDirect == DIRECT::right)
-			{
-				setCurrentSprite(MarioSuperJumpRight);
-			}
-			else
-			{
-				setCurrentSprite(MarioSuperJumpLeft);
-			}
-			break;
-		case BIGMARIO:
-			if (m_hDirect == DIRECT::right)
-			{
-				setCurrentSprite(BigMarioSuperJumpRight);
-			}
-			else
-			{
-				setCurrentSprite(BigMarioSuperJumpLeft);
-			}
-			break;
-		case BROS:
-			if (m_hDirect == DIRECT::right)
-			{
-				setCurrentSprite(BrosFlyRight);
-			}
-			else
-			{
-				setCurrentSprite(BrosFlyLeft);
-			}
-		default:
-			break;
-		}
 		return;
 	}
 	else

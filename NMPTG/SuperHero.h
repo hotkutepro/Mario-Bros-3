@@ -83,7 +83,7 @@ public:
 	
 
 	//dang nhay
-	bool isJump = false;	
+	bool isSuperJump = false;	
 
 	//dang chay
 	bool isRun = false;
