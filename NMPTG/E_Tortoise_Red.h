@@ -28,6 +28,7 @@ public:
 	void SetMove();
 	void Collision_Shell_Object();
 	void SetControl();
+	void Die();
 	E_Tortoise_Red();
 	~E_Tortoise_Red();
 };

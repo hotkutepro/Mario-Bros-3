@@ -25,6 +25,7 @@ public:
 	void Collision_Left();
 	void Collision_Right();
 	void SetSprite();
+	void Die();
 	E_Plant_Red_Gun();
 	~E_Plant_Red_Gun();
 };

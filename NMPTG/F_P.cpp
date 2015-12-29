@@ -24,3 +24,20 @@ void F_P::Update(float gameTime)
 {
 	Object::Update(gameTime);
 }
+
+void F_P::Die()
+{
+	life = false;
+	vector<Object*> result;
+	sId::iterator id_Objects;
+	mapObject::iterator it_Object;
+	for (id_Objects = QNode::s_IdObjectInViewPort.begin(); id_Objects != QNode::s_IdObjectInViewPort.end(); id_Objects++)
+	{
+		it_Object = QNode::m_Objects.find(*id_Objects);
+		if (it_Object->second->type == brick)
+		{
+			it_Object->second->WatchUp();
+		}
+	}
+}
+

@@ -28,12 +28,16 @@ void E_Tortoise_Fly::Load()
 	m_hState = ON_SPACE;
 	m_hSpeed.x = 2; m_hSpeed.y = -2;
 	IsRun = false;
+	IsControl = false;
 }
 
 void E_Tortoise_Fly::Update(float gameTime)
 {	
 	Object::Update(gameTime);	
-	MoveObject();	
+	if (IsControl)
+		SetControl();
+	else
+		MoveObject();
 	Collision_Shell_Object();
 	CollistionWithObject();
 	SetSprite();
@@ -70,7 +74,7 @@ void E_Tortoise_Fly::Collision_Down()
 
 void E_Tortoise_Fly::Collision_Left()
 {
-	if (status == 0){
+	if (status == 0||status==1){
 		_LocalHero->IsAttacked();
 	}
 	if (status == 2)
@@ -195,3 +199,29 @@ void E_Tortoise_Fly::Collision_Shell_Object()
 		}
 	}
 }
+
+void E_Tortoise_Fly::SetControl()
+{
+	if (IsControl)
+	{
+		if (!_LocalHero->ready)
+		{
+			//IsRun = true;
+			if (_LocalHero->m_hDirect == DIRECT::left)
+				m_hSpeed.x = -vx_run;
+			else
+				m_hSpeed.x = vx_run;
+			IsControl = false;
+		}
+		m_hPosition.y = _LocalHero->m_hPosition.y;
+		if (_LocalHero->m_hDirect == DIRECT::left)
+		{
+			m_hPosition.x = _LocalHero->m_hPosition.x + -15;
+		}
+		else
+		{
+			m_hPosition.x = _LocalHero->m_hPosition.x - vx_run + _LocalHero->m_hCurrentSprite->_Width;
+		}
+	}
+}
+

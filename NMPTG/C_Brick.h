@@ -7,11 +7,15 @@ class C_Brick:public Object
 private:
 	FrkSprite* brick;
 	FrkSprite* Coin;	
+	int n;//sau bao lau se tro lai binh thuong
 public:
 	Box* m_hBox;	
 	void Load();	
 	void Update(float gameTime);	
 	void IsAttacked();
+	void Die();
+	void WatchUp();
+	void Reset();
 	C_Brick(D3DXVECTOR2 pos, D3DXVECTOR2 speed);
 	C_Brick(TYPEOBJECT _t);
 	C_Brick();

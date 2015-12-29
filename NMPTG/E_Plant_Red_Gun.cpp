@@ -150,3 +150,8 @@ void E_Plant_Red_Gun::IsAttacked()
 {
 	life = false;
 }
+
+void E_Plant_Red_Gun::Die()
+{
+	life = false;
+}

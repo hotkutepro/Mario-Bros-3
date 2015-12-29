@@ -8,6 +8,7 @@ private:
 public:
 	void Load();
 	void Update(float gameTime);
+	void Die();	
 	F_P();
 	~F_P();
 };

@@ -66,9 +66,8 @@ void Object::Update(float gameTime)
 			Object* tmp = QNode::m_Objects_Dynamic.find(id)->second;
 			m_hPosition.y = tmp->m_hPosition.y;
 			m_hPosition.x = tmp->m_hPosition.x;
-			status = tmp->status;
-			m_hState = tmp->m_hState;
-			m_hDirect = tmp->m_hDirect;
+			status = 0;
+			m_hState = tmp->m_hState;			
 			m_hSpeed = tmp->m_hSpeed;
 			SetSprite();
 		}
@@ -217,7 +216,7 @@ vector<Object*> Object::GetStaticObject()
 		{
 			result.push_back(it_Object->second);
 		}
-		if (it_Object->second->type == brick && it_Object->second->life == true)
+		if (it_Object->second->type == brick && it_Object->second->life == true && it_Object->second->status==0)
 			result.push_back(it_Object->second);
 	}
 
@@ -231,11 +230,11 @@ void Object::EatFood()
 	for (int i = 0; i < objects_Food.size(); i++)
 	{
 
-		if (objects_Food.at(i)->type == coin || objects_Food.at(i)->type == leaf || objects_Food.at(i)->type == p || objects_Food.at(i)->type == star || objects_Food.at(i)->type == oneup)
+		if (objects_Food.at(i)->type == coin || objects_Food.at(i)->type == leaf || objects_Food.at(i)->type == p || objects_Food.at(i)->type == star || objects_Food.at(i)->type == oneup || (objects_Food.at(i)->type == brick&&objects_Food.at(i)->status==1))
 		{
 			if (Collision::checkAABB(GetBox(), objects_Food.at(i)->GetBox()))
 			{
-				objects_Food.at(i)->Die();
+					objects_Food.at(i)->Die();
 			}
 
 		}

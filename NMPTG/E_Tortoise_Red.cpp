@@ -122,32 +122,44 @@ void E_Tortoise_Red::Collision_Down()
 }
 
 void E_Tortoise_Red::Collision_Left()
-{	
-	if (status == 0||IsRun){
+{		
+	if (status == 0 || IsRun){
 		_LocalHero->IsAttacked();
 	}
-	else if (status == 1||status==2)
-	{		
-		IsRun = true;		
-		m_hSpeed.x = 3;				
+	else
+	if (_LocalHero->ready&&status == 1 || status == 2)
+	{
+		IsControl = true;
+	}
+	else
+	if (status == 1 || status == 2)
+	{
+		IsRun = true;
+		m_hSpeed.x = vx_run;
 	}
 }
 
 void E_Tortoise_Red::Collision_Right()
 {
-	if (status == 0||IsRun){
+	if (status == 0 || IsRun)
+	{
 		_LocalHero->IsAttacked();
 	}
-	else if (status == 1||status==2)
-	{		
-		IsRun = true;		
-		m_hSpeed.x = -3;		
+	else
+	if (_LocalHero->ready&&status == 1 || status == 2)
+	{
+		IsControl = true;
+	}
+	else if (status == 1 || status == 2)
+	{
+		IsRun = true;
+		m_hSpeed.x = -vx_run;
 	}
 }
 
 void E_Tortoise_Red::SetMove()
 {
-	if (IsRun)
+	if (status!=0)
 		return;
 	if (m_hSpeed.x>0)
 	{
@@ -175,7 +187,7 @@ void E_Tortoise_Red::IsAttacked()
 
 void E_Tortoise_Red::Collision_Shell_Object()
 {
-	if (status == 0 || m_hSpeed.x == 0)
+	if (status == 0 )
 		return;
 	vector<Object*> result;
 	sId::iterator id_Objects;
@@ -183,7 +195,7 @@ void E_Tortoise_Red::Collision_Shell_Object()
 	for (id_Objects = QNode::s_IdObjectInViewPort.begin(); id_Objects != QNode::s_IdObjectInViewPort.end(); id_Objects++)
 	{
 		it_Object = QNode::m_Objects.find(*id_Objects);
-		if (it_Object->second->id != id && (it_Object->second->type == tarnooki || it_Object->second->type == question_block))
+		if (it_Object->second->id != id && (it_Object->second->type == tarnooki || it_Object->second->type == question_block || it_Object->second->type == tree_red_shoot || it_Object->second->type == brick))
 		{
 			float nx, ny;
 			float time = Collision::sweptAABBCheck(GetBoxWithObject(it_Object->second), it_Object->second->GetBox(), nx, ny);
@@ -191,6 +203,10 @@ void E_Tortoise_Red::Collision_Shell_Object()
 			{
 				//m_hSpeed.x = -m_hSpeed.x;
 				it_Object->second->Die();
+				if (it_Object->second->type == tree_red_shoot)
+				{
+					Die();
+				}
 			}
 
 		}
@@ -220,4 +236,9 @@ void E_Tortoise_Red::SetControl()
 			m_hPosition.x = _LocalHero->m_hPosition.x - vx_run + _LocalHero->m_hCurrentSprite->_Width;
 		}
 	}
+}
+
+void E_Tortoise_Red::Die()
+{
+	life = false;
 }
