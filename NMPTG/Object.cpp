@@ -336,7 +336,7 @@ Box* Object::GetBox_CLeft()
 Box* Object::GetBox_CRight()
 {
 	Box* x = new Box();
-	x->_position.x = m_hPosition.x + 1;
+	x->_position.x = m_hPosition.x + 13;
 	x->_position.y = m_hPosition.y;
 	x->_size = m_hBox->_size;
 	return x;

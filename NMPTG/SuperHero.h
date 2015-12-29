@@ -130,6 +130,7 @@ public:
 	Box* GetBox_CGround();//va de xet va cham voi mat dat
 	//void RenderBoxDebug();
 	void RenderV();	
+	void RenderBoxRight();
 	void RenderBoxBottom();
 	void RenderBoxAttack();
 	void RendeBoxTop();
