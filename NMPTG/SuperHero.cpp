@@ -70,7 +70,7 @@ void SuperHero::Load()
 	MarioSuperJumpLeft = ResourcesManager::GetInstance()->GetSprite(SpriteID::MarioSuperJumpLeft);
 	MarioSuperJumpRight = ResourcesManager::GetInstance()->GetSprite(SpriteID::MarioSuperJumpRight);
 #pragma endregion
-	info = new Infomation(300, 0, 0, 4, 0);
+	info = new Infomation(0, 0, 0, 4, 0);
 	info->Load();
 	type = mario;
 	setCurrentSprite(MarioRight);
@@ -95,7 +95,15 @@ void SuperHero::Update(float gametime)
 	f_str1 = "Vy = " + std::to_string(m_hSpeed.y);
 	a1 = new char[f_str1.length() + 1];
 	strcpy(a1, f_str1.c_str());
-
+	if (isFly)
+	{
+		timeFly++;
+	}
+	if (timeFly > 100)
+	{
+		isFly = false;
+		timeFly = 0;
+	}
 	_LocalKeyboard->GetDeviceState();
 	if (m_hState != OTHER)
 	{
@@ -232,7 +240,7 @@ void SuperHero::Update(float gametime)
 		{
 			if (m_hSpeed.x != 0)
 			{
-				if (abs(m_hSpeed.x) <= _hero_SPEED)
+				if (abs(m_hSpeed.x) <= _hero_SPEED+1)
 				{
 					DelayNext(3);
 				}
@@ -409,6 +417,7 @@ void SuperHero::Update(float gametime)
 		getCurrentSprite()->Next();
 	}
 #pragma endregion
+	// xu ly cho attack = false
 #pragma region ATTACK
 	if (attack && m_hState != ON_FLY)
 	{
@@ -988,12 +997,14 @@ void SuperHero::RenderV()
 
 void SuperHero::BrosFly(float gameTime)
 {
+	isFly = true;
 	switch (status)
 	{
 	case BROS:
 		if (abs(m_hSpeed.x) == _hero_MAXSPEED)
 		{
 			m_hState = ON_FLY;
+			timeFly++;
 			m_hObjectGround = NULL;
 			if (m_hDirect == DIRECT::right)
 			{
@@ -1004,12 +1015,19 @@ void SuperHero::BrosFly(float gameTime)
 				m_hSpeed.x = -_hero_MAXSPEED;
 			}
 			m_hSpeed.y += 0.1;		
+			if (m_hSpeed.y > 5)
+			{
+				m_hSpeed.y = 5;
+			}
 		}
 		else
 		{
 			Jump(_hero_JUMP - 5);//nhảy liên tục khi giữ X
 			BrosFall(gameTime);
 		}
+		break;
+	default:
+		Jump(_hero_JUMP - 5);//nhảy liên tục khi giữ X
 		break;
 	}
 
@@ -1061,16 +1079,18 @@ void SuperHero::SuperJump()
 Box* SuperHero::GetBox()
 {
 	m_hBox->_position.y = m_hPosition.y;
-	m_hBox->_size.y = getCurrentSprite()->_Height;
+	
 	m_hBox->_v = m_hSpeed;
 	m_hBox->_size.x = _hero_BOX_WIDTH;
 	switch (status)
 	{
 	case MARIO:
+		m_hBox->_size.y = 16;
 		m_hBox->_position.x = m_hPosition.x + 4;
 		m_hBox->_size.x = 9;
 		break;
 	case BIGMARIO:
+		m_hBox->_size.y = 28;
 		if (m_hDirect == DIRECT::right)
 		{
 			m_hBox->_position.x = m_hPosition.x + _hero_BOX_ADJUST_POS_RIGHT;
@@ -1081,6 +1101,7 @@ Box* SuperHero::GetBox()
 		}
 		break;
 	case BROS:
+		m_hBox->_size.y = 28;
 		if (m_hDirect == DIRECT::right)
 		{
 			m_hBox->_position.x = m_hPosition.x + _hero_BOX_ADJUST_POS_RIGHT + 8;
@@ -1098,17 +1119,19 @@ Box* SuperHero::GetBoxWithObject(Object* object)
 {
 	Box* x = new Box();
 	x->_position.y = m_hPosition.y;
-	x->_size.y = getCurrentSprite()->_Height;
+	
 	x->_v.x = m_hSpeed.x - object->m_hSpeed.x;
 	x->_v.y = m_hSpeed.y - object->m_hSpeed.y;
 	x->_size.x = _hero_BOX_WIDTH;
 	switch (status)
 	{
 	case MARIO:
+		x->_size.y = 16;
 		x->_position.x = m_hPosition.x + 4;
 		x->_size.x = 9;
 		break;
 	case BIGMARIO:
+		x->_size.y = 28;
 		if (m_hDirect == DIRECT::right)
 		{
 			x->_position.x = m_hPosition.x + _hero_BOX_ADJUST_POS_RIGHT;
@@ -1119,6 +1142,7 @@ Box* SuperHero::GetBoxWithObject(Object* object)
 		}
 		break;
 	case BROS:
+		x->_size.y = 28;
 		if (m_hDirect == DIRECT::right)
 		{
 			x->_position.x = m_hPosition.x + _hero_BOX_ADJUST_POS_RIGHT + 8;
@@ -1195,7 +1219,6 @@ void SuperHero::Move()
 				}
 				if (nx == -1 && object_static_can_collision.at(i)->type != box)
 				{
-
 					m_hPosition.x += time*m_hSpeed.x;
 					m_hSpeed.x = 0;
 					m_hObjectRight = object_static_can_collision.at(i);
@@ -1212,7 +1235,14 @@ void SuperHero::Move()
 			}			
 		}
 		m_hPosition.x += m_hSpeed.x;
-		m_hPosition.y += m_hSpeed.y;
+		if (timeFly < 130)
+		{			
+			m_hPosition.y += m_hSpeed.y;
+		}
+		else
+		{			
+			m_hState = ON_SPACE;
+		}
 		break;
 	case FALL_DOWN:
 
@@ -1257,7 +1287,7 @@ void SuperHero::Move()
 			m_hPosition.x += m_hSpeed.x;
 		break;
 	case ON_SPACE:
-
+		timeFly = 0;
 		m_hObjectLeft = NULL;
 		m_hObjectRight = NULL;
 		for (int i = 0; i < object_static_can_collision.size(); i++)
@@ -1400,12 +1430,12 @@ Box* SuperHero::GetBoxAttack()
 		if (m_hDirect == DIRECT::right)
 		{
 			x->_position.x = m_hPosition.x + 20;
-			x->_position.y = m_hPosition.y;
+			x->_position.y = m_hPosition.y+5;
 		}
 		else
 		{
 			x->_position.x = m_hPosition.x - 5;
-			x->_position.y = m_hPosition.y;
+			x->_position.y = m_hPosition.y+5;
 		}
 	}
 	return x;
@@ -1413,6 +1443,7 @@ Box* SuperHero::GetBoxAttack()
 
 void SuperHero::IsAttacked()
 {
+	delayChopChop++;
 	if (timeSuper != 30)
 		return;
 	else
@@ -1421,6 +1452,7 @@ void SuperHero::IsAttacked()
 	{
 	case BROS:
 		status--;
+		
 		if (m_hDirect == DIRECT::right)
 		{
 			setCurrentSprite(BigMarioRight);
@@ -1487,11 +1519,23 @@ void SuperHero::RendeBoxTop()
 	a = GetBoxTop()->getRect();
 	_LocalGraphic->tDrawTexture(_LocalContent->LoadTexture("boxbottom.png"), src, a, D3DXVECTOR2(GetBoxTop()->getCenter()), D3DCOLOR_XRGB(255, 255, 255), 0);
 }
+void SuperHero::RenderBoxCollision(Object* object)
+{
+
+	RECT src;
+	src.left = 0;
+	src.right = src.left + 1;
+	src.top = 0;
+	src.bottom = src.top + 1;
+	RECT a;
+	a = GetBoxWithObject(object)->getRect();
+	_LocalGraphic->tDrawTexture(_LocalContent->LoadTexture("boxbottom.png"), src, a, D3DXVECTOR2(GetBoxWithObject(object)->getCenter()), D3DCOLOR_XRGB(255, 255, 255), 0);
+}
 
 void SuperHero::Collision_Coin()
 {
 	info->I_Coin++;
-	info->I_Score += 10;
+	info->I_Score += 100;
 }
 
 void SuperHero::Collision_Leaf()
@@ -1500,7 +1544,7 @@ void SuperHero::Collision_Leaf()
 	{
 		status++;
 	}
-	info->I_Score += 100;
+	info->I_Score += 1000;
 }
 
 void SuperHero::Collision_1up()
@@ -1508,10 +1552,10 @@ void SuperHero::Collision_1up()
 	info->I_Life++;
 }
 
-
-void SuperHero::Collision_Mushroom()
+void SuperHero::RenderAffection()
 {
-	status++;
+	Strike->Render(D3DXVECTOR2(m_hPosition.x + 10, m_hPosition.y));
 }
+
 
 

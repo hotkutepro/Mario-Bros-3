@@ -42,16 +42,38 @@ void Infomation::Load()
 	sHub5 = new FrkSprite(tHub5, 1, 1);
 	sHub6 = new FrkSprite(tHub6, 1, 1);
 	sHub7 = new FrkSprite(tHub7, 1, 1);
-	spriteRender = sHub;
+	spriteRender = sHub6;
 }
 
 void Infomation::Update()
 {
-	pos.x = FrkCamera::m_hVpx;
-	pos.y = FrkCamera::m_hVpy-100;
+	sLife = std::to_string(I_Life);
+	cLife = new char[sLife.length() + 1];
+	strcpy(cLife, sLife.c_str());
+
+	sTime = std::to_string(I_Time);
+	cTime = new char[sTime.length() + 1];
+	strcpy(cTime, sTime.c_str());
+
+	sScore = std::to_string(I_Score);
+	cScore = new char[sScore.length() + 1];
+	strcpy(cScore, sScore.c_str());
+
+	sCoin= std::to_string(I_Coin);
+	cCoin = new char[sCoin.length() + 1];
+	strcpy(cCoin, sCoin.c_str());
+
+	pos.x = FrkCamera::m_hVpx/1;
+	pos.y = FrkCamera::m_hVpy/1-200;
 }
 
 void Infomation::Render()
 {
-	spriteRender->Render2(pos);
+	D3DXVECTOR2 iVector =  D3DXVECTOR2(180, 100);
+	spriteRender->Render2(iVector);
+	_LocalGraphic->nsDraw(cLife, D3DXVECTOR2(iVector.y - 37, iVector.x + 5), D3DCOLOR_XRGB(0, 0, 0));
+	_LocalGraphic->nsDraw(cScore, D3DXVECTOR2(iVector.y + 29, iVector.x + 5), D3DCOLOR_XRGB(0, 0, 0));
+	_LocalGraphic->nsDraw(cTime, D3DXVECTOR2(iVector.y +69, iVector.x + 5), D3DCOLOR_XRGB(0, 0, 0));
+	_LocalGraphic->nsDraw(cCoin, D3DXVECTOR2(iVector.y + 69, iVector.x -3), D3DCOLOR_XRGB(0, 0, 0));
+
 }

@@ -14,7 +14,20 @@ public:
 	FrkSprite* sHub7;
 	FrkSprite* spriteRender;	
 	D3DXVECTOR2 pos;
-	float I_Time ;
+	//
+	char* cTime;
+	string sTime;
+	//
+	char* cScore;
+	string sScore;
+	//
+	char* cCoin;
+	string sCoin;
+	//
+	char* cLife;
+	string sLife;
+
+	int I_Time ;
 	int I_Score;
 	int I_Coin;
 	int I_Life;

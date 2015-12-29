@@ -18,6 +18,7 @@ public:
 	void Next();
 	void Reset();
 	void Set(int index);		
+	
 	void Render2(D3DXVECTOR2 position);
 	void Render(D3DXVECTOR2 position);
 	bool IsSprite(FrkSprite* compare);

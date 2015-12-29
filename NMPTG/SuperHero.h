@@ -3,7 +3,7 @@
 #include "Infomation.h"
 #define _hero_JUMP 9.7f//10
 #define _hero_MAXJUM 11//45
-#define _hero_MAXSPEED 5//5
+#define _hero_MAXSPEED 4//5
 #define _hero_SPEED 3//2
 #define _hero_ACCELERATION 0.5f//.2f
 #define _hero_RUN_ACCELERATION 0.048f//
@@ -80,7 +80,8 @@ public:
 	string f_str1;
 	char* a1;
 
-	
+	//hinh chop chop
+	int delayChopChop=0;
 
 	//dang nhay
 	bool isSuperJump = false;	
@@ -93,7 +94,7 @@ public:
 
 	//dang bay
 	bool isFly = false;
-
+	float timeFly = 0;
 	//ba le
 	bool attack = false;
 	//thoi gian ba le
@@ -132,11 +133,11 @@ public:
 	void RenderBoxBottom();
 	void RenderBoxAttack();
 	void RendeBoxTop();
+	void RenderBoxCollision(Object* object);
 	void Collision_Coin();
-	void Collision_Leaf();
-	void Collision_Mushroom();
+	void Collision_Leaf();	
 	void Collision_1up();
-	
+	void RenderAffection();
 	virtual void Move();
 	SuperHero();
 	~SuperHero();

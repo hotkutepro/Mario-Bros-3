@@ -130,9 +130,38 @@ Box* Object::GetBox()
 		m_hBox->_size.x = m_hSize.x;
 		m_hBox->_size.y = m_hSize.y;
 	}
-	else if (type == mario)
+	else if (type == tortoise || type == tortoise_red || type == tortoise_fly)
 	{
+		m_hBox->_position.x = m_hPosition.x+3.5f;
+		m_hBox->_position.y = m_hPosition.y;
 
+		m_hBox->_size.x = m_hCurrentSprite->_Width-5;
+		m_hBox->_size.y = m_hCurrentSprite->_Height-12;
+		m_hBox->_v.x = m_hSpeed.x;
+		m_hBox->_v.y = m_hSpeed.y;
+	}
+	else if (type==tarnooki_fly)
+	{
+		if (status == 0)
+		{
+			m_hBox->_position.x = m_hPosition.x;
+			m_hBox->_position.y = m_hPosition.y;
+
+			m_hBox->_size.x = m_hCurrentSprite->_Width;
+			m_hBox->_size.y = m_hCurrentSprite->_Height - 13;
+			m_hBox->_v.x = m_hSpeed.x;
+			m_hBox->_v.y = m_hSpeed.y;
+		}
+		else
+		{
+			m_hBox->_position.x = m_hPosition.x;
+			m_hBox->_position.y = m_hPosition.y;
+
+			m_hBox->_size.x = m_hCurrentSprite->_Width;
+			m_hBox->_size.y = m_hCurrentSprite->_Height;
+			m_hBox->_v.x = m_hSpeed.x;
+			m_hBox->_v.y = m_hSpeed.y;
+		}
 	}
 	else
 	{
@@ -268,10 +297,13 @@ void Object::KillEnemy()
 		if (Collision::checkAABB(_LocalHero->GetBoxAttack(), objects_Enemy.at(i)->GetBox()))
 		{
 			objects_Enemy.at(i)->IsAttacked();
+			_LocalHero->RenderAffection();
 		}
-		time = Collision::sweptAABBCheck(GetBoxWithObject(objects_Enemy.at(i)), objects_Enemy.at(i)->GetBox(), nx, ny);
+		time = Collision::sweptAABBCheck(GetBoxWithObject(objects_Enemy.at(i)), objects_Enemy.at(i)->GetBox(), nx, ny);		
+		
 		if (time < 1 && time >= 0)
 		{
+			_LocalHero->RenderBoxCollision(objects_Enemy.at(i));
 			if (nx == 1)
 			{
 				objects_Enemy.at(i)->Collision_Right();
@@ -532,6 +564,16 @@ void Object::Collision_Mushroom()
 void Object::Collision_1up()
 {
 
+}
+
+void Object::RenderBoxCollision(Object* object)
+{
+
+}
+
+void Object::RenderAffection()
+{
+	
 }
 
 

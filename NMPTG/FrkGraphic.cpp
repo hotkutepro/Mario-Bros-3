@@ -6,7 +6,7 @@ FrkGraphic::FrkGraphic(FrkGame* hGame)
 	this->m_hGame = hGame;
 	D3DXCreateSprite(this->m_hGame->GetDevice(), &this->m_hD3DXSprite);
 	fontFace = "impact";
-	SetFontSize(D3DXVECTOR2(15,15));
+	SetFontSize(D3DXVECTOR2(9,9));
 }
 
 
@@ -18,7 +18,7 @@ FrkGraphic::~FrkGraphic(void)
 void FrkGraphic::Begin()
 {
 	// xóa c?a s? v? b?ng màu tr?ng D3DCOLOR_XRGB(255,255,255)
-	this->m_hGame->GetDevice()->Clear(1, NULL, D3DCLEAR_TARGET, D3DCOLOR_XRGB(255, 255, 255), 1, NULL);
+	this->m_hGame->GetDevice()->Clear(1, NULL, D3DCLEAR_TARGET, D3DCOLOR_XRGB(254, 254, 254), 1, NULL);
 	// bat dau ve
 	this->m_hGame->GetDevice()->BeginScene();
 	this->m_hD3DXSprite->Begin(D3DXSPRITE_ALPHABLEND);
@@ -260,4 +260,25 @@ void FrkGraphic::SetFontSize(D3DXVECTOR2 size)
 	this->fontSize = size;
 	if (!this->initFont())
 		MessageBox(NULL, "Khong the sua kich thuoc chu", NULL, NULL);
+}
+
+void FrkGraphic::nsDraw(char* text, D3DXVECTOR2 pos, D3DCOLOR color)
+{
+	int index;
+	RECT s_rect;
+
+	float str_width = strlen(text)*fontSize.x;
+	float str_height = fontSize.y;
+
+	
+	s_rect.left = pos.x - str_width / 2.0f;
+	s_rect.top = pos.y - str_height / 2.0f;
+	s_rect.right = s_rect.left + str_width;
+	s_rect.bottom = s_rect.top + strlen(text)*fontSize.y;
+	font->DrawText(m_hD3DXSprite,
+		text,
+		-1, // so ki tu trong chuoi, -1 ->khong gioi han
+		&s_rect,
+		DT_TOP | DT_LEFT,
+		color);
 }

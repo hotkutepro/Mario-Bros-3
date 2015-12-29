@@ -49,6 +49,7 @@ public:
 	//font
 	bool initFont();
 	void sDraw(char* text, D3DXVECTOR2 pos, D3DCOLOR color);
+	void nsDraw(char* text, D3DXVECTOR2 pos, D3DCOLOR color);
 	void SetFontSize(D3DXVECTOR2 size);
 	
 };

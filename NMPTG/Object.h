@@ -95,9 +95,9 @@ public:
 	virtual void EatFood();//xử lý va chạm với coin, leaf, ...đụng bên dưới quật đuôi, question block, brick, 
 	virtual void KillEnemy();
 	virtual void RenderDebug();
-	virtual void RenderBoxDebug();
-	
-	
+	virtual void RenderBoxDebug();	
+	virtual void RenderBoxCollision(Object* object);
+	virtual void RenderAffection();
 	virtual Box* GetBox();
 	virtual Box* GetBoxWithObject(Object* object);
 	virtual Box* GetBoxTop();
@@ -105,6 +105,7 @@ public:
 	virtual Box* GetBox_CGround();
 	virtual Box* GetBox_CLeft();
 	virtual Box* GetBox_CRight();	
+	
 	void Jump();
 	void SetPosition(int x, int y);
 	D3DXVECTOR2 GetPosition();
