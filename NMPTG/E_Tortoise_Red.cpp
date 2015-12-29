@@ -28,6 +28,7 @@ void E_Tortoise_Red::Load()
 	m_hSpeed.y = -2;
 	status = 0;
 	IsRun = false;
+	IsControl = false;
 }
 
 void E_Tortoise_Red::Update(float gameTime)
@@ -36,7 +37,10 @@ void E_Tortoise_Red::Update(float gameTime)
 	SetSprite();
 	SetMove();
 	Object::Update(gameTime);
-	MoveObject();
+	if (IsControl)
+		SetControl();
+	else
+		MoveObject();
 	Collision_Shell_Object();
 
 }
@@ -189,6 +193,31 @@ void E_Tortoise_Red::Collision_Shell_Object()
 				it_Object->second->Die();
 			}
 
+		}
+	}
+}
+
+void E_Tortoise_Red::SetControl()
+{
+	if (IsControl)
+	{
+		if (!_LocalHero->ready)
+		{
+			//IsRun = true;
+			if (_LocalHero->m_hDirect == DIRECT::left)
+				m_hSpeed.x = -vx_run;
+			else
+				m_hSpeed.x = vx_run;
+			IsControl = false;
+		}
+		m_hPosition.y = _LocalHero->m_hPosition.y;
+		if (_LocalHero->m_hDirect == DIRECT::left)
+		{
+			m_hPosition.x = _LocalHero->m_hPosition.x + -15;
+		}
+		else
+		{
+			m_hPosition.x = _LocalHero->m_hPosition.x - vx_run + _LocalHero->m_hCurrentSprite->_Width;
 		}
 	}
 }

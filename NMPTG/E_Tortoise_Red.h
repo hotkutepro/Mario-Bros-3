@@ -13,6 +13,7 @@ private:
 	FrkSprite* E_TortoiseshellRedLeftReverse;
 	FrkSprite* E_TortoiseshellRedRightReverse;	
 	bool IsRun;
+	bool IsControl;
 public:
 	void Load();
 	void Update(float gameTime);
@@ -26,6 +27,7 @@ public:
 	void SetSprite();
 	void SetMove();
 	void Collision_Shell_Object();
+	void SetControl();
 	E_Tortoise_Red();
 	~E_Tortoise_Red();
 };
