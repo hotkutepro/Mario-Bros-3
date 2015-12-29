@@ -66,8 +66,7 @@ public:
 	//Dieu kien life = true
 	vector<Object*> GetDynamicObject();//tra ve danh sach cac doi tuong di chuyen tortoise, mushroom, tarnooki, tree,	leaf	DIEU KIEN: LIFE = TRUE
 
-	vector<Object*> GetFoodObject();//tra ve danh sach cac doi tuong dung yen va co the an duoc hoac pha huy: coin, brick, star, QUESTION_BLOCK, P, F_Mushroom DIEU KIEN: LIFE = TRUE	
-	vector<Object*> GetListTortoise();//trả về danh sách các loại tortoise, bắt đầu từ tortoise tiếp theo nằm trong danh sách
+	vector<Object*> GetFoodObject();//tra ve danh sach cac doi tuong dung yen va co the an duoc hoac pha huy: coin, brick, star, QUESTION_BLOCK, P, F_Mushroom DIEU KIEN: LIFE = TRUE		
 
 	void setCurrentSprite(FrkSprite*);
 	FrkSprite* getCurrentSprite();

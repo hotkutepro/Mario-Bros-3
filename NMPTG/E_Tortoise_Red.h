@@ -1,5 +1,8 @@
 #pragma once
 #include"Object.h"
+#define vx 1
+#define vx_run 4
+#define vy -2
 class E_Tortoise_Red:public Object
 {
 private:
@@ -8,13 +11,12 @@ private:
 	FrkSprite* E_TortoiseshellRedRight;
 	FrkSprite* E_TurtoiseRedLeft;
 	FrkSprite* E_TortoiseshellRedLeftReverse;
-	FrkSprite* E_TortoiseshellRedRightReverse;
+	FrkSprite* E_TortoiseshellRedRightReverse;	
 	bool IsRun;
 public:
 	void Load();
 	void Update(float gameTime);
 	void IsAttacked();
-	void UpdateDirect();
 	Box* GetBox_CLeft();
 	Box* GetBox_CRight();
 	void Collision_Up();
@@ -23,6 +25,7 @@ public:
 	void Collision_Right();
 	void SetSprite();
 	void SetMove();
+	void Collision_Shell_Object();
 	E_Tortoise_Red();
 	~E_Tortoise_Red();
 };

@@ -43,8 +43,7 @@ void E_Tarnooki::Update(float gameTime)
 
 void E_Tarnooki::Die()
 {
-	//Object::Die();
-	//setCurrentSprite(E_MushroomDeath);
+	life = false;
 }
 
 void E_Tarnooki::Collision_Up()

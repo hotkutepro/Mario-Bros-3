@@ -1,5 +1,6 @@
 #include "E_Tortoise_Fly.h"
 #include"ResourcesManager.h"
+#include "Collision.h"
 
 E_Tortoise_Fly::E_Tortoise_Fly()
 {
@@ -11,8 +12,7 @@ E_Tortoise_Fly::~E_Tortoise_Fly()
 }
 
 void E_Tortoise_Fly::Load()
-{
-	m_hSpeed.x = 0.02; m_hSpeed.y = -0.002;
+{	
 	E_FlyTortoiseGreenLeft = ResourcesManager::GetInstance()->GetSprite(SpriteID::E_FlyTortoiseGreenLeft);
 	E_FlyTortoiseGreenRight = ResourcesManager::GetInstance()->GetSprite(SpriteID::E_FlyTortoiseGreenRight);
 	E_TortoiseGreenLeft = ResourcesManager::GetInstance()->GetSprite(SpriteID::E_TortoiseGreenLeft);
@@ -24,18 +24,19 @@ void E_Tortoise_Fly::Load()
 	setCurrentSprite(E_FlyTortoiseGreenLeft);
 	Object::Load();
 	status = 0;
-	type = TYPEOBJECT::tortoise_fly;
-	m_hDirect = DIRECT::left;
+	type = TYPEOBJECT::tortoise_fly;	
 	m_hState = ON_SPACE;
-	m_hSpeed.x = -1; m_hSpeed.y = -2;
+	m_hSpeed.x = 2; m_hSpeed.y = -2;
 	IsRun = false;
 }
 
 void E_Tortoise_Fly::Update(float gameTime)
 {	
-	Object::Update(gameTime);
-	//UpdateDirect();
-	MoveObject();
+	Object::Update(gameTime);	
+	MoveObject();	
+	Collision_Shell_Object();
+	CollistionWithObject();
+	SetSprite();
 }
 
 void E_Tortoise_Fly::Collision_Up()
@@ -49,7 +50,7 @@ void E_Tortoise_Fly::Collision_Up()
 		IsRun = !IsRun;
 		if (IsRun)
 		{
-			if (m_hDirect == DIRECT::left)
+			if (_LocalHero->m_hDirect == DIRECT::left)
 				m_hSpeed.x = -3;
 			else
 				m_hSpeed.x = 3;
@@ -57,8 +58,7 @@ void E_Tortoise_Fly::Collision_Up()
 
 		return;
 	}
-	status++;
-	SetSprite();
+	status++;	
 }
 
 void E_Tortoise_Fly::Collision_Down()
@@ -108,41 +108,33 @@ void E_Tortoise_Fly::Collision_Right()
 	SetSprite();
 }
 void E_Tortoise_Fly::SetSprite()
-{
-	UpdateDirect();
+{	
 	if (status == 0)
 	{
-		if (m_hDirect == DIRECT::left)
+		if (m_hSpeed.x<0)
 			setCurrentSprite(E_FlyTortoiseGreenLeft);
 		else
 			setCurrentSprite(E_FlyTortoiseGreenRight);
 	}
 	else if (status == 1)
 	{
-		if (m_hDirect == DIRECT::left)
+		if (m_hSpeed.x<0)
 			setCurrentSprite(E_TortoiseGreenLeft);
 		else
 			setCurrentSprite(E_TortoiseGreenRight);
 	}
 	else if (status == 2){
-		if (m_hDirect == DIRECT::right)
+		if (m_hSpeed.x<0)
 			setCurrentSprite(E_TortoiseshellGreenLeft);
 		else
 			setCurrentSprite(E_TortoiseshellGreenRight);
 	}
 	else{
-		if (m_hDirect == DIRECT::left)
+		if (m_hSpeed.x<0)
 			setCurrentSprite(E_TortoiseshellGreenLeftReverse);
 		else
 			setCurrentSprite(E_TortoiseshellGreenRightReverse);
 	}
-}
-void E_Tortoise_Fly::UpdateDirect()
-{
-	if (m_hSpeed.x > 0)
-		m_hDirect = DIRECT::right;
-	else if (m_hSpeed.x < 0)
-		m_hDirect = DIRECT::left;
 }
 
 void E_Tortoise_Fly::IsAttacked()
@@ -150,4 +142,56 @@ void E_Tortoise_Fly::IsAttacked()
 	status = 3;
 	m_hSpeed.x = 0;
 	SetSprite();
+}
+void E_Tortoise_Fly::CollistionWithObject()
+{
+	if (status != 0)
+		return;
+	vector<Object*> result;
+	sId::iterator id_Objects;
+	mapObject::iterator it_Object;
+	for (id_Objects = QNode::s_IdObjectInViewPort.begin(); id_Objects != QNode::s_IdObjectInViewPort.end(); id_Objects++)
+	{
+		it_Object = QNode::m_Objects.find(*id_Objects);
+		if (it_Object->second->id != id && (it_Object->second->type == tortoise_fly || it_Object->second->type == tortoise))
+		{
+			float nx, ny;
+			float time = Collision::sweptAABBCheck(GetBoxWithObject(it_Object->second), it_Object->second->GetBox(), nx, ny);
+			if (time != 1&&it_Object->second->status==0)
+			{
+				m_hSpeed.x = -m_hSpeed.x;
+				it_Object->second->m_hSpeed.x = -it_Object->second->m_hSpeed.x;
+			}
+
+		}
+	}
+}
+
+void E_Tortoise_Fly::Die()
+{
+	life = false;
+}
+
+void E_Tortoise_Fly::Collision_Shell_Object()
+{
+	if (status == 0 ||status==1|| m_hSpeed.x == 0)
+		return;
+	vector<Object*> result;
+	sId::iterator id_Objects;
+	mapObject::iterator it_Object;
+	for (id_Objects = QNode::s_IdObjectInViewPort.begin(); id_Objects != QNode::s_IdObjectInViewPort.end(); id_Objects++)
+	{
+		it_Object = QNode::m_Objects.find(*id_Objects);
+		if (it_Object->second->id != id && (it_Object->second->type == tortoise_fly || it_Object->second->type == tortoise))
+		{
+			float nx, ny;
+			float time = Collision::sweptAABBCheck(GetBoxWithObject(it_Object->second), it_Object->second->GetBox(), nx, ny);
+			if (time != 1)
+			{
+				//m_hSpeed.x = -m_hSpeed.x;
+				it_Object->second->Die();
+			}
+
+		}
+	}
 }

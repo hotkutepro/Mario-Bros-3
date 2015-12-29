@@ -344,7 +344,7 @@ void Object::MoveObject()
 				{
 					if (status == 0 && (type == tarnooki_fly || type == tortoise_fly)){
 						FallDown(time, 0);
-						m_hSpeed.y = 5;
+						m_hSpeed.y = 6.5;
 						return;
 					}
 					FallDown(time, 0);/////////
@@ -472,24 +472,6 @@ void Object::Collision_Right()
 
 }
 
-vector<Object*> Object::GetListTortoise()
-{
-	vector<Object*> result;
-	sId::iterator id_Objects;
-	mapObject::iterator it_Object;
-	for (id_Objects = QNode::s_IdObjectInViewPort.find(id); id_Objects != QNode::s_IdObjectInViewPort.end(); id_Objects++)
-	{
-		it_Object = QNode::m_Objects.find(*id_Objects);
-		if (!it_Object->second->life)
-			continue;
-		if (it_Object->second->type == tortoise || it_Object->second->type == tortoise_fly)
-		{
-			result.push_back(it_Object->second);
-		}
-	}
-
-	return result;
-}
 
 void Object::IsAttacked()
 {

@@ -21,7 +21,9 @@ public:
 	void Collision_Down();
 	void Collision_Left();
 	void Collision_Right();	
-	void UpdateDirect();
+	void CollistionWithObject();
+	void Collision_Shell_Object();
+	void Die();
 	E_Tortoise_Fly();
 	~E_Tortoise_Fly();
 };

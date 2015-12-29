@@ -1,5 +1,6 @@
 #include "E_Tortoise.h"
 #include"ResourcesManager.h"
+#include"Collision.h"
 
 
 E_Tortoise::E_Tortoise()
@@ -23,7 +24,8 @@ void E_Tortoise::Load()
 	Object::Load();
 	type = TYPEOBJECT::tortoise;
 	m_hDirect = DIRECT::left;
-	m_hSpeed.x = -1; m_hSpeed.y = -2;
+	m_hSpeed.x = -vx; 
+	m_hSpeed.y = -2;
 	m_hState = ON_SPACE;
 	IsRun = false;
 	IsControl = false;
@@ -33,24 +35,19 @@ void E_Tortoise::Load()
 void E_Tortoise::Update(float gameTime)
 {	
 	
-	Object::Update(gameTime);
-	UpdateDirect();
+	Object::Update(gameTime);	
 	if (IsControl)
 		SetControl();
 	else
-		MoveObject();
+		MoveObject();	
+	SetSprite();
+	Collision_Shell_Object();
 	
-}
-
-void E_Tortoise::Tortoise_Shell()
-{
-	setCurrentSprite(E_TortoiseshellGreenLeft);
 }
 
 void E_Tortoise::Die()
 {	
-
-
+	life = false;
 }
 
 void E_Tortoise::Collision_Up()
@@ -64,10 +61,10 @@ void E_Tortoise::Collision_Up()
 		IsRun = !IsRun;
 		if (IsRun)
 		{
-			if (m_hDirect == DIRECT::left)
-				m_hSpeed.x = -3;
+			if (_LocalHero->m_hDirect == DIRECT::left)
+				m_hSpeed.x = -vx_run;
 			else
-				m_hSpeed.x = 3;
+				m_hSpeed.x = vx_run;
 		}
 
 		return;
@@ -83,28 +80,29 @@ void E_Tortoise::Collision_Down()
 
 void E_Tortoise::Collision_Left()
 {
-	if (status == 0){
+	if (status == 0||IsRun){
 		_LocalHero->IsAttacked();
 	}
+	else
 	if (_LocalHero->ready&&status == 1 || status == 2)
 	{
 		IsControl = true;
 	}
 	else
 	if (status == 1||status==2)
-	{
-		IsControl = false;		
+	{		
 		IsRun = true;
-		m_hSpeed.x = 3;		
+		m_hSpeed.x = vx_run;		
 	}
 }
 
 void E_Tortoise::Collision_Right()
 {
-	if (status == 0)
+	if (status == 0||IsRun)
 	{
 		_LocalHero->IsAttacked();
 	}
+	else
 	if (_LocalHero->ready&&status == 1 || status == 2)
 	{		
 		IsControl = true;
@@ -112,7 +110,7 @@ void E_Tortoise::Collision_Right()
 	else if (status == 1||status==2)
 	{				
 		IsRun = true;
-		m_hSpeed.x = -3;		
+		m_hSpeed.x = -vx_run;		
 	}
 }
 
@@ -120,32 +118,25 @@ void E_Tortoise::SetSprite()
 {
 	if (status == 0)
 	{
-		if (m_hDirect == DIRECT::left)
+		if (m_hSpeed.x<0)
 			setCurrentSprite(E_TortoiseGreenLeft);
 		else
 			setCurrentSprite(E_TortoiseGreenRight);
 	}
 	if (status == 1)
 	{
-		if (m_hDirect == DIRECT::left)
+		if (m_hSpeed.x<0)
 			setCurrentSprite(E_TortoiseshellGreenLeft);
 		else
 			setCurrentSprite(E_TortoiseshellGreenRight);
 	}
 	if (status == 2)
 	{
-		if (m_hDirect == DIRECT::left)
+		if (m_hSpeed.x<0)
 			setCurrentSprite(E_TortoiseshellGreenLeftReverse);
 		else
 			setCurrentSprite(E_TortoiseshellGreenRightReverse);
 	}
-}
-void E_Tortoise::UpdateDirect()
-{
-	if (m_hSpeed.x > 0)
-		m_hDirect = DIRECT::right;
-	else if (m_hSpeed.x < 0)
-		m_hDirect = DIRECT::left;
 }
 
 void E_Tortoise::IsAttacked()
@@ -161,11 +152,11 @@ void E_Tortoise::SetControl()
 	{
 		if (!_LocalHero->ready)
 		{
-			IsRun = true;
+			//IsRun = true;
 			if (_LocalHero->m_hDirect == DIRECT::left)
-				m_hSpeed.x = -3;
+				m_hSpeed.x = -vx_run;
 			else
-				m_hSpeed.x = 3;
+				m_hSpeed.x = vx_run;
 			IsControl = false;
 		}
 		m_hPosition.y = _LocalHero->m_hPosition.y;
@@ -175,7 +166,32 @@ void E_Tortoise::SetControl()
 		}
 		else
 		{
-			m_hPosition.x = _LocalHero->m_hPosition.x -3 +_LocalHero->m_hCurrentSprite->_Width;
+			m_hPosition.x = _LocalHero->m_hPosition.x -vx_run +_LocalHero->m_hCurrentSprite->_Width;
+		}
+	}
+}
+
+
+void E_Tortoise::Collision_Shell_Object()
+{
+	if (status == 0 || m_hSpeed.x==0)
+		return;
+	vector<Object*> result;
+	sId::iterator id_Objects;
+	mapObject::iterator it_Object;
+	for (id_Objects = QNode::s_IdObjectInViewPort.begin(); id_Objects != QNode::s_IdObjectInViewPort.end(); id_Objects++)
+	{
+		it_Object = QNode::m_Objects.find(*id_Objects);
+		if (it_Object->second->id != id && (it_Object->second->type == tortoise_fly || it_Object->second->type == tortoise))
+		{
+			float nx, ny;
+			float time = Collision::sweptAABBCheck(GetBoxWithObject(it_Object->second), it_Object->second->GetBox(), nx, ny);
+			if (time != 1)
+			{
+				//m_hSpeed.x = -m_hSpeed.x;
+				it_Object->second->Die();
+			}
+
 		}
 	}
 }
