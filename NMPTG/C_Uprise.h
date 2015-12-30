@@ -2,8 +2,7 @@
 #include "Object.h"
 class C_Uprise:public Object
 {
-public:
-
+public:	
 	void Load();
 	void Update(float gameTime);
 	C_Uprise();

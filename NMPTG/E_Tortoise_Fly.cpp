@@ -27,7 +27,6 @@ void E_Tortoise_Fly::Load()
 	type = TYPEOBJECT::tortoise_fly;	
 	m_hState = ON_SPACE;
 	m_hSpeed.x = 2; m_hSpeed.y = -2;
-	IsRun = false;
 	IsControl = false;
 }
 
@@ -48,18 +47,17 @@ void E_Tortoise_Fly::Collision_Up()
 	_LocalHero->m_hSpeed.y = 5;
 	if (status == 1)
 		m_hSpeed.x = 0;
-	if (status == 2)
-	{
-		m_hSpeed.x = 0;
-		IsRun = !IsRun;
-		if (IsRun)
+	if (status == 2||status==3)
+	{				
+		if (m_hSpeed.x == 0)
 		{
 			if (_LocalHero->m_hDirect == DIRECT::left)
 				m_hSpeed.x = -3;
 			else
 				m_hSpeed.x = 3;
 		}
-
+		else
+			m_hSpeed.x = 0;
 		return;
 	}
 	status++;	
@@ -74,41 +72,30 @@ void E_Tortoise_Fly::Collision_Down()
 
 void E_Tortoise_Fly::Collision_Left()
 {
-	if (status == 0||status==1){
+	if (m_hSpeed.x != 0){
 		_LocalHero->IsAttacked();
 	}
-	if (status == 2)
-	{
-		m_hSpeed.x = 0;
-		IsRun = true;
+	else if (status >1 && _LocalHero->ready)
+		IsControl = true;
+	else if (status >1)
+	{				
 		m_hSpeed.x = 3;
-	}
-	if (status == 3)
-	{
-		m_hSpeed.x = 0;
-		IsRun = true;
-		m_hSpeed.x = 3;
-	}
+	}	
 	SetSprite();
 }
 
 void E_Tortoise_Fly::Collision_Right()
 {
-	if (status == 0){
+	if (m_hSpeed.x != 0){
 		_LocalHero->IsAttacked();
 	}
-	if (status == 2)
+	else if (status >= 2 && _LocalHero->ready)
+		IsControl = true;
+	else if (status >=2)
 	{
-		m_hSpeed.x = 0;
-		IsRun = true;
+		m_hSpeed.x = 0;		
 		m_hSpeed.x = -3;		
-	}
-	if (status == 3)
-	{
-		m_hSpeed.x = 0;
-		IsRun = true;
-		m_hSpeed.x = -3;
-	}
+	}	
 	SetSprite();
 }
 void E_Tortoise_Fly::SetSprite()
@@ -205,8 +192,7 @@ void E_Tortoise_Fly::SetControl()
 	if (IsControl)
 	{
 		if (!_LocalHero->ready)
-		{
-			//IsRun = true;
+		{			
 			if (_LocalHero->m_hDirect == DIRECT::left)
 				m_hSpeed.x = -vx_run;
 			else

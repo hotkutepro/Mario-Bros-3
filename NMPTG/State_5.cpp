@@ -76,9 +76,9 @@ void State_5::Render()
 	}
 	//hero->RenderBoundBox();
 	hero->RenderDebug();
-	//hero->RenderV();
+	hero->RenderV();
 	//hero->ReanderViewPort();
-	hero->Render();
+	//hero->Render();
 	//hero->ReanderGroundBox();
 	_LocalGraphic->End();
 

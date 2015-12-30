@@ -11,8 +11,7 @@ class E_Tortoise_Fly :public Object
 	FrkSprite* E_TortoiseGreenLeft;
 	FrkSprite* E_TortoiseGreenRight;
 	FrkSprite* E_TortoiseshellGreenLeftReverse;
-	FrkSprite* E_TortoiseshellGreenRightReverse;
-	bool IsRun;
+	FrkSprite* E_TortoiseshellGreenRightReverse;	
 	bool IsControl;
 public:
 	void Load();	

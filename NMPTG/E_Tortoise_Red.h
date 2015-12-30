@@ -11,8 +11,7 @@ private:
 	FrkSprite* E_TortoiseshellRedRight;
 	FrkSprite* E_TurtoiseRedLeft;
 	FrkSprite* E_TortoiseshellRedLeftReverse;
-	FrkSprite* E_TortoiseshellRedRightReverse;	
-	bool IsRun;
+	FrkSprite* E_TortoiseshellRedRightReverse;		
 	bool IsControl;
 public:
 	void Load();

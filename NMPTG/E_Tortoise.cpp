@@ -26,8 +26,7 @@ void E_Tortoise::Load()
 	m_hDirect = DIRECT::left;
 	m_hSpeed.x = -vx; 
 	m_hSpeed.y = -2;
-	m_hState = ON_SPACE;
-	IsRun = false;
+	m_hState = ON_SPACE;	
 	IsControl = false;
 	status = 0;
 }
@@ -57,16 +56,16 @@ void E_Tortoise::Collision_Up()
 		m_hSpeed.x = 0;
 	if (status == 1||status==2)
 	{
-		m_hSpeed.x = 0;
-		IsRun = !IsRun;
-		if (IsRun)
+		m_hSpeed.x = 0;		
+		if (m_hSpeed.x == 0)
 		{
 			if (_LocalHero->m_hDirect == DIRECT::left)
 				m_hSpeed.x = -vx_run;
 			else
 				m_hSpeed.x = vx_run;
 		}
-
+		else
+			m_hSpeed.x = 0;
 		return;
 	}
 	status++;
@@ -80,7 +79,7 @@ void E_Tortoise::Collision_Down()
 
 void E_Tortoise::Collision_Left()
 {
-	if (status == 0||IsRun){
+	if (m_hSpeed.x!=0){
 		_LocalHero->IsAttacked();
 	}
 	else
@@ -90,26 +89,24 @@ void E_Tortoise::Collision_Left()
 	}
 	else
 	if (status == 1||status==2)
-	{		
-		IsRun = true;
+	{				
 		m_hSpeed.x = vx_run;		
 	}
 }
 
 void E_Tortoise::Collision_Right()
 {
-	if (status == 0||IsRun)
+	if (m_hSpeed.x!=0)
 	{
 		_LocalHero->IsAttacked();
 	}
 	else
-	if (_LocalHero->ready&&status == 1 || status == 2)
+	if (_LocalHero->ready&&status >0)
 	{		
 		IsControl = true;
 	}
-	else if (status == 1||status==2)
-	{				
-		IsRun = true;
+	else if (status >0)
+	{						
 		m_hSpeed.x = -vx_run;		
 	}
 }
@@ -151,8 +148,7 @@ void E_Tortoise::SetControl()
 	if (IsControl)
 	{
 		if (!_LocalHero->ready)
-		{
-			//IsRun = true;
+		{			
 			if (_LocalHero->m_hDirect == DIRECT::left)
 				m_hSpeed.x = -vx_run;
 			else
@@ -187,8 +183,7 @@ void E_Tortoise::Collision_Shell_Object()
 			float nx, ny;
 			float time = Collision::sweptAABBCheck(GetBoxWithObject(it_Object->second), it_Object->second->GetBox(), nx, ny);
 			if (time != 1)
-			{
-				//m_hSpeed.x = -m_hSpeed.x;
+			{				
 				it_Object->second->Die();
 			}
 

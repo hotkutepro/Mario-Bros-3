@@ -84,7 +84,6 @@ void SuperHero::Load()
 	Object::Load();
 	m_hObjectLeft = NULL;
 	m_hObjectRight = NULL;
-	_uprise = NULL;
 }
 
 void SuperHero::Update(float gametime)
@@ -936,22 +935,24 @@ void SuperHero::InertiaRun(float gameTime)
 
 void SuperHero::Jump(float vJump)
 {
-	if (m_hState == ON_UPRISE || m_hState == ON_GROUND)
-	{
-		m_hSpeed.y = vJump;
-		m_hState = ON_SPACE;
-		m_hObjectGround = NULL;
-		if (m_hSpeed.y == _hero_MAXJUM)
-		{
-			return;
-		}
-		
+	if (m_hState != ON_GROUND)
+		return;
 
-		if (isSquat)
-		{
-			return;
-		}
+	m_hSpeed.y = vJump;
+	m_hState = ON_SPACE;
+	m_hObjectGround = NULL;
+	if (m_hSpeed.y == _hero_MAXJUM)
+	{
+		return;
 	}
+	//set sprite
+#pragma region Set Sprite	
+	if (isSquat)
+	{
+		return;
+	}
+
+#pragma endregion
 }
 
 void SuperHero::JumpKeyUp(float gameTime)
@@ -1060,10 +1061,14 @@ void SuperHero::Attack()
 
 void SuperHero::SuperJump()
 {
+	if (m_hState != ON_GROUND)
+	{
+		return;
+	}
 	if (abs(m_hSpeed.x) >= _hero_MAXSPEED)
 	{
+		isSuperJump = true;
 		Jump(_hero_MAXJUM);
-		isSuperJump = true;		
 		return;
 	}
 	else
@@ -1193,32 +1198,12 @@ void SuperHero::Move()
 {
 	vector<Object*> object_static_can_collision = GetStaticObject();
 	float time, nx, ny;
-	float ratio;
 	switch (m_hState)
 	{
-#pragma region on_uprise
-	case ON_UPRISE:
-		m_hObjectGround = NULL;
-		if (!Collision::checkAABB(GetBoxNormal(),_uprise->GetBox()))
-		{
-			m_hState = ON_SPACE;
-			_uprise = NULL;
-			return;
-		}
-		m_hPosition.x += m_hSpeed.x;		
-		ratio = _uprise->m_hVector.y / _uprise->m_hVector.x;
-		if (m_hSpeed.x!=0)
-			m_hPosition.y += (m_hSpeed.x*ratio)+0.3;
-		return;
-		break;
-#pragma endregion
-#pragma region on_other
 	case OTHER:
 		m_hPosition.y += m_hSpeed.y;
 		m_hSpeed.y += GRAVITY / 2;
 		break;
-#pragma endregion
-#pragma region on_fly
 	case ON_FLY:
 
 		for (int i = 0; i < object_static_can_collision.size(); i++)
@@ -1282,8 +1267,6 @@ void SuperHero::Move()
 		}
 
 		break;
-#pragma endregion
-#pragma region fall_down
 	case FALL_DOWN:
 
 		m_hObjectLeft = NULL;
@@ -1326,31 +1309,15 @@ void SuperHero::Move()
 		if (m_hObjectLeft == NULL && m_hObjectRight == NULL)
 			m_hPosition.x += m_hSpeed.x;
 		break;
-#pragma endregion
-#pragma region on_space
 	case ON_SPACE:
 		timeFly = 0;
 		m_hObjectLeft = NULL;
 		m_hObjectRight = NULL;
 		for (int i = 0; i < object_static_can_collision.size(); i++)
 		{
-			if (object_static_can_collision.at(i)->type==uprise)
-			{
-				time = Collision::sweptAABBCheck(GetBoxNormal(), object_static_can_collision.at(i)->m_hBox_Shadow, nx, ny);
-				if (time < 1)
-				{
-					if (ny == 1)
-					{
-						m_hPosition.y += time*m_hSpeed.y;
-						_uprise = object_static_can_collision.at(i);
-						m_hState = ON_UPRISE;
-					}
-					return;
-				}				
-			}
 
-			time = Collision::sweptAABBCheck(GetBoxNormal(), object_static_can_collision.at(i)->GetBox(), nx, ny);
-			if (time < 1&&object_static_can_collision.at(i)->type != uprise){
+			time = Collision::sweptAABBCheck(GetBox(), object_static_can_collision.at(i)->GetBox(), nx, ny);
+			if (time < 1){
 				//time = Collision::sweptAABBCheck(GetBox(), object_static_can_collision.at(i)->GetBox(), nx, ny);
 				if (nx == 1 && object_static_can_collision.at(i)->type != box)
 				{
@@ -1361,7 +1328,7 @@ void SuperHero::Move()
 					m_hObjectLeft = object_static_can_collision.at(i);
 
 				}
-				if (nx == -1 && object_static_can_collision.at(i)->type != box&& object_static_can_collision.at(i)->type != uprise)
+				if (nx == -1 && object_static_can_collision.at(i)->type != box)
 				{
 					m_hPosition.x += time*m_hSpeed.x;
 
@@ -1369,7 +1336,7 @@ void SuperHero::Move()
 					m_hObjectRight = object_static_can_collision.at(i);
 
 				}
-				if (ny == 1 && nx == 0 && object_static_can_collision.at(i)->type != uprise)
+				if (ny == 1 && nx == 0)
 				{
 					FallDown(time, 0);/////////
 					m_hSpeed.y = 0;
@@ -1377,7 +1344,7 @@ void SuperHero::Move()
 					m_hObjectGround = object_static_can_collision.at(i);///////
 					return;
 				}
-				if (ny == -1 && object_static_can_collision.at(i)->type != box&& object_static_can_collision.at(i)->type != uprise)
+				if (ny == -1 && object_static_can_collision.at(i)->type != box)
 				{
 					m_hPosition.y += time*m_hSpeed.y;
 					m_hSpeed.y = 0;
@@ -1388,44 +1355,34 @@ void SuperHero::Move()
 		if (m_hObjectLeft == NULL && m_hObjectRight == NULL)
 			m_hPosition.x += m_hSpeed.x;
 		break;
-#pragma endregion
-#pragma region on_ground
 	case ON_GROUND:
 
 		m_hObjectLeft = NULL;
 		m_hObjectRight = NULL;
 		for (int i = 0; i < object_static_can_collision.size(); i++)
 		{
-			//if (Collision::checkAABB(Collision::getBoardPhaseBox(GetBox()), object_static_can_collision.at(i)->GetBox()))
-			if (Collision::checkAABB(GetBoxNormal(), object_static_can_collision.at(i)->GetBox()))
+			if (Collision::checkAABB(Collision::getBoardPhaseBox(GetBox()), object_static_can_collision.at(i)->GetBox()))
 			{
 				time = Collision::sweptAABBCheck(GetBox(), object_static_can_collision.at(i)->GetBox(), nx, ny);
-
-				if (time<1 && object_static_can_collision.at(i)->type == uprise)
-				{
-					_uprise = object_static_can_collision.at(i);
-					m_hPosition.x += m_hSpeed.x*time;
-					m_hState = ON_UPRISE;
-					return;
-				}
-				if (time < 1 && time >= 0 && object_static_can_collision.at(i)->type != box)
-				{					
-					if (nx == 1 && object_static_can_collision.at(i)->type != box)
+				if (time < 1 && time >= 0 && object_static_can_collision.at(i)->type != box){
+					if (type != mario&&nx != 0){
+						//m_hPosition.x += time*m_hSpeed.x;
+						m_hSpeed.x = -m_hSpeed.x;
+					}
+					else if (nx == 1 && object_static_can_collision.at(i)->type != box)
 					{
 
 						m_hPosition.x += time*m_hSpeed.x;
 						m_hSpeed.x = 0;
 						m_hObjectLeft = object_static_can_collision.at(i);
 					}
-					if (nx == -1 && object_static_can_collision.at(i)->type != box)
+					else if (nx == -1 && object_static_can_collision.at(i)->type != box)
 					{
 						m_hPosition.x += time*m_hSpeed.x;
 						m_hSpeed.x = 0;
 						m_hObjectRight = object_static_can_collision.at(i);
 					}
 				}
-				
-
 			}
 
 		}
@@ -1439,7 +1396,6 @@ void SuperHero::Move()
 		if (m_hObjectLeft == NULL && m_hObjectRight == NULL)
 			m_hPosition.x += m_hSpeed.x;
 		break;
-#pragma endregion
 
 	}
 
@@ -1641,18 +1597,6 @@ void SuperHero::RenderBoxRight()
 	RECT a;
 	a = GetBox_CRight()->getRect();
 	_LocalGraphic->tDrawTexture(_LocalContent->LoadTexture("boxbottom.png"), src, a, D3DXVECTOR2(GetBox_CRight()->getCenter()), D3DCOLOR_XRGB(255, 255, 255), 0);
-}
-
-Box* SuperHero::GetBoxNormal()
-{
-	Box* x = new Box();
-	x->_position.x = m_hPosition.x;
-	x->_position.y = m_hPosition.y;
-	x->_size.x = m_hCurrentSprite->_Width;
-	x->_size.y = m_hCurrentSprite->_Height;
-	x->_v.x = m_hSpeed.x;
-	x->_v.y = m_hSpeed.y;
-	return x;
 }
 
 

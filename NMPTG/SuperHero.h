@@ -1,7 +1,6 @@
 #pragma once
 #include"Object.h"
 #include "Infomation.h"
-
 #define _hero_JUMP 9.7f//10
 #define _hero_MAXJUM 11//45
 #define _hero_MAXSPEED 4//5
@@ -73,8 +72,6 @@ private:
 	FrkSprite* MarioRunRight;
 	FrkSprite* MarioSuperJumpLeft;
 	FrkSprite* MarioSuperJumpRight;
-
-	Object* _uprise;
 #pragma endregion
 public:
 	Infomation* info;
@@ -131,7 +128,6 @@ public:
 	Box* GetBoxTop();
 	Box* GetBoxAttack();
 	Box* GetBox_CGround();//va de xet va cham voi mat dat
-	Box* GetBoxNormal();
 	//void RenderBoxDebug();
 	void RenderV();	
 	void RenderBoxRight();

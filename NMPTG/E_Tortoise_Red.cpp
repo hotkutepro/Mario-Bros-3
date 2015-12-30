@@ -27,7 +27,6 @@ void E_Tortoise_Red::Load()
 	m_hSpeed.x = -vx;
 	m_hSpeed.y = -2;
 	status = 0;
-	IsRun = false;
 	IsControl = false;
 }
 
@@ -51,16 +50,16 @@ void E_Tortoise_Red::Collision_Up()
 		m_hSpeed.x = 0;
 	if (status == 1)
 	{
-		m_hSpeed.x = 0;
-		IsRun = !IsRun;
-		if (IsRun)
+		m_hSpeed.x = 0;		
+		if (m_hSpeed.x == 0)
 		{
-			if (_LocalHero->m_hDirect==DIRECT::left)
+			if (_LocalHero->m_hDirect == DIRECT::left)
 				m_hSpeed.x = -3;
 			else
 				m_hSpeed.x = 3;
 		}
-
+		else
+			m_hSpeed.x = 0;
 		return;
 	}
 	status++;
@@ -123,36 +122,34 @@ void E_Tortoise_Red::Collision_Down()
 
 void E_Tortoise_Red::Collision_Left()
 {		
-	if (status == 0 || IsRun){
+	if (m_hSpeed.x!=0){
 		_LocalHero->IsAttacked();
 	}
 	else
-	if (_LocalHero->ready&&status == 1 || status == 2)
+	if (_LocalHero->ready&&status >0)
 	{
 		IsControl = true;
 	}
 	else
-	if (status == 1 || status == 2)
-	{
-		IsRun = true;
+	if (status >0)
+	{		
 		m_hSpeed.x = vx_run;
 	}
 }
 
 void E_Tortoise_Red::Collision_Right()
 {
-	if (status == 0 || IsRun)
+	if (m_hSpeed.x!=0)
 	{
 		_LocalHero->IsAttacked();
 	}
 	else
-	if (_LocalHero->ready&&status == 1 || status == 2)
+	if (_LocalHero->ready&&status >0)
 	{
 		IsControl = true;
 	}
-	else if (status == 1 || status == 2)
-	{
-		IsRun = true;
+	else if (status >0)
+	{		
 		m_hSpeed.x = -vx_run;
 	}
 }
@@ -218,8 +215,7 @@ void E_Tortoise_Red::SetControl()
 	if (IsControl)
 	{
 		if (!_LocalHero->ready)
-		{
-			//IsRun = true;
+		{			
 			if (_LocalHero->m_hDirect == DIRECT::left)
 				m_hSpeed.x = -vx_run;
 			else
