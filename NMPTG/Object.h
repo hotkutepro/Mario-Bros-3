@@ -16,7 +16,7 @@ enum TYPEOBJECT{
 	brick, coin, drain, land, leaf, mushroom_red, p, box, question_block, star, tarnooki, tarnooki_fly,
 	tortoise, tortoise_fly, tortoise_red, tree, tree_red, tree_red_shoot, tree_shoot, bullet, mario,uprise,oneup
 };
-enum STATE{ ON_GROUND, ON_SPACE, FALL_DOWN, ON_FLY,OTHER };
+enum STATE{ ON_GROUND, ON_SPACE, FALL_DOWN, ON_FLY,OTHER,ON_UPRISE };
 enum DIRECT{ left,right };
 enum Status
 {
@@ -38,6 +38,7 @@ public:
 	bool ready = false;
 
 	Box* m_hBox;
+	Box* m_hBox_Shadow;
 	// thoi gian co the bay
 	int flyTime = 0;
 	//toc do
