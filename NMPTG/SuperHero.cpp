@@ -936,24 +936,22 @@ void SuperHero::InertiaRun(float gameTime)
 
 void SuperHero::Jump(float vJump)
 {
-	if (m_hState != ON_GROUND)
-		return;
-
-	m_hSpeed.y = vJump;
-	m_hState = ON_SPACE;
-	m_hObjectGround = NULL;
-	if (m_hSpeed.y == _hero_MAXJUM)
+	if (m_hState == ON_UPRISE || m_hState == ON_GROUND)
 	{
-		return;
-	}
-	//set sprite
-#pragma region Set Sprite	
-	if (isSquat)
-	{
-		return;
-	}
+		m_hSpeed.y = vJump;
+		m_hState = ON_SPACE;
+		m_hObjectGround = NULL;
+		if (m_hSpeed.y == _hero_MAXJUM)
+		{
+			return;
+		}
+		
 
-#pragma endregion
+		if (isSquat)
+		{
+			return;
+		}
+	}
 }
 
 void SuperHero::JumpKeyUp(float gameTime)
@@ -1062,14 +1060,10 @@ void SuperHero::Attack()
 
 void SuperHero::SuperJump()
 {
-	if (m_hState != ON_GROUND)
-	{
-		return;
-	}
 	if (abs(m_hSpeed.x) >= _hero_MAXSPEED)
 	{
-		isSuperJump = true;
 		Jump(_hero_MAXJUM);
+		isSuperJump = true;		
 		return;
 	}
 	else
@@ -1205,7 +1199,7 @@ void SuperHero::Move()
 #pragma region on_uprise
 	case ON_UPRISE:
 		m_hObjectGround = NULL;
-		if (!Collision::checkAABB(GetBox(),_uprise->GetBox()))
+		if (!Collision::checkAABB(GetBoxNormal(),_uprise->GetBox()))
 		{
 			m_hState = ON_SPACE;
 			_uprise = NULL;
