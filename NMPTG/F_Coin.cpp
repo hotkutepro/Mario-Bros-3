@@ -38,6 +38,7 @@ void F_Coin::Show()
 	if (n >= 4)
 	{
 		life = false;
+		_LocalHero->Collision_Coin();
 		m_hCurrentSprite = NULL;
 	}
 }

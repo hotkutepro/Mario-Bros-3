@@ -7,6 +7,7 @@
 class State_4 :
 	public State
 {
+	
 	SuperHero* hero;
 	QNode* qnode;
 	State* state_2;

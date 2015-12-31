@@ -70,7 +70,7 @@ void SuperHero::Load()
 	MarioSuperJumpLeft = ResourcesManager::GetInstance()->GetSprite(SpriteID::MarioSuperJumpLeft);
 	MarioSuperJumpRight = ResourcesManager::GetInstance()->GetSprite(SpriteID::MarioSuperJumpRight);
 #pragma endregion
-	info = new Infomation(0, 0, 0, 4, 0);
+	info = new Infomation(300, 0, 0, 4, 1);
 	info->Load();
 	type = mario;
 	setCurrentSprite(MarioRight);
@@ -80,7 +80,7 @@ void SuperHero::Load()
 	m_hDirect = DIRECT::right;
 	delayMaxSpeed = 0;
 	m_hState = ON_SPACE;
-	timeSuper = 0;
+	
 	Object::Load();
 	m_hObjectLeft = NULL;
 	m_hObjectRight = NULL;
@@ -88,9 +88,18 @@ void SuperHero::Load()
 
 void SuperHero::Update(float gametime)
 {
-	info->Update();
-	if (timeSuper < 30)
-		timeSuper++;
+		
+
+	info->Update(m_hSpeed.x);
+	if (isAttacked && timeChopChop<40)
+	{
+		timeChopChop++;
+	}
+	else
+	{
+		isAttacked = false;
+		timeChopChop = 0;
+	}
 
 	f_str = "Vx = " + std::to_string(m_hSpeed.x);
 	a = new char[f_str.length() + 1];
@@ -481,8 +490,17 @@ void SuperHero::Update(float gametime)
 
 void SuperHero::Render()
 {
-	Object::Render();
 	info->Render();
+
+	if (timeChopChop % 3 == 0 )
+	{
+		Object::Render();
+	}
+	if (status == 0 && m_hState == OTHER)
+	{
+		Object::Render();
+	}
+	
 }
 
 
@@ -1090,7 +1108,7 @@ Box* SuperHero::GetBox()
 		m_hBox->_size.x = 9;
 		break;
 	case BIGMARIO:
-		m_hBox->_size.y = 28;
+		m_hBox->_size.y = getCurrentSprite()->_Height;
 		if (m_hDirect == DIRECT::right)
 		{
 			m_hBox->_position.x = m_hPosition.x + _hero_BOX_ADJUST_POS_RIGHT;
@@ -1101,7 +1119,7 @@ Box* SuperHero::GetBox()
 		}
 		break;
 	case BROS:
-		m_hBox->_size.y = 28;
+		m_hBox->_size.y = getCurrentSprite()->_Height;
 		if (m_hDirect == DIRECT::right)
 		{
 			m_hBox->_position.x = m_hPosition.x + _hero_BOX_ADJUST_POS_RIGHT + 8;
@@ -1222,7 +1240,7 @@ void SuperHero::Move()
 					m_hPosition.x += time*m_hSpeed.x;
 					m_hSpeed.x = 0;
 					m_hObjectRight = object_static_can_collision.at(i);
-					
+
 				}
 				if (ny == 1)
 				{
@@ -1236,12 +1254,15 @@ void SuperHero::Move()
 				}
 			}
 		}
-		if (m_hObjectRight != NULL)
-		if (!Collision::checkAABB(GetBox_CRight(), m_hObjectRight->GetBox()))
+
+		if (m_hObjectRight != NULL&&!Collision::checkAABB(GetBox_CRight(), m_hObjectRight->GetBox()))
+		{
 			m_hObjectRight = NULL;
-		if (m_hObjectLeft != NULL)
-		if (!Collision::checkAABB(GetBox_CLeft(), m_hObjectLeft->GetBox()))
+		}
+		if (m_hObjectLeft != NULL&&!Collision::checkAABB(GetBox_CLeft(), m_hObjectLeft->GetBox()))
+		{
 			m_hObjectLeft = NULL;
+		}				
 		if (m_hObjectLeft == NULL && m_hObjectRight == NULL)
 		{
 
@@ -1257,14 +1278,13 @@ void SuperHero::Move()
 			m_hPosition.x += m_hSpeed.x;
 		}
 
-		if (timeFly < 130)
-		{
-			m_hPosition.y += m_hSpeed.y;
-		}
-		else
+		if (m_hPosition.y > 720)
 		{
 			m_hState = ON_SPACE;
+			return;
 		}
+		m_hPosition.y += m_hSpeed.y;
+	
 
 		break;
 	case FALL_DOWN:
@@ -1329,7 +1349,7 @@ void SuperHero::Move()
 
 				}
 				if (nx == -1 && object_static_can_collision.at(i)->type != box)
-				{
+				{					
 					m_hPosition.x += time*m_hSpeed.x;
 
 					m_hSpeed.x = 0;
@@ -1470,10 +1490,15 @@ Box* SuperHero::GetBoxAttack()
 
 void SuperHero::IsAttacked()
 {
-	if (timeSuper != 30)
+	if (isAttacked)
+	{
 		return;
+	}
 	else
-		timeSuper = 0;
+	{
+		isAttacked = true;
+	}
+
 	switch (status)
 	{
 	case BROS:

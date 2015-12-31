@@ -3,7 +3,7 @@
 #include "Infomation.h"
 #define _hero_JUMP 9.7f//10
 #define _hero_MAXJUM 11//45
-#define _hero_MAXSPEED 4//5
+#define _hero_MAXSPEED 5//5
 #define _hero_SPEED 3//2
 #define _hero_ACCELERATION 0.5f//.2f
 #define _hero_RUN_ACCELERATION 0.048f//
@@ -81,8 +81,10 @@ public:
 	char* a1;
 
 	//hinh chop chop
-	int delayChopChop=0;
-
+	int timeChopChop = 0;
+	//neu vua bi tan cong thi gia tri la true
+	bool isAttacked = false;
+	
 	//dang nhay
 	bool isSuperJump = false;	
 
@@ -105,7 +107,7 @@ public:
 	//thoi gian delay khi dat max speed
 	float delayMaxSpeed;
 	//bien delay khi die
-	float timeSuper = 0;
+	
 	void Load();
 	void Update(float gametime);
 	void Render();

@@ -16,6 +16,8 @@ State_4::~State_4()
 
 void State_4::Load()
 {
+	
+	
 	collision = new Collision();
 	qnode = new QNode();
 	qnode->LoadQNode("QNode.txt");
@@ -60,7 +62,7 @@ void State_4::Load()
 void State_4::Render()
 {
 	_LocalGraphic->Begin(camera->GetTransformMatrix());
-
+	
 	//_LocalGraphic->DrawTexture(wall, D3DXVECTOR2(720,450), D3DXVECTOR2(720, 450), D3DCOLOR_XRGB(255, 255, 255), 0.2);
 	map1->Render();	
 
@@ -79,6 +81,7 @@ void State_4::Render()
 	//hero->RenderV();
 	//hero->ReanderViewPort();
 	hero->Render();
+	hero->RenderAffection();
 	//hero->RenderBoxAttack();
 	//hero->RenderBoxRight();
 	//hero->ReanderGroundBox();
@@ -88,6 +91,7 @@ void State_4::Render()
 
 void State_4::Update(float gameTime)
 {
+	
 	map1->Update();
 	hero->Update(gameTime);
 	//hero->GetStaticObject();
@@ -104,9 +108,7 @@ void State_4::Update(float gameTime)
 	for (id_Objects = qnode->s_IdObjectInViewPort.begin(); id_Objects != qnode->s_IdObjectInViewPort.end(); id_Objects++)//sửa lại, chỉ chọn đối tượng tĩnh
 	{
 		it_Object = qnode->m_Objects.find(*id_Objects);		
-		it_Object->second->Update(gameTime);
-		if (it_Object->second->m_hCurrentSprite!=NULL)
-			it_Object->second->m_hCurrentSprite->Next();
+		it_Object->second->Update(gameTime);		
 	}
 
 }

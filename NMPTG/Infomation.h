@@ -26,15 +26,21 @@ public:
 	//
 	char* cLife;
 	string sLife;
+	//
+	char* cState;
+	string sState;
 
+	int x;
+	
+	int n = 0;
 	int I_Time ;
 	int I_Score;
 	int I_Coin;
 	int I_Life;
-	int I_A;
-	Infomation(float _time, int _score, int _coin, int _life, int a);
+	int I_State;
+	Infomation(float _time, int _score, int _coin, int _life, int _state);
 	void Load();
-	void Update();
+	void Update(float speedMario);
 	void Render();
 	Infomation();
 	~Infomation();

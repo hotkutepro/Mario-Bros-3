@@ -581,7 +581,7 @@ void Object::RenderBoxCollision(Object* object)
 
 void Object::RenderAffection()
 {
-	
+
 }
 
 
