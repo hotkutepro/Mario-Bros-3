@@ -196,13 +196,13 @@ void E_Tortoise_Red::Collision_Shell_Object()
 		{
 			float nx, ny;
 			float time = Collision::sweptAABBCheck(GetBoxWithObject(it_Object->second), it_Object->second->GetBox(), nx, ny);
-			if (time != 1)
-			{
-				//m_hSpeed.x = -m_hSpeed.x;
+			if (time != 1&&nx!=0)
+			{				
 				it_Object->second->Die();
+				m_hSpeed.x = -m_hSpeed.x;
 				if (it_Object->second->type == tree_red_shoot)
 				{
-					Die();
+					Die();					
 				}
 			}
 

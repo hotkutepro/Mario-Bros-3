@@ -19,14 +19,27 @@ void F_Leaf::Load()
 	setCurrentSprite(Leaf);
 	Object::Load();
 	type = TYPEOBJECT::leaf;
+	n = 0;
+	v = 2;
 }
 
 void F_Leaf::Update(float gameTime)
 {	
 	Object::Update(gameTime);
-	if (life == true&&m_hCurrentSprite==F_MushroomPower)
+	if (life&&m_hCurrentSprite==F_MushroomPower)
 	{
 		MoveObject();
+	}
+	else if (life)
+	{
+		n++;
+		if (n==10)
+		{
+			n = 0;
+			v = -v;
+		}
+		m_hPosition.x += v;
+		m_hPosition.y +=m_hSpeed.y;
 	}
 }
 
@@ -43,7 +56,8 @@ void F_Leaf::WatchUp()
 	if (_LocalHero->status != MARIO)
 	{
 		setCurrentSprite(Leaf);
-		m_hSpeed.y = -3;
+		m_hPosition.y += 30;
+		m_hSpeed.y = -2;
 	}
 	else
 	{

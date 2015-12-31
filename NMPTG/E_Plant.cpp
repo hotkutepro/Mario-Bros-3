@@ -48,7 +48,7 @@ void E_Plant::Render()
 }
 
 void E_Plant::Collision_Up()
-{
+{	
 	_LocalHero->IsAttacked();
 }
 
@@ -69,5 +69,6 @@ void E_Plant::Collision_Right()
 
 void E_Plant::IsAttacked()
 {
-	life = false;
+	if (!(m_hSpeed.y<0 && n>33))
+		life = false;
 }

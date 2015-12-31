@@ -75,12 +75,12 @@ void State_4::Render()
 			 it_Object->second->Render();
 	}
 	//hero->RenderBoundBox();
-	hero->RenderDebug();
+	//hero->RenderDebug();
 	//hero->RenderV();
 	//hero->ReanderViewPort();
 	hero->Render();
-	hero->RenderBoxAttack();
-	hero->RenderBoxRight();
+	//hero->RenderBoxAttack();
+	//hero->RenderBoxRight();
 	//hero->ReanderGroundBox();
 	_LocalGraphic->End();
 

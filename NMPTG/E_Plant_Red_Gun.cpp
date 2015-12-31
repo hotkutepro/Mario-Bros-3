@@ -148,7 +148,8 @@ void E_Plant_Red_Gun::SetSprite()
 
 void E_Plant_Red_Gun::IsAttacked()
 {
-	life = false;
+	if (!(n>33&&m_hSpeed.y<0))
+		life = false;
 }
 
 void E_Plant_Red_Gun::Die()

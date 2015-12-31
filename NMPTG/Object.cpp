@@ -286,6 +286,14 @@ void Object::EatFood()
 
 			}
 		}
+		if (objects_Food.at(i)->type == brick)
+		{
+			time = Collision::sweptAABBCheck(GetBoxTop(), objects_Food.at(i)->GetBox(), nx, ny);
+			if (time < 1 && time >= 0 && ny == -1)
+			{			
+				objects_Food.at(i)->Die();
+			}
+		}
 	}
 }
 void Object::KillEnemy()

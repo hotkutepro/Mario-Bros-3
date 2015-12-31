@@ -472,8 +472,8 @@ void SuperHero::Update(float gametime)
 #pragma endregion
 	if (m_hState != OTHER)
 	{
-		KillEnemy();
 		EatFood();
+		KillEnemy();		
 	}
 
 	this->Move();
