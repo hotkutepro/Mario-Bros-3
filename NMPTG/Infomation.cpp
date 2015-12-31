@@ -26,14 +26,14 @@ Infomation::~Infomation()
 
 void Infomation::Load()
 {
-	FrkTexture* tHub = _LocalContent->LoadTexture("resources\\Cut\\hub.png");
-	FrkTexture* tHub1 = _LocalContent->LoadTexture("resources\\Cut\\hub1.png");
-	FrkTexture* tHub2 = _LocalContent->LoadTexture("resources\\Cut\\hub2.png");
-	FrkTexture* tHub3 = _LocalContent->LoadTexture("resources\\Cut\\hub3.png");
-	FrkTexture* tHub4 = _LocalContent->LoadTexture("resources\\Cut\\hub4.png");
-	FrkTexture* tHub5 = _LocalContent->LoadTexture("resources\\Cut\\hub5.png");
-	FrkTexture* tHub6 = _LocalContent->LoadTexture("resources\\Cut\\hub6.png");
-	FrkTexture* tHub7 = _LocalContent->LoadTexture("resources\\Cut\\hub7.png");
+	FrkTexture* tHub = _LocalContent->LoadTexture("resources\\hub\\hub.png");
+	FrkTexture* tHub1 = _LocalContent->LoadTexture("resources\\hub\\hub1.png");
+	FrkTexture* tHub2 = _LocalContent->LoadTexture("resources\\hub\\hub2.png");
+	FrkTexture* tHub3 = _LocalContent->LoadTexture("resources\\hub\\hub3.png");
+	FrkTexture* tHub4 = _LocalContent->LoadTexture("resources\\hub\\hub4.png");
+	FrkTexture* tHub5 = _LocalContent->LoadTexture("resources\\hub\\hub5.png");
+	FrkTexture* tHub6 = _LocalContent->LoadTexture("resources\\hub\\hub6.png");
+	FrkTexture* tHub7 = _LocalContent->LoadTexture("resources\\hub\\hub7.png");
 	sHub = new FrkSprite(tHub, 1, 1);
 	sHub1 = new FrkSprite(tHub1, 1, 1);
 	sHub2 = new FrkSprite(tHub2, 1, 1);
