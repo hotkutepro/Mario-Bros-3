@@ -12,6 +12,8 @@ private:
 public:
 	StateManager();   
 	~StateManager();
+	static StateManager* Instance;
+	static StateManager* GetInstance();
 	void Add(State* scene);
 	void Remove(State* scene);
 	void Clear();

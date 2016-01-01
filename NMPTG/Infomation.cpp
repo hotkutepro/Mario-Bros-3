@@ -126,3 +126,12 @@ void Infomation::Render()
 	_LocalGraphic->nsDraw(cState, D3DXVECTOR2(iVector.y -33, iVector.x - 3), D3DCOLOR_XRGB(0, 0, 0));
 
 }
+Infomation* Infomation::Instance = NULL;
+Infomation* Infomation::GetInstance()
+{
+	if (Instance == NULL)
+	{
+		Instance = new Infomation(300, 0, 0, 4, 1);
+	}
+	return Instance;
+}

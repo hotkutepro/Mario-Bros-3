@@ -39,3 +39,14 @@ void StateManager::Render()
 	this->m_hCurrentScene = lScene->front();
 	this->m_hCurrentScene->Render();
 }
+
+StateManager* StateManager::Instance = NULL;
+
+StateManager* StateManager::GetInstance()
+{
+	if (Instance == NULL)
+	{
+		Instance = new StateManager();
+	}
+	return Instance;
+}

@@ -39,6 +39,8 @@ public:
 	int I_Life;
 	int I_State;
 	Infomation(float _time, int _score, int _coin, int _life, int _state);
+	static Infomation* Instance;
+	static Infomation* GetInstance();
 	void Load();
 	void Update(float speedMario);
 	void Render();
