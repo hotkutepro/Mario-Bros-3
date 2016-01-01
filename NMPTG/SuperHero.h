@@ -75,7 +75,7 @@ private:
 	Object* _uprise;
 #pragma endregion
 public:
-	Infomation* info;
+	
 	string f_str;
 	char* a;
 	string f_str1;
@@ -126,8 +126,7 @@ public:
 	void BrosFall(float gameTime);
 	void Attack();
 	void IsAttacked();
-	Box* GetBox_CLeft();
-	Box* GetBox_CRight();
+
 	Box* GetBoxWithObject(Object* object);
 	Box* GetBox();
 	Box* GetBoxTop();

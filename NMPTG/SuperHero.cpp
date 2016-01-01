@@ -70,8 +70,8 @@ void SuperHero::Load()
 	MarioSuperJumpLeft = ResourcesManager::GetInstance()->GetSprite(SpriteID::MarioSuperJumpLeft);
 	MarioSuperJumpRight = ResourcesManager::GetInstance()->GetSprite(SpriteID::MarioSuperJumpRight);
 #pragma endregion
-	info = new Infomation(0, 0, 0, 4, 0);
-	info->Load();
+	
+	
 	type = mario;
 	setCurrentSprite(MarioRight);
 	m_hPosition.x = 30;
@@ -80,7 +80,7 @@ void SuperHero::Load()
 	m_hDirect = DIRECT::right;
 	delayMaxSpeed = 0;
 	m_hState = ON_SPACE;
-	//timeSuper = 0;
+	
 	Object::Load();
 	m_hObjectLeft = NULL;
 	m_hObjectRight = NULL;
@@ -88,11 +88,18 @@ void SuperHero::Load()
 
 void SuperHero::Update(float gametime)
 {
-	EatFood();//////////////
-	KillEnemy();/////////////
-	info->Update();
-	/*if (timeSuper < 30)
-		timeSuper++;*/
+		
+
+	Infomation::GetInstance()->Update(m_hSpeed.x);
+	if (isAttacked && timeChopChop<40)
+	{
+		timeChopChop++;
+	}
+	else
+	{
+		isAttacked = false;
+		timeChopChop = 0;
+	}
 
 	f_str = "Vx = " + std::to_string(m_hSpeed.x);
 	a = new char[f_str.length() + 1];
@@ -475,7 +482,7 @@ void SuperHero::Update(float gametime)
 	if (m_hState != OTHER)
 	{
 		EatFood();
-		KillEnemy();
+		KillEnemy();		
 	}
 
 	this->Move();
@@ -483,8 +490,17 @@ void SuperHero::Update(float gametime)
 
 void SuperHero::Render()
 {
-	Object::Render();
-	info->Render();
+	Infomation::GetInstance()->Render();
+
+	if (timeChopChop % 3 == 0 )
+	{
+		Object::Render();
+	}
+	if (status == 0 && m_hState == OTHER)
+	{
+		Object::Render();
+	}
+	
 }
 
 
@@ -937,7 +953,7 @@ void SuperHero::InertiaRun(float gameTime)
 
 void SuperHero::Jump(float vJump)
 {
-	if (m_hState == ON_UPRISE || m_hState == ON_GROUND)
+	if (m_hState == ON_GROUND || m_hState == ON_UPRISE)
 	{
 		m_hSpeed.y = vJump;
 		m_hState = ON_SPACE;
@@ -946,13 +962,8 @@ void SuperHero::Jump(float vJump)
 		{
 			return;
 		}
-
-
-		if (isSquat)
-		{
-			return;
-		}
 	}
+
 }
 
 void SuperHero::JumpKeyUp(float gameTime)
@@ -1018,7 +1029,7 @@ void SuperHero::BrosFly(float gameTime)
 				m_hSpeed.x = -_hero_MAXSPEED;
 			}
 			m_hSpeed.y = 3;
-
+			
 		}
 		else
 		{
@@ -1090,29 +1101,26 @@ Box* SuperHero::GetBox()
 		m_hBox->_size.x = 9;
 		break;
 	case BIGMARIO:
-		//m_hBox->_size.y = 28;
-		m_hBox->_size.y = 28;
-		m_hBox->_position.x = m_hPosition.x + 2;
-		/*if (m_hDirect == DIRECT::right)
+		m_hBox->_size.y = getCurrentSprite()->_Height;
+		if (m_hDirect == DIRECT::right)
 		{
-		m_hBox->_position.x = m_hPosition.x + _hero_BOX_ADJUST_POS_RIGHT;
+			m_hBox->_position.x = m_hPosition.x + _hero_BOX_ADJUST_POS_RIGHT;
 		}
 		else
 		{
-		m_hBox->_position.x = m_hPosition.x + _hero_BOX_ADJUST_POS_LEFT + 1;
-		}*/
+			m_hBox->_position.x = m_hPosition.x + _hero_BOX_ADJUST_POS_LEFT + 1;
+		}
 		break;
 	case BROS:
-		m_hBox->_size.y = 28;
-		m_hBox->_position.x = m_hPosition.x + 2;
-		/*if (m_hDirect == DIRECT::right)
+		m_hBox->_size.y = getCurrentSprite()->_Height;
+		if (m_hDirect == DIRECT::right)
 		{
-		m_hBox->_position.x = m_hPosition.x + _hero_BOX_ADJUST_POS_RIGHT + 8;
+			m_hBox->_position.x = m_hPosition.x + _hero_BOX_ADJUST_POS_RIGHT + 8;
 		}
 		else
 		{
-		m_hBox->_position.x = m_hPosition.x + _hero_BOX_ADJUST_POS_LEFT + 3;
-		}*/
+			m_hBox->_position.x = m_hPosition.x + _hero_BOX_ADJUST_POS_LEFT + 3;
+		}
 		break;
 	}
 
@@ -1134,7 +1142,7 @@ Box* SuperHero::GetBoxWithObject(Object* object)
 		x->_size.x = 9;
 		break;
 	case BIGMARIO:
-		x->_size.y = 28;
+		x->_size.y = getCurrentSprite()->_Height;
 		if (m_hDirect == DIRECT::right)
 		{
 			x->_position.x = m_hPosition.x + _hero_BOX_ADJUST_POS_RIGHT;
@@ -1145,7 +1153,7 @@ Box* SuperHero::GetBoxWithObject(Object* object)
 		}
 		break;
 	case BROS:
-		x->_size.y = 28;
+		x->_size.y = getCurrentSprite()->_Height;
 		if (m_hDirect == DIRECT::right)
 		{
 			x->_position.x = m_hPosition.x + _hero_BOX_ADJUST_POS_RIGHT + 8;
@@ -1196,200 +1204,6 @@ Box* SuperHero::GetBox_CGround()
 	return x;
 }
 
-Box* SuperHero::GetBoxTop()
-{
-	Box* x;
-	x = new Box();
-	x->_size.x = _hero_BOX_TOP_WIDTH;
-	x->_size.y = _hero_BOX_TOP_HEIGHT;
-	x->_v = m_hSpeed;
-	x->_position.y = m_hPosition.y + getCurrentSprite()->_Height - _hero_BOX_TOP_HEIGHT;
-	switch (status)
-	{
-	case BROS:
-		if (m_hDirect == DIRECT::right)
-		{
-			x->_position.x = m_hPosition.x + getCurrentSprite()->_Height / 2 + 2;
-		}
-		else
-		{
-			x->_position.x = m_hPosition.x + getCurrentSprite()->_Height / 2 - 4;
-		}
-		break;
-	case BIGMARIO:
-		if (m_hDirect == DIRECT::right)
-		{
-			x->_position.x = m_hPosition.x + getCurrentSprite()->_Height / 2 - 5;
-		}
-		else
-		{
-			x->_position.x = m_hPosition.x + getCurrentSprite()->_Height / 2 - 4;
-		}
-		break;
-	default:
-		x->_position.x = m_hPosition.x + getCurrentSprite()->_Height / 2;
-		break;
-	}
-
-
-
-	return x;
-}
-
-Box* SuperHero::GetBoxAttack()
-{
-
-	Box* x = new Box();
-	if (attack)
-	{
-		x->_size.x = 10;
-		x->_size.y = 5;
-		x->_v.x = 5;
-		x->_v.y = 0;
-		if (m_hDirect == DIRECT::right)
-		{
-			x->_position.x = m_hPosition.x + 20;
-			x->_position.y = m_hPosition.y + 5;
-		}
-		else
-		{
-			x->_position.x = m_hPosition.x - 5;
-			x->_position.y = m_hPosition.y + 5;
-		}
-	}
-	return x;
-}
-
-void SuperHero::IsAttacked()
-{
-	/*if (timeSuper != 30)
-		return;
-	else
-		timeSuper = 0;*/
-	switch (status)
-	{
-	case BROS:
-		status--;
-		if (m_hState == ON_FLY)
-		{
-			m_hState = ON_SPACE;
-		}
-		if (m_hDirect == DIRECT::right)
-		{
-			setCurrentSprite(BigMarioRight);
-		}
-		else
-		{
-			setCurrentSprite(BigMarioLeft);
-		}
-		break;
-	case BIGMARIO:
-		status--;
-		if (m_hDirect == DIRECT::right)
-		{
-			setCurrentSprite(MarioRight);
-		}
-		else
-		{
-			setCurrentSprite(MarioLeft);
-		}
-		break;
-	default:
-		setCurrentSprite(MarioDeath);
-		m_hSpeed.y = 5;
-		m_hState = OTHER;
-		break;
-	}
-}
-
-void SuperHero::RenderBoxAttack()
-{
-	if (attack)
-	{
-		RECT src;
-		src.left = 0;
-		src.right = src.left + 1;
-		src.top = 0;
-		src.bottom = src.top + 1;
-		RECT a;
-		a = GetBoxAttack()->getRect();
-		_LocalGraphic->tDrawTexture(_LocalContent->LoadTexture("boxbottom.png"), src, a, D3DXVECTOR2(GetBoxAttack()->getCenter()), D3DCOLOR_XRGB(255, 255, 255), 0);
-	}
-}
-void SuperHero::RenderBoxBottom()
-{
-	RECT src;
-	src.left = 0;
-	src.right = src.left + 1;
-	src.top = 0;
-	src.bottom = src.top + 1;
-
-	RECT a;
-	a = GetBox_CGround()->getRect();
-	_LocalGraphic->tDrawTexture(_LocalContent->LoadTexture("boxbottom.png"), src, a, D3DXVECTOR2(GetBox_CGround()->getCenter()), D3DCOLOR_XRGB(255, 255, 255), 0);
-
-}
-void SuperHero::RendeBoxTop()
-{
-	RECT src;
-	src.left = 0;
-	src.right = src.left + 1;
-	src.top = 0;
-	src.bottom = src.top + 1;
-	RECT a;
-	a = GetBoxTop()->getRect();
-	_LocalGraphic->tDrawTexture(_LocalContent->LoadTexture("boxbottom.png"), src, a, D3DXVECTOR2(GetBoxTop()->getCenter()), D3DCOLOR_XRGB(255, 255, 255), 0);
-}
-void SuperHero::RenderBoxCollision(Object* object)
-{
-
-	RECT src;
-	src.left = 0;
-	src.right = src.left + 1;
-	src.top = 0;
-	src.bottom = src.top + 1;
-	RECT a;
-	a = GetBoxWithObject(object)->getRect();
-	_LocalGraphic->tDrawTexture(_LocalContent->LoadTexture("boxbottom.png"), src, a, D3DXVECTOR2(GetBoxWithObject(object)->getCenter()), D3DCOLOR_XRGB(255, 255, 255), 0);
-}
-
-void SuperHero::Collision_Coin()
-{
-	info->I_Coin++;
-	info->I_Score += 100;
-}
-
-void SuperHero::Collision_Leaf()
-{
-	if (status != BROS)
-	{
-		status++;
-	}
-	info->I_Score += 1000;
-}
-
-void SuperHero::Collision_1up()
-{
-	info->I_Life++;
-}
-
-void SuperHero::RenderAffection()
-{
-	Strike->Render(D3DXVECTOR2(m_hPosition.x + 10, m_hPosition.y));
-}
-
-void SuperHero::RenderBoxRight()
-{
-	RECT src;
-	src.left = 0;
-	src.right = src.left + 1;
-	src.top = 0;
-	src.bottom = src.top + 1;
-
-	RECT a;
-	a = GetBox_CRight()->getRect();
-	_LocalGraphic->tDrawTexture(_LocalContent->LoadTexture("boxbottom.png"), src, a, D3DXVECTOR2(GetBox_CRight()->getCenter()), D3DCOLOR_XRGB(255, 255, 255), 0);
-}
 
 void SuperHero::Move()
 {
@@ -1402,7 +1216,9 @@ void SuperHero::Move()
 	case ON_UPRISE:
 		m_hSpeed.y = 0;
 		//m_hObjectGround = NULL;
-		if (!Collision::checkAABB(GetBox(), _uprise->GetBox()))
+		//m_hObjectLeft = NULL;
+		//m_hObjectRight = NULL;
+		if ((!Collision::checkAABB(GetBox(), _uprise->GetBox())))
 		{
 			m_hState = ON_SPACE;
 			_uprise = NULL;
@@ -1418,29 +1234,32 @@ void SuperHero::Move()
 				{
 					/*if (nx == -1 && _uprise->m_hPosition.y + _uprise->m_hSize.y == object_static_can_collision.at(i)->m_hPosition.y + object_static_can_collision.at(i)->m_hSize.y)
 					{
- 						m_hPosition.x += m_hSpeed.x + 2;
-						m_hPosition.y += 2;
-						m_hState = ON_GROUND;						
+					m_hPosition.x += m_hSpeed.x + 2;
+					m_hPosition.y += 2;
+					m_hState = ON_GROUND;
 					}
 					else*/
 					if (nx == -1)
 					{
-						m_hPosition.x += m_hSpeed.x + 2;
-						m_hPosition.y += 2;
+						m_hPosition.x += m_hSpeed.x;
+						m_hPosition.y += 3;
 						m_hObjectRight = object_static_can_collision.at(i);
 						m_hSpeed.x = 0;
 					}
 					if (nx == 1)
 					{
 						m_hPosition.x += m_hSpeed.x;
+						m_hPosition.y += 3;
+						m_hSpeed.x = 0;
 						m_hObjectLeft = object_static_can_collision.at(i);
 					}
 					if (ny == 1)
 					{
 						m_hPosition.y += m_hSpeed.y;
+						m_hPosition.y += 3;
 						m_hState = ON_GROUND;
 					}
-					if (ny==-1)
+					if (ny == -1)
 					{
 						m_hPosition.y += m_hSpeed.y;
 						m_hState = ON_GROUND;
@@ -1469,8 +1288,8 @@ void SuperHero::Move()
 			ratio = _uprise->m_hVector.y / _uprise->m_hVector.x;
 			if (!(m_hSpeed.x<0 && _uprise->m_hVector.y>0 && m_hPosition.x<_uprise->m_hPosition.x) && !(m_hSpeed.x>0 && _uprise->m_hVector.y<0 && m_hPosition.x + 16>_uprise->m_hPosition.x + _uprise->m_hSize.x))
 				m_hPosition.y += (m_hSpeed.x*ratio);
-			
-		}		
+
+		}
 		return;
 		break;
 #pragma endregion
@@ -1534,14 +1353,19 @@ void SuperHero::Move()
 			m_hPosition.x += m_hSpeed.x;
 		}
 
-		if (timeFly < 130)
-		{
 			m_hPosition.y += m_hSpeed.y;
-		}
-		else
-		{
-			m_hState = ON_SPACE;
-		}
+			if (m_hPosition.y < 720)
+			{
+				if (m_hDirect == DIRECT::right)
+				{
+					m_hSpeed.x = _hero_SPEED;
+				}
+				else
+				{
+					m_hSpeed.x = -_hero_SPEED;
+				}
+				m_hState = ON_FLY;
+			}
 
 		break;
 #pragma endregion
@@ -1685,14 +1509,14 @@ void SuperHero::Move()
 						}
 						if (nx == -1)
 						{
-							m_hPosition.x += time*m_hSpeed.x+2;							
+							m_hPosition.x += time*m_hSpeed.x + 2;
 							_uprise = object_static_can_collision.at(i);
 							m_hPosition.y += 2;
 							m_hState = ON_UPRISE;
 						}
 						if (nx == 1)
 						{
-							m_hPosition.x += time*m_hSpeed.x-3;							
+							m_hPosition.x += time*m_hSpeed.x - 3;
 							_uprise = object_static_can_collision.at(i);
 							m_hPosition.y += 2;
 							m_hState = ON_UPRISE;
@@ -1738,24 +1562,209 @@ void SuperHero::Move()
 		break;
 #pragma endregion
 	}
+
+
 }
 
-Box* SuperHero::GetBox_CLeft()
+Box* SuperHero::GetBoxTop()
 {
-	Box* b = new Box();
-	Box* c = GetBox();
-	b->_position.x = c->_position.x - 5;
-	b->_position.y = c->_position.y;
-	b->_size = c->_size;
-	return b;
+	Box* x;
+	x = new Box();
+	x->_size.x = _hero_BOX_TOP_WIDTH;
+	x->_size.y = _hero_BOX_TOP_HEIGHT;
+	x->_v = m_hSpeed;
+	x->_position.y = m_hPosition.y + getCurrentSprite()->_Height - _hero_BOX_TOP_HEIGHT;
+	switch (status)
+	{
+	case BROS:
+		if (m_hDirect == DIRECT::right)
+		{
+			x->_position.x = m_hPosition.x + getCurrentSprite()->_Height / 2 + 2;
+		}
+		else
+		{
+			x->_position.x = m_hPosition.x + getCurrentSprite()->_Height / 2 - 4;
+		}
+		break;
+	case BIGMARIO:
+		if (m_hDirect == DIRECT::right)
+		{
+			x->_position.x = m_hPosition.x + getCurrentSprite()->_Height / 2 - 5;
+		}
+		else
+		{
+			x->_position.x = m_hPosition.x + getCurrentSprite()->_Height / 2 - 4;
+		}
+		break;
+	default:
+		x->_position.x = m_hPosition.x + getCurrentSprite()->_Height / 2;
+		break;
+	}
+
+
+
+	return x;
 }
 
-Box* SuperHero::GetBox_CRight()
+Box* SuperHero::GetBoxAttack()
 {
-	Box* b = new Box();
-	Box* c = GetBox();
-	b->_position.x = c->_position.x + 5;
-	b->_position.y = c->_position.y;
-	b->_size = c->_size;
-	return b;
+
+	Box* x = new Box();
+	if (attack)
+	{
+		x->_size.x = 10;
+		x->_size.y = 5;
+		x->_v.x = 5;
+		x->_v.y = 0;
+		if (m_hDirect == DIRECT::right)
+		{
+			x->_position.x = m_hPosition.x + 20;
+			x->_position.y = m_hPosition.y + 5;
+		}
+		else
+		{
+			x->_position.x = m_hPosition.x - 5;
+			x->_position.y = m_hPosition.y + 5;
+		}
+	}
+	return x;
 }
+
+void SuperHero::IsAttacked()
+{
+	if (isAttacked)
+	{
+		return;
+	}
+	else
+	{
+		isAttacked = true;
+	}
+
+	switch (status)
+	{
+	case BROS:
+		status--;
+		if (m_hState == ON_FLY)
+		{
+			m_hState = ON_SPACE;
+		}
+		if (m_hDirect == DIRECT::right)
+		{
+			setCurrentSprite(BigMarioRight);
+		}
+		else
+		{
+			setCurrentSprite(BigMarioLeft);
+		}
+		break;
+	case BIGMARIO:
+		status--;
+		if (m_hDirect == DIRECT::right)
+		{
+			setCurrentSprite(MarioRight);
+		}
+		else
+		{
+			setCurrentSprite(MarioLeft);
+		}
+		break;
+	default:
+		setCurrentSprite(MarioDeath);
+		m_hSpeed.y = 5;
+		m_hState = OTHER;
+		break;
+	}
+}
+
+void SuperHero::RenderBoxAttack()
+{
+	if (attack)
+	{
+		RECT src;
+		src.left = 0;
+		src.right = src.left + 1;
+		src.top = 0;
+		src.bottom = src.top + 1;
+		RECT a;
+		a = GetBoxAttack()->getRect();
+		_LocalGraphic->tDrawTexture(_LocalContent->LoadTexture("boxbottom.png"), src, a, D3DXVECTOR2(GetBoxAttack()->getCenter()), D3DCOLOR_XRGB(255, 255, 255), 0);
+	}
+}
+void SuperHero::RenderBoxBottom()
+{
+	RECT src;
+	src.left = 0;
+	src.right = src.left + 1;
+	src.top = 0;
+	src.bottom = src.top + 1;
+
+	RECT a;
+	a = GetBox_CGround()->getRect();
+	_LocalGraphic->tDrawTexture(_LocalContent->LoadTexture("boxbottom.png"), src, a, D3DXVECTOR2(GetBox_CGround()->getCenter()), D3DCOLOR_XRGB(255, 255, 255), 0);
+
+}
+void SuperHero::RendeBoxTop()
+{
+	RECT src;
+	src.left = 0;
+	src.right = src.left + 1;
+	src.top = 0;
+	src.bottom = src.top + 1;
+	RECT a;
+	a = GetBoxTop()->getRect();
+	_LocalGraphic->tDrawTexture(_LocalContent->LoadTexture("boxbottom.png"), src, a, D3DXVECTOR2(GetBoxTop()->getCenter()), D3DCOLOR_XRGB(255, 255, 255), 0);
+}
+void SuperHero::RenderBoxCollision(Object* object)
+{
+
+	RECT src;
+	src.left = 0;
+	src.right = src.left + 1;
+	src.top = 0;
+	src.bottom = src.top + 1;
+	RECT a;
+	a = GetBoxWithObject(object)->getRect();
+	_LocalGraphic->tDrawTexture(_LocalContent->LoadTexture("boxbottom.png"), src, a, D3DXVECTOR2(GetBoxWithObject(object)->getCenter()), D3DCOLOR_XRGB(255, 255, 255), 0);
+}
+
+void SuperHero::Collision_Coin()
+{
+	Infomation::GetInstance()->I_Coin++;
+	Infomation::GetInstance()->I_Score += 100;
+}
+
+void SuperHero::Collision_Leaf()
+{
+	if (status != BROS)
+	{
+		status++;
+	}
+	Infomation::GetInstance()->I_Score += 1000;
+}
+
+void SuperHero::Collision_1up()
+{
+	Infomation::GetInstance()->I_Life++;
+}
+
+void SuperHero::RenderAffection()
+{
+	Strike->Render(D3DXVECTOR2(m_hPosition.x + 10, m_hPosition.y));
+}
+
+void SuperHero::RenderBoxRight()
+{
+	RECT src;
+	src.left = 0;
+	src.right = src.left + 1;
+	src.top = 0;
+	src.bottom = src.top + 1;
+
+	RECT a;
+	a = GetBox_CRight()->getRect();
+	_LocalGraphic->tDrawTexture(_LocalContent->LoadTexture("boxbottom.png"), src, a, D3DXVECTOR2(GetBox_CRight()->getCenter()), D3DCOLOR_XRGB(255, 255, 255), 0);
+}
+
+
+
