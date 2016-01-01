@@ -41,7 +41,7 @@ void E_Tortoise::Update(float gameTime)
 		MoveObject();	
 	SetSprite();
 	Collision_Shell_Object();
-	
+	DelayNext(4);
 }
 
 void E_Tortoise::Die()

@@ -40,6 +40,7 @@ void E_Tortoise_Fly::Update(float gameTime)
 	Collision_Shell_Object();
 	CollistionWithObject();
 	SetSprite();
+	DelayNext(3);
 }
 
 void E_Tortoise_Fly::Collision_Up()

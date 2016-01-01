@@ -117,7 +117,7 @@ void Infomation::Update(float speedMario)
 
 void Infomation::Render()
 {
-	D3DXVECTOR2 iVector =  D3DXVECTOR2(180, 100);
+	D3DXVECTOR2 iVector =  D3DXVECTOR2(220, 100);
 	spriteRender->Render2(iVector);
 	_LocalGraphic->nsDraw(cLife, D3DXVECTOR2(iVector.y - 37, iVector.x + 5), D3DCOLOR_XRGB(0, 0, 0));
 	_LocalGraphic->nsDraw(cScore, D3DXVECTOR2(iVector.y + 10, iVector.x + 5), D3DCOLOR_XRGB(0, 0, 0));

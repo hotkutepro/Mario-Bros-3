@@ -41,7 +41,7 @@ void E_Tortoise_Red::Update(float gameTime)
 	else
 		MoveObject();
 	Collision_Shell_Object();
-
+	DelayNext(5);
 }
 void E_Tortoise_Red::Collision_Up()
 {

@@ -37,6 +37,7 @@ void E_Tarnooki_Fly::Update(float gameTime)
 	}
 	Object::Update(gameTime);
 	MoveObject();
+	DelayNext(3);
 }
 
 void E_Tarnooki_Fly::Collision_Up()
