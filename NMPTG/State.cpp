@@ -42,3 +42,15 @@ void State::Init()
 	FrkGame::InitDX();
 	FrkGame::InitLocal();
 }
+
+void State::ChangeState(State* state)
+{
+	//StateManager::GetInstance()->Remove(this);
+	StateManager::GetInstance()->Add(state);
+
+}
+
+void State::ResetState()
+{
+	
+}

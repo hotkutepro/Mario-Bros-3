@@ -8,8 +8,7 @@ class State : public FrkGame
 {
 protected:
 	StateManager* stateManager;
-	int Score;
-	int Coin;	
+	
 	
 public:
 	enum SceneID
@@ -25,6 +24,7 @@ public:
 	virtual void Load();
 	virtual void Render();
 	virtual void Update(float gameTime);
-	
+	virtual void ChangeState(State* state);
+	virtual void ResetState();
 };
 

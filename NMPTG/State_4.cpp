@@ -1,14 +1,14 @@
 ﻿#include "State_4.h"
 #include "ResourcesManager.h"
 #include"FrkShareControl.h"
+#include "State_5.h"
 
 
 
 State_4::State_4(HINSTANCE hIns, int width, int height, char* wName, StateManager* SM) :State(hIns, width, height, wName, SM)
 {
-
+	//state_4 = new State_5(hIns, width, height, wName, SM);
 }
-
 
 State_4::~State_4()
 {
@@ -81,7 +81,7 @@ void State_4::Render()
 	//hero->RenderV();
 	//hero->ReanderViewPort();
 	hero->Render();
-	hero->RenderAffection();
+	//hero->RenderAffection();
 	//hero->RenderBoxAttack();
 	//hero->RenderBoxRight();
 	//hero->ReanderGroundBox();
@@ -91,7 +91,11 @@ void State_4::Render()
 
 void State_4::Update(float gameTime)
 {
-	
+	//if (hero->m_hPosition.y < 0)
+	//{
+	//	ChangeState(state_4);
+	//	
+	//}
 	map1->Update();
 	hero->Update(gameTime);
 	//hero->GetStaticObject();

@@ -1354,7 +1354,7 @@ void SuperHero::Move()
 		}
 
 			m_hPosition.y += m_hSpeed.y;
-			if (m_hPosition.y < 720)
+			if (m_hPosition.y > 720)
 			{
 				if (m_hDirect == DIRECT::right)
 				{
@@ -1364,7 +1364,8 @@ void SuperHero::Move()
 				{
 					m_hSpeed.x = -_hero_SPEED;
 				}
-				m_hState = ON_FLY;
+				m_hState = ON_SPACE;
+				
 			}
 
 		break;

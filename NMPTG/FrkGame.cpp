@@ -180,8 +180,8 @@ void FrkGame::Run()
 					SetWindowText(this->m_hWnd, (char*)(txt.c_str()));
 				}
 				start = now;
-				this->m_hStateManager->Update(game_time);
-				this->m_hStateManager->Render();
+			StateManager::GetInstance()->Update(game_time);
+			StateManager::GetInstance()->Render();
 				
 			}
 			else

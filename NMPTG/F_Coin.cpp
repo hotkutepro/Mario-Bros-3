@@ -22,6 +22,7 @@ void F_Coin::Update(float gameTime)
 {
 	if (connect == true && life == true)
 		Show();
+	DelayNext(5);
 }
 
 void F_Coin::Die()

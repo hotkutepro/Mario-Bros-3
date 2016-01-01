@@ -38,6 +38,7 @@ void E_Tarnooki::Update(float gameTime)
 	}
 	Object::Update(gameTime);
 	MoveObject();
+	DelayNext(6);
 	//m_hPosition.y -= 0.2*gameTime;
 }
 

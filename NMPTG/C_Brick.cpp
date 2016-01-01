@@ -29,6 +29,7 @@ void C_Brick::Update(float gameTime)
 	if (n == 100)
 		Reset();
 	Object::Update(gameTime);
+	DelayNext(3);
 }
 
 void C_Brick::IsAttacked()

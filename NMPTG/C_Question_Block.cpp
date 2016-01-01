@@ -24,7 +24,7 @@ void C_Question_Block::Load()
 
 void C_Question_Block::Update(float gameTime)
 {
-	DelayNext(3);
+	DelayNext(4);
 }
 
 void C_Question_Block::Die()

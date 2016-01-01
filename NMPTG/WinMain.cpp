@@ -24,13 +24,14 @@ int WINAPI WinMain(HINSTANCE h, HINSTANCE p, LPTSTR a, int c)
 	//game->Load();
 	//game->Run();
 	
-	StateManager* SM = new StateManager();
 	
-	State* state = new State_5(h, 320, 240, "demo", SM);
+	
+	State* state = new State_4(h, 320, 240, "demo", StateManager::GetInstance());
 
-	SM->Add(state);
+	StateManager::GetInstance()->Add(state);
 	
 	state->Init();
+	Infomation::GetInstance()->Load();
 	ResourcesManager::GetInstance()->Init();
 	ResourcesManager::GetInstance()->LoadSprite("sprite1.txt");	
 	state->Load();

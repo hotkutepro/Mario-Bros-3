@@ -16,6 +16,7 @@ void Bullet::Update(float gameTime)
 	Object::Update(gameTime);
 	m_hPosition.x += m_hSpeed.x;
 	m_hPosition.y += m_hSpeed.y;
+	DelayNext(3);
 }
 
 void Bullet::Load()

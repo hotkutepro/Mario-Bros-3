@@ -10,11 +10,12 @@ class State_4 :
 	
 	SuperHero* hero;
 	QNode* qnode;
-	State* state_2;
+	State* state_4;
 	FrkCamera* camera;
 	Map* map1;
 	SuperHero* s_hero;
 	Collision* collision;
+	
 public:
 	void Load();
 	void Update(float gameTime);

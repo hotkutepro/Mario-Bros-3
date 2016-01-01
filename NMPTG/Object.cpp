@@ -303,8 +303,7 @@ void Object::KillEnemy()
 	{
 		if (Collision::checkAABB(_LocalHero->GetBoxAttack(), objects_Enemy.at(i)->GetBox()))
 		{
-			objects_Enemy.at(i)->IsAttacked();
-			_LocalHero->RenderAffection();
+			objects_Enemy.at(i)->IsAttacked();			
 		}
 		time = Collision::sweptAABBCheck(GetBoxWithObject(objects_Enemy.at(i)), objects_Enemy.at(i)->GetBox(), nx, ny);		
 		
