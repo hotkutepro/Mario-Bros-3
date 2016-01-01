@@ -49,6 +49,7 @@ D3DXVECTOR2 Object::GetPosition()
 
 void Object::Load()
 {
+	_uprise = new Object();
 	life = true;
 	life_state = 0;
 	m_hObjectGround = NULL;
@@ -129,6 +130,7 @@ Box* Object::GetBox()
 
 		m_hBox->_size.x = m_hSize.x;
 		m_hBox->_size.y = m_hSize.y;
+		m_hBox->_v.x = m_hBox->_v.y = 0;
 	}
 	else if (type == tortoise || type == tortoise_red || type == tortoise_fly)
 	{
@@ -187,9 +189,6 @@ void Object::RenderBoxDebug()
 	RECT a = m_hBox->getRect();
 	_LocalGraphic->tDrawTexture(_LocalContent->LoadTexture("abc.png"), src, a, D3DXVECTOR2(m_hBox->getCenter()), D3DCOLOR_XRGB(255, 255, 255), 0);
 }
-
-
-
 
 vector<Object*> Object::GetDynamicObject()
 {
@@ -353,9 +352,52 @@ Box* Object::GetBox_CRight()
 void Object::MoveObject()
 {
 	vector<Object*> object_static_can_collision = GetStaticObject();
-	float time, nx, ny;
+	float time, nx, ny,ratio;
 	switch (m_hState)
 	{
+	case ON_UPRISE:
+		ratio = _uprise->m_hVector.y / _uprise->m_hVector.x;
+		m_hSpeed.y = (m_hSpeed.x*ratio);		
+		if ((!Collision::checkAABB(GetBox(), _uprise->GetBox())))
+		{
+			m_hState = ON_SPACE;			
+			_uprise = NULL;			
+			return;
+		}
+		for (int i = 0; i < object_static_can_collision.size(); i++)
+		{
+			time = Collision::sweptAABBCheck(GetBox(), object_static_can_collision.at(i)->GetBox(), nx, ny);
+			if (time < 1)
+			{
+				if (object_static_can_collision.at(i)->type == land)
+				{
+					if (nx !=0)
+					{
+						m_hPosition.x += m_hSpeed.x;												
+						m_hSpeed.x = -m_hSpeed.x;
+					}			
+					if (ny==1)
+					{
+ 						m_hObjectGround = object_static_can_collision.at(i);
+						m_hState = ON_GROUND;
+						return;
+					}
+					if (ny==-1)
+					{
+						m_hSpeed.x = -m_hSpeed.x;
+					}
+				}
+				if (object_static_can_collision.at(i)->type == uprise&&_uprise->id != object_static_can_collision.at(i)->id)
+				{					
+					_uprise = object_static_can_collision.at(i);
+				}
+			}
+		}		
+			m_hPosition.x += m_hSpeed.x;						
+			m_hPosition.y += m_hSpeed.y;
+
+		return;
+		break;
 	case ON_SPACE:
 		object_static_can_collision = GetStaticObject();
 		m_hObjectLeft = NULL;
@@ -363,8 +405,16 @@ void Object::MoveObject()
 		for (int i = 0; i < object_static_can_collision.size(); i++)
 		{
 			time = Collision::sweptAABBCheck(GetBox(), object_static_can_collision.at(i)->GetBox(), nx, ny);
-			if (time < 1){
-				//time = Collision::sweptAABBCheck(GetBox(), object_static_can_collision.at(i)->GetBox(), nx, ny);
+			if (time < 1)
+			{
+				if (object_static_can_collision.at(i)->type == uprise)
+				{
+					if (ny != 0)
+						m_hPosition.y -= 2;
+					m_hState = ON_UPRISE;
+					_uprise = object_static_can_collision.at(i);
+					return;
+				}
 				if (nx == 1 && object_static_can_collision.at(i)->type != box)
 				{
 					m_hPosition.x += time*m_hSpeed.x;
@@ -409,10 +459,25 @@ void Object::MoveObject()
 		m_hObjectLeft = NULL;
 		m_hObjectRight = NULL;
 		for (int i = 0; i < object_static_can_collision.size(); i++)
-		{
+		{			
 			time = Collision::sweptAABBCheck(GetBox(), object_static_can_collision.at(i)->GetBox(), nx, ny);
-			if (time < 1 && time >= 0 && object_static_can_collision.at(i)->type != box){
-
+			if (time < 1 && time >= 0 && object_static_can_collision.at(i)->type != box)
+			{
+				if (object_static_can_collision.at(i)->type == uprise)
+				{
+					m_hState = ON_UPRISE;					
+					_uprise = object_static_can_collision.at(i);
+					m_hPosition.x += m_hSpeed.x;
+					if (nx==1)
+					{
+						m_hPosition.x += 1;
+					}
+					if (nx == -1)
+					{
+						m_hPosition.x -= 1;
+					}
+					return;
+				}
 				if (nx == 1 && object_static_can_collision.at(i)->type != box)
 				{
 
@@ -582,6 +647,18 @@ void Object::RenderBoxCollision(Object* object)
 void Object::RenderAffection()
 {
 
+}
+
+void Object::RenderBoxShadow()
+{
+	RECT src;
+	src.left = 0;
+	src.right = src.left + 16;
+	src.top = 0;
+	src.bottom = src.top + 16;
+	RECT a;	
+	a = m_hBox_Shadow->getRect();		
+	_LocalGraphic->tDrawTexture(_LocalContent->LoadTexture("brick.png"), src, a, D3DXVECTOR2(m_hBox_Shadow->getCenter()), D3DCOLOR_XRGB(0, 0, 255), 0);
 }
 
 

@@ -88,6 +88,7 @@
     <ClInclude Include="C_Box.h" />
     <ClInclude Include="C_Drain.h" />
     <ClInclude Include="C_Land.h" />
+    <ClInclude Include="C_Music.h" />
     <ClInclude Include="C_Question_Block.h" />
     <ClInclude Include="C_Uprise.h" />
     <ClInclude Include="DSutil.h" />
@@ -136,6 +137,7 @@
     <ClCompile Include="C_Box.cpp" />
     <ClCompile Include="C_Drain.cpp" />
     <ClCompile Include="C_Land.cpp" />
+    <ClCompile Include="C_Music.cpp" />
     <ClCompile Include="C_Question_Block.cpp" />
     <ClCompile Include="C_Uprise.cpp" />
     <ClCompile Include="DSutil.cpp" />

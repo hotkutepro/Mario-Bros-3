@@ -6,16 +6,6 @@ C_Brick::C_Brick()
 {
 }
 
-C_Brick::C_Brick(D3DXVECTOR2 pos, D3DXVECTOR2 speed) :Object(pos,speed)
-{
-
-}
-
-C_Brick::C_Brick(TYPEOBJECT _t) : Object(_t)
-{
-
-}
-
 
 C_Brick::~C_Brick()
 {

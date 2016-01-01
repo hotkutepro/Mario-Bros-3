@@ -14,9 +14,9 @@
 #define  V_FALLDOWN -1 // tốc độ rơi khi press X
 enum TYPEOBJECT{
 	brick, coin, drain, land, leaf, mushroom_red, p, box, question_block, star, tarnooki, tarnooki_fly,
-	tortoise, tortoise_fly, tortoise_red, tree, tree_red, tree_red_shoot, tree_shoot, bullet, mario,uprise,oneup
+	tortoise, tortoise_fly, tortoise_red, tree, tree_red, tree_red_shoot, tree_shoot, bullet, mario,uprise,oneup,music
 };
-enum STATE{ ON_GROUND, ON_SPACE, FALL_DOWN, ON_FLY,OTHER };
+enum STATE{ ON_GROUND, ON_SPACE, FALL_DOWN, ON_FLY, OTHER, ON_UPRISE };
 enum DIRECT{ left,right };
 enum Status
 {
@@ -25,7 +25,7 @@ enum Status
 class Object:public Operate
 {
 private:
-	 
+	Object* _uprise;
 protected:		
 	
 public:
@@ -36,6 +36,8 @@ public:
 	bool isRight = false;
 	// chuan bi cam rua
 	bool ready = false;
+	Box* m_hBox_Shadow;
+	float m_hC_Shadow;
 
 	Box* m_hBox;
 	// thoi gian co the bay
@@ -98,6 +100,7 @@ public:
 	virtual void RenderBoxDebug();	
 	virtual void RenderBoxCollision(Object* object);
 	virtual void RenderAffection();
+	virtual void RenderBoxShadow();
 	virtual Box* GetBox();
 	virtual Box* GetBoxWithObject(Object* object);
 	virtual Box* GetBoxTop();

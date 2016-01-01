@@ -72,6 +72,7 @@ private:
 	FrkSprite* MarioRunRight;
 	FrkSprite* MarioSuperJumpLeft;
 	FrkSprite* MarioSuperJumpRight;
+	Object* _uprise;
 #pragma endregion
 public:
 	Infomation* info;
@@ -125,6 +126,8 @@ public:
 	void BrosFall(float gameTime);
 	void Attack();
 	void IsAttacked();
+	Box* GetBox_CLeft();
+	Box* GetBox_CRight();
 	Box* GetBoxWithObject(Object* object);
 	Box* GetBox();
 	Box* GetBoxTop();

@@ -77,7 +77,7 @@ void State_4::Render()
 			 it_Object->second->Render();
 	}
 	//hero->RenderBoundBox();
-	//hero->RenderDebug();
+	hero->RenderDebug();
 	//hero->RenderV();
 	//hero->ReanderViewPort();
 	hero->Render();

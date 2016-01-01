@@ -29,7 +29,7 @@ void State_5::Load()
 	map1->Init("hihi2.txt", ResourcesManager::GetInstance()->GetTexture(TextureID::TileMap2));
 	hero = new SuperHero();
 	hero->Load();
-	hero->status = BROS;
+	hero->status = MARIO;
 	_LocalHero = hero;
 	camera->Update(hero->GetPosition());
 	mapObject::iterator it;
@@ -70,15 +70,18 @@ void State_5::Render()
 	{
 
 		it_Object = qnode->m_Objects.find(*id_Objects);
-		it_Object->second->RenderBoxDebug();
+		
+		//it_Object->second->RenderBoxDebug();
+		if (it_Object->second->type == uprise)
+			it_Object->second->RenderBoxShadow();
 		if (it_Object->second->getCurrentSprite() != NULL)
 			it_Object->second->Render();
 	}
 	//hero->RenderBoundBox();
 	hero->RenderDebug();
-	hero->RenderV();
+	//hero->RenderV();
 	//hero->ReanderViewPort();
-	//hero->Render();
+	hero->Render();
 	//hero->ReanderGroundBox();
 	_LocalGraphic->End();
 

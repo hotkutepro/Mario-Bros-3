@@ -23,34 +23,31 @@ FrkCamera::~FrkCamera()
 }
 
 void FrkCamera::Update(D3DXVECTOR2 target)
-{
-	m_hVpx = Zoom *target.x - Center_W;
-	m_hVpy = (target.y)*Zoom + Center_H;
+{	
+	m_hVpx = Zoom *target.x - Center_W;	
 	if (m_hVpx < 0)
 		m_hVpx = 0;
-	if (m_hVpx + 320 >= m_hMaxWidth*Zoom)//800 là chiều dài của cửa sổ
+	if (m_hVpx + 320 >= m_hMaxWidth*Zoom)
 		m_hVpx = m_hMaxWidth*Zoom - 320;
-
-	if ((_LocalHero->m_hPosition.y > 336 && _LocalHero->m_hPosition.y<592) || _LocalHero->m_hState == ON_FLY)
-	{
-		m_hVpy = (target.y)*Zoom + Center_H;
-	}
-	else if (_LocalHero->m_hPosition.y >= 448)
-	{
-		m_hVpy = 720;
-	}
-	else if (_LocalHero->m_hPosition.y < 240)
-	{
-		m_hVpy = 240;
-	}
-	else
-	{
-
-	}	
 	R_Viewport.left = m_hVpx;
 	R_Viewport.right = m_hVpx + 320;//320;
 	R_Viewport.top = 0;//720-mhvpy
 	R_Viewport.bottom = 720;//240;	
+	if (_LocalHero->m_hPosition.y <240)
+	{
+		m_hVpy = 240;
+		return;
+	}
+	if (_LocalHero->m_hPosition.y>448)
+	{
+		m_hVpy = 704;
+		return;
+	}
+	if (_LocalHero->m_hPosition.y >240)
+	{
+		m_hVpy = 448;
+		return;
+	}				
 }
 
 D3DXMATRIX* FrkCamera::GetTransformMatrix()

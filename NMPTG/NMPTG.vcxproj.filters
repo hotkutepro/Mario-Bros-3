@@ -157,6 +157,9 @@
     <ClInclude Include="Infomation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="C_Music.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="FrkCamera.cpp">
@@ -294,6 +297,7 @@
     <ClCompile Include="Infomation.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
+    <ClCompile Include="C_Music.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
