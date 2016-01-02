@@ -3,6 +3,7 @@
 
 E_Plant::E_Plant()
 {
+	type = TYPEOBJECT::tree;
 }
 
 
@@ -17,8 +18,7 @@ void E_Plant::Load()
 	m_hCurrentSprite = Tree;
 	Object::Load();
 	pos.x = m_hPosition.x;
-	pos.y = m_hPosition.y - 16;
-	type = TYPEOBJECT::tree;
+	pos.y = m_hPosition.y - 16;	
 	m_hPosition.x += 8;	
 	m_hPosition.y += 16;
 	m_hSpeed.y = -1;

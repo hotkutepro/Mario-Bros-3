@@ -4,6 +4,7 @@
 
 E_Tarnooki_Fly::E_Tarnooki_Fly()
 {
+	type = TYPEOBJECT::tarnooki_fly;
 }
 
 
@@ -17,8 +18,7 @@ void E_Tarnooki_Fly::Load()
 	E_MushroomRed = ResourcesManager::GetInstance()->GetSprite(SpriteID::E_MushroomRed);
 	E_MushroomRedDeath = ResourcesManager::GetInstance()->GetSprite(SpriteID::E_MushroomRedDeath);
 	setCurrentSprite(E_FlyMushroom);
-	Object::Load();
-	type = TYPEOBJECT::tarnooki_fly;
+	Object::Load();	
 	m_hDirect = DIRECT::left;
 	m_hState = ON_SPACE;
 	m_hSpeed.x = -1; m_hSpeed.y = -2;
@@ -51,7 +51,7 @@ void E_Tarnooki_Fly::Collision_Up()
 
 void E_Tarnooki_Fly::Collision_Down()
 {
-
+	_LocalHero->IsAttacked();
 }
 
 void E_Tarnooki_Fly::Collision_Left()

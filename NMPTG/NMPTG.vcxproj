@@ -94,7 +94,7 @@
     <ClInclude Include="DSutil.h" />
     <ClInclude Include="E_Plant_Red.h" />
     <ClInclude Include="E_Plant.h" />
-    <ClInclude Include="E_Plant_Gun.h" />
+    <ClInclude Include="C_Block.h" />
     <ClInclude Include="E_Plant_Red_Gun.h" />
     <ClInclude Include="E_Tarnooki.h" />
     <ClInclude Include="E_Tarnooki_Fly.h" />
@@ -143,7 +143,7 @@
     <ClCompile Include="DSutil.cpp" />
     <ClCompile Include="E_Plant_Red.cpp" />
     <ClCompile Include="E_Plant.cpp" />
-    <ClCompile Include="E_Plant_Gun.cpp" />
+    <ClCompile Include="C_Block.cpp" />
     <ClCompile Include="E_Tortoise_Fly.cpp" />
     <ClCompile Include="E_Plant_Red_Gun.cpp" />
     <ClCompile Include="E_Tarnooki.cpp" />

@@ -11,6 +11,7 @@ namespace QT
         public int id = -1;
         public Rectangle oRect;
         public GameObject gameObject;
+        public int IsUprise= 0;        
         public CTreeObject(Rectangle _r) {
             oRect = _r;            
         }

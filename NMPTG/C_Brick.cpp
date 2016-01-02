@@ -4,6 +4,7 @@
 
 C_Brick::C_Brick()
 {
+	type = TYPEOBJECT::brick;
 }
 
 
@@ -15,8 +16,7 @@ void C_Brick::Load()
 {		
 	brick = ResourcesManager::GetInstance()->GetSprite(SpriteID::Brick);
 	Coin = ResourcesManager::GetInstance()->GetSprite(SpriteID::Coin);
-	setCurrentSprite(brick);
-	type = TYPEOBJECT::brick;
+	setCurrentSprite(brick);	
 	Object::Load();
 	status = 0;	
 	n = 0;

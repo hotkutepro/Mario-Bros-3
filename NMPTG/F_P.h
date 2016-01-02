@@ -9,6 +9,7 @@ public:
 	void Load();
 	void Update(float gameTime);
 	void Die();	
+	void WatchUp();
 	F_P();
 	~F_P();
 };

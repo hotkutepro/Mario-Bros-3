@@ -5,6 +5,7 @@
 
 E_Tortoise_Red::E_Tortoise_Red()
 {
+	type = TYPEOBJECT::tortoise_red;
 }
 
 
@@ -21,18 +22,26 @@ void E_Tortoise_Red::Load()
 	E_TortoiseshellRedLeftReverse = ResourcesManager::GetInstance()->GetSprite(SpriteID::E_TortoiseshellRedLeftReverse);
 	E_TortoiseshellRedRightReverse = ResourcesManager::GetInstance()->GetSprite(SpriteID::E_TortoiseshellRedRightReverse);
 	setCurrentSprite(E_TortoiseRedRight);
-	Object::Load();
-	type = TYPEOBJECT::tortoise_red;	
+	Object::Load();	
 	m_hState = ON_SPACE;
 	m_hSpeed.x = -vx;
 	m_hSpeed.y = -2;
 	status = 0;
 	IsControl = false;
+	timelife = 0;
 }
 
 void E_Tortoise_Red::Update(float gameTime)
 {
-	
+	if (timelife > 0)
+		timelife++;
+	if (timelife == 150)
+	{
+		timelife = 0;
+		m_hSpeed.x = vx;
+		status = 0;
+		IsControl = false;
+	}
 	SetSprite();
 	SetMove();
 	Object::Update(gameTime);
@@ -45,9 +54,12 @@ void E_Tortoise_Red::Update(float gameTime)
 }
 void E_Tortoise_Red::Collision_Up()
 {
+	timelife = 1;
 	_LocalHero->m_hSpeed.y = 5;
 	if (status == 0)
-		m_hSpeed.x = 0;
+	{ 
+		m_hSpeed.x = 0;		
+	}
 	if (status == 1)
 	{
 		m_hSpeed.x = 0;		
@@ -114,10 +126,9 @@ void E_Tortoise_Red::SetSprite()
 	}
 }
 
-
 void E_Tortoise_Red::Collision_Down()
 {
-
+	_LocalHero->IsAttacked();
 }
 
 void E_Tortoise_Red::Collision_Left()
@@ -211,7 +222,7 @@ void E_Tortoise_Red::Collision_Shell_Object()
 }
 
 void E_Tortoise_Red::SetControl()
-{
+{	
 	if (IsControl)
 	{
 		if (!_LocalHero->ready)

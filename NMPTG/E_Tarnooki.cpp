@@ -5,6 +5,7 @@
 
 E_Tarnooki::E_Tarnooki()
 {
+	type = TYPEOBJECT::tarnooki;
 }
 
 
@@ -23,8 +24,7 @@ void E_Tarnooki::Load()
 	m_hSpeed.y = -2;
 	status = 0;
 	t = 0;
-	m_hDirect = DIRECT::left;
-	type = TYPEOBJECT::tarnooki;
+	m_hDirect = DIRECT::left;	
 }
 
 void E_Tarnooki::Update(float gameTime)
@@ -59,7 +59,7 @@ void E_Tarnooki::Collision_Up()
 
 void E_Tarnooki::Collision_Down()
 {
-
+	_LocalHero->IsAttacked();
 }
 
 void E_Tarnooki::Collision_Left()

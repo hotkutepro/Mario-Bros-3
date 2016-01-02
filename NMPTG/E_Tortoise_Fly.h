@@ -1,6 +1,7 @@
 #pragma once
 #include"Object.h"
 #define vx_run 4
+#define vx 1;
 class E_Tortoise_Fly :public Object
 {
 
@@ -13,6 +14,7 @@ class E_Tortoise_Fly :public Object
 	FrkSprite* E_TortoiseshellGreenLeftReverse;
 	FrkSprite* E_TortoiseshellGreenRightReverse;	
 	bool IsControl;
+	int timelife;
 public:
 	void Load();	
 	void Update(float gameTime);

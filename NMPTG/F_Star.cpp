@@ -4,6 +4,7 @@
 
 F_Star::F_Star()
 {
+	type = TYPEOBJECT::star;
 }
 
 
@@ -14,8 +15,7 @@ F_Star::~F_Star()
 void F_Star::Load()
 {	
 	m_hCurrentSprite = ResourcesManager::GetInstance()->GetSprite(SpriteID::Endgame);
-	Object::Load();
-	type = TYPEOBJECT::star;
+	Object::Load();	
 }
 
 void F_Star::Update(float gameTime)

@@ -134,7 +134,7 @@ namespace QT
 
         public void Writer_QNode()
         {
-            using (StreamWriter sw = new StreamWriter("C:/Users/pumpa/Desktop/Mario-Bros-3-final.git/trunk/NMPTG/QNode.txt"))
+            using (StreamWriter sw = new StreamWriter("C:/Users/HomeSK/Desktop/Mario-Bros-3.git/trunk/NMPTG/QNode2.txt"))
             {
                 sw.Write(count_QNode + "\r\n");
                 foreach(QNode i in l_QNode)
@@ -143,7 +143,7 @@ namespace QT
         }
         public void ghifile()
         {
-            using (StreamWriter w = new StreamWriter("C:/Users/pumpa/Desktop/Mario-Bros-3-final.git/trunk/NMPTG/OiNode.txt"))
+            using (StreamWriter w = new StreamWriter("C:/Users/HomeSK/Desktop/Mario-Bros-3.git/trunk/NMPTG/OiNode2.txt"))
             {
                 w.Write(nla.Count+"\r\n");
                 foreach (QNode i in nla)

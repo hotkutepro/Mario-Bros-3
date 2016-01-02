@@ -8,7 +8,7 @@
 #include "C_Question_Block.h"
 #include "E_Tortoise_Fly.h"
 #include "E_Plant.h"
-#include "E_Plant_Gun.h"
+#include "C_Block.h"
 #include "E_Plant_Red.h"
 #include "E_Plant_Red_Gun.h"
 #include "E_Tarnooki.h"
@@ -227,7 +227,7 @@ void QNode::LoadObjects(string path)//Viet lai
 				tmp = new E_Plant_Red_Gun();
 				break;
 			case 18:
-				tmp = new E_Plant_Gun();
+				tmp = new C_Block();
 				break;
 			case  19:
 				tmp = new C_Uprise();
@@ -256,12 +256,12 @@ void QNode::LoadObjects(string path)//Viet lai
 void QNode::LoadObjects_Dynamic(string path)
 {
 	int count;
-	TYPEOBJECT type;
+	//TYPEOBJECT type;
 	string stype;
 	fstream open(path);
 	string line;
-	TYPEOBJECT typeO[19] = { brick, coin, drain, land, leaf, mushroom_red, p, box, question_block, star, tarnooki,
-		tarnooki_fly, tortoise, tortoise_fly, tortoise_red, tree, tree_red, tree_red_shoot, tree_shoot };
+	//TYPEOBJECT typeO[19] = { brick, coin, drain, land, leaf, mushroom_red, p, box, question_block, star, tarnooki,
+		//tarnooki_fly, tortoise, tortoise_fly, tortoise_red, tree, tree_red, tree_red_shoot, block };
 	for (int i = 0; i < 19; i++)
 	{
 		open >> stype;
@@ -326,7 +326,7 @@ void QNode::LoadObjects_Dynamic(string path)
 				tmp = new E_Plant_Red_Gun();
 				break;
 			case 18:
-				tmp = new E_Plant_Gun();
+				tmp = new C_Block();
 				break;
 			}
 			open >> tmp->id;
@@ -337,7 +337,7 @@ void QNode::LoadObjects_Dynamic(string path)
 			open >> size.x;
 			open >> size.y;
 			tmp->SetPosition(pos.x, pos.y);
-			tmp->type = typeO[i];
+			//tmp->type = typeO[i];
 			tmp->m_hSize.x = size.x;
 			tmp->m_hSize.y = size.y;
 			if (tmp->type == tarnooki || tmp->type == tarnooki_fly || tmp->type == tortoise || tmp->type == tortoise_fly || tmp->type == tortoise_red)

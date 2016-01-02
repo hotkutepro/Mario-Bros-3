@@ -14,7 +14,7 @@
 #define  V_FALLDOWN -1 // tốc độ rơi khi press X
 enum TYPEOBJECT{
 	brick, coin, drain, land, leaf, mushroom_red, p, box, question_block, star, tarnooki, tarnooki_fly,
-	tortoise, tortoise_fly, tortoise_red, tree, tree_red, tree_red_shoot, tree_shoot, bullet, mario,uprise,oneup,music
+	tortoise, tortoise_fly, tortoise_red, tree, tree_red, tree_red_shoot, block, bullet, mario,uprise,oneup,music
 };
 enum STATE{ ON_GROUND, ON_SPACE, FALL_DOWN, ON_FLY, OTHER, ON_UPRISE };
 enum DIRECT{ left,right };
@@ -64,7 +64,7 @@ public:
 	bool life_state;//dung cho question_block
 	bool connect=false;//Kiểm tra có kết nối với brick ko.
 	//khong dieu kien
-	vector<Object*> GetStaticObject();///tra ve danh sach land, box, brick, QUESTION_BLOCK, uprise  de kiem tra khi object roi	
+	vector<Object*> GetStaticObject();///tra ve danh sach block, music land, box, brick, QUESTION_BLOCK, uprise  de kiem tra khi object roi	
 	//Dieu kien life = true
 	vector<Object*> GetDynamicObject();//tra ve danh sach cac doi tuong di chuyen tortoise, mushroom, tarnooki, tree,	leaf	DIEU KIEN: LIFE = TRUE
 

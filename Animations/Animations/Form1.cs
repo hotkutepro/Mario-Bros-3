@@ -49,26 +49,37 @@ namespace Animations
                     s.c = b.Width / b.Height;
                 else
                     s.c = b.Width / b.Height + 1;
-                if (b.Width == 96 && b.Height == 48)
-                    s.c = 3;
-                if (b.Width == 32 && b.Height == 16)
+                if (b.Width == 22 && b.Height == 18)
                     s.c = 1;
-                if (b.Width == 48 && b.Height == 32)
+                if (b.Width == 64 && b.Height == 32)
+                    s.c = 4;
+                if (b.Width == 80 && b.Height == 32)
+                    s.c = 4;
+                if (b.Width == 48 && b.Height == 27)
+                    s.c = 3;
+                if (b.Width == 32 && b.Height == 32)
+                    s.c = 2;
+                if (b.Width == 16 && b.Height == 7)
+                    s.c = 1;
+                if (i == filename.Length - 1)
                     s.c = 1;
                 Label l_information = new Label();
                 l_information.Text = "" + s.c;
                 s.Controls.Add(l_information);
-                l_information.Location = new Point(0, 0);
                 l_information.BringToFront();
-                l_information.Size = new Size(20, 20);
-                l_information.BackColor = System.Drawing.Color.Gold;
+                l_information.Location = new Point(0,0);
+                l_information.BringToFront();
+                l_information.Size = new Size(10, 10);
+                l_information.BackColor = System.Drawing.Color.Cyan;
                 l_information.ForeColor = Color.Red;
                 p_mapImage.Controls.Add(s);
+
                 s.Size = new Size(b.Width, b.Height);
                 s.Location = new Point((i % 5)*192, (i / 5) * 48);//xét tọa độ x0, y0 bt: 192: 48
                 s.BringToFront();
                 s.MouseClick += new MouseEventHandler(sprite_click);
                 list_sprite.Add(s);
+                
             }
 
         }
@@ -107,7 +118,14 @@ namespace Animations
 
                     }
                 }
-
+                for (int i = 0; i < filename.Length; i++)
+                {
+                    if (!filename[i].Contains("Tortoise") && !filename[i].Contains("Mushroom") && !filename[i].Contains("Mario") && !filename[i].Contains("Bros"))
+                    {
+                        string[] s_name = filename[i].Split('.');
+                        sw.WriteLine("FrkSprite* " + s_name[0] + ";");
+                    }
+                }
                 sw.Close();
             }
         }
@@ -134,6 +152,14 @@ namespace Animations
                 for (int i = 0; i < filename.Length; i++)
                 {
                     if (filename[i].Contains("Mushroom"))
+                    {
+                        string[] s_name = filename[i].Split('.');
+                        sw.WriteLine(s_name[0] + "= ResourcesManager::GetInstance()->GetSprite(SpriteID::" + s_name[0] + ");");
+                    }
+                }
+                for (int i = 0; i < filename.Length; i++)
+                {
+                    if (!filename[i].Contains("Tortoise")&&!filename[i].Contains("Mushroom")&&!filename[i].Contains("Mario")&&!filename[i].Contains("Bros"))
                     {
                         string[] s_name = filename[i].Split('.');
                         sw.WriteLine(s_name[0] + "= ResourcesManager::GetInstance()->GetSprite(SpriteID::" + s_name[0] + ");");

@@ -186,6 +186,17 @@ void SuperHero::Update(float gametime)
 #pragma endregion	
 
 #pragma region KeyPressed/Up
+		if (_LocalKeyboard->IsKeyPressed(DIK_B))
+		{
+			if (status!=BROS)
+			{
+				status++;
+			}
+			else
+			{
+				status = 0;
+			}
+		}
 		if (_LocalKeyboard->IsKeyPressed(DIK_LCONTROL))
 		{
 			Attack();
@@ -1220,7 +1231,7 @@ void SuperHero::Move()
 		//m_hObjectGround = NULL;
 		//m_hObjectLeft = NULL;
 		//m_hObjectRight = NULL;
-		if ((!Collision::checkAABB(GetBox(), _uprise->GetBox())))
+		if ((!Collision::checkAABB(GetBox(), _uprise->m_hBox_Shadow)))
 		{
 			m_hState = ON_SPACE;
 			_uprise = NULL;
@@ -1431,14 +1442,14 @@ void SuperHero::Move()
 				{
 					if (ny == 1)
 					{
-						m_hPosition.y += time*m_hSpeed.y;
+						m_hPosition.y += time*m_hSpeed.y-1;
 
 						_uprise = object_static_can_collision.at(i);
 						m_hState = ON_UPRISE;
 					}
 					if (nx != 0)
 					{
-						m_hPosition.x += time*m_hSpeed.x;
+						m_hPosition.x += time*m_hSpeed.x+nx*1;
 						_uprise = object_static_can_collision.at(i);
 						m_hState = ON_UPRISE;
 					}
@@ -1471,6 +1482,15 @@ void SuperHero::Move()
 				}
 				if (ny == 1 && nx == 0)
 				{
+					if (object_static_can_collision.at(i)->type == music)
+					{
+						m_hSpeed.y = 7;
+						if (m_hDirect == DIRECT::left)
+							m_hSpeed.x = -4;
+						else
+							m_hSpeed.x = 4;
+						return;
+					}
 					FallDown(time, 0);/////////
 					m_hSpeed.y = 0;
 					m_hState = ON_GROUND;
@@ -1480,7 +1500,7 @@ void SuperHero::Move()
 				if (ny == -1 && object_static_can_collision.at(i)->type != box)
 				{
 					m_hPosition.y += time*m_hSpeed.y;
-					m_hSpeed.y = 0;
+					m_hSpeed.y = 0;					
 				}
 			}
 		}
@@ -1512,7 +1532,7 @@ void SuperHero::Move()
 						}
 						if (nx == -1)
 						{
-							m_hPosition.x += time*m_hSpeed.x + 2;
+							m_hPosition.x += time*m_hSpeed.x + 3;
 							_uprise = object_static_can_collision.at(i);
 							m_hPosition.y += 2;
 							m_hState = ON_UPRISE;
@@ -1521,7 +1541,7 @@ void SuperHero::Move()
 						{
 							m_hPosition.x += time*m_hSpeed.x - 3;
 							_uprise = object_static_can_collision.at(i);
-							m_hPosition.y += 2;
+							m_hPosition.y += 1;
 							m_hState = ON_UPRISE;
 						}
 						return;

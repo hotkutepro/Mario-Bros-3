@@ -38,9 +38,9 @@ void FrkCamera::Update(D3DXVECTOR2 target)
 		m_hVpy = 240;
 		return;
 	}
-	if (_LocalHero->m_hPosition.y>448)
+	if (_LocalHero->m_hPosition.y>=464)
 	{
-		m_hVpy = 704;
+		m_hVpy = 688;
 		return;
 	}
 	if (_LocalHero->m_hPosition.y >240)

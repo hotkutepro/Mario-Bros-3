@@ -72,9 +72,8 @@ void State_4::Render()
 	{
 
 		it_Object = qnode->m_Objects.find(*id_Objects);
-		//it_Object->second->RenderBoxDebug();
-		if (it_Object->second->getCurrentSprite() != NULL)
-			 it_Object->second->Render();
+		it_Object->second->RenderBoxDebug();		
+		it_Object->second->Render();
 	}
 	//hero->RenderBoundBox();
 	//hero->RenderDebug();

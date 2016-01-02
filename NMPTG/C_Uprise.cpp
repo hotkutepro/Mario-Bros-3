@@ -30,7 +30,7 @@ void C_Uprise::Update(float gameTime)
 	{
 		m_hBox_Shadow->_position.x = m_hPosition.x;
 
-		m_hBox_Shadow->_position.y = m_hPosition.y-2;
+		m_hBox_Shadow->_position.y = m_hPosition.y;
 		if (m_hVector.y*m_hVector.x < 0)
 			m_hBox_Shadow->_position.y += m_hSize.y;
 	}
@@ -38,7 +38,7 @@ void C_Uprise::Update(float gameTime)
 	{
 		m_hBox_Shadow->_position.x = m_hPosition.x + m_hSize.x-16;	
 
-		m_hBox_Shadow->_position.y = m_hPosition.y - 3;
+		m_hBox_Shadow->_position.y = m_hPosition.y;
 		if (m_hVector.y*m_hVector.x > 0)			
 			m_hBox_Shadow->_position.y +=+ m_hSize.y;		
 			
@@ -48,8 +48,13 @@ void C_Uprise::Update(float gameTime)
 		m_hBox_Shadow->_position.x = _LocalHero->m_hPosition.x;
 		float dy = (_LocalHero->m_hPosition.x - m_hPosition.x)*(m_hVector.y / m_hVector.x);
 
-		m_hBox_Shadow->_position.y = m_hPosition.y + dy - 3;
+		m_hBox_Shadow->_position.y = m_hPosition.y + dy ;
 		if (m_hVector.y*m_hVector.x < 0)					
-			m_hBox_Shadow->_position.y += m_hSize.y+2;
+			m_hBox_Shadow->_position.y += m_hSize.y;
 	}
+}
+
+void C_Uprise::Render()
+{
+
 }

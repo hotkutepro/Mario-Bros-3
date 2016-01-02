@@ -72,7 +72,9 @@ namespace QT
         List<CTreeObject> lCTreeObject = new List<CTreeObject>();//dùng để kiểm tra 
         List<CTreeObject> lCtree = new List<CTreeObject>();
 
+        List<CTreeObject> c_uprise = new List<CTreeObject>();
         List<CTreeObject> c_brick = new List<CTreeObject>();
+        List<CTreeObject> c_music = new List<CTreeObject>();
         List<CTreeObject> c_land = new List<CTreeObject>();
         List<CTreeObject> c_tortoise = new List<CTreeObject>();
         List<CTreeObject> c_tortoise_fly = new List<CTreeObject>();
@@ -93,31 +95,23 @@ namespace QT
         List<CTreeObject> c_box = new List<CTreeObject>();
 
 
-
-        List<GameObject> brick = new List<GameObject>();
-        List<GameObject> land = new List<GameObject>();
-        List<GameObject> tortoise = new List<GameObject>();
-        List<GameObject> tortoise_fly = new List<GameObject>();
-        List<GameObject> tortoise_red = new List<GameObject>();
-        List<GameObject> mushroom_red = new List<GameObject>();
-        List<GameObject> leaf = new List<GameObject>();
-        List<GameObject> star = new List<GameObject>();
-        List<GameObject> coin = new List<GameObject>();
-        List<GameObject> question_block = new List<GameObject>();
-        List<GameObject> tarnooki = new List<GameObject>();
-        List<GameObject> tarnooki_fly = new List<GameObject>();
-        List<GameObject> tree = new List<GameObject>();
-        List<GameObject> tree_red = new List<GameObject>();
-        List<GameObject> tree_shoot = new List<GameObject>();
-        List<GameObject> tree_red_shoot = new List<GameObject>();
-        List<GameObject> drain = new List<GameObject>();
-        List<GameObject> p = new List<GameObject>();
+        
         #endregion
         #region Click vào button chọn loại object
         private void btBox_Click(object sender, EventArgs e)
         {
             ctype = typeO.Box;
             pImageType.Image = Image.FromFile("box.png");
+        }
+        private void btMusic_Click(object sender, EventArgs e)
+        {
+            ctype = typeO.Music;
+            pImageType.Image = Image.FromFile("music.png");
+        }
+        private void button1_Click(object sender, EventArgs e)
+        {
+            ctype = typeO.UpRise;
+            pImageType.Image = Image.FromFile("hill.png");
         }
         private void btBrick_Click(object sender, EventArgs e)
         {
@@ -244,21 +238,21 @@ namespace QT
                 MessageBox.Show("mouse.X = " + e.X + " mouse.Y = " + e.Y);
                 return;
             }            
-            if (ctype == typeO._null || mousedown == 0 || remove)
+            if (ctype == typeO._null || remove)
                 return;
             int i = e.X / 16;
             int j = e.Y / 16;
             int index = j * colum_Count + i;
-            if (index < 0 || index > row_Count * colum_Count)//Kiểm tra phần tử có chỉ số index có tồn tại hay không
+            if (index < 0 || index >= row_Count * colum_Count)//Kiểm tra phần tử có chỉ số index có tồn tại hay không
                 return;
             //Thêm đối tượng vào map            
-            if (lCTreeObject[index].id == -1)//Kiểm tra tại vị trí đang xét đã có hay chưa, có rồi thì thôi
-            {
+            //if (lCTreeObject[index].id == -1)//Kiểm tra tại vị trí đang xét đã có hay chưa, có rồi thì thôi
+            //{
                 lCTreeObject[index].id = index;
                 lCTreeObject[index].gameObject.id = index;
-            }
-            else
-                return;
+            //}
+            //else
+                //return;
             GameObject t = new GameObject(index, ctype);
             t.Image = pImageType.Image;
             t.Size = new System.Drawing.Size(t.Image.Width, t.Image.Height);
@@ -269,12 +263,23 @@ namespace QT
 
             switch (ctype)
             {
+                case typeO.UpRise:
+                    c_uprise.Add(ct);                    
+                    lCtree.Add(c_uprise[c_uprise.Count - 1]);
+                    break;
                 case typeO.brick:
                     c_brick.Add(ct);
                     pbImgMap.Controls.Add(c_brick[c_brick.Count - 1].gameObject);
                     c_brick[c_brick.Count - 1].gameObject.BringToFront();
                     lCtree.Add(c_brick[c_brick.Count - 1]);
                     break;
+                case typeO.Music:
+                    c_music.Add(ct);
+                    pbImgMap.Controls.Add(c_music[c_music.Count - 1].gameObject);
+                    c_music[c_music.Count - 1].gameObject.BringToFront();
+                    lCtree.Add(c_music[c_music.Count - 1]);
+                    break;
+
                 case typeO.coin:
                     c_coin.Add(ct);
                     pbImgMap.Controls.Add(c_coin[c_coin.Count - 1].gameObject);
@@ -292,6 +297,12 @@ namespace QT
                     pbImgMap.Controls.Add(c_land[c_land.Count - 1].gameObject);
                     c_land[c_land.Count - 1].gameObject.BringToFront();
                     lCtree.Add(c_land[c_land.Count - 1]);
+                    break;
+                    case typeO.tree_shoot:
+                    c_tree_shoot.Add(ct);
+                    pbImgMap.Controls.Add(c_tree_shoot[c_tree_shoot.Count - 1].gameObject);
+                    c_tree_shoot[c_tree_shoot.Count - 1].gameObject.BringToFront();
+                    lCtree.Add(c_tree_shoot[c_tree_shoot.Count - 1]);
                     break;
                 case typeO.leaf:
                     c_leaf.Add(ct);
@@ -377,12 +388,7 @@ namespace QT
                     c_tree_red_shoot[c_tree_red_shoot.Count - 1].gameObject.BringToFront();
                     lCtree.Add(c_tree_red_shoot[c_tree_red_shoot.Count - 1]);
                     break;
-                case typeO.tree_shoot:
-                    c_tree_shoot.Add(ct);
-                    pbImgMap.Controls.Add(c_tree_shoot[c_tree_shoot.Count - 1].gameObject);
-                    c_tree_shoot[c_tree_shoot.Count - 1].gameObject.BringToFront();
-                    lCtree.Add(c_tree_shoot[c_tree_shoot.Count - 1]);
-                    break;
+                
 
             }
         }        
@@ -418,6 +424,12 @@ namespace QT
                     pbImgMap.Controls.Add(c_brick[c_brick.Count - 1].gameObject);
                     c_brick[c_brick.Count - 1].gameObject.BringToFront();
                     lCtree.Add(c_brick[c_brick.Count - 1]);
+                    break;
+                case typeO.Music:
+                    c_music.Add(ct);
+                    pbImgMap.Controls.Add(c_music[c_music.Count - 1].gameObject);
+                    c_music[c_music.Count - 1].gameObject.BringToFront();
+                    lCtree.Add(c_music[c_music.Count - 1]);
                     break;
                 case typeO.coin:
                     c_coin.Add(ct);
@@ -521,12 +533,12 @@ namespace QT
                     c_tree_red_shoot[c_tree_red_shoot.Count - 1].gameObject.BringToFront();
                     lCtree.Add(c_tree_red_shoot[c_tree_red_shoot.Count - 1]);
                     break;
-                case typeO.tree_shoot:
-                    c_tree_shoot.Add(ct);
-                    pbImgMap.Controls.Add(c_tree_shoot[c_tree_shoot.Count - 1].gameObject);
-                    c_tree_shoot[c_tree_shoot.Count - 1].gameObject.BringToFront();
-                    lCtree.Add(c_tree_shoot[c_tree_shoot.Count - 1]);
-                    break;
+                //case typeO.tree_shoot:
+                //    c_tree_shoot.Add(ct);
+                //    pbImgMap.Controls.Add(c_tree_shoot[c_tree_shoot.Count - 1].gameObject);
+                //    c_tree_shoot[c_tree_shoot.Count - 1].gameObject.BringToFront();
+                //    lCtree.Add(c_tree_shoot[c_tree_shoot.Count - 1]);
+                //    break;
 
             }
         }
@@ -540,11 +552,22 @@ namespace QT
                 int i = e.X / 16;
                 int j = e.Y / 16;                
                 int i0 = c_land[c_land.Count - 1].oRect.X / 16;
-                int j0 = c_land[c_land.Count - 1].oRect.Y / 16;
+                int j0 = c_land[c_land.Count - 1].oRect.Y / 16;                
                 c_land[c_land.Count - 1].oRect.Width = (Math.Abs(i - i0) + 1) * 16;
                 c_land[c_land.Count - 1].oRect.Height= (Math.Abs(j - j0) + 1) * 16;
                 c_land[c_land.Count - 1].gameObject.Size = new Size(c_land[c_land.Count - 1].oRect.Width, c_land[c_land.Count - 1].oRect.Height);
                 c_land[c_land.Count - 1].gameObject.BackColor = Color.Cyan;
+            }
+            if (ctype == typeO.tree_shoot)
+            {
+                int i = e.X / 16;
+                int j = e.Y / 16;
+                int i0 = c_tree_shoot[c_tree_shoot.Count - 1].oRect.X / 16;
+                int j0 = c_tree_shoot[c_tree_shoot.Count - 1].oRect.Y / 16;
+                c_tree_shoot[c_tree_shoot.Count - 1].oRect.Width = (Math.Abs(i - i0) + 1) * 16;
+                c_tree_shoot[c_tree_shoot.Count - 1].oRect.Height = (Math.Abs(j - j0) + 1) * 16;
+                c_tree_shoot[c_tree_shoot.Count - 1].gameObject.Size = new Size(c_tree_shoot[c_tree_shoot.Count - 1].oRect.Width, c_tree_shoot[c_tree_shoot.Count - 1].oRect.Height);
+                c_tree_shoot[c_tree_shoot.Count - 1].gameObject.BackColor = Color.Cyan;
             }
             if (ctype == typeO.Box)
             {
@@ -557,13 +580,50 @@ namespace QT
                 c_box[c_box.Count - 1].gameObject.Size = new Size(c_box[c_box.Count - 1].oRect.Width, c_box[c_box.Count - 1].oRect.Height);
                 c_box[c_box.Count - 1].gameObject.BackColor = Color.DeepPink;
             }
+            if (ctype == typeO.UpRise) 
+            {
+                int i = e.X / 16;
+                int j = e.Y / 16;
+                int i0 = c_uprise[c_uprise.Count - 1].oRect.X / 16;
+                int j0 = c_uprise[c_uprise.Count - 1].oRect.Y / 16;
+                if (j0 >= j)
+                {
+                    c_uprise[c_uprise.Count - 1].oRect.Y = j * 16;
+                    c_uprise[c_uprise.Count - 1].gameObject.Location = new Point(i0*16, j * 16);
+                    c_uprise[c_uprise.Count - 1].IsUprise = 1;
+                    c_uprise[c_uprise.Count - 1].gameObject.vy = -j + j0 + 1;
+                }
+                else
+                {
+                    c_uprise[c_uprise.Count - 1].gameObject.vy = -j + j0 - 1;
+                }
+                c_uprise[c_uprise.Count - 1].gameObject.vx = i - i0+1;                
+                c_uprise[c_uprise.Count - 1].oRect.Width = (Math.Abs(i - i0) + 1) * 16;
+                c_uprise[c_uprise.Count - 1].oRect.Height = (Math.Abs(j - j0) + 1) * 16;
+                c_uprise[c_uprise.Count - 1].gameObject.Size = new Size(c_uprise[c_uprise.Count - 1].oRect.Width, c_uprise[c_uprise.Count - 1].oRect.Height);
+
+                c_uprise[c_uprise.Count - 1].gameObject.BackColor = Color.Cyan;
+                pbImgMap.Controls.Add(c_uprise[c_uprise.Count - 1].gameObject);
+                c_uprise[c_uprise.Count - 1].gameObject.BringToFront();
+                c_uprise[c_uprise.Count - 1].gameObject.Paint += new System.Windows.Forms.PaintEventHandler(this.pbUprise_Paint);
+            }
             mousedown = 0;            
         }
-        
-        private void pDrain_Paint(object sender, PaintEventArgs e)
+        private void pbUprise_Paint(object sender, PaintEventArgs e) 
         {
-
-        }
+            GameObject t = (GameObject)sender;
+            Graphics g = e.Graphics;
+            Pen p = new Pen(Color.DarkGreen, 0.5f);
+            if (t.vy < 0)
+            {
+                g.DrawLine(p, new Point(0, 0), new Point(t.Width, t.Height));
+            }
+            else
+            {
+                g.DrawLine(p, new Point(0, t.Height), new Point(t.Width, 0));
+            }
+            
+        }        
         #endregion              
         bool check_setregion() {
             int x1, y1, x2, y2;
@@ -625,7 +685,19 @@ namespace QT
                     break;
                 }
             }
-            switch (ct.type) { 
+            switch (ct.type) 
+            {
+                case typeO.UpRise:
+                    for (int u = 0; u < c_uprise.Count; u++)
+                    {
+                        if (c_uprise[u].id == ct.id)
+                        {
+                            lCTreeObject[index].id = -1;
+                            pbImgMap.Controls.Remove(c_uprise[u].gameObject);
+                            c_uprise.RemoveAt(u);
+                        }
+                    }
+                    break;
                 case typeO.brick:
                     for (int u = 0; u< c_brick.Count;u++ )
                     {
@@ -636,6 +708,17 @@ namespace QT
                             c_brick.RemoveAt(u);
                         }
                     }
+                        break;
+                case typeO.Music:
+                        for (int u = 0; u < c_music.Count; u++)
+                        {
+                            if (c_music[u].id == ct.id)
+                            {
+                                lCTreeObject[index].id = -1;
+                                pbImgMap.Controls.Remove(c_music[u].gameObject);
+                                c_music.RemoveAt(u);
+                            }
+                        }
                         break;
                 case typeO.coin:
                         for (int u = 0; u < c_coin.Count; u++)
@@ -873,7 +956,7 @@ namespace QT
         private void Write_Object()
         {
             int mapHeight = pbImgMap.Height;
-            using (StreamWriter sw = new StreamWriter("C:/Users/pumpa/Desktop/Mario-Bros-3-final.git/trunk/NMPTG/Object.txt"))
+            using (StreamWriter sw = new StreamWriter("C:/Users/HomeSK/Desktop/Mario-Bros-3.git/trunk/NMPTG/Object2.txt"))
             {
                 sw.WriteLine("brick" + " " + c_brick.Count);
                 for (int i = 0; i < c_brick.Count; i++)
@@ -970,6 +1053,16 @@ namespace QT
                 {
                     sw.WriteLine(c_tree_shoot[i].id + " " + c_tree_shoot[i].oRect.X + " " + (mapHeight - c_tree_shoot[i].oRect.Bottom) + " " + c_tree_shoot[i].oRect.Width + " " + c_tree_shoot[i].oRect.Height);
                 }
+                sw.WriteLine("uprise" + " " + c_uprise.Count);
+                for (int i = 0; i < c_uprise.Count; i++)
+                {
+                    sw.WriteLine(c_uprise[i].id + " " + c_uprise[i].oRect.X + " " + (mapHeight - c_uprise[i].oRect.Bottom) + " " + c_uprise[i].oRect.Width + " " + c_uprise[i].oRect.Height + " " + c_uprise[i].gameObject.vx+" "+c_uprise[i].gameObject.vy);
+                }
+                sw.WriteLine("music" + " " + c_music.Count);
+                for (int i = 0; i < c_music.Count; i++)
+                {
+                    sw.WriteLine(c_music[i].id + " " + c_music[i].oRect.X + " " + (mapHeight - c_music[i].oRect.Bottom) + " " + c_music[i].oRect.Width + " " + c_music[i].oRect.Height);
+                }
                 sw.Close();
             }
         }
@@ -984,6 +1077,10 @@ namespace QT
             else
                 btSetRegions.Text = "set Regions: off";
         }
+       
+
+        
+       
 
         
             

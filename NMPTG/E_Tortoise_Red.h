@@ -13,6 +13,7 @@ private:
 	FrkSprite* E_TortoiseshellRedLeftReverse;
 	FrkSprite* E_TortoiseshellRedRightReverse;		
 	bool IsControl;
+	int timelife;
 public:
 	void Load();
 	void Update(float gameTime);

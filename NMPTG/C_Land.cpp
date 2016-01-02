@@ -3,6 +3,7 @@
 
 C_Land::C_Land()
 {
+	type = TYPEOBJECT::land;
 }
 
 
@@ -11,16 +12,17 @@ C_Land::~C_Land()
 }
 
 void C_Land::Load()
-{			
-	//m_hCurrentSprite = ResourcesManager::GetInstance()->GetSprite(SpriteID::Brick);
-	m_hCurrentSprite = NULL;
-	type = TYPEOBJECT::land;
-	Object::Load();		
-	//box->vx = 0;
-	//box->vy = 0;	
+{				
+	m_hCurrentSprite = NULL;	
+	Object::Load();			
 }
 
 void C_Land::Update(float gameTime)
+{
+
+}
+
+void C_Land::Render()
 {
 
 }

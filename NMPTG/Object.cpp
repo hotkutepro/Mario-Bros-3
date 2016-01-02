@@ -63,8 +63,11 @@ void Object::Update(float gameTime)
 {
 	if (m_hPosition.y < 0)
 	{
-		if (type != oneup && type != leaf){
+		if (type ==tortoise||type==tortoise_red||type==tortoise_fly)
+		{
+			int i = id;
 			Object* tmp = QNode::m_Objects_Dynamic.find(id)->second;
+
 			m_hPosition.y = tmp->m_hPosition.y;
 			m_hPosition.x = tmp->m_hPosition.x;
 			status = 0;
@@ -124,7 +127,7 @@ void Object::RenderDebug()
 
 Box* Object::GetBox()
 {
-	if (type == land || type == box || type == drain || type == uprise)// drain chua biet load sao
+	if (type == land || type == box || type == drain || type == uprise||type==block)// drain chua biet load sao
 	{
 		m_hBox->_position.x = m_hPosition.x;
 		m_hBox->_position.y = m_hPosition.y;
@@ -241,11 +244,13 @@ vector<Object*> Object::GetStaticObject()
 	for (id_Objects = QNode::s_IdObjectInViewPort.begin(); id_Objects != QNode::s_IdObjectInViewPort.end(); id_Objects++)
 	{
 		it_Object = QNode::m_Objects.find(*id_Objects);
-		if (it_Object->second->type == land || it_Object->second->type == question_block || it_Object->second->type == box || it_Object->second->type == uprise)
+		if (it_Object->second->type == block||it_Object->second->type == music || it_Object->second->type == land || it_Object->second->type == question_block || it_Object->second->type == box || it_Object->second->type == uprise)
 		{
 			result.push_back(it_Object->second);
 		}
 		if (it_Object->second->type == brick && it_Object->second->life == true && it_Object->second->status==0)
+			result.push_back(it_Object->second);
+		if (it_Object->second->type == coin && it_Object->second->life == true && it_Object->second->status == 1)
 			result.push_back(it_Object->second);
 	}
 
@@ -258,8 +263,8 @@ void Object::EatFood()
 	float nx, ny, time;
 	for (int i = 0; i < objects_Food.size(); i++)
 	{
-
-		if (objects_Food.at(i)->type == coin || objects_Food.at(i)->type == leaf || objects_Food.at(i)->type == p || objects_Food.at(i)->type == star || objects_Food.at(i)->type == oneup || (objects_Food.at(i)->type == brick&&objects_Food.at(i)->status==1))
+		
+		if ((objects_Food.at(i)->type == coin&&objects_Food.at(i)->status == 0) || objects_Food.at(i)->type == leaf || objects_Food.at(i)->type == p || objects_Food.at(i)->type == star || objects_Food.at(i)->type == oneup || (objects_Food.at(i)->type == brick&&objects_Food.at(i)->status == 1))
 		{
 			if (Collision::checkAABB(GetBox(), objects_Food.at(i)->GetBox()))
 			{
@@ -267,7 +272,7 @@ void Object::EatFood()
 			}
 
 		}
-		if (objects_Food.at(i)->type == question_block || objects_Food.at(i)->type == brick)
+		if (objects_Food.at(i)->type == question_block || objects_Food.at(i)->type == brick || objects_Food.at(i)->type == coin&&objects_Food.at(i)->status == 1)
 		{
 			if (Collision::checkAABB(_LocalHero->GetBoxAttack(), objects_Food.at(i)->GetBox()))
 			{
@@ -558,8 +563,7 @@ int Object::getDirectWithHero(Object* hero)
 }
 
 void Object::WatchUp()
-{
-	life = true;
+{	
 }
 
 void Object::DelayNext(float frame)

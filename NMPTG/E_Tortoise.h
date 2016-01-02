@@ -12,6 +12,7 @@ class E_Tortoise:public Object
 	FrkSprite* E_TortoiseshellGreenLeftReverse;
 	FrkSprite* E_TortoiseshellGreenRightReverse;		
 	bool IsControl;	
+	int timelife;
 public:
 	void Load();
 	void Update(float gameTime);

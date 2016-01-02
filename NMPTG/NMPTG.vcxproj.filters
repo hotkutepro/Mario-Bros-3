@@ -91,9 +91,6 @@
     <ClInclude Include="E_Plant.h">
       <Filter>GameObject</Filter>
     </ClInclude>
-    <ClInclude Include="E_Plant_Gun.h">
-      <Filter>GameObject</Filter>
-    </ClInclude>
     <ClInclude Include="E_Plant_Red.h">
       <Filter>GameObject</Filter>
     </ClInclude>
@@ -160,6 +157,9 @@
     <ClInclude Include="C_Music.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="C_Block.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="FrkCamera.cpp">
@@ -214,9 +214,6 @@
       <Filter>GameObject</Filter>
     </ClCompile>
     <ClCompile Include="E_Plant.cpp">
-      <Filter>GameObject</Filter>
-    </ClCompile>
-    <ClCompile Include="E_Plant_Gun.cpp">
       <Filter>GameObject</Filter>
     </ClCompile>
     <ClCompile Include="E_Plant_Red.cpp">
@@ -298,6 +295,9 @@
       <Filter>Header Files</Filter>
     </ClCompile>
     <ClCompile Include="C_Music.cpp" />
+    <ClCompile Include="C_Block.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

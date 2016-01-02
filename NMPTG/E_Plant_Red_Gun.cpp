@@ -5,6 +5,7 @@
 
 E_Plant_Red_Gun::E_Plant_Red_Gun()
 {
+	type = tree_red_shoot;
 }
 
 
@@ -26,35 +27,17 @@ void E_Plant_Red_Gun::Load()
 	m_hPosition.x += 8;	
 	m_hPosition.y += 16;
 	m_hSpeed.y = -1;
-	type = tree_red_shoot;
 	n = 0;
 	bullet = new Bullet();
 	bullet->Load();
-	bullet->life = false;
-
+	bullet->life = false;	
 }
 
 void E_Plant_Red_Gun::Update(float gameTime)
 {
 	if (!life)
 		return;
-	if (n <= 33){
-		m_hPosition.y += m_hSpeed.y;
-		m_hCurrentSprite->Next();
-	}
-	else if (n < 50)
-		m_hCurrentSprite->_Index = 0;
-	else
-		m_hCurrentSprite->Next();
-
-	if (n++ == 100)
-	{
-		n = 0;
-		m_hSpeed.y = -m_hSpeed.y;
-	}
-
-	if (n == 40&&m_hSpeed.y>0)
-		shoot();
+	
 	if (bullet->life)
 	{ 
 		float time = 2,nx,ny;
@@ -67,6 +50,23 @@ void E_Plant_Red_Gun::Update(float gameTime)
 		bullet->Update(gameTime);
 		bullet->m_hCurrentSprite->Next();
 	}
+	if (n <= 33){
+		m_hPosition.y += m_hSpeed.y;
+		m_hCurrentSprite->Next();
+	}
+	else if (n < 50)
+		m_hCurrentSprite->_Index = 0;
+	else
+		m_hCurrentSprite->Next();
+
+	if (n++ == 200)
+	{
+		n = 0;
+		m_hSpeed.y = -m_hSpeed.y;
+	}
+
+	if (n == 40 && m_hSpeed.y > 0)
+		shoot();
 	Object::Update(gameTime);	
 	SetSprite();
 }

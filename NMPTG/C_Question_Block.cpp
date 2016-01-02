@@ -4,6 +4,7 @@
 
 C_Question_Block::C_Question_Block()
 {
+	type = TYPEOBJECT::question_block;
 }
 
 
@@ -18,8 +19,7 @@ void C_Question_Block::Load()
 	CoinBoxNull = ResourcesManager::GetInstance()->GetSprite(SpriteID::CoinBoxNull);
 	brick = ResourcesManager::GetInstance()->GetSprite(SpriteID::Brick);
 	setCurrentSprite(CoinBox);
-	Object::Load();
-	type = TYPEOBJECT::question_block;
+	Object::Load();	
 }
 
 void C_Question_Block::Update(float gameTime)

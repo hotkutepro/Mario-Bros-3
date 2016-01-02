@@ -5,6 +5,7 @@
 #include "FrkShareControl.h"
 F_Leaf::F_Leaf()
 {
+	type = TYPEOBJECT::leaf;
 }
 
 
@@ -17,10 +18,9 @@ void F_Leaf::Load()
 	Leaf = ResourcesManager::GetInstance()->GetSprite(SpriteID::Leaf);
 	F_MushroomPower = ResourcesManager::GetInstance()->GetSprite(SpriteID::F_MushroomPower);
 	setCurrentSprite(Leaf);
-	Object::Load();
-	type = TYPEOBJECT::leaf;
+	Object::Load();	
 	n = 0;
-	v = 2;
+	v = 3;
 }
 
 void F_Leaf::Update(float gameTime)
@@ -38,6 +38,10 @@ void F_Leaf::Update(float gameTime)
 			n = 0;
 			v = -v;
 		}
+		if (v > 0)
+			m_hCurrentSprite->_Index = 1;
+		else
+			m_hCurrentSprite->_Index = 0;
 		m_hPosition.x += v;
 		m_hPosition.y +=m_hSpeed.y;
 	}
@@ -57,7 +61,7 @@ void F_Leaf::WatchUp()
 	{
 		setCurrentSprite(Leaf);
 		m_hPosition.y += 30;
-		m_hSpeed.y = -2;
+		m_hSpeed.y = -1;
 	}
 	else
 	{

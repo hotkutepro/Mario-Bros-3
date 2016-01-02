@@ -1,6 +1,8 @@
 #pragma once
 #include"Object.h"
 #include"Bullet.h"
+#define  vx 3
+#define  vy 1.5
 class E_Plant_Red_Gun:public Object
 {
 private:
@@ -10,9 +12,7 @@ private:
 	FrkSprite* Tree_red_right_up;
 	FrkSprite* ZPipe_md;
 	D3DXVECTOR2 pos;
-	int n ;
-	int vx = 3;
-	int vy = 1.5;
+	int n ;	
 	Bullet* bullet;
 public:
 	void Load();

@@ -4,6 +4,7 @@
 
 F_Coin::F_Coin()
 {
+	type = TYPEOBJECT::coin;
 }
 
 
@@ -13,13 +14,33 @@ F_Coin::~F_Coin()
 
 void F_Coin::Load()
 {	
-	m_hCurrentSprite= ResourcesManager::GetInstance()->GetSprite(SpriteID::Coin);
-	Object::Load();
-	type = TYPEOBJECT::coin;
+	brick = ResourcesManager::GetInstance()->GetSprite(SpriteID::Brick);
+	Coin = ResourcesManager::GetInstance()->GetSprite(SpriteID::Coin);
+	setCurrentSprite(Coin);	
+	Object::Load();	
+	status = 0;
 }
-
+void F_Coin::WatchUp()
+{
+	if (life==false)
+	{
+		life = true;
+		return;
+	}
+	else
+	{
+		setCurrentSprite(brick);
+		status = 1;
+		n++;
+	}
+	
+}
 void F_Coin::Update(float gameTime)
 {
+	if (n >0)
+		n++;
+	if (n == 300)
+		Reset();
 	if (connect == true && life == true)
 		Show();
 	DelayNext(5);
@@ -39,7 +60,13 @@ void F_Coin::Show()
 	if (n >= 4)
 	{
 		life = false;
-		_LocalHero->Collision_Coin();
-		m_hCurrentSprite = NULL;
+		_LocalHero->Collision_Coin();		
 	}
 }
+void F_Coin::Reset()
+{
+	setCurrentSprite(Coin);
+	n = 0;
+	status = 0;
+}
+
