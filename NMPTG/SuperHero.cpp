@@ -1129,10 +1129,12 @@ Box* SuperHero::GetBox()
 Box* SuperHero::GetBoxWithObject(Object* object)
 {
 	Box* x = new Box();
+	Box* o = object->GetBox();
 	x->_position.y = m_hPosition.y;
-
-	x->_v.x = m_hSpeed.x - object->m_hSpeed.x;
-	x->_v.y = m_hSpeed.y - object->m_hSpeed.y;
+	x->_v.x = m_hSpeed.x - o->_v.x;
+	x->_v.y = m_hSpeed.y - o->_v.x;
+	//x->_v.x = m_hSpeed.x - object->m_hSpeed.x;
+	//x->_v.y = m_hSpeed.y - object->m_hSpeed.y;
 	x->_size.x = _hero_BOX_WIDTH;
 	switch (status)
 	{

@@ -77,7 +77,7 @@ void State_4::Render()
 			 it_Object->second->Render();
 	}
 	//hero->RenderBoundBox();
-	hero->RenderDebug();
+	//hero->RenderDebug();
 	//hero->RenderV();
 	//hero->ReanderViewPort();
 	hero->Render();
@@ -97,7 +97,7 @@ void State_4::Update(float gameTime)
 	//	
 	//}
 	map1->Update();
-	hero->Update(gameTime);
+	
 	//hero->GetStaticObject();
 	camera->Update(hero->GetPosition());
 	mapQNode::iterator it_Node;
@@ -113,6 +113,7 @@ void State_4::Update(float gameTime)
 	{
 		it_Object = qnode->m_Objects.find(*id_Objects);		
 		it_Object->second->Update(gameTime);		
-	}
 
+	}
+	hero->Update(gameTime);
 }

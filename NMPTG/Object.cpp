@@ -111,6 +111,7 @@ void Object::FallDown(float remainingtime, float Vy)
 
 void Object::RenderDebug()
 {
+	Box* b = GetBox();
 	RECT src;
 	src.left = 0;
 	src.right = src.left + 16;
@@ -118,7 +119,7 @@ void Object::RenderDebug()
 	src.bottom = src.top + 16;
 	RECT a;
 	a = m_hBox->getRect();
-	_LocalGraphic->tDrawTexture(_LocalContent->LoadTexture("brick.png"), src, a, D3DXVECTOR2(m_hBox->getCenter()), D3DCOLOR_XRGB(255, 255, 255), 0);
+	_LocalGraphic->tDrawTexture(_LocalContent->LoadTexture("brick.png"), src, b->getRect(), D3DXVECTOR2(b->getCenter()), D3DCOLOR_XRGB(255, 255, 255), 0);
 }
 
 Box* Object::GetBox()
@@ -305,9 +306,21 @@ void Object::KillEnemy()
 		{
 			objects_Enemy.at(i)->IsAttacked();			
 		}
-		time = Collision::sweptAABBCheck(GetBoxWithObject(objects_Enemy.at(i)), objects_Enemy.at(i)->GetBox(), nx, ny);		
+		Box* boxHero = GetBox();
+
+		Box* boxObject = objects_Enemy.at(i)->GetBox();
+
+		boxHero->_v.x -= boxObject->_v.x;
+		if (objects_Enemy.at(i)->type == tarnooki_fly || objects_Enemy.at(i)->type == tortoise_fly)
+		{
+			boxHero->_v.y -= boxObject->_v.y;
+		}		
+		boxObject->_v.x = 0;
+		boxObject->_v.y = 0;
 		
-		if (time < 1 && time >= 0)
+		time = Collision::sweptAABBCheck(boxHero, boxObject, nx, ny);		
+		
+		if (time < 1 )
 		{
 			_LocalHero->RenderBoxCollision(objects_Enemy.at(i));
 			if (nx == 1)
@@ -326,7 +339,13 @@ void Object::KillEnemy()
 			{
 				objects_Enemy.at(i)->Collision_Down();
 			}
-		}
+		}/*else
+		{
+			if (Collision::checkAABB(boxHero, boxObject))
+			{
+				time = Collision::sweptAABBCheck(boxHero, boxObject, nx, ny);
+			}
+		}*/
 	}
 }
 
