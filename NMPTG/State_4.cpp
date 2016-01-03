@@ -2,12 +2,18 @@
 #include "ResourcesManager.h"
 #include"FrkShareControl.h"
 #include "State_5.h"
+#include "FrkSound.h"
 
 
 
 State_4::State_4(HINSTANCE hIns, int width, int height, char* wName, StateManager* SM) :State(hIns, width, height, wName, SM)
 {
-	//state_4 = new State_5(hIns, width, height, wName, SM);
+	
+}
+
+State_4::State_4(State* state) : State(state)
+{
+
 }
 
 State_4::~State_4()
@@ -16,6 +22,8 @@ State_4::~State_4()
 
 void State_4::Load()
 {
+	FrkSound* EDM = new FrkSound("resources\\sounds\\world\\a.wav");
+	EDM->Play();
 	
 	
 	collision = new Collision();
@@ -90,14 +98,14 @@ void State_4::Render()
 
 void State_4::Update(float gameTime)
 {
-	//if (hero->m_hPosition.y < 0)
-	//{
-	//	ChangeState(state_4);
-	//	
-	//}
+	
+	if (hero->m_hState == OTHER)
+	{
+		StateManager::GetInstance()->Add(state_5);
+	}
 	map1->Update();
 	
-	//hero->GetStaticObject();
+	
 	camera->Update(hero->GetPosition());
 	mapQNode::iterator it_Node;
 	it_Node = qnode->m_QNode.find(0);

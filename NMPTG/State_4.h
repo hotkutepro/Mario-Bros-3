@@ -10,7 +10,7 @@ class State_4 :
 	
 	SuperHero* hero;
 	QNode* qnode;
-	State* state_4;
+	State* state_5;
 	FrkCamera* camera;
 	Map* map1;
 	SuperHero* s_hero;
@@ -22,6 +22,7 @@ public:
 	void Render();
 
 	State_4(HINSTANCE hIns, int width, int height, char* wName, StateManager* SM);
+	State_4(State* state);
 	~State_4();
 };
 
