@@ -187,6 +187,8 @@ void E_Tortoise_Red::SetMove()
 
 void E_Tortoise_Red::IsAttacked()
 {
+	sound = new FrkSound("resources\\sounds\\effect\\smb3_kick.wav");
+	sound->Play();
 	status = 2;
 	m_hSpeed.x = 0;
 	SetSprite();

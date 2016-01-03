@@ -1,6 +1,7 @@
 ﻿#include "FrkGame.h"
 #include"FrkKeyboard.h"
 #include"FrkControl.h"
+#include"FrkSound.h"
 
 FrkGame::FrkGame(HINSTANCE hIns, int Width, int Height, char* hWindowName,StateManager* sm)
 {
@@ -200,6 +201,7 @@ void FrkGame::InitLocal(){
 	R_Viewport.top=R_Viewport.left = 0;
 	R_Viewport.right = 320;
 	R_Viewport.bottom = 240;
+	FrkSound::InitializeSoundClass(this->GetwndHandle());
 
 
 }

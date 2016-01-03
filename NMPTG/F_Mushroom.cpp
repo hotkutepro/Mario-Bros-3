@@ -27,7 +27,9 @@ F_Mushroom::~F_Mushroom()
 }
 
 void F_Mushroom::Die()
-{	
+{		
+	sound = new FrkSound("resources\\sounds\\effect\\smb3_1-up.wav");
+	sound->Play();
 	life = false;
 	_LocalHero->Collision_1up();
 }

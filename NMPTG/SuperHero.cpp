@@ -83,7 +83,8 @@ void SuperHero::Load()
 	
 	Object::Load();
 	m_hObjectLeft = NULL;
-	m_hObjectRight = NULL;
+	m_hObjectRight = NULL;	
+
 }
 
 void SuperHero::Update(float gametime)
@@ -964,8 +965,14 @@ void SuperHero::InertiaRun(float gameTime)
 
 void SuperHero::Jump(float vJump)
 {
+	
+
+
 	if (m_hState == ON_GROUND || m_hState == ON_UPRISE)
-	{
+	{		
+		sound = new FrkSound("resources\\sounds\\effect\\smb3_jump.wav");
+		sound->Play();
+
 		m_hSpeed.y = vJump;
 		m_hState = ON_SPACE;
 		m_hObjectGround = NULL;
@@ -1075,6 +1082,8 @@ void SuperHero::Attack()
 {
 	if (status == BROS&&!attack)
 	{
+		sound = new FrkSound("resources\\sounds\\effect\\smb3_tail.wav");
+		sound->Play();		
 		attack = true;
 	}
 
@@ -1693,6 +1702,8 @@ void SuperHero::IsAttacked()
 		}
 		break;
 	default:
+		sound = new FrkSound("resources\\sounds\\effect\\smb3_player_down.wav");
+		sound->Play();				
 		setCurrentSprite(MarioDeath);
 		m_hSpeed.y = 5;
 		m_hState = OTHER;
@@ -1759,10 +1770,21 @@ void SuperHero::Collision_Coin()
 
 void SuperHero::Collision_Leaf()
 {
+	if (status == 0)
+	{
+		sound = new FrkSound("resources\\sounds\\effect\\smb3_power-up.wav");
+		sound->Play();
+	}
+	else
+	{
+		sound = new FrkSound("resources\\sounds\\effect\\smb3_power-up.wav");
+		sound->Play();
+	}
 	if (status != BROS)
 	{
+		
 		status++;
-	}
+	}	
 	Infomation::GetInstance()->I_Score += 1000;
 }
 

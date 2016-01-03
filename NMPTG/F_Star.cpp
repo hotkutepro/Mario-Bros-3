@@ -25,5 +25,7 @@ void F_Star::Update(float gameTime)
 
 void F_Star::Die()
 {
+	sound = new FrkSound("resources\\sounds\\effect\\smb3_game_over.wav");
+	sound->Play();
 	life = false;
 }

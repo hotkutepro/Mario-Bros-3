@@ -8,6 +8,7 @@
 #include"Operate.h"
 #include <list>
 #include <vector>
+#include"FrkSound.h"
 #define Range_x 10// dung cho ham lay danh sach cac doi tuong cach object mot khoang rang_x theo chieu ngang
 #define Range_y 10// dung cho ham lay danh sach cac doi tuong cach object mot khoang rang_y theo chieu doc
 #define GRAVITY -0.7f // trọng lực
@@ -29,6 +30,7 @@ private:
 protected:		
 	
 public:
+	FrkSound* sound;
 	//xu ly phim khi keyup
 	bool isUp = false;
 	bool isDown = false;

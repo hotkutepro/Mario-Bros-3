@@ -1,6 +1,8 @@
 #pragma once
 #include"Object.h"
 #include "Infomation.h"
+#include"FrkSound.h"
+
 #define _hero_JUMP 9.7f//10
 #define _hero_MAXJUM 11//45
 #define _hero_MAXSPEED 5//5
@@ -75,7 +77,6 @@ private:
 	Object* _uprise;
 #pragma endregion
 public:
-	
 	string f_str;
 	char* a;
 	string f_str1;

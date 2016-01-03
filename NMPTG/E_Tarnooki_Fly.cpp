@@ -82,5 +82,7 @@ void E_Tarnooki_Fly::SetSprite()
 
 void E_Tarnooki_Fly::IsAttacked()
 {
+	sound = new FrkSound("resources\\sounds\\effect\\smb3_kick.wav");
+	sound->Play();
 	life = false;
 }

@@ -15,7 +15,7 @@ State_5::~State_5()
 }
 
 void State_5::Load()
-{
+{	
 	collision = new Collision();
 	qnode = new QNode();
 	qnode->LoadQNode("QNode2.txt");

@@ -83,6 +83,8 @@ void E_Plant_Red_Gun::Render()
 
 void E_Plant_Red_Gun::shoot()
 {
+	sound = new FrkSound("resources\\sounds\\effect\\smb3_fireball.wav");
+	sound->Play();
 	bullet->life = true;
 	bullet->m_hPosition.x = m_hPosition.x + 8;
 	bullet->m_hPosition.y = m_hPosition.y + 24;
@@ -148,6 +150,8 @@ void E_Plant_Red_Gun::SetSprite()
 
 void E_Plant_Red_Gun::IsAttacked()
 {
+	sound = new FrkSound("resources\\sounds\\effect\\smb3_kick.wav");
+	sound->Play();
 	if (!(n>33&&m_hSpeed.y<0))
 		life = false;
 }

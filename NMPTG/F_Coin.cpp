@@ -48,6 +48,8 @@ void F_Coin::Update(float gameTime)
 
 void F_Coin::Die()
 {
+	sound = new FrkSound("resources\\sounds\\effect\\smb3_coin.wav");
+	sound->Play();
 	life = false;
 	_LocalHero->Collision_Coin();
 }
