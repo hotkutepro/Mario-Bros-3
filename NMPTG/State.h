@@ -18,6 +18,7 @@ public:
 
 	
 	State(HINSTANCE hInstance, int width, int height, char* wName, StateManager* SM);
+	State(FrkGame* gamestate);
 	~State();
 	void Init();
 	void Run();

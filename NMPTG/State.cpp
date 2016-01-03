@@ -7,6 +7,11 @@ State::State(HINSTANCE hInstance, int width, int height, char* wName,StateManage
 	
 }
 
+State::State(FrkGame* gamestate) : FrkGame(gamestate)
+{
+
+}
+
 
 
 State::~State()
