@@ -71,7 +71,7 @@ void SuperHero::Load()
 	MarioSuperJumpRight = ResourcesManager::GetInstance()->GetSprite(SpriteID::MarioSuperJumpRight);
 #pragma endregion
 	
-	
+
 	type = mario;
 	setCurrentSprite(MarioRight);
 	m_hPosition.x = 30;
@@ -1317,6 +1317,8 @@ void SuperHero::Move()
 #pragma endregion
 #pragma region on_other
 	case OTHER:
+		sound = new FrkSound("resources\\sounds\\effect\\smb3_player_down.wav");
+		sound->Play();
 		m_hPosition.y += m_hSpeed.y;
 		m_hSpeed.y += GRAVITY / 2;
 		break;
@@ -1580,7 +1582,6 @@ void SuperHero::Move()
 					}
 				}
 			}
-
 		}
 		if (this->m_hObjectGround != NULL)
 		{
@@ -1710,8 +1711,7 @@ void SuperHero::IsAttacked()
 		}
 		break;
 	default:
-		sound = new FrkSound("resources\\sounds\\effect\\smb3_player_down.wav");
-		sound->Play();				
+					
 		setCurrentSprite(MarioDeath);
 		m_hSpeed.y = 5;
 		m_hState = OTHER;
