@@ -1584,6 +1584,14 @@ void SuperHero::Move()
 		}
 		if (this->m_hObjectGround != NULL)
 		{
+			if (m_hObjectGround->type == brick && m_hObjectGround->status == 1)
+			{
+				m_hState = ON_SPACE;
+			}
+			if (m_hObjectGround->type == coin&& m_hObjectGround->status == 0)
+			{
+				m_hState = ON_SPACE;
+			}
 			if (!Collision::checkAABB(this->GetBox_CGround(), this->m_hObjectGround->GetBox()))
 			{
 				m_hState = ON_SPACE;
