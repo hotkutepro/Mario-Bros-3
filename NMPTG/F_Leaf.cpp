@@ -56,9 +56,11 @@ void F_Leaf::Die()
 
 void F_Leaf::WatchUp()
 {
+	sound = new FrkSound("resources\\sounds\\effect\\smb3_mushroom_appears.wav");
+	sound->Play();
 	life = true;
 	if (_LocalHero->status != MARIO)
-	{
+	{				
 		setCurrentSprite(Leaf);
 		m_hPosition.y += 30;
 		m_hSpeed.y = -1;

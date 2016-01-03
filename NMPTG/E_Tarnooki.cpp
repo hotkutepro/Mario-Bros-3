@@ -44,9 +44,9 @@ void E_Tarnooki::Update(float gameTime)
 
 void E_Tarnooki::Die()
 {
-	life = false;
-	sound = new FrkSound("resources\\sounds\\effect\\smb3_game_over.wav");
-	sound->Play();	
+	life = false;	
+	sound = new FrkSound("resources\\sounds\\effect\\smb3_tail.wav");
+	sound->Play();
 }
 
 void E_Tarnooki::Collision_Up()
@@ -85,6 +85,6 @@ void E_Tarnooki::SetSprite()
 void E_Tarnooki::IsAttacked()
 {
 	sound = new FrkSound("resources\\sounds\\effect\\smb3_kick.wav");
-	sound->Play();
+	sound->Play();	
 	life = false;
 }

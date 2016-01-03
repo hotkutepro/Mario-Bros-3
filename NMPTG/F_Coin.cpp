@@ -61,6 +61,8 @@ void F_Coin::Show()
 	m_hPosition.y += m_hSpeed.y;
 	if (n >= 4)
 	{
+		sound = new FrkSound("resources\\sounds\\effect\\smb3_coin.wav");
+		sound->Play();
 		life = false;
 		_LocalHero->Collision_Coin();		
 	}
