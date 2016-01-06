@@ -29,25 +29,23 @@ void FrkCamera::Update(D3DXVECTOR2 target)
 		m_hVpx = 0;
 	if (m_hVpx + 320 >= m_hMaxWidth*Zoom)
 		m_hVpx = m_hMaxWidth*Zoom - 320;
-	R_Viewport.left = m_hVpx;
-	R_Viewport.right = m_hVpx + 320;//320;
-	R_Viewport.top = 0;//720-mhvpy
-	R_Viewport.bottom = 720;//240;	
+	
 	if (_LocalHero->m_hPosition.y <240)
 	{
-		m_hVpy = 240;
-		return;
-	}
+		m_hVpy = 240;		
+	}else
 	if (_LocalHero->m_hPosition.y>=464)
 	{
-		m_hVpy = 688;
-		return;
-	}
+		m_hVpy = 688;		
+	}else
 	if (_LocalHero->m_hPosition.y >240)
 	{
-		m_hVpy = 448;
-		return;
+		m_hVpy = 448;		
 	}				
+	R_Viewport.left = m_hVpx;
+	R_Viewport.right = m_hVpx + 320;//320;
+	R_Viewport.top = 688-m_hVpy;//720-mhvpy
+	R_Viewport.bottom = m_hVpy+100;//240;	
 }
 
 D3DXMATRIX* FrkCamera::GetTransformMatrix()
